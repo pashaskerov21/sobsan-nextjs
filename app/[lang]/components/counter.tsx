@@ -11,6 +11,7 @@ export default function Counter({
   }
 }) {
   const [count, setCount] = useState(0)
+
   return (
     <p>
       This component is rendered on client:
