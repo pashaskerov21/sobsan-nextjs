@@ -1,6 +1,6 @@
-import { AttributeGrouDataType } from "../types";
+import { AttributeGroupDataType } from "../types";
 
-const AttributeGrouData:AttributeGrouDataType[] = [
+const AttributeGroupData:AttributeGroupDataType[] = [
     {
         id: 1,
     },
@@ -17,4 +17,4 @@ const AttributeGrouData:AttributeGrouDataType[] = [
         id: 5,
     },
 ]
-export default AttributeGrouData;
+export default AttributeGroupData;

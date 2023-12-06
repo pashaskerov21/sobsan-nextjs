@@ -1,8 +1,6 @@
-import AboutData from "./About";
-import AboutTranslateData from "./AboutTranslates";
 import ArticleData from "./Article";
 import ArticleTranslateData from "./ArticleTranslates";
-import AttributeGrouData from "./AttributeGroups";
+import AttributeGroupData from "./AttributeGroups";
 import AttributeGroupTranslateData from "./AttributeGroupTranslates";
 import AttributeData from "./Attributes";
 import AttributeTranslateData from "./AttributeTranslates";
@@ -14,20 +12,14 @@ import CatalogTranslateData from "./CatalogTranslates";
 import CategoriesData from "./Categories";
 import CategoriesTranslateData from "./CategoryTranslates";
 import ColorData from "./Colors";
-import ColorSystemData from "./ColorSystem";
-import ColorSystemTranslateData from "./ColorSystemTranslates";
 import ColorTranslateData from "./ColorTranslates";
 import FilialData from "./Filials";
 import FilialTranslateData from "./FilialTranslates";
 import GalleryData from "./Gallery";
-import MasterContentData from "./MasterContents";
-import MasterContentTranslateData from "./MasterContentTranslate";
 import MasterImagesData from "./MasterImages";
 import MenuData from "./Menu";
 import MenuTranslateData from "./MenuTranslates";
 import PartnerData from "./Partners";
-import PaymenyDeliveryData from "./PaymentDelivery";
-import PaymenyDeliveryTranslateData from "./PaymentDeliveryTranslates";
 import ProductAttributeRelationData from "./ProductAttributeRelation";
 import ProductBannerData from "./ProductBanners";
 import ProductBannerTranslateData from "./ProductBannerTranslates";
@@ -40,17 +32,13 @@ import RoomData from "./Rooms";
 import RoomTranslateData from "./RoomTranslates";
 import SettingData from "./Setting";
 import SettingTranslateData from "./SettingTranslates";
-import WarrantyConditionsData from "./WarrantyConditions";
-import WarrantyConditionTranslateData from "./WarrantyCondtionTranslates";
 import WeightData from "./Weights";
 
 
 export {
-    AboutData,
-    AboutTranslateData,
     ArticleData,
     ArticleTranslateData,
-    AttributeGrouData,
+    AttributeGroupData,
     AttributeGroupTranslateData,
     AttributeData,
     AttributeTranslateData,
@@ -62,20 +50,14 @@ export {
     CategoriesData,
     CategoriesTranslateData,
     ColorData,
-    ColorSystemData,
-    ColorSystemTranslateData,
     ColorTranslateData,
     FilialData,
     FilialTranslateData,
     GalleryData,
-    MasterContentData,
-    MasterContentTranslateData,
     MasterImagesData,
     MenuData,
     MenuTranslateData,
     PartnerData,
-    PaymenyDeliveryData,
-    PaymenyDeliveryTranslateData,
     ProductAttributeRelationData,
     ProductBannerData,
     ProductBannerTranslateData,
@@ -88,7 +70,5 @@ export {
     RoomTranslateData,
     SettingData,
     SettingTranslateData,
-    WarrantyConditionsData,
-    WarrantyConditionTranslateData,
     WeightData,
 }

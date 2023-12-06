@@ -1,19 +1,9 @@
 import { LocaleType } from "..";
 
-export type AboutDataType = {
-    id: number,
-    image: string,
-};
-export type AboutTranslateDataType = {
-    id: number,
-    about_id: number,
-    lang: LocaleType,
-    text: string,
-};
 export type ArticleDataType = {
     id: number,
     type: number,
-    image: string,
+    image: string | null,
 };
 export type ArticleTranslateDataType = {
     id: number,
@@ -22,7 +12,7 @@ export type ArticleTranslateDataType = {
     title: string,
     text: string,
 };
-export type AttributeGrouDataType = {
+export type AttributeGroupDataType = {
     id: number,
 };
 export type AttributeGroupTranslateDataType = {
@@ -85,16 +75,6 @@ export type ColorDataType = {
     simple_color: boolean,
     color_code: string | null,
 };
-export type ColorSystemDataType = {
-    id: number,
-    image: string,
-};
-export type ColorSystemTranslateDataType = {
-    id: number,
-    content_id: number,
-    lang: LocaleType,
-    text: string,
-};
 export type ColorTranslateDataType = {
     id: number,
     color_id: number,
@@ -119,16 +99,6 @@ export type GalleryDataType = {
     image: string,
     url: string,
 };
-export type MasterContentDataType = {
-    id: number,
-};
-export type MasterContentTranslateDataType = {
-    id: number,
-    content_id: number,
-    lang: LocaleType,
-    title: string,
-    text: string,
-};
 export type MasterImagesDataType = {
     id: number,
     image: string,
@@ -148,16 +118,6 @@ export type PartnerDataType = {
     id: number,
     image: string,
     url: string,
-};
-export type PaymenyDeliveryDataType = {
-    id: number,
-    image: string,
-};
-export type PaymenyDeliveryTranslateDataType = {
-    id: number,
-    content_id: number,
-    lang: LocaleType,
-    text: string,
 };
 export type ProductAttributeRelationDataType = {
     id: number,
@@ -251,16 +211,6 @@ export type SettingTranslateDataType = {
     description: string,
     address: string,
     copyright: string,
-};
-export type WarrantyConditionsDataType = {
-    id: number,
-    image: string,
-};
-export type WarrantyConditionTranslateDataType = {
-    id: number,
-    content_id: number,
-    lang: LocaleType,
-    text: string,
 };
 export type WeightDataType = {
     id: number,
