@@ -3,7 +3,7 @@ import { SettingDataType } from "../types";
 const SettingData:SettingDataType[] = [
     {
         id: 1,
-        theme: 'light',
+        theme: 'dark',
         mail: 'sobsan@sobsan.com',
         phone: '(+994 12) 404 45 45',
         hotline: '*4545',

@@ -9,7 +9,7 @@ const MenuData:MenuDataType[] = [
     {
         id: 2,
         parent_id: 1,
-        path: '/about-coloring-system',
+        path: '/about/coloring-system',
     },
     {
         id: 3,

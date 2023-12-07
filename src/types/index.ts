@@ -39,6 +39,14 @@ import {
     WeightDataType,
 } from './data';
 
+import {
+    RootLayoutProps,
+} from './layout';
+
+import {
+    SiteToolbarProps,
+} from './components';
+
 export type {
     LocaleType,
 
@@ -77,4 +85,8 @@ export type {
     SettingDataType,
     SettingTranslateDataType,
     WeightDataType,
+
+
+    RootLayoutProps,
+    SiteToolbarProps
 }
