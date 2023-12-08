@@ -51,7 +51,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                 <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
                     <GlobalStyles />
                     <body>
-                        {loading && <div className='preloader'></div>}
+                        {/* {loading && <div className='preloader'></div>} */}
                         <SiteToolbar
                             settingData={settingData}
                             titleDictionary={titleDictionary}

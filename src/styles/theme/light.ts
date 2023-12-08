@@ -10,6 +10,7 @@ const lightTheme = {
     bg_color_5: '#f7f7f7',
     bg_color_6: '#f9f9f9',
     bg_color_7: 'rgba(0,0,0,0.3)',
+    bg_color_8: '#f1f1f1',
     text_color_1: '#212121',
     text_color_2: '#000000',
     text_color_3: '#474747',

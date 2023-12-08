@@ -28,6 +28,7 @@ export const LanguageDropdownWrapper = styled.div`
         padding: 3px 10px 10px;
         gap: 5px;
         border: 1px solid ${props => props.theme.border_color_2};
+        background-color: ${props => props.theme.bg_color_1};
         border-top-color: transparent;
         border-radius: 0 0 10px 10px;
         display: none;

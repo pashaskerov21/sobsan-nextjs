@@ -8,3 +8,7 @@ export type ThemeButtonProps = {
     theme: string,
     toggleTheme: () => void,
 }
+export type SocialMediaProps = {
+    className: string,
+    settingData: SettingDataType,
+}

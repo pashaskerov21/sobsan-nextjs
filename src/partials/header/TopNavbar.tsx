@@ -5,7 +5,7 @@ import { TopNavbarWrapper } from './style'
 import { Container } from '@/src/styles/utils'
 import { IoIosSearch } from "react-icons/io";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { LanguageDropdown, ThemeButton } from '@/src/components'
+import { LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components'
 import { BiLogInCircle } from "react-icons/bi";
 import PageLinkTranslate from '../translate/PageLinkTranslate'
 import PageLinks from './PageLinks'
@@ -45,6 +45,7 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
             <div className="right">
               <LanguageDropdown activeLocale={activeLocale} />
               <ThemeButton theme={theme} toggleTheme={toggleTheme} />
+              <SocialMedia className='d-none d-xl-flex' settingData={settingData}/>
               <div className="general-icons">
                 <Link className='icon d-none d-md-flex' href='/basket'><PiShoppingCartSimpleLight /></Link>
                 <Link className='icon d-none d-md-flex' href='/wishlist'><PiHeartStraight /></Link>

@@ -46,6 +46,7 @@ import {
 import {
     SiteToolbarProps,
     ThemeButtonProps,
+    SocialMediaProps,
 } from './components';
 
 import {
@@ -105,6 +106,7 @@ export type {
 
     SiteToolbarProps,
     ThemeButtonProps,
+    SocialMediaProps,
 
     HeaderStateType,
     HeaderProps,

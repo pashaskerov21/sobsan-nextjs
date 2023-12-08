@@ -10,6 +10,7 @@ const darkTheme = {
     bg_color_5: 'rgba(0,0,0,0.4)',
     bg_color_6: 'rgba(0,0,0,0.7)',
     bg_color_7: '#ffffff',
+    bg_color_8: '#000000',
     text_color_1: '#ffffff',
     text_color_2: '#ffffff',
     text_color_3: '#ffffff',
