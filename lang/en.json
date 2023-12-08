@@ -2,6 +2,8 @@
     "title": {
         "basket": "Basket",
         "wishlist": "Wishlist",
-        "comparisons": "Comparisons"
+        "comparisons": "Comparisons",
+        "login": "Login",
+        "registration": "Registration"
     }
 }

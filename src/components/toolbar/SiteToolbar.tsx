@@ -43,7 +43,7 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({settingData,titleDictionary}) 
                         <PiScalesLight />
                         <span className='amount'>0</span>
                     </div>
-                    <Link href='/compare'>{titleDictionary.comparisons}</Link>
+                    <Link href='/comparisons'>{titleDictionary.comparisons}</Link>
                 </div>
             </CenterToolbarWrapper>
             <BottomToolbarWrapper>

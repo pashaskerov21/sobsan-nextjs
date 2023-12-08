@@ -2,6 +2,8 @@
     "title": {
         "basket": "Səbət",
         "wishlist": "Seçilmişlər",
-        "comparisons": "Müqayisələr"
+        "comparisons": "Müqayisələr",
+        "login": "Daxil ol",
+        "registration": "Qeydiyyat"
     }
 }

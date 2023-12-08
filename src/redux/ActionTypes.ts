@@ -1,0 +1,1 @@
+export const UPDATE_LOCALE_SLUG = "UPDATE_LOCALE_SLUG";

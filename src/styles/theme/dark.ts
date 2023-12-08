@@ -16,8 +16,10 @@ const darkTheme = {
     text_color_4: 'rgba(0,0,0,0.6)',
     text_color_5: 'rgba(0,0,0,0.4)',
     text_color_6: 'rgba(0,0,0,0.7)',
+    text_color_7: '#ffffff',
     border_color_1: 'rgba(255,255,255,0.2)',
     border_color_2: 'rgba(255,255,255,0.2)',
+    border_color_3: '#ffffff',
     shadow_color_1: 'rgba(255,255,255,0.2)',
 }
 export default darkTheme;

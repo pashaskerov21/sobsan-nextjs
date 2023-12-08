@@ -2,6 +2,8 @@
     "title": {
         "basket": "Корзина",
         "wishlist": "Избранные",
-        "comparisons": "Сравнения"
+        "comparisons": "Сравнения",
+        "login": "Войти",
+        "registration": "Регистрация"
     }
 }

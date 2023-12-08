@@ -12,6 +12,8 @@ import { ThemeProvider } from 'styled-components';
 import { SiteToolbar } from '../components';
 import { RootLayoutProps } from '../types';
 import { Footer, Header } from '../partials';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 
 
 
@@ -45,21 +47,34 @@ const RootLayout: React.FC<RootLayoutProps> = ({
 
     return (
         <React.Fragment>
-            <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-                <GlobalStyles />
-                <body>
-                    {loading && <div className='preloader'></div>}
-                    <SiteToolbar
-                        settingData={settingData}
-                        titleDictionary={titleDictionary}
-                    />
-                    <Header />
-                    <main>
-                        {children}
-                    </main>
-                    <Footer />
-                </body>
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+                    <GlobalStyles />
+                    <body>
+                        {loading && <div className='preloader'></div>}
+                        <SiteToolbar
+                            settingData={settingData}
+                            titleDictionary={titleDictionary}
+                        />
+                        <Header
+                            activeLocale={activeLocale}
+                            categoryData={categoryData}
+                            categoryTranslateData={categoryTranslateData}
+                            menuData={menuData}
+                            menuTranslateData={menuTranslateData}
+                            settingData={settingData}
+                            settingTranslateData={settingTranslateData}
+                            theme={theme}
+                            titleDictionary={titleDictionary}
+                            toggleTheme={toggleTheme}
+                        />
+                        <main>
+                            {children}
+                        </main>
+                        <Footer />
+                    </body>
+                </ThemeProvider>
+            </Provider>
         </React.Fragment>
     )
 }
