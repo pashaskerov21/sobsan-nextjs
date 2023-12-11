@@ -56,6 +56,8 @@ import {
     BottomNavbarProps,
     PageLinksProps,
     PageLinkTranslateProps,
+    CategoryProps,
+    CategoryTranslateProps,
 } from './partials'
 
 import {
@@ -114,6 +116,8 @@ export type {
     BottomNavbarProps,
     PageLinksProps,
     PageLinkTranslateProps,
+    CategoryProps,
+    CategoryTranslateProps,
 
     LocaleStateType,
     RootStateType,

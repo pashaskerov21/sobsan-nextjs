@@ -163,7 +163,7 @@ export const BottomNavbarWrapper = styled.nav`
         background-color: ${props => props.theme.bg_color_1};
         transition: all 0.3s;
         ${column_justify_start};
-        padding: 15px;
+        padding: 15px 10px;
         @media (min-width: 1200px){
             position: relative;
             top: 0;
@@ -181,6 +181,10 @@ export const BottomNavbarWrapper = styled.nav`
             .menu-items{
                 ${row_justify_end};
                 gap:10px;
+                padding-left: 10px;
+                @media (width >= 400px){
+                    gap: 20px;
+                }
                 .login-link{
                     ${row_center};
                     gap: 5px;
@@ -189,40 +193,62 @@ export const BottomNavbarWrapper = styled.nav`
                         font-size: 26px;
                     }
                     span{
-                        font-size: 14px;
+                        white-space: nowrap;
+                        font-size: 12px;
                         font-weight: 600;
+                        @media (width >= 400px){
+                            font-size: 14px;
+                        }
                     }
                 }
                 .close-button{
-                    width: 40px;
-                    height: 40px;
+                    width: 30px;
+                    height: 30px;
                     border: 1px solid ${props => props.theme.color_1};
                     border-radius: 50%;
                     ${row_center};
                     color: ${props => props.theme.color_1};
-                    font-size: 20px;
+                    font-size: 16px;
                     cursor: pointer;
                     &:hover{
                         background-color: ${props => props.theme.color_1};
                         color: #ffffff;
+                    }
+                    @media (width >= 400px){
+                        width: 40px;
+                        height: 40px;
+                        font-size: 20px;
                     }
                 }
             }
             .menu-header-icons{
                 ${row_justify_end};
                 gap: 10px;
-                margin-right: 40px;
+                margin-right: 10px;
+                @media (width >= 400px){
+                    margin-right: 20px;
+                }
                 a{
-                    width: 40px;
-                    height: 40px;
+                    width: 25px;
+                    height: 25px;
                     ${row_center};
                     background-color: ${props => props.theme.color_1};
                     border-radius: 50%;
                     color: #ffffff;
-                    font-size: 18px;
+                    font-size: 12px;
                     animation: pulse-red 1s ease infinite;
+                    @media (width >= 400px){
+                        width: 35px;
+                        height: 35px;
+                        font-size: 16px;
+                    }
                 }
             }
+        }
+        .inner-center{
+            width: 100%;
+            ${column_center};
+            padding: 25px 0;
         }
         &.menuShow{
             left: 0;
@@ -233,5 +259,53 @@ export const BottomNavbarWrapper = styled.nav`
 
 
 
+export const CategoryWrapper = styled.div`
+    width: 100%;
+    ${column_align_start};
+    .category-item{
+        position: relative;
+        width: 100%;
+        ${column_center};
+        .main-row{
+            width :100%;
+            ${row_between};
+            border-bottom: 1px solid ${props => props.theme.border_color_1};
+            padding: 8px 0;
+            a{
+                text-transform: capitalize;
+                font-size: 12px;
+                @media (width >= 400px){
+                    font-size: 14px;
+                }
+            }
+            .arrow-btn{
+                min-width: 60px;
+                ${row_justify_end};
+                color: ${props => props.theme.color_1};
+                cursor: pointer;
+                &.active{
+                    svg{
+                        transition: all 0.2s;
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
 
+    }
+`;
+
+type AltCategoryWrapperProps = {
+    $active: boolean,
+    $level: number;
+} 
+export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
+    width: 100%;
+    display: ${props => props.$active ? 'block' : 'none'};
+    .category-item{
+        .main-row{
+            padding-left: ${props => props.$level * 15}px;
+        }
+    }
+`;
 

@@ -57,3 +57,14 @@ export type PageLinkTranslateProps = {
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
 };
+export type CategoryProps = {
+    activeLocale: LocaleType,
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
+}
+export type CategoryTranslateProps = {
+    activeLocale: LocaleType,
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
+    categoryID: number,
+}

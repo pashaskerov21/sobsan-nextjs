@@ -7,6 +7,7 @@ import { Container } from '@/src/styles/utils';
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';
+import Categories from './Categories';
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
   activeLocale,
@@ -51,7 +52,13 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                 <button className='close-button' onClick={toggleMenu}><FaXmark /></button>
               </div>
             </div>
-            <div className="inner-center"></div>
+            <div className="inner-center">
+              <Categories
+                activeLocale={activeLocale}
+                categoryData={categoryData}
+                categoryTranslateData={categoryTranslateData}
+              />
+            </div>
             <div className="inner-right"></div>
           </div>
         </Container>

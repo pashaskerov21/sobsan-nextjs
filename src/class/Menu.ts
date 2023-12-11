@@ -13,6 +13,14 @@ class Menu {
         const activeTranslateData: MenuTranslateDataType | undefined = this.menuTranslateData.find((data) => data.menu_id === id && data.lang === activeLocale);
         return activeTranslateData;
     }
+    public getMainMenuData(){
+        const mainMenuData: MenuDataType[] | [] = this.menuData.filter((data) => data.parent_id === 0);
+        return mainMenuData;
+    }
+    public getAltMenuData(id: number){
+        const altMenuData: MenuDataType[] | [] = this.menuData.filter((data) => data.parent_id === id);
+        return altMenuData;
+    }
 }
 
 export default Menu;
