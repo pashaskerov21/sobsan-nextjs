@@ -11,7 +11,7 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
 
 
   const [activeCategories, setActiveCategories] = React.useState<number[]>([]);
-  const toggleCategory = (categoryID: number) => {
+  const handleCategoryClick = (categoryID: number) => {
     const updatedCategories: number[] = [...activeCategories];
     const index = updatedCategories.findIndex((item) => item === categoryID);
     if (index > -1) {
@@ -20,6 +20,18 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
       updatedCategories.push(categoryID);
     }
     setActiveCategories(updatedCategories);
+  };
+  const handleCategoryMouseMove = (categoryID: number) => {
+    let updatedCategories: number[] = [...activeCategories];
+    if (window.innerWidth > 1200) {
+      if(!activeCategories.includes(categoryID)){
+        updatedCategories.push(categoryID);
+      }
+      setActiveCategories(updatedCategories);
+    }
+  };
+  const handleCategoryMouseLeave = () => {
+    setActiveCategories([]);
   };
 
 
@@ -36,7 +48,7 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
               categoryTranslateData={categoryTranslateData}
             />
             {category.getAltCategoryData(altData.id).length > 0 && (
-              <div className={`arrow-btn ${activeCategories.includes(altData.id) ? 'active' : ''}`} onClick={() => toggleCategory(altData.id)}>
+              <div className={`arrow-btn ${activeCategories.includes(altData.id) ? 'active' : ''}`} onClick={() => handleCategoryClick(altData.id)}>
                 <IoChevronForwardOutline />
               </div>
             )}
@@ -51,11 +63,14 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
     ));
   };
 
+  React.useEffect(() => {
+    console.log(activeCategories)
+  },[activeCategories])
 
   const renderCategories = (data: CategoriesDataType[] | []): JSX.Element[] => {
     return data.map((mainData: CategoriesDataType) => (
       <React.Fragment key={mainData.id}>
-        <div className={`category-item`}>
+        <div className={`category-item`} onMouseMove={() => handleCategoryMouseMove(mainData.id)} onMouseLeave={() => handleCategoryMouseLeave()}>
           <div className="main-row">
             <CategoryTranslate
               activeLocale={activeLocale}
@@ -64,14 +79,18 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
               categoryTranslateData={categoryTranslateData}
             />
             {category.getAltCategoryData(mainData.id).length > 0 && (
-              <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onClick={() => toggleCategory(mainData.id)}>
+              <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onClick={() => handleCategoryClick(mainData.id)}>
                 <IoChevronForwardOutline />
               </div>
             )}
           </div>
-          <AltCategoryWrapper $active={activeCategories.includes(mainData.id)} $level={1}>
-            {category.getAltCategoryData(mainData.id).length > 0 && renderAltCategories(category.getAltCategoryData(mainData.id), 1)}
-          </AltCategoryWrapper>
+          {
+            category.getAltCategoryData(mainData.id).length > 0 ? (
+              <AltCategoryWrapper $active={activeCategories.includes(mainData.id)} $level={1}>
+                {renderAltCategories(category.getAltCategoryData(mainData.id), 1)}
+              </AltCategoryWrapper>
+            ) : null
+          }
         </div>
       </React.Fragment>
     ))

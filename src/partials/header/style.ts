@@ -1,5 +1,5 @@
-import { column_align_start, column_center, column_justify_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles/mixin";
-import styled from "styled-components";
+import { column_align_start, column_center, column_justify_start, column_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles/mixin";
+import styled, { css } from "styled-components";
 
 
 export const HeaderWrapper = styled.header`
@@ -173,7 +173,9 @@ export const BottomNavbarWrapper = styled.nav`
             max-width: 100%;
             height: auto;
             ${row_between};
-            padding: 12px 0;
+            padding: 0;
+            align-items: stretch;
+            overflow: visible;
         }
         .inner-left{
             width: 100%;
@@ -249,6 +251,9 @@ export const BottomNavbarWrapper = styled.nav`
             width: 100%;
             ${column_center};
             padding: 25px 0;
+            @media (width >= 1200px){
+                padding: 0;
+            }
         }
         &.menuShow{
             left: 0;
@@ -262,16 +267,35 @@ export const BottomNavbarWrapper = styled.nav`
 export const CategoryWrapper = styled.div`
     width: 100%;
     ${column_align_start};
+    
+    @media (width >= 1200px){
+        ${row_between};
+        gap: 20px;
+        align-self: stretch;
+        height: 100%;
+        min-width: 750px;
+        background-color: ${props => props.theme.bg_color_1};
+        
+    }
     .category-item{
-        position: relative;
         width: 100%;
         ${column_center};
+       
+        @media (width >= 1200px){
+            width: auto;
+            height: 100%;
+        }
         .main-row{
             width :100%;
             ${row_between};
             border-bottom: 1px solid ${props => props.theme.border_color_1};
             padding: 8px 0;
             position: relative;
+            
+            @media (width >= 1200px){
+                border: none;
+                padding: 0;
+            }
             a{
                 text-transform: capitalize;
                 font-size: 12px;
@@ -289,6 +313,9 @@ export const CategoryWrapper = styled.div`
                 ${row_justify_end};
                 color: ${props => props.theme.color_1};
                 cursor: pointer;
+                @media (width >= 1200px){
+                    display: none;
+                }
                 &.active{
                     svg{
                         transition: all 0.2s;
@@ -311,7 +338,51 @@ export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
     .category-item{
         .main-row{
             padding-left: ${props => props.$level * 15}px;
+            @media (width >= 1200px){
+                padding-left: 0; 
+            }
         }
+    }
+    ${
+        props => props.$level === 1 ? css`
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            min-height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
+            padding: 30px;
+            display: ${props.$active ? 'grid' : 'none'};
+            grid-template-columns: repeat(3,1fr);
+            @media (width >= 1400px){
+                grid-template-columns: repeat(4,1fr);
+            }
+            .category-item{
+                ${column_start};          
+                .main-row{
+                    margin-bottom: 15px !important;           
+                    a{
+                        font-size: 18px;
+                        font-weight: 600;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        ` : css`
+            display: block;
+            .category-item{
+                height: auto;   
+                .main-row{
+                    margin-bottom: 2px !important;
+                    a{
+                        font-size: 14px !important;
+                        font-weight: 500 !important;
+                        text-decoration: none !important;
+                    }
+                }
+            }
+        `
     }
 `;
 
