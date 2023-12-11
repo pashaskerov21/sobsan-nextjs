@@ -180,6 +180,7 @@ export const BottomNavbarWrapper = styled.nav`
         .inner-left{
             width: 100%;
             ${row_between};
+            align-items: start;
             .menu-items{
                 ${row_justify_end};
                 gap:10px;
@@ -345,43 +346,47 @@ export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
     }
     ${
         props => props.$level === 1 ? css`
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            min-height: 300px;
-            border-radius: 20px;
-            box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
-            padding: 30px;
-            display: ${props.$active ? 'grid' : 'none'};
-            grid-template-columns: repeat(3,1fr);
-            @media (width >= 1400px){
-                grid-template-columns: repeat(4,1fr);
-            }
-            .category-item{
-                ${column_start};          
-                .main-row{
-                    margin-bottom: 15px !important;           
-                    a{
-                        font-size: 18px;
-                        font-weight: 600;
-                        text-decoration: underline;
+            @media (width >= 1200px){
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                min-height: 300px;
+                border-radius: 20px;
+                box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
+                padding: 30px;
+                display: ${props.$active ? 'grid' : 'none'};
+                grid-template-columns: repeat(3,1fr);
+                @media (width >= 1400px){
+                    grid-template-columns: repeat(4,1fr);
+                }   
+                .category-item{
+                    ${column_start};          
+                    .main-row{
+                        margin-bottom: 15px !important;           
+                        a{
+                            font-size: 18px;
+                            font-weight: 600;
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
         ` : css`
-            display: block;
-            .category-item{
-                height: auto;   
-                .main-row{
-                    margin-bottom: 2px !important;
-                    a{
-                        font-size: 14px !important;
-                        font-weight: 500 !important;
-                        text-decoration: none !important;
+            @media (width >= 1200px){
+                display: block;
+                .category-item{
+                    height: auto;   
+                    .main-row{
+                        margin-bottom: 2px !important;
+                        a{
+                            font-size: 14px !important;
+                            font-weight: 500 !important;
+                            text-decoration: none !important;
+                        }
                     }
                 }
-            }
+            }            
         `
     }
 `;
