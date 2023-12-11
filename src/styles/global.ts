@@ -26,7 +26,7 @@ body{
     height: 10px;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: ${props => props.theme.color_v1};
+    background-color: ${props => props.theme.color_1};
 }
 ::-webkit-scrollbar-track{
     background-color: ${props => props.theme.bg_color_1};

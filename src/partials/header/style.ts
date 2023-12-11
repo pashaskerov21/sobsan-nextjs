@@ -204,14 +204,14 @@ export const BottomNavbarWrapper = styled.nav`
                 .close-button{
                     width: 30px;
                     height: 30px;
-                    border: 1px solid ${props => props.theme.color_1};
+                    border: 1px solid ${props => props.theme.text_color_7};
                     border-radius: 50%;
                     ${row_center};
-                    color: ${props => props.theme.color_1};
+                    color: ${props => props.theme.text_color_7};
                     font-size: 16px;
                     cursor: pointer;
                     &:hover{
-                        background-color: ${props => props.theme.color_1};
+                        background-color: ${props => props.theme.text_color_7};
                         color: #ffffff;
                     }
                     @media (width >= 400px){
@@ -271,6 +271,7 @@ export const CategoryWrapper = styled.div`
             ${row_between};
             border-bottom: 1px solid ${props => props.theme.border_color_1};
             padding: 8px 0;
+            position: relative;
             a{
                 text-transform: capitalize;
                 font-size: 12px;
@@ -279,7 +280,12 @@ export const CategoryWrapper = styled.div`
                 }
             }
             .arrow-btn{
+                position: absolute;
+                top: 0;
+                right: 0;
                 min-width: 60px;
+                height: 100%;
+                z-index: 10;
                 ${row_justify_end};
                 color: ${props => props.theme.color_1};
                 cursor: pointer;

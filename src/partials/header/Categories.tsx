@@ -36,7 +36,7 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
               categoryTranslateData={categoryTranslateData}
             />
             {category.getAltCategoryData(altData.id).length > 0 && (
-              <div className={`arrow-btn ${activeCategories.includes(altData.id) ? 'active' : ''}`} onTouchStart={() => toggleCategory(altData.id)}>
+              <div className={`arrow-btn ${activeCategories.includes(altData.id) ? 'active' : ''}`} onClick={() => toggleCategory(altData.id)}>
                 <IoChevronForwardOutline />
               </div>
             )}
@@ -64,7 +64,7 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
               categoryTranslateData={categoryTranslateData}
             />
             {category.getAltCategoryData(mainData.id).length > 0 && (
-              <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onTouchStart={() => toggleCategory(mainData.id)}>
+              <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onClick={() => toggleCategory(mainData.id)}>
                 <IoChevronForwardOutline />
               </div>
             )}
