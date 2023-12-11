@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.header`
 `;
 export const TopNavbarWrapper = styled.nav`
     width: 100%;
-    z-index: 10;
+    z-index: 150;
     .nav-inner{
         width: 100%;
         ${row_between};
@@ -84,9 +84,12 @@ export const TopNavbarWrapper = styled.nav`
             }
             .link-item{
                 position: relative;
-                ${row_center};
-                gap: 3px;
+                ${column_align_start};
                 padding: 5px 0;
+                .main-row{
+                    ${row_center};
+                    gap: 3px
+                }
                 svg{
                     color: ${props => props.theme.text_color_7};
                 }
@@ -164,6 +167,10 @@ export const BottomNavbarWrapper = styled.nav`
         transition: all 0.3s;
         ${column_justify_start};
         padding: 15px 10px;
+        &::-webkit-scrollbar{
+            width: 3px; 
+            height: 3px;
+        }
         @media (min-width: 1200px){
             position: relative;
             top: 0;
@@ -176,6 +183,7 @@ export const BottomNavbarWrapper = styled.nav`
             padding: 0;
             align-items: stretch;
             overflow: visible;
+            z-index: 0;
         }
         .inner-left{
             width: 100%;
@@ -215,7 +223,7 @@ export const BottomNavbarWrapper = styled.nav`
                     cursor: pointer;
                     &:hover{
                         background-color: ${props => props.theme.text_color_7};
-                        color: #ffffff;
+                        color: ${props => props.theme.text_color_1};
                     }
                     @media (width >= 400px){
                         width: 40px;
@@ -254,6 +262,39 @@ export const BottomNavbarWrapper = styled.nav`
             padding: 25px 0;
             @media (width >= 1200px){
                 padding: 0;
+            }
+            .page-links{
+                width: 100%;
+                ${column_align_start};
+                padding: 40px 0;
+                gap: 10px;
+                a{
+                    text-transform: capitalize;
+                    font-size: 12px;
+                    &:hover{
+                        color: ${props => props.theme.color_1};
+                    }
+                    @media (width >= 400px){
+                        font-size: 14px;
+                    }
+                }
+                .link-item{
+                    ${column_align_start};
+                    .main-row{
+                        ${row_center};
+                        .arrow-btn{
+                            padding-left: 10px;
+                        }
+                    }
+                    .link-menu{
+                        display: none;
+                        margin-top: 10px;
+                        &.active{
+                            ${column_align_start};
+                            gap: 10px;
+                        }
+                    }
+                }
             }
         }
         &.menuShow{
@@ -300,6 +341,9 @@ export const CategoryWrapper = styled.div`
             a{
                 text-transform: capitalize;
                 font-size: 12px;
+                &:hover{
+                    color: ${props => props.theme.color_1};
+                }
                 @media (width >= 400px){
                     font-size: 14px;
                 }

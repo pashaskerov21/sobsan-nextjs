@@ -31,7 +31,9 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
     }
   };
   const handleCategoryMouseLeave = () => {
-    setActiveCategories([]);
+    if (window.innerWidth > 1200) {
+      setActiveCategories([]);
+    }
   };
 
 

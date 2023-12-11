@@ -8,6 +8,7 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';
 import Categories from './Categories';
+import PageLinks from './PageLinks';
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
   activeLocale,
@@ -57,6 +58,12 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                 activeLocale={activeLocale}
                 categoryData={categoryData}
                 categoryTranslateData={categoryTranslateData}
+              />
+              <PageLinks
+                className='page-links d-xl-none'
+                activeLocale={activeLocale}
+                menuData={menuData}
+                menuTranslateData={menuTranslateData}
               />
             </div>
             <div className="inner-right"></div>
