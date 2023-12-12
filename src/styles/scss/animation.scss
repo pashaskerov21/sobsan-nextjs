@@ -92,6 +92,10 @@
     75%{transform: translateX(-3px);}
     100%{transform: translateX(0);}
 }
+@keyframes search-animation{
+    0%{width: 0;}
+    100%{width: 220px;}
+}
 .fa-phone:hover{animation: phone-animation 0.2s ease 5;}
 .fa-envelope:hover{animation: envelope-animation 1s ease;}
 .fa-location-dot:hover{animation: location-animation 0.5s ease;}

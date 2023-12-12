@@ -266,7 +266,7 @@ export const BottomNavbarWrapper = styled.nav<BottomProps>`
                     cursor: pointer;
                     &:hover{
                         background-color: ${props => props.theme.text_color_7};
-                        color: ${props => props.theme.text_color_1};
+                        color: ${props => props.theme.text_color_8};
                     }
                     @media (width >= 400px){
                         width: 40px;
@@ -352,22 +352,27 @@ export const BottomNavbarWrapper = styled.nav<BottomProps>`
             }
         }
         .inner-right{
-            position: absolute;
+            position: fixed;
             bottom: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
+            max-width: 450px;
             ${row_between};
             flex-direction: row-reverse;
             padding: 15px 10px;
-            box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
+            border-top: 1px solid ${props => props.theme.border_color_1};
+            background-color: 0 0 10px ${props => props.theme.bg_color_1};
             gap: 15px;
+            transition: all 0.3s;
             @media (width >= 1200px){
                 position: relative;
+                left: 0;
                 width: auto;
                 flex-direction: row;
                 justify-content: flex-end;
                 padding: 0;
-                box-shadow: none;
+                border: none;
+                background-color: transparent
             }
             .fixnav-items{
                 ${row_justify_end};
@@ -382,6 +387,10 @@ export const BottomNavbarWrapper = styled.nav<BottomProps>`
         &.menuShow{
             left: 0;
             z-index: 550;
+            .inner-right{
+                left: 0;
+            }
+            
         }
     }
 `;
@@ -523,12 +532,8 @@ export const SearchFormWrapper = styled.form`
         opacity: 0;
         height: 35px;
         overflow: hidden;
+        visibility: hidden;
         transition: all 0.2s;
-        &.active{
-            width: 220px;
-            overflow: visible;
-            opacity: 1;
-        }
         input{
             position: absolute;
             width: 100%;
@@ -556,6 +561,12 @@ export const SearchFormWrapper = styled.form`
                 background-color: ${props => props.theme.text_color_7};
                 color: ${props => props.theme.text_color_8};
             }
+        }
+        &.active{
+            width: 220px;
+            overflow: visible;
+            visibility: visible;
+            opacity: 1;
         }
     }
 `

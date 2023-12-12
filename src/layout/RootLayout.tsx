@@ -70,26 +70,6 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                         />
                         <main>
                             {children}
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
-                            <div className="test-div"></div>
                         </main>
                         <Footer />
                     </body>
