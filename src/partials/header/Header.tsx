@@ -3,6 +3,7 @@ import TopNavbar from './TopNavbar';
 import BottomNavbar from './BottomNavbar';
 import { HeaderProps, HeaderStateType } from '@/src/types';
 import { HeaderWrapper } from './style';
+import Search from './Search';
 
 const Header: React.FC<HeaderProps> = ({
   activeLocale,
@@ -24,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({
   // header fixed
   React.useEffect(() => {
     window.addEventListener('scroll', function () {
-      if (this.scrollY > 500) {
+      if (this.scrollY > 300) {
         setHeaderState((prev) => ({
           ...prev,
           fixed: true,

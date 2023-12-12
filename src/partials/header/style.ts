@@ -1,20 +1,61 @@
 import { column_align_start, column_center, column_justify_start, column_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles/mixin";
 import styled, { css } from "styled-components";
 
-
+type TopNavProps = {
+    $fixed: boolean,
+}
+type BottomProps = {
+    $fixed: boolean,
+}
+type AltCategoryWrapperProps = {
+    $active: boolean,
+    $level: number;
+}
 export const HeaderWrapper = styled.header`
     width: 100%;
-    z-index: 200;
+    z-index: 300;
     ${column_center};
+    position: relative;
     .black-backdrop{
         @media (min-width: 1200px){
             display: none;
         }
     }
+    .social-icons{
+        ${row_center};
+        gap: 8px;
+        a{
+            font-size: 12px;
+            width: 30px;
+            height: 30px;
+            ${row_center};
+            background-color: ${props => props.theme.bg_color_8};
+            color: ${props => props.theme.text_color_7};
+            border-radius: 5px;
+            box-shadow: 0 0 1px ${props => props.theme.shadow_color_1};
+            &:hover{
+                box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
+            }
+        }
+    }
 `;
-export const TopNavbarWrapper = styled.nav`
+export const TopNavbarWrapper = styled.nav<TopNavProps>`
     width: 100%;
-    z-index: 150;
+    z-index: 250;
+    ${
+        props => props.$fixed ? css`
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: ${props => props.theme.bg_color_1};
+            animation: fixed-nav 0.3s ease forwards;
+            @media (width >= 1200px){
+                position: relative;
+                background-color: transparent;
+                animation: none;
+            }
+        ` : css``
+    }
     .nav-inner{
         width: 100%;
         ${row_between};
@@ -134,27 +175,24 @@ export const TopNavbarWrapper = styled.nav`
                 }
             }
         }
-        .social-icons{
-            ${row_center};
-            gap: 8px;
-            a{
-                font-size: 12px;
-                width: 30px;
-                height: 30px;
-                ${row_center};
-                background-color: ${props => props.theme.bg_color_8};
-                color: ${props => props.theme.text_color_7};
-                border-radius: 5px;
-                box-shadow: 0 0 1px ${props => props.theme.shadow_color_1};
-                &:hover{
-                    box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
-                }
-            }
-        }
     }
 `;
-export const BottomNavbarWrapper = styled.nav`
+export const BottomNavbarWrapper = styled.nav<BottomProps>`
     width: 100%;
+    @media (width >= 1200px){
+        z-index: 200;
+    }
+    ${
+        props => props.$fixed ? css`
+            @media (width >= 1200px){
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: ${props => props.theme.bg_color_1};
+                animation: fixed-nav 0.3s ease forwards;
+            }
+        ` : css``
+    }
     .bottom-inner{
         position: fixed;
         top: 0;
@@ -183,12 +221,17 @@ export const BottomNavbarWrapper = styled.nav`
             padding: 0;
             align-items: stretch;
             overflow: visible;
-            z-index: 0;
+            z-index: 150;
+            transition: all 0s;
         }
         .inner-left{
             width: 100%;
             ${row_between};
             align-items: start;
+            @media (width >= 1200px){
+                width: auto;
+                align-items: center;
+            }
             .menu-items{
                 ${row_justify_end};
                 gap:10px;
@@ -262,6 +305,8 @@ export const BottomNavbarWrapper = styled.nav`
             padding: 25px 0;
             @media (width >= 1200px){
                 padding: 0;
+                width: auto;
+                min-height: 90px;
             }
             .page-links{
                 width: 100%;
@@ -283,7 +328,16 @@ export const BottomNavbarWrapper = styled.nav`
                     .main-row{
                         ${row_center};
                         .arrow-btn{
-                            padding-left: 10px;
+                            padding-left: 7px;
+                            svg{
+                                transform: rotate(-90deg);
+                                transition: all 0.2s
+                            }
+                            &.active{
+                                svg{
+                                    transform: rotate(0);
+                                }
+                            }
                         }
                     }
                     .link-menu{
@@ -297,15 +351,40 @@ export const BottomNavbarWrapper = styled.nav`
                 }
             }
         }
+        .inner-right{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            ${row_between};
+            flex-direction: row-reverse;
+            padding: 15px 10px;
+            box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
+            gap: 15px;
+            @media (width >= 1200px){
+                position: relative;
+                width: auto;
+                flex-direction: row;
+                justify-content: flex-end;
+                padding: 0;
+                box-shadow: none;
+            }
+            .fixnav-items{
+                ${row_justify_end};
+                gap: 10px;
+                .search-icon{
+                    cursor: pointer;
+                    color: ${props => props.theme.text_color_7};
+                    font-size: 28px;
+                }
+            }
+        }
         &.menuShow{
             left: 0;
-            z-index: 650;
+            z-index: 550;
         }
     }
 `;
-
-
-
 export const CategoryWrapper = styled.div`
     width: 100%;
     ${column_align_start};
@@ -372,11 +451,6 @@ export const CategoryWrapper = styled.div`
 
     }
 `;
-
-type AltCategoryWrapperProps = {
-    $active: boolean,
-    $level: number;
-} 
 export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
     width: 100%;
     display: ${props => props.$active ? 'block' : 'none'};
@@ -388,8 +462,7 @@ export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
             }
         }
     }
-    ${
-        props => props.$level === 1 ? css`
+    ${props => props.$level === 1 ? css`
             @media (width >= 1200px){
                 position: absolute;
                 top: 100%;
@@ -401,6 +474,7 @@ export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
                 padding: 30px;
                 display: ${props.$active ? 'grid' : 'none'};
                 grid-template-columns: repeat(3,1fr);
+                background-color: ${props => props.theme.bg_color_1};
                 @media (width >= 1400px){
                     grid-template-columns: repeat(4,1fr);
                 }   
@@ -434,4 +508,54 @@ export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
         `
     }
 `;
-
+export const SearchFormWrapper = styled.form`
+    position: relative;
+    .search-icon{
+        cursor: pointer;
+        color: ${props => props.theme.text_color_7};
+        font-size: 28px;
+    }
+    .input-row{
+        position: absolute;
+        top: calc(100% + 15px);
+        right: 0;
+        width: 0;
+        opacity: 0;
+        height: 35px;
+        overflow: hidden;
+        transition: all 0.2s;
+        &.active{
+            width: 220px;
+            overflow: visible;
+            opacity: 1;
+        }
+        input{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: ${props => props.theme.bg_color_1};
+            border: 1px solid ${props => props.theme.border_color_1};
+            caret-color: ${props => props.theme.border_color_1};
+            color: ${props => props.theme.text_color_1};
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 10px;
+            padding: 12px 15px;
+        }
+        button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            border-radius: 0 10px 10px 0;
+            ${row_center};
+            color: ${props => props.theme.text_color_7};
+            font-size: 18px;
+            cursor: pointer;
+            &:hover{
+                background-color: ${props => props.theme.text_color_7};
+                color: ${props => props.theme.text_color_8};
+            }
+        }
+    }
+`

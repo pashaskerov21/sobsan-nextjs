@@ -68,3 +68,8 @@ export type CategoryTranslateProps = {
     categoryTranslateData: CategoriesTranslateDataType[],
     categoryID: number,
 }
+export type SearchProps = {
+    headerState: HeaderStateType,
+    toggleSearch: () => void,
+    titleDictionary: { [key: string]: string },
+}

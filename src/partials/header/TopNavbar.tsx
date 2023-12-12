@@ -3,12 +3,11 @@ import Link from 'next/link'
 import { TopNavbarProps } from '@/src/types'
 import { TopNavbarWrapper } from './style'
 import { Container } from '@/src/styles/utils'
-import { IoIosSearch } from "react-icons/io";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
 import { LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components'
 import { BiLogInCircle } from "react-icons/bi";
-import PageLinkTranslate from '../translate/PageLinkTranslate'
 import PageLinks from './PageLinks'
+import Search from './Search'
 
 
 const TopNavbar: React.FC<TopNavbarProps> = ({
@@ -17,7 +16,6 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
   menuData,
   menuTranslateData,
   settingData,
-  settingTranslateData,
   titleDictionary,
   theme,
   toggleTheme,
@@ -26,7 +24,7 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
 }) => {
   return (
     <React.Fragment>
-      <TopNavbarWrapper>
+      <TopNavbarWrapper $fixed={headerState.fixed}>
         <Container>
           <div className="nav-inner">
             <div className="left">
@@ -45,12 +43,15 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
             <div className="right">
               <LanguageDropdown activeLocale={activeLocale} />
               <ThemeButton theme={theme} toggleTheme={toggleTheme} />
-              <SocialMedia className='d-none d-xl-flex' settingData={settingData}/>
+              <SocialMedia className='d-none d-xl-flex' settingData={settingData} />
               <div className="general-icons">
                 <Link className='icon d-none d-md-flex' href='/basket'><PiShoppingCartSimpleLight /></Link>
                 <Link className='icon d-none d-md-flex' href='/wishlist'><PiHeartStraight /></Link>
                 <Link className='icon d-none d-md-flex' href='/comparisons'><PiScalesLight /></Link>
-                <div className='icon' onClick={toggleSearch}><IoIosSearch /></div>
+                <Search
+                  headerState={headerState}
+                  titleDictionary={titleDictionary}
+                  toggleSearch={toggleSearch} />
                 <Link className='icon d-none d-md-flex' href='/login'><span>{titleDictionary.login}</span><BiLogInCircle /></Link>
               </div>
             </div>

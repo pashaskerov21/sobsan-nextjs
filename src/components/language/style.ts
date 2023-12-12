@@ -2,10 +2,9 @@ import { column_align_start, row_center } from "@/src/styles/mixin";
 import styled from "styled-components";
 
 export const LanguageDropdownWrapper = styled.div`
-    
-    
     cursor: pointer;
     position: relative;
+    z-index: 100;
     .active-value{
         border: 1px solid ${props => props.theme.border_color_2};
         padding: 6px 10px;

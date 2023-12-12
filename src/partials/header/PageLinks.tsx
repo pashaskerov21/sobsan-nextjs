@@ -37,7 +37,7 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                         </Link>
                                         {
                                             menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
-                                                <div className="arrow-btn" onClick={() => toggleLinkMenu(maindata.id)}>
+                                                <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
                                                     <BiChevronDown />
                                                 </div>
                                             ) : null

@@ -58,6 +58,7 @@ import {
     PageLinkTranslateProps,
     CategoryProps,
     CategoryTranslateProps,
+    SearchProps,
 } from './partials'
 
 import {
@@ -118,6 +119,7 @@ export type {
     PageLinkTranslateProps,
     CategoryProps,
     CategoryTranslateProps,
+    SearchProps,
 
     LocaleStateType,
     RootStateType,

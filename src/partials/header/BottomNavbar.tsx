@@ -9,6 +9,8 @@ import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';
 import Categories from './Categories';
 import PageLinks from './PageLinks';
+import { LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components';
+import Search from './Search';
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
   activeLocale,
@@ -18,7 +20,6 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
   menuData,
   menuTranslateData,
   settingData,
-  settingTranslateData,
   titleDictionary,
   theme,
   toggleTheme,
@@ -34,7 +35,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
           </React.Fragment>
         ) : null
       }
-      <BottomNavbarWrapper>
+      <BottomNavbarWrapper $fixed={headerState.fixed}>
         <Container>
           <div className={`bottom-inner ${headerState.menuShow ? 'menuShow' : ''}`}>
             <div className="inner-left">
@@ -66,7 +67,22 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                 menuTranslateData={menuTranslateData}
               />
             </div>
-            <div className="inner-right"></div>
+            <div className="inner-right">
+              <div className="menu-footer-icons">
+                <SocialMedia className='social-icons d-xl-none' settingData={settingData} />
+                <div className={`fixnav-items ${headerState.fixed ? 'd-none d-xl-flex' : 'd-none'}`}>
+                  <LanguageDropdown activeLocale={activeLocale} />
+                  <ThemeButton theme={theme} toggleTheme={toggleTheme} />
+                  <Search
+                    headerState={headerState}
+                    titleDictionary={titleDictionary}
+                    toggleSearch={toggleSearch} />
+                </div>
+              </div>
+              <Link href='/' className='master-logo'>
+                <Image src={settingData.master_logo} width={100} height={30} alt='m-logo' />
+              </Link>
+            </div>
           </div>
         </Container>
       </BottomNavbarWrapper>

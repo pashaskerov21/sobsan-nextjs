@@ -65,10 +65,6 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
     ));
   };
 
-  React.useEffect(() => {
-    console.log(activeCategories)
-  },[activeCategories])
-
   const renderCategories = (data: CategoriesDataType[] | []): JSX.Element[] => {
     return data.map((mainData: CategoriesDataType) => (
       <React.Fragment key={mainData.id}>
