@@ -49,6 +49,7 @@ export const TopNavbarWrapper = styled.nav<TopNavProps>`
             left: 0;
             background-color: ${props => props.theme.bg_color_1};
             animation: fixed-nav 0.3s ease forwards;
+            box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
             @media (width >= 1200px){
                 position: relative;
                 background-color: transparent;
@@ -190,6 +191,7 @@ export const BottomNavbarWrapper = styled.nav<BottomProps>`
                 left: 0;
                 background-color: ${props => props.theme.bg_color_1};
                 animation: fixed-nav 0.3s ease forwards;
+                box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
             }
         ` : css``
     }

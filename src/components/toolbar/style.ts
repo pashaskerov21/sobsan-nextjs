@@ -89,7 +89,7 @@ export const CenterToolbarWrapper = styled.div`
 export const BottomToolbarWrapper = styled.div`
     position: fixed;
     bottom: 25px;
-    right: 20px;
+    right: 25px;
     ${column_center};
     z-index: 100;
     gap: 10px;

@@ -18,7 +18,7 @@ const MenuTranslation: React.FC<MenuTranslationProps> = ({
             case "link":
                 return (
                     <React.Fragment>
-                        <Link href={`${activeLocale}/${activeMenuData.path}`} className={className}>
+                        <Link href={`/${activeLocale}/${activeMenuData.path}`} className={className}>
                             {activeTranslateData.title}
                         </Link>
                     </React.Fragment>

@@ -41,6 +41,7 @@ import {
 
 import {
     RootLayoutProps,
+    CatalogPageLayout,
 } from './layout';
 
 import {
@@ -112,6 +113,7 @@ export type {
     WeightDataType,
 
     RootLayoutProps,
+    CatalogPageLayout,
 
     SiteToolbarProps,
     ThemeButtonProps,

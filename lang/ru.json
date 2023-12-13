@@ -1,5 +1,6 @@
 {
     "title": {
+        "sobsan": "Собсан",
         "basket": "Корзина",
         "wishlist": "Избранные",
         "comparisons": "Сравнения",
@@ -12,6 +13,8 @@
         "useful_links": "Полезные ссылки",
         "faq": "Часто задаваемые вопросы",
         "career": "Карьера",
-        "service_network": "Сервисная сеть"
+        "service_network": "Сервисная сеть",
+        "home_page": "Главная",
+        "catalogs": "Каталоги"
     }
 }
