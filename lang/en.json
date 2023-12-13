@@ -5,6 +5,13 @@
         "comparisons": "Comparisons",
         "login": "Login",
         "registration": "Registration",
-        "search": "Search"
+        "search": "Search",
+        "menues": "Menues",
+        "categories": "Categories",
+        "addresses": "Our Addresses",
+        "useful_links": "Useful Links",
+        "faq": "FAQ",
+        "career": "Career",
+        "service_network": "Service network"
     }
 }

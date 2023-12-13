@@ -55,16 +55,22 @@ import {
     TopNavbarProps,
     BottomNavbarProps,
     PageLinksProps,
-    PageLinkTranslateProps,
     CategoryProps,
-    CategoryTranslateProps,
     SearchProps,
+    FooterProps,
 } from './partials'
 
 import {
     LocaleStateType,
     RootStateType,
 } from './redux'
+
+import {
+    CategoryTranslationProps,
+    MenuTranslationProps,
+    FilialTranslationProps,
+    SettingTranslationProps
+} from './translate'
 
 export type {
     LocaleType,
@@ -116,11 +122,15 @@ export type {
     TopNavbarProps,
     BottomNavbarProps,
     PageLinksProps,
-    PageLinkTranslateProps,
     CategoryProps,
-    CategoryTranslateProps,
     SearchProps,
+    FooterProps,
 
     LocaleStateType,
     RootStateType,
+
+    CategoryTranslationProps,
+    MenuTranslationProps,
+    FilialTranslationProps,
+    SettingTranslationProps,
 }

@@ -5,6 +5,13 @@
         "comparisons": "Сравнения",
         "login": "Войти",
         "registration": "Регистрация",
-        "search": "Поиск"
+        "search": "Поиск",
+        "menues": "Меню",
+        "categories": "Категории",
+        "addresses": "Наши адреса",
+        "useful_links": "Полезные ссылки",
+        "faq": "Часто задаваемые вопросы",
+        "career": "Карьера",
+        "service_network": "Сервисная сеть"
     }
 }

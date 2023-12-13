@@ -1,11 +1,9 @@
-import { LocaleType, SettingDataType, SettingTranslateDataType } from "../types";
+import { LocaleType, SettingTranslateDataType } from "../types";
 
 class Setting {
-    private settingData: SettingDataType[];
     private settingTranslateData: SettingTranslateDataType[];
     
-    constructor(settingData: SettingDataType[],settingTranslateData: SettingTranslateDataType[]){
-        this.settingData = settingData;
+    constructor(settingTranslateData: SettingTranslateDataType[]){
         this.settingTranslateData = settingTranslateData;
     }
 

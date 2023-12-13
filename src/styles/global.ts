@@ -20,7 +20,6 @@ body{
     color: ${props => props.theme.text_color_1};
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
-    
 }
 ::-webkit-scrollbar{
     width: 10px; 

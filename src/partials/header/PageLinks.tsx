@@ -1,9 +1,8 @@
-import Link from 'next/link'
 import React from 'react'
-import PageLinkTranslate from '../translate/PageLinkTranslate'
 import { PageLinksProps } from '@/src/types';
 import { BiChevronDown } from "react-icons/bi";
 import { Menu } from '@/src/class';
+import { MenuTranslation } from '@/src/utils/translate';
 
 
 const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslateData, activeLocale }) => {
@@ -12,9 +11,9 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
 
     const [activeLinkID, setActiveLinkID] = React.useState<number | null>();
     const toggleLinkMenu = (linkID: number) => {
-        if(activeLinkID === linkID){
+        if (activeLinkID === linkID) {
             setActiveLinkID(null);
-        }else{
+        } else {
             setActiveLinkID(linkID);
         }
     }
@@ -27,14 +26,13 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                             <React.Fragment key={maindata.id}>
                                 <div className="link-item">
                                     <div className="main-row">
-                                        <Link href={`/${activeLocale}/${maindata.path}`}>
-                                            <PageLinkTranslate
-                                                activeLocale={activeLocale}
-                                                menuData={menuData}
-                                                menuTranslateData={menuTranslateData}
-                                                menuID={maindata.id}
-                                            />
-                                        </Link>
+                                        <MenuTranslation
+                                            activeLocale={activeLocale}
+                                            activeMenuData={maindata}
+                                            menuData={menuData}
+                                            menuTranslateData={menuTranslateData}
+                                            translationType='link'
+                                        />
                                         {
                                             menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
                                                 <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
@@ -50,14 +48,13 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                                     {
                                                         menu.getAltMenuData(maindata.id).map((altdata) => (
                                                             <React.Fragment key={altdata.id}>
-                                                                <Link href={`/${activeLocale}/${altdata.path}`}>
-                                                                    <PageLinkTranslate
-                                                                        activeLocale={activeLocale}
-                                                                        menuData={menuData}
-                                                                        menuTranslateData={menuTranslateData}
-                                                                        menuID={altdata.id}
-                                                                    />
-                                                                </Link>
+                                                                <MenuTranslation
+                                                                    activeLocale={activeLocale}
+                                                                    activeMenuData={altdata}
+                                                                    menuData={menuData}
+                                                                    menuTranslateData={menuTranslateData}
+                                                                    translationType='link'
+                                                                />
                                                             </React.Fragment>
                                                         ))
                                                     }

@@ -361,7 +361,7 @@ export const BottomNavbarWrapper = styled.nav<BottomProps>`
             flex-direction: row-reverse;
             padding: 15px 10px;
             border-top: 1px solid ${props => props.theme.border_color_1};
-            background-color: 0 0 10px ${props => props.theme.bg_color_1};
+            background-color: ${props => props.theme.bg_color_1};
             gap: 15px;
             transition: all 0.3s;
             @media (width >= 1200px){

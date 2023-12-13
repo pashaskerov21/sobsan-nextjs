@@ -38,6 +38,12 @@ import {
     fetchSettingTranslateData,
 } from './fetch/translate';
 
+import {
+    CategoryTranslation,
+    FilialTranslation,
+    MenuTranslation,
+    SettingTranslation,
+} from './translate'
 
 export {
     fetchArticleData,
@@ -75,4 +81,9 @@ export {
     fetchProductTranslateData,
     fetchRoomTranslateData,
     fetchSettingTranslateData,
+
+    CategoryTranslation,
+    FilialTranslation,
+    MenuTranslation,
+    SettingTranslation,
 }

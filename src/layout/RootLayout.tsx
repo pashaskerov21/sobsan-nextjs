@@ -22,6 +22,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     categoryData,
     categoryTranslateData,
     children,
+    filialData,
+    filialTranslateData,
     menuData,
     menuTranslateData,
     settingData,
@@ -71,7 +73,18 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                         <main>
                             {children}
                         </main>
-                        <Footer />
+                        <Footer
+                            activeLocale={activeLocale}
+                            categoryData={categoryData}
+                            categoryTranslateData={categoryTranslateData}
+                            filialData={filialData}
+                            filialTranslateData={filialTranslateData}
+                            menuData={menuData}
+                            menuTranslateData={menuTranslateData}
+                            settingData={settingData}
+                            settingTranslateData={settingTranslateData}
+                            titleDictionary={titleDictionary}
+                        />
                     </body>
                 </ThemeProvider>
             </Provider>

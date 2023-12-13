@@ -2,8 +2,8 @@ import React from 'react'
 import { AltCategoryWrapper, CategoryWrapper } from './style'
 import { CategoriesDataType, CategoryProps } from '@/src/types';
 import { Category } from '@/src/class';
-import CategoryTranslate from '../translate/CategoryTranslate';
 import { IoChevronForwardOutline } from "react-icons/io5";
+import { CategoryTranslation } from '@/src/utils/translate';
 
 const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categoryTranslateData }) => {
   const category = new Category(categoryData, categoryTranslateData);
@@ -24,7 +24,7 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
   const handleCategoryMouseMove = (categoryID: number) => {
     let updatedCategories: number[] = [...activeCategories];
     if (window.innerWidth > 1200) {
-      if(!activeCategories.includes(categoryID)){
+      if (!activeCategories.includes(categoryID)) {
         updatedCategories.push(categoryID);
       }
       setActiveCategories(updatedCategories);
@@ -43,11 +43,12 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
       <React.Fragment key={altData.id}>
         <div className={`category-item`}>
           <div className="main-row">
-            <CategoryTranslate
+            <CategoryTranslation
+              activeCategoryData={altData}
               activeLocale={activeLocale}
               categoryData={categoryData}
-              categoryID={altData.id}
               categoryTranslateData={categoryTranslateData}
+              translationType='link'
             />
             {category.getAltCategoryData(altData.id).length > 0 && (
               <div className={`arrow-btn ${activeCategories.includes(altData.id) ? 'active' : ''}`} onClick={() => handleCategoryClick(altData.id)}>
@@ -70,11 +71,12 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
       <React.Fragment key={mainData.id}>
         <div className={`category-item`} onMouseMove={() => handleCategoryMouseMove(mainData.id)} onMouseLeave={() => handleCategoryMouseLeave()}>
           <div className="main-row">
-            <CategoryTranslate
+            <CategoryTranslation
+              activeCategoryData={mainData}
               activeLocale={activeLocale}
               categoryData={categoryData}
-              categoryID={mainData.id}
               categoryTranslateData={categoryTranslateData}
+              translationType='link'
             />
             {category.getAltCategoryData(mainData.id).length > 0 && (
               <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onClick={() => handleCategoryClick(mainData.id)}>

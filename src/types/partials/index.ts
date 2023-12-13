@@ -1,4 +1,4 @@
-import { CategoriesDataType, CategoriesTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from ".."
+import { CategoriesDataType, CategoriesTranslateDataType, FilialDataType, FilialTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from ".."
 
 export type HeaderStateType = {
     fixed: boolean,
@@ -10,7 +10,7 @@ export type HeaderProps = {
     theme: string,
     toggleTheme: () => void,
     settingData: SettingDataType,
-    settingTranslateData: SettingTranslateDataType,
+    settingTranslateData: SettingTranslateDataType[],
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
     categoryData: CategoriesDataType[],
@@ -25,7 +25,7 @@ export type TopNavbarProps = {
     toggleSearch: () => void,
     activeLocale: LocaleType,
     settingData: SettingDataType,
-    settingTranslateData: SettingTranslateDataType,
+    settingTranslateData: SettingTranslateDataType[],
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
     titleDictionary: { [key: string]: string },
@@ -38,7 +38,7 @@ export type BottomNavbarProps = {
     toggleSearch: () => void,
     activeLocale: LocaleType,
     settingData: SettingDataType,
-    settingTranslateData: SettingTranslateDataType,
+    settingTranslateData: SettingTranslateDataType[],
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
     categoryData: CategoriesDataType[],
@@ -51,25 +51,26 @@ export type PageLinksProps = {
     menuTranslateData: MenuTranslateDataType[],
     className: string,
 }
-export type PageLinkTranslateProps = {
-    activeLocale: LocaleType,
-    menuID: number,
-    menuData: MenuDataType[],
-    menuTranslateData: MenuTranslateDataType[],
-};
 export type CategoryProps = {
     activeLocale: LocaleType,
     categoryData: CategoriesDataType[],
     categoryTranslateData: CategoriesTranslateDataType[],
-}
-export type CategoryTranslateProps = {
-    activeLocale: LocaleType,
-    categoryData: CategoriesDataType[],
-    categoryTranslateData: CategoriesTranslateDataType[],
-    categoryID: number,
-}
+};
+
 export type SearchProps = {
     headerState: HeaderStateType,
     toggleSearch: () => void,
+    titleDictionary: { [key: string]: string },
+};
+export type FooterProps = {
+    activeLocale: LocaleType,
+    settingData: SettingDataType,
+    settingTranslateData: SettingTranslateDataType[],
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
+    filialData: FilialDataType[],
+    filialTranslateData: FilialTranslateDataType[],
     titleDictionary: { [key: string]: string },
 }
