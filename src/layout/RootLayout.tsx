@@ -31,41 +31,41 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     titleDictionary,
 }) => {
     React.useEffect(() => { Fancybox.bind("[data-fancybox]", {}) }, [])
-    // const [theme, setTheme] = React.useState<string>(`dark`);
-    // const toggleTheme = React.useCallback(() => {
-    //     if (theme === 'dark') {
-    //         setTheme('light');
-    //     } else {
-    //         setTheme('dark')
-    //     }
-    // }, [theme])
-
-
-    const defaultTheme = settingData.theme; 
-
-    const [theme, setTheme] = React.useState<string>(() => {
-        if (typeof window !== 'undefined') {
-            const savedTheme = localStorage.getItem('theme');
-            if(savedTheme !== null){
-                return savedTheme
-            }else{
-                return defaultTheme
-            }
-        }
-        return defaultTheme; 
-    });
-    console.log(theme)
-
-    React.useEffect(() => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('theme', theme);
-        }
-        
-    }, [theme]);
-
+    const [theme, setTheme] = React.useState<string>(`dark`);
     const toggleTheme = React.useCallback(() => {
-        setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-    }, []);
+        if (theme === 'dark') {
+            setTheme('light');
+        } else {
+            setTheme('dark')
+        }
+    }, [theme])
+
+
+    // const defaultTheme = settingData.theme; 
+
+    // const [theme, setTheme] = React.useState<string>(() => {
+    //     if (typeof window !== 'undefined') {
+    //         const savedTheme = localStorage.getItem('theme');
+    //         if(savedTheme !== null){
+    //             return savedTheme
+    //         }else{
+    //             return defaultTheme
+    //         }
+    //     }
+    //     return defaultTheme; 
+    // });
+    // console.log(theme)
+
+    // React.useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         localStorage.setItem('theme', theme);
+    //     }
+        
+    // }, [theme]);
+
+    // const toggleTheme = React.useCallback(() => {
+    //     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
+    // }, []);
 
     const [loading, setLoading] = React.useState(true);
 
