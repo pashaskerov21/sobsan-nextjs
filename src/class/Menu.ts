@@ -37,6 +37,16 @@ class Menu {
         if (activeData) {
             const activeTranslateData: MenuTranslateDataType | undefined = this.menuTranslateData.find((data) => data.lang === activeLocale && data.menu_id === activeData.id);
             if (activeTranslateData) {
+                pageData = {
+                    title: activeTranslateData.title,
+                    breadcrumbs: [
+                        {
+                            id: 1,
+                            path: `/${activeLocale}/${activeData.path}`,
+                            name: activeTranslateData.title,
+                        },
+                    ]
+                }
                 if (activeData.parent_id !== 0) {
                     const parentData: MenuDataType | undefined = this.menuData.find((data) => data.id === activeData.parent_id);
                     if (parentData) {
@@ -60,16 +70,7 @@ class Menu {
                         }
                     }
                 }
-                pageData = {
-                    title: activeTranslateData.title,
-                    breadcrumbs: [
-                        {
-                            id: 1,
-                            path: `/${activeLocale}/${activeData.path}`,
-                            name: activeTranslateData.title,
-                        },
-                    ]
-                }
+
 
             }
         }
