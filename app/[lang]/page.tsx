@@ -1,7 +1,8 @@
+import React from "react"
 
-
-export default async function IndexPage() {
+const HomePage = async () => {
   return (
-    <></>
+    <React.Fragment></React.Fragment>
   )
 }
+export default HomePage

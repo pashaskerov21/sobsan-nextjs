@@ -32,6 +32,7 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                             menuData={menuData}
                                             menuTranslateData={menuTranslateData}
                                             translationType='link'
+                                            path={`${maindata.path}`}
                                         />
                                         {
                                             menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
@@ -54,6 +55,7 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                                                     menuData={menuData}
                                                                     menuTranslateData={menuTranslateData}
                                                                     translationType='link'
+                                                                    path={`${maindata.path}/${altdata.path}`}
                                                                 />
                                                             </React.Fragment>
                                                         ))

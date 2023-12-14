@@ -10,6 +10,7 @@ const MenuTranslation: React.FC<MenuTranslationProps> = ({
     className,
     menuTranslateData,
     translationType,
+    path,
 }) => {
     const menu = new Menu(menuData, menuTranslateData);
     const activeTranslateData: MenuTranslateDataType | undefined = menu.getTranslate(activeMenuData.id, activeLocale);
@@ -18,7 +19,7 @@ const MenuTranslation: React.FC<MenuTranslationProps> = ({
             case "link":
                 return (
                     <React.Fragment>
-                        <Link href={`/${activeLocale}/${activeMenuData.path}`} className={className}>
+                        <Link href={`/${activeLocale}/${path}`} className={className}>
                             {activeTranslateData.title}
                         </Link>
                     </React.Fragment>

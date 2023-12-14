@@ -15,6 +15,14 @@
         "career": "Career",
         "service_network": "Service network",
         "home_page": "Home",
-        "catalogs": "Catalogs"
+        "catalogs": "Catalogs",
+        "about": "About us",
+        "coloring_system": "About the coloring system",
+        "actions": "Actions",
+        "gallery": "Gallery",
+        "news": "News",
+        "payment_delivery": "Payment and delivery",
+        "warranty_conditions": "Warranty conditions",
+        "contact": "Contact us"
     }
 }

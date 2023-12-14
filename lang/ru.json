@@ -15,6 +15,14 @@
         "career": "Карьера",
         "service_network": "Сервисная сеть",
         "home_page": "Главная",
-        "catalogs": "Каталоги"
+        "catalogs": "Каталоги",
+        "about": "О нас",
+        "coloring_system": "О системе окраски",
+        "actions": "Акции",
+        "gallery": "Галерея",
+        "news": "Новости",
+        "payment_delivery": "Оплата и доставка",
+        "warranty_conditions": "Условия гарантии",
+        "contact": "Свяжитесь с нами"
     }
 }

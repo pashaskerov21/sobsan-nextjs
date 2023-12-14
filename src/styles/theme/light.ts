@@ -19,6 +19,7 @@ const lightTheme = {
     text_color_6: '#f9f9f9',
     text_color_7: '#ed3237',
     text_color_8: '#ffffff',
+    text_color_9: 'rgba(0,0,0,0.8)',
     border_color_1: 'rgba(0,0,0,0.1)',
     border_color_2: 'rgba(0,0,0,0.3)',
     border_color_3: '#ed3237',

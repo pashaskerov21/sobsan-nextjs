@@ -12,6 +12,7 @@ export type MenuTranslationProps = {
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
     className?: string,
+    path: string,
 };
 export type CategoryTranslationProps = {
     translationType: "link" | "title",

@@ -4,52 +4,52 @@ const MenuData:MenuDataType[] = [
     {
         id: 1,
         parent_id: 0,
-        path: '/about',
+        path: 'about',
     },
     {
         id: 2,
         parent_id: 1,
-        path: '/about/coloring-system',
+        path: 'coloring-system',
     },
     {
         id: 3,
         parent_id: 0,
-        path: '/catalogs',
+        path: 'catalogs',
     },
     {
         id: 4,
         parent_id: 0,
-        path: '/media',
+        path: 'media',
     },
     {
         id: 5,
         parent_id: 4,
-        path: '/media/actions',
+        path: 'actions',
     },
     {
         id: 6,
         parent_id: 4,
-        path: '/media/news',
+        path: 'news',
     },
     {
         id: 7,
         parent_id: 4,
-        path: '/media/gallery',
+        path: 'gallery',
     },
     {
         id: 8,
         parent_id: 0,
-        path: '/payment-and-delivery',
+        path: 'payment-and-delivery',
     },
     {
         id: 9,
         parent_id: 0,
-        path: '/warranty-conditions',
+        path: 'warranty-conditions',
     },
     {
         id: 10,
         parent_id: 0,
-        path: '/contact',
+        path: 'contact',
     },
 ]
 

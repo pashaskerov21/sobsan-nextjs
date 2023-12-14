@@ -5,7 +5,7 @@ import { FooterWrapper } from './style'
 import { FooterProps } from '@/src/types'
 import { Container } from '@/src/styles/utils'
 import { SocialMedia } from '@/src/components'
-import { Category } from '@/src/class'
+import { Category, Menu } from '@/src/class'
 import { CategoryTranslation, FilialTranslation, MenuTranslation, SettingTranslation } from '@/src/utils'
 
 const Footer: React.FC<FooterProps> = ({
@@ -20,6 +20,7 @@ const Footer: React.FC<FooterProps> = ({
   settingTranslateData,
   titleDictionary,
 }) => {
+  const menu = new Menu(menuData, menuTranslateData);
   const category = new Category(categoryData, categoryTranslateData);
   return (
     <React.Fragment>
@@ -37,17 +38,36 @@ const Footer: React.FC<FooterProps> = ({
                 <div className="footer-links">
                   <h3 className="title">{titleDictionary.menues}</h3>
                   {
-                    menuData.map((data) => (
-                      <React.Fragment key={data.id}>
-                        <MenuTranslation
-                          activeLocale={activeLocale}
-                          activeMenuData={data}
-                          menuData={menuData}
-                          menuTranslateData={menuTranslateData}
-                          translationType='link'
-                        />
-                      </React.Fragment>
-                    ))
+                    menu.getMainMenuData().length > 0 ? (
+                      menu.getMainMenuData().map((maindata) => (
+                        <React.Fragment key={maindata.id}>
+                          <MenuTranslation
+                            activeLocale={activeLocale}
+                            activeMenuData={maindata}
+                            menuData={menuData}
+                            menuTranslateData={menuTranslateData}
+                            translationType='link'
+                            path={`${maindata.path}`}
+                          />
+                          {
+                            menu.getAltMenuData(maindata.id).length > 0 ? (
+                              menu.getAltMenuData(maindata.id).map((altdata) => (
+                                <React.Fragment key={altdata.id}>
+                                  <MenuTranslation
+                                    activeLocale={activeLocale}
+                                    activeMenuData={altdata}
+                                    menuData={menuData}
+                                    menuTranslateData={menuTranslateData}
+                                    translationType='link'
+                                    path={`${maindata.path}/${altdata.path}`}
+                                  />
+                                </React.Fragment>
+                              ))
+                            ) : null
+                          }
+                        </React.Fragment>
+                      ))
+                    ) : null
                   }
                 </div>
               </div>
@@ -114,7 +134,7 @@ const Footer: React.FC<FooterProps> = ({
                     activeLocale={activeLocale}
                     settingTranslateData={settingTranslateData}
                     translationType='copyright'
-                    />
+                  />
                 </div>
                 <div className="powered-by">
                   <Link href='https://alipashaskerov.vercel.app/' target='_blank'>Alipasha Askerov</Link>

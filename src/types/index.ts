@@ -41,13 +41,24 @@ import {
 
 import {
     RootLayoutProps,
-    CatalogPageLayout,
+    CatalogPageLayoutProps,
+    AboutPageLayoutProps,
+    ColorSystemPageLayoutProps,
+    ActionPageLayoutProps,
+    GalleryPageLayoutProps,
+    NewsPageLayoutProps,
+    ContactPageLayoutProps,
+    PaymentDeliveryPageLayoutProps,
+    WarrantyConditionPageLayoutProps,
 } from './layout';
 
 import {
     SiteToolbarProps,
     ThemeButtonProps,
     SocialMediaProps,
+    BreadcrumbType,
+    PageTitleDataType,
+    PageTitleProps,
 } from './components';
 
 import {
@@ -113,11 +124,22 @@ export type {
     WeightDataType,
 
     RootLayoutProps,
-    CatalogPageLayout,
+    CatalogPageLayoutProps,
+    AboutPageLayoutProps,
+    ColorSystemPageLayoutProps,
+    ActionPageLayoutProps,
+    GalleryPageLayoutProps,
+    NewsPageLayoutProps,
+    ContactPageLayoutProps,
+    PaymentDeliveryPageLayoutProps,
+    WarrantyConditionPageLayoutProps,
 
     SiteToolbarProps,
     ThemeButtonProps,
     SocialMediaProps,
+    BreadcrumbType,
+    PageTitleDataType,
+    PageTitleProps,
 
     HeaderStateType,
     HeaderProps,
