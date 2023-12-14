@@ -9,6 +9,7 @@
     "@fancyapps/ui": "^5.0.28",
     "@formatjs/intl-localematcher": "0.2.32",
     "@reduxjs/toolkit": "^2.0.1",
+    "@vercel/speed-insights": "^1.0.2",
     "formik": "^2.4.5",
     "negotiator": "0.6.3",
     "next": "latest",

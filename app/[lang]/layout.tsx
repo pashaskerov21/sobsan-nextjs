@@ -1,3 +1,6 @@
+
+import { i18n } from '../../i18n-config';
+import { Metadata } from 'next';
 import {
   CategoriesDataType,
   CategoriesTranslateDataType,
@@ -9,13 +12,21 @@ import {
   SettingDataType,
   SettingTranslateDataType
 } from '@/src/types';
-import { i18n } from '../../i18n-config';
-import { Metadata } from 'next';
-import { fetchCategoryData, fetchCategoryTranslateData, fetchFilialData, fetchFilialTranslateData, fetchMenuData, fetchMenuTranslateData, fetchSettingData, fetchSettingTranslateData } from '@/src/utils';
+import {
+  fetchCategoryData,
+  fetchCategoryTranslateData,
+  fetchFilialData,
+  fetchFilialTranslateData,
+  fetchMenuData,
+  fetchMenuTranslateData,
+  fetchSettingData,
+  fetchSettingTranslateData
+} from '@/src/utils';
 import { Setting } from '@/src/class';
 import { RootLayout, StyledComponentsRegistry } from '@/src/layout';
 import { getTranslate } from '@/get-translate';
 import { Suspense } from 'react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const fetchData = async (): Promise<{
   settingData: SettingDataType[] | undefined;
@@ -24,7 +35,7 @@ const fetchData = async (): Promise<{
   menuTranslateData: MenuTranslateDataType[] | undefined;
   categoryData: CategoriesDataType[] | undefined;
   categoryTranslateData: CategoriesTranslateDataType[] | undefined;
-  filialData:  FilialDataType[] | undefined;
+  filialData: FilialDataType[] | undefined;
   filialTranslateData: FilialTranslateDataType[] | undefined;
 }> => {
   try {
@@ -150,6 +161,7 @@ export default async function Root({
                 filialTranslateData={filialTranslateData}
                 titleDictionary={titleDictionary}>
                 {children}
+                <SpeedInsights/>
               </RootLayout>
             </Suspense>
           </StyledComponentsRegistry>
