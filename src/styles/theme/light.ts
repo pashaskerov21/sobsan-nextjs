@@ -1,4 +1,4 @@
-const lightTheme = {
+const LightTheme = {
     color_1: '#ed3237',
     color_2: '#ffa300',
     color_3: '#4bb543',
@@ -11,6 +11,7 @@ const lightTheme = {
     bg_color_6: '#f9f9f9',
     bg_color_7: 'rgba(0,0,0,0.3)',
     bg_color_8: '#f1f1f1',
+    bg_color_9: '#efefef',
     text_color_1: '#212121',
     text_color_2: '#000000',
     text_color_3: '#474747',
@@ -21,8 +22,8 @@ const lightTheme = {
     text_color_8: '#ffffff',
     text_color_9: 'rgba(0,0,0,0.8)',
     border_color_1: 'rgba(0,0,0,0.1)',
-    border_color_2: 'rgba(0,0,0,0.3)',
+    border_color_2: 'rgba(0,0,0,0.2)',
     border_color_3: '#ed3237',
     shadow_color_1: 'rgba(0,0,0,0.2)',
 }
-export default lightTheme;
+export default LightTheme;

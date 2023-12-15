@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { AltCategoryWrapper, CategoryWrapper } from './style'
 import { CategoriesDataType, CategoryProps } from '@/src/types';

@@ -1,4 +1,21 @@
-import { ArticleDataType, ArticleTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, FilialDataType, FilialTranslateDataType, GalleryDataType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from ".."
+import {
+    ArticleDataType, 
+    ArticleTranslateDataType, 
+    CatalogDataType, 
+    CatalogTranslateDataType, 
+    CategoriesDataType, 
+    CategoriesTranslateDataType, 
+    ColorDataType, 
+    ColorTranslateDataType, 
+    FilialDataType, 
+    FilialTranslateDataType, 
+    GalleryDataType, 
+    LocaleType, 
+    MenuDataType, 
+    MenuTranslateDataType, 
+    SettingDataType, 
+    SettingTranslateDataType
+} from ".."
 
 export type RootLayoutProps = {
     children: React.ReactNode,
@@ -17,11 +34,14 @@ export type CatalogPageLayoutProps = {
     activeLocale: LocaleType,
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
     catalogData: CatalogDataType[],
     catalogTranslateData: CatalogTranslateDataType[],
     colorData: ColorDataType[],
     colorTranslateData: ColorTranslateDataType[],
     titleDictionary: { [key: string]: string },
+    textDictionary: { [key: string]: string },
 };
 export type AboutPageLayoutProps = {
     activeLocale: LocaleType,

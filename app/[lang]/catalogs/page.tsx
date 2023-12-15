@@ -1,14 +1,16 @@
 import React, { Suspense } from 'react';
 import { getTranslate } from '@/get-translate';
 import { CatalogPageLayout } from '@/src/layout';
-import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType } from '@/src/types';
-import { fetchCatalogData, fetchCatalogTranslateData, fetchColorData, fetchColorTranslateData, fetchMenuData, fetchMenuTranslateData } from '@/src/utils';
+import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType } from '@/src/types';
+import { fetchCatalogData, fetchCatalogTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchColorData, fetchColorTranslateData, fetchMenuData, fetchMenuTranslateData } from '@/src/utils';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 const fetchData = async (): Promise<{
   menuData: MenuDataType[] | undefined;
   menuTranslateData: MenuTranslateDataType[] | undefined;
+  categoryData: CategoriesDataType[] | undefined;
+  categoryTranslateData: CategoriesTranslateDataType[] | undefined;
   catalogData: CatalogDataType[] | undefined;
   catalogTranslateData: CatalogTranslateDataType[] | undefined;
   colorData: ColorDataType[] | undefined;
@@ -18,6 +20,8 @@ const fetchData = async (): Promise<{
     const [
       menuData,
       menuTranslateData,
+      categoryData,
+      categoryTranslateData,
       catalogData,
       catalogTranslateData,
       colorData,
@@ -25,12 +29,14 @@ const fetchData = async (): Promise<{
     ] = await Promise.all([
       fetchMenuData(),
       fetchMenuTranslateData(),
+      fetchCategoryData(),
+      fetchCategoryTranslateData(),
       fetchCatalogData(),
       fetchCatalogTranslateData(),
       fetchColorData(),
       fetchColorTranslateData()
     ]);
-    return { menuData, menuTranslateData, catalogData, catalogTranslateData, colorData, colorTranslateData };
+    return { menuData, menuTranslateData, categoryData, categoryTranslateData, catalogData, catalogTranslateData, colorData, colorTranslateData };
   } catch (error) {
     throw new Error('Failed to fetch data');
   }
@@ -49,13 +55,16 @@ const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType }
   try {
     const t = await getTranslate(lang);
     const titleDictionary = t.title;
-    const { menuData, menuTranslateData, catalogData, catalogTranslateData, colorData, colorTranslateData } = await fetchData();
+    const textDictionary = t.text;
+    const { menuData, menuTranslateData, categoryData, categoryTranslateData, catalogData, catalogTranslateData, colorData, colorTranslateData } = await fetchData();
     if (
       menuData
       && menuTranslateData
-      && catalogData 
-      && catalogTranslateData 
-      && colorData 
+      && categoryData
+      && categoryTranslateData
+      && catalogData
+      && catalogTranslateData
+      && colorData
       && colorTranslateData) {
       return (
         <React.Fragment>
@@ -64,11 +73,14 @@ const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType }
               activeLocale={lang}
               menuData={menuData}
               menuTranslateData={menuTranslateData}
+              categoryData={categoryData}
+              categoryTranslateData={categoryTranslateData}
               catalogData={catalogData}
               catalogTranslateData={catalogTranslateData}
               colorData={colorData}
               colorTranslateData={colorTranslateData}
               titleDictionary={titleDictionary}
+              textDictionary={textDictionary}
             />
           </Suspense>
         </React.Fragment>

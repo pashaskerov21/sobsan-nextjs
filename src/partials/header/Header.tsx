@@ -1,9 +1,9 @@
+'use client'
 import React from 'react'
 import TopNavbar from './TopNavbar';
 import BottomNavbar from './BottomNavbar';
 import { HeaderProps, HeaderStateType } from '@/src/types';
 import { HeaderWrapper } from './style';
-import Search from './Search';
 
 const Header: React.FC<HeaderProps> = ({
   activeLocale,

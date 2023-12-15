@@ -43,6 +43,7 @@ import {
     FilialTranslation,
     MenuTranslation,
     SettingTranslation,
+    CatalogTranslation,
 } from './translate'
 
 export {
@@ -86,4 +87,5 @@ export {
     FilialTranslation,
     MenuTranslation,
     SettingTranslation,
+    CatalogTranslation,
 }

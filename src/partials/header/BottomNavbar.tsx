@@ -1,9 +1,10 @@
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BottomNavbarProps } from '@/src/types';
 import { BottomNavbarWrapper } from './style';
-import { Container } from '@/src/styles/utils';
+import { Container } from '@/src/styles';
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';

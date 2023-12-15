@@ -1,10 +1,10 @@
-import { column_align_start, column_center, row_center, row_justify_start } from "@/src/styles/mixin";
+import { column_align_start, column_center, row_center, row_justify_start } from "@/src/styles";
 import styled from "styled-components";
 
 export const PageTitleWrapper = styled.div`
     width: 100%;
     position: relative;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     .inner{
         width: 100%;
         ${column_center};

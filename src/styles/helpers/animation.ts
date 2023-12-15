@@ -1,6 +1,6 @@
 import { keyframes } from "styled-components";
 
-export const preloaderAnimation = keyframes`
+export const PreloaderAnimation = keyframes`
 0% {
     transform: rotate(0deg);
 }

@@ -1,4 +1,4 @@
-import { column_align_start, column_center, column_justify_start, column_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles/mixin";
+import { column_align_start, column_center, column_justify_start, column_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles";
 import styled, { css } from "styled-components";
 
 type TopNavProps = {

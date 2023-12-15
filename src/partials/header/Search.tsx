@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { SearchProps } from '@/src/types'
 import { SearchFormWrapper } from './style'

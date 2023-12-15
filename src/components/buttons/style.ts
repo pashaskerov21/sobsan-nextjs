@@ -1,5 +1,5 @@
-import { row_center } from "@/src/styles/mixin";
 import styled from "styled-components";
+import { row_center } from "@/src/styles";
 
 export const ThemeButtonStyle = styled.div`
     min-width: 55px;

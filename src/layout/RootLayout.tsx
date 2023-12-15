@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import darkTheme from '../styles/theme/dark';
-import lightTheme from '../styles/theme/light';
+import { DarkTheme } from '../styles';
+import { LightTheme } from '../styles';
 import GlobalStyles from '../styles/global';
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import 'slick-carousel/slick/slick-theme.css';
@@ -40,33 +40,6 @@ const RootLayout: React.FC<RootLayoutProps> = ({
         }
     }, [theme])
 
-
-    // const defaultTheme = settingData.theme; 
-
-    // const [theme, setTheme] = React.useState<string>(() => {
-    //     if (typeof window !== 'undefined') {
-    //         const savedTheme = localStorage.getItem('theme');
-    //         if(savedTheme !== null){
-    //             return savedTheme
-    //         }else{
-    //             return defaultTheme
-    //         }
-    //     }
-    //     return defaultTheme; 
-    // });
-    // console.log(theme)
-
-    // React.useEffect(() => {
-    //     if (typeof window !== 'undefined') {
-    //         localStorage.setItem('theme', theme);
-    //     }
-        
-    // }, [theme]);
-
-    // const toggleTheme = React.useCallback(() => {
-    //     setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-    // }, []);
-
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
@@ -77,7 +50,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     return (
         <React.Fragment>
             <Provider store={store}>
-                <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+                <ThemeProvider theme={theme === 'dark' ? DarkTheme : LightTheme}>
                     <GlobalStyles />
                     <body>
                         {loading && <div className='preloader'></div>}

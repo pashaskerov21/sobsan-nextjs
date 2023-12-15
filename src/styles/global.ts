@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-import { column_between, row_center } from "./mixin";
-import { preloaderAnimation } from "./animation";
+import { column_between, row_center } from "./helpers/mixin";
+import { PreloaderAnimation } from "./helpers/animation";
+
 
 const GlobalStyles = createGlobalStyle`
 * {
@@ -98,7 +99,7 @@ input{
         ${row_center};
         width: 150px;
         height: 150px;
-        animation: ${preloaderAnimation} 0.7s linear infinite;
+        animation: ${PreloaderAnimation} 0.7s linear infinite;
     }
 }
 `;

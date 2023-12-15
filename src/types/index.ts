@@ -59,6 +59,7 @@ import {
     BreadcrumbType,
     PageTitleDataType,
     PageTitleProps,
+    CatalogAccordionProps,
 } from './components';
 
 import {
@@ -81,8 +82,13 @@ import {
     CategoryTranslationProps,
     MenuTranslationProps,
     FilialTranslationProps,
-    SettingTranslationProps
+    SettingTranslationProps,
+    CatalogTransLationProps
 } from './translate'
+
+import {
+    CatalogSectionProps,
+} from './section'
 
 export type {
     LocaleType,
@@ -140,6 +146,7 @@ export type {
     BreadcrumbType,
     PageTitleDataType,
     PageTitleProps,
+    CatalogAccordionProps,
 
     HeaderStateType,
     HeaderProps,
@@ -157,4 +164,7 @@ export type {
     MenuTranslationProps,
     FilialTranslationProps,
     SettingTranslationProps,
+    CatalogTransLationProps,
+
+    CatalogSectionProps,
 }

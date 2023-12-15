@@ -1,8 +1,9 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
 import { TopNavbarProps } from '@/src/types'
 import { TopNavbarWrapper } from './style'
-import { Container } from '@/src/styles/utils'
+import { Container } from '@/src/styles'
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
 import { LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components'
 import { BiLogInCircle } from "react-icons/bi";

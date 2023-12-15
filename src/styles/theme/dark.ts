@@ -1,4 +1,4 @@
-const darkTheme = {
+const DarkTheme = {
     color_1: '#ed3237',
     color_2: '#ffa300',
     color_3: '#4bb543',
@@ -11,6 +11,7 @@ const darkTheme = {
     bg_color_6: 'rgba(0,0,0,0.7)',
     bg_color_7: '#ffffff',
     bg_color_8: '#000000',
+    bg_color_9: '#000000',
     text_color_1: '#ffffff',
     text_color_2: '#ffffff',
     text_color_3: '#ffffff',
@@ -25,4 +26,4 @@ const darkTheme = {
     border_color_3: '#ffffff',
     shadow_color_1: 'rgba(255,255,255,0.2)',
 }
-export default darkTheme;
+export default DarkTheme;

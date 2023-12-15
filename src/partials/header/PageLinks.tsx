@@ -1,8 +1,9 @@
+'use client'
 import React from 'react'
 import { PageLinksProps } from '@/src/types';
 import { BiChevronDown } from "react-icons/bi";
 import { Menu } from '@/src/class';
-import { MenuTranslation } from '@/src/utils/translate';
+import { MenuTranslation } from '@/src/utils';
 
 
 const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslateData, activeLocale }) => {

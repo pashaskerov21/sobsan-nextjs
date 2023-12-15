@@ -1,10 +1,11 @@
+'use client'
 import React from 'react'
 import { ThemeButtonStyle } from './style'
 import { BsFillSunFill, BsMoonStarsFill } from 'react-icons/bs'
 import { ThemeButtonProps } from '@/src/types'
 
 
-const ThemeButton:React.FC<ThemeButtonProps> = ({theme, toggleTheme}) => {
+const ThemeButton: React.FC<ThemeButtonProps> = ({ theme, toggleTheme }) => {
     return (
         <React.Fragment>
             <ThemeButtonStyle className={theme} onClick={toggleTheme}>

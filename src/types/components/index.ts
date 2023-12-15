@@ -1,4 +1,5 @@
-import { SettingDataType } from "../data"
+import { LocaleType } from "..";
+import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, SettingDataType } from "../data"
 
 export type SiteToolbarProps = {
     settingData: SettingDataType,
@@ -22,7 +23,16 @@ export type PageTitleDataType = {
     breadcrumbs: BreadcrumbType[],
 }
 export type PageTitleProps = {
-    activeLocale: string,
+    activeLocale: LocaleType,
     pageTitleData: PageTitleDataType,
     titleDictionary: { [key: string]: string },
+}
+export type CatalogAccordionProps = {
+    activeLocale: LocaleType,
+    activeCategoryID: number,
+    catalogData: CatalogDataType[],
+    catalogTranslateData: CatalogTranslateDataType[],
+    colorData: ColorDataType[],
+    colorTranslateData: ColorTranslateDataType[],
+    textDictionary: { [key: string]: string },
 }

@@ -1,10 +1,30 @@
 import styled, { css } from "styled-components";
 
-interface GridProps {
+export const Container = styled.div`
+width: 100%;
+margin: 0 auto;
+padding: 0 12px;
+@media (min-width: 576px){
+    max-width: 540px;
+}
+@media (min-width: 768px){
+    max-width: 720px;
+}
+@media (min-width: 992px){
+    max-width: 960px;
+}
+@media (min-width: 1200px){
+    max-width: 1140px;
+}
+@media (min-width: 1400px){
+    max-width: 1320px;
+}
+`;
+
+type GridProps = {
     $col?: number,
 }
-
-const Grid = styled.div<GridProps>`
+export const GridContainer = styled.div<GridProps>`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(1,1fr);
@@ -61,4 +81,3 @@ const Grid = styled.div<GridProps>`
         `
     }
 `;
-export default Grid

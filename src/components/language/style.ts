@@ -1,4 +1,4 @@
-import { column_align_start, row_center } from "@/src/styles/mixin";
+import { column_align_start, row_center } from "@/src/styles";
 import styled from "styled-components";
 
 export const LanguageDropdownWrapper = styled.div`

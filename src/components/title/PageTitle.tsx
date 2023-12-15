@@ -1,8 +1,9 @@
+'yse client'
 import React from 'react'
 import Link from 'next/link'
 import { PageTitleWrapper } from './style'
 import { PageTitleProps } from '@/src/types'
-import { Container } from '@/src/styles/utils'
+import { Container } from '@/src/styles'
 import { BsChevronRight } from 'react-icons/bs'
 
 const PageTitle: React.FC<PageTitleProps> = ({

@@ -3,6 +3,7 @@ import LanguageDropdown from "./language/LanguageDropdown";
 import ThemeButton from "./buttons/ThemeButton";
 import SocialMedia from "./SocialMedia";
 import PageTitle from "./title/PageTitle";
+import CatalogAccordion from "./catalog/CatalogAccordion";
 
 export {
     SiteToolbar,
@@ -10,4 +11,5 @@ export {
     ThemeButton,
     SocialMedia,
     PageTitle,
+    CatalogAccordion,
 }
