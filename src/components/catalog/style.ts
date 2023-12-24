@@ -42,6 +42,7 @@ export const ColorWrapper = styled.div`
                 box-shadow: 0 0 10px ${props => props.theme.shadow_color_1};
                 background-color: ${props => props.theme.bg_color_1};
                 border-radius: 0 0 20px 20px;
+                padding: 10px;
             }
         }
         @media (width >= 576px){
@@ -65,7 +66,7 @@ export const ColorWrapper = styled.div`
             }
         }
         .info{
-            padding: 15px 0;
+            padding: 15px 10px;
             ${column_center};
             font-size: 12px;
             text-align: center;
@@ -93,6 +94,11 @@ export const ColorWrapper = styled.div`
         .color-item{
             width: 100%;
             margin: 0;
+            &.secondary{
+                .info{
+                    box-shadow: none;
+                }
+            }
             @media (width >= 1200px){
                 width: 20%;
             }
