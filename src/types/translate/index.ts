@@ -1,4 +1,4 @@
-import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, FilialDataType, FilialTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, SettingTranslateDataType } from "..";
+import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, FilialDataType, FilialTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, SettingTranslateDataType } from "..";
 
 export type SettingTranslationProps = {
     translationType: "title" | "description" | "address" | "copyright",
@@ -34,4 +34,10 @@ export type CatalogTransLationProps = {
     activeCatalogData: CatalogDataType,
     catalogData: CatalogDataType[],
     catalogTranslateData: CatalogTranslateDataType[],
+}
+export type ColorTranslationProps = {
+    activeLocale: LocaleType,
+    activeColorData: ColorDataType,
+    colorData: ColorDataType[],
+    colorTranslateData: ColorTranslateDataType[],
 }

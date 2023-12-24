@@ -36,3 +36,11 @@ export type CatalogAccordionProps = {
     colorTranslateData: ColorTranslateDataType[],
     textDictionary: { [key: string]: string },
 }
+export type CatalogColorProps = {
+    activeLocale: LocaleType,
+    activeCatalogID: number,
+    catalogData: CatalogDataType[],
+    catalogTranslateData: CatalogTranslateDataType[],
+    colorData: ColorDataType[],
+    colorTranslateData: ColorTranslateDataType[],
+}

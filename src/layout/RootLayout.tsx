@@ -6,6 +6,7 @@ import GlobalStyles from '../styles/global';
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/scss/index.scss';
 import { Fancybox } from '@fancyapps/ui';
 import { ThemeProvider } from 'styled-components';

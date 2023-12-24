@@ -60,6 +60,7 @@ import {
     PageTitleDataType,
     PageTitleProps,
     CatalogAccordionProps,
+    CatalogColorProps,
 } from './components';
 
 import {
@@ -83,7 +84,8 @@ import {
     MenuTranslationProps,
     FilialTranslationProps,
     SettingTranslationProps,
-    CatalogTransLationProps
+    CatalogTransLationProps,
+    ColorTranslationProps
 } from './translate'
 
 import {
@@ -147,6 +149,7 @@ export type {
     PageTitleDataType,
     PageTitleProps,
     CatalogAccordionProps,
+    CatalogColorProps,
 
     HeaderStateType,
     HeaderProps,
@@ -165,6 +168,7 @@ export type {
     FilialTranslationProps,
     SettingTranslationProps,
     CatalogTransLationProps,
+    ColorTranslationProps,
 
     CatalogSectionProps,
 }

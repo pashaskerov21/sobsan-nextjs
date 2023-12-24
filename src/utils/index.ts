@@ -44,6 +44,7 @@ import {
     MenuTranslation,
     SettingTranslation,
     CatalogTranslation,
+    ColorTranslation,
 } from './translate'
 
 export {
@@ -88,4 +89,5 @@ export {
     MenuTranslation,
     SettingTranslation,
     CatalogTranslation,
+    ColorTranslation,
 }

@@ -827,13 +827,13 @@ const ColorTranslateData:ColorTranslateDataType[] = [
     id: 138,
     color_id: 46,
     lang: "ru",
-    title: "Бежевый"
+    title: "Основной цвет"
   },
   {
     id: 139,
     color_id: 47,
     lang: "az",
-    title: "Основной цвет"
+    title: ""
   },
   {
     id: 140,

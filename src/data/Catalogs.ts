@@ -42,6 +42,10 @@ const CatalogData:CatalogDataType[] = [
         category_id: 1,
     },
     {
+        id: 11,
+        category_id: 1,
+    },
+    {
         id: 12,
         category_id: 1,
     },

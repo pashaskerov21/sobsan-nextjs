@@ -29,7 +29,7 @@ import {
 import Section from "./components/section";
 import { Container, GridContainer} from "./components/container";
 import { CategoryButtonWrapper } from "./components/category";
-import { AccordionWrapper } from "./components/accordion";
+import { AccordionContainer } from "./components/accordion";
 
 export {
     GlobalStyles,
@@ -63,5 +63,5 @@ export {
     Container,
     GridContainer,
     CategoryButtonWrapper,
-    AccordionWrapper,
+    AccordionContainer,
 }

@@ -1,11 +1,13 @@
 'use client'
 import React from 'react'
-import { AccordionWrapper } from '@/src/styles'
 import { CatalogAccordionProps, CatalogDataType } from '@/src/types'
 import { CatalogTranslation } from '@/src/utils';
 import { FaChevronDown } from "react-icons/fa6";
 import { Catalog } from '@/src/class';
-import { CatalogAccordionBodyWrapper } from './style';
+import { CatalogAccordionBodyInner } from './style';
+import CatalogColors from './CatalogColors';
+import { Accordion } from 'react-bootstrap';
+import { AccordionContainer } from '@/src/styles';
 
 const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
   activeCategoryID,
@@ -18,14 +20,6 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
 }) => {
   const catalog = new Catalog(catalogData, catalogTranslateData);
   const [catalogs, setCatalogs] = React.useState<CatalogDataType[]>(catalogData);
-  const accordionBodyRefs = React.useRef<{ [key: number]: HTMLDivElement | null }>({});
-  const [accordionState, setAccordionState] = React.useState<{
-    index: number | null,
-    height: number | null,
-  }>({
-    index: null,
-    height: null,
-  });
 
   React.useEffect(() => {
     if (activeCategoryID === 0) {
@@ -36,34 +30,15 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
     }
   }, [activeCategoryID])
 
-
-  const handleAccordionButton = React.useCallback((id: number) => {
-    const itemBody = accordionBodyRefs.current[id];
-
-    if (accordionState.index === id) {
-      setAccordionState({
-        index: null,
-        height: null,
-      });
-    } else {
-      if (itemBody) {
-        setAccordionState({
-          index: id,
-          height: itemBody.scrollHeight,
-        });
-      }
-    }
-
-  }, [accordionState])
   return (
     <React.Fragment>
-      <AccordionWrapper $activeBodyHeight={accordionState.height}>
-        {
-          catalogs.map((data) => (
-            <React.Fragment key={data.id}>
-              <div className={`accordion-item ${accordionState.index === data.id ? 'active' : ''}`} >
-                <div className="accordion-button" onClick={() => handleAccordionButton(data.id)}>
-                  <div className="button-title">
+      <AccordionContainer>
+        <Accordion alwaysOpen>
+          {
+            catalogs.map((data) => (
+              <React.Fragment key={data.id}>
+                <Accordion.Item eventKey={`${data.id}`}>
+                  <Accordion.Header>
                     <CatalogTranslation
                       activeCatalogData={data}
                       activeLocale={activeLocale}
@@ -71,24 +46,30 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
                       catalogTranslateData={catalogTranslateData}
                       translationType='title'
                     />
-                  </div>
-                  <div className="button-icon">
                     <FaChevronDown />
-                  </div>
-                </div>
-                <div className='accordion-body'
-                  >
-                  <CatalogAccordionBodyWrapper ref={(ref) => { ref ? accordionBodyRefs.current[data.id] = ref : null }}>
-                    <div className="note">
-                      {textDictionary.catalog_note}
-                    </div>
-                  </CatalogAccordionBodyWrapper>
-                </div>
-              </div>
-            </React.Fragment>
-          ))
-        }
-      </AccordionWrapper>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <CatalogAccordionBodyInner>
+                      <CatalogColors
+                        activeCatalogID={data.id}
+                        activeLocale={activeLocale}
+                        catalogData={catalogData}
+                        catalogTranslateData={catalogTranslateData}
+                        colorData={colorData}
+                        colorTranslateData={colorTranslateData}
+                      />
+                      <div className="note">
+                        {textDictionary.catalog_note}
+                      </div>
+                    </CatalogAccordionBodyInner>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </React.Fragment>
+            ))
+          }
+        </Accordion>
+      </AccordionContainer>
+
     </React.Fragment>
   )
 }

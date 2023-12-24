@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({
             <div className="top-inner">
               <div className="col">
                 <Link href={`/${activeLocale}`}>
-                  <Image src={settingData.logo} width={100} height={130} alt='logo' />
+                  <Image src={settingData.logo} width={100} height={130} alt='logo'  priority={true}/>
                 </Link>
                 <SocialMedia className='social-media' settingData={settingData} />
               </div>

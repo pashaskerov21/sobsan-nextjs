@@ -1,69 +1,49 @@
 import styled from "styled-components";
 import { column_center, row_between } from "../../helpers/mixin";
 
-type AccordionWrapperProps = {
-    $activeBodyHeight: number | null, 
-}
 
-export const AccordionWrapper = styled.div<AccordionWrapperProps>`
+
+export const AccordionContainer = styled.div`
     width: 100%;
-    position: relative;
-    ${column_center};
-    border: 1px solid ${props => props.theme.border_color_1};
-    border-radius: 10px;
-    .accordion-item{
+    .accordion{
         width: 100%;
-        position: relative;
-        ${column_center};
-        .accordion-button{
+        background-color: transparent !important;
+        border-color: ${props => props.theme.border_color_1};
+        color: ${props => props.theme.text_color_1} !important;
+        .accordion-item{
+            background-color: transparent !important;
+            border-color: ${props => props.theme.border_color_1};
+            color: ${props => props.theme.text_color_1} !important;
+            box-shadow: none;
+        }
+        &-button{
             width: 100%;
             ${row_between};
             gap: 30px;
-            padding: 15px;
-            border-top: 1px solid ${props => props.theme.border_color_2};
-            cursor: pointer;
-            .button-title{
-                font-weight: 600;
+            background-color: transparent !important;
+            border-color: ${props => props.theme.border_color_1};
+            color: ${props => props.theme.text_color_1} !important;
+            box-shadow: none;
+            &::after{
+                display: none;
             }
-            .button-icon{
-                font-size: 14px;
+            svg{
+                transition: all 0.2s;
+            }
+            &:not(.collapsed){
+                background: url('/design/large-drop-bg.webp') #ed3237 !important;
+                background-repeat: no-repeat;
+                background-size: cover;
+                color: #ffffff !important;
+                box-shadow: none;
                 svg{
-                    transition: all 0.2s;
+                    transform: rotate(-180deg)
                 }
             }
         }
         .accordion-body{
-            width: 100%;
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-            transition: all 0.3s;
-            border-top: 1px solid ${props => props.theme.border_color_2};
+            color: ${props => props.theme.text} !important;
         }
-        &.active{
-            .accordion-button{
-                background: url('/design/large-drop-bg.webp') ${props => props.theme.color_1};
-                background-repeat: no-repeat;
-                background-size: cover;
-                color: #ffffff;
-                .button-icon{
-                    svg{
-                        transform: rotate(-180deg)
-                    }
-                }
-            }
-            .accordion-body{
-                height: ${props => props.$activeBodyHeight}px;
-                overflow: visible;
-                opacity: 1;
-            }
-        }
-        &:first-child{
-            .accordion-button{
-                border-top: none
-            }
-        }
-        
     }
 `;
 

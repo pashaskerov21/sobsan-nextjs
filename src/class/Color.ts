@@ -13,12 +13,12 @@ class Color {
         const activeTranslate: ColorTranslateDataType | undefined = this.colorTranslateData.find((data) => data.lang === activeLocale && data.color_id === id);
         return activeTranslate
     }
-    public getMainColors(id: number){
-        const mainColors: ColorDataType[] = this.colorData.filter((data) => data.parent_id === 0);
+    public getMainColors(){
+        const mainColors: ColorDataType[] | [] = this.colorData.filter((data) => data.parent_id === 0);
         return mainColors;
     }
     public getAltColors(id: number){
-        const altColors: ColorDataType[] = this.colorData.filter((data) => data.parent_id === id);
+        const altColors: ColorDataType[] | [] = this.colorData.filter((data) => data.parent_id === id);
         return altColors;
     }
 }

@@ -14,11 +14,11 @@ class Catalog {
         return activeTranslate
     }
     public getColors(id: number, colorData: ColorDataType[]){
-        const colors:ColorDataType[] = colorData.filter((data) => data.catalog_id === id);
+        const colors:ColorDataType[] | [] = colorData.filter((data) => data.catalog_id === id);
         return colors;
     }
     public filterCatalogsByCategory(categoryID: number){
-        const catalogs: CatalogDataType[] = this.catalogData.filter((data) => data.category_id === categoryID);
+        const catalogs: CatalogDataType[] | [] = this.catalogData.filter((data) => data.category_id === categoryID);
         return catalogs;
     }
 }

@@ -3,6 +3,7 @@ import MenuTranslation from "./MenuTranslation";
 import FilialTranslation from "./FilialTranslation";
 import SettingTranslation from "./SettingTranslation";
 import CatalogTranslation from "./CatalogTranslation";
+import ColorTranslation from "./ColorTranslation";
 
 export {
     CategoryTranslation,
@@ -10,4 +11,5 @@ export {
     FilialTranslation,
     SettingTranslation,
     CatalogTranslation,
+    ColorTranslation
 }
