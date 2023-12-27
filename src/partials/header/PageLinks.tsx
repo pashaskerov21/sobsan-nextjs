@@ -4,7 +4,6 @@ import { PageLinksProps } from '@/src/types';
 import { BiChevronDown } from "react-icons/bi";
 import { Menu } from '@/src/class';
 import { MenuTranslation } from '@/src/utils';
-import { Skeleton } from '@/src/components';
 
 
 const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslateData, activeLocale }) => {

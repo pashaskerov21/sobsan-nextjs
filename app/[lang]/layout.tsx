@@ -147,22 +147,20 @@ export default async function Root({
             <link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
             <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
           </head>
-          <StyledComponentsRegistry>
-              <RootLayout
-                activeLocale={lang}
-                categoryData={categoryData}
-                categoryTranslateData={categoryTranslateData}
-                menuData={menuData}
-                menuTranslateData={menuTranslateData}
-                settingData={settingData[0]}
-                settingTranslateData={settingTranslateData}
-                filialData={filialData}
-                filialTranslateData={filialTranslateData}
-                titleDictionary={titleDictionary}>
-                {children}
-                <SpeedInsights/>
-              </RootLayout>
-          </StyledComponentsRegistry>
+          <RootLayout
+            activeLocale={lang}
+            categoryData={categoryData}
+            categoryTranslateData={categoryTranslateData}
+            menuData={menuData}
+            menuTranslateData={menuTranslateData}
+            settingData={settingData[0]}
+            settingTranslateData={settingTranslateData}
+            filialData={filialData}
+            filialTranslateData={filialTranslateData}
+            titleDictionary={titleDictionary}>
+            {children}
+            <SpeedInsights />
+          </RootLayout>
         </html>
       );
     }
