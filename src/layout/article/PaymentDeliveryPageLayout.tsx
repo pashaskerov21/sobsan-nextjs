@@ -16,6 +16,10 @@ const PaymentDeliveryPageLayout: React.FC<PaymentDeliveryPageLayoutProps> = ({
 }) => {
     const path = 'payment-and-delivery';
     const dispatch = useDispatch();
+    const [loading, setLoading] = React.useState<boolean>(true);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
 
     const menu = new Menu(menuData, menuTranslateData);
     const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);
@@ -27,6 +31,7 @@ const PaymentDeliveryPageLayout: React.FC<PaymentDeliveryPageLayoutProps> = ({
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}

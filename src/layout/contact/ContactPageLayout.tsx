@@ -16,6 +16,10 @@ const ContactPageLayout: React.FC<ContactPageLayoutProps> = ({
 }) => {
     const path = 'contact';
     const dispatch = useDispatch();
+    const [loading, setLoading] = React.useState<boolean>(true);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
 
     const menu = new Menu(menuData, menuTranslateData);
     const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);
@@ -27,6 +31,7 @@ const ContactPageLayout: React.FC<ContactPageLayoutProps> = ({
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}

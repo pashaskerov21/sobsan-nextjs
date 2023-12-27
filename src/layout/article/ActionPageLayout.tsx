@@ -16,6 +16,7 @@ const ActionPageLayout: React.FC<ActionPageLayoutProps> = ({
 }) => {
     const path = 'actions';
     const dispatch = useDispatch();
+    const [loading, setLoading] = React.useState<boolean>(true);
 
     const menu = new Menu(menuData, menuTranslateData);
     const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);
@@ -24,9 +25,13 @@ const ActionPageLayout: React.FC<ActionPageLayoutProps> = ({
     React.useEffect(() => {
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}

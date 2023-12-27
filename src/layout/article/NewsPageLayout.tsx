@@ -17,6 +17,10 @@ const NewsPageLayout: React.FC<NewsPageLayoutProps> = ({
 }) => {
     const path = 'news';
     const dispatch = useDispatch();
+    const [loading, setLoading] = React.useState<boolean>(true);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
 
     const menu = new Menu(menuData, menuTranslateData);
     const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);
@@ -28,6 +32,7 @@ const NewsPageLayout: React.FC<NewsPageLayoutProps> = ({
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}

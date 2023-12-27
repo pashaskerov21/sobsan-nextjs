@@ -16,6 +16,10 @@ const WarrantyConditionsPageLayout: React.FC<WarrantyConditionPageLayoutProps> =
 }) => {
     const path = 'warranty-conditions';
     const dispatch = useDispatch();
+    const [loading, setLoading] = React.useState<boolean>(true);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
 
     const menu = new Menu(menuData, menuTranslateData);
     const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);
@@ -27,6 +31,7 @@ const WarrantyConditionsPageLayout: React.FC<WarrantyConditionPageLayoutProps> =
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}

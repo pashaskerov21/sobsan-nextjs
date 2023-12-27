@@ -7,7 +7,7 @@ import { MenuTranslation } from '@/src/utils';
 import { Skeleton } from '@/src/components';
 
 
-const PageLinks: React.FC<PageLinksProps> = ({ loading, className, menuData, menuTranslateData, activeLocale }) => {
+const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslateData, activeLocale }) => {
     const menu = new Menu(menuData, menuTranslateData);
     const mainMenuData = menu.getMainMenuData();
 
@@ -28,30 +28,20 @@ const PageLinks: React.FC<PageLinksProps> = ({ loading, className, menuData, men
                             <React.Fragment key={maindata.id}>
                                 <div className="link-item">
                                     <div className="main-row">
+                                        <MenuTranslation
+                                            activeLocale={activeLocale}
+                                            activeMenuData={maindata}
+                                            menuData={menuData}
+                                            menuTranslateData={menuTranslateData}
+                                            translationType='link'
+                                            path={`${maindata.path}`}
+                                        />
                                         {
-                                            loading ? (
-                                                <React.Fragment>
-                                                    <Skeleton width='80px' height='20px'/>
-                                                </React.Fragment>
-                                            ) : (
-                                                <React.Fragment>
-                                                    <MenuTranslation
-                                                        activeLocale={activeLocale}
-                                                        activeMenuData={maindata}
-                                                        menuData={menuData}
-                                                        menuTranslateData={menuTranslateData}
-                                                        translationType='link'
-                                                        path={`${maindata.path}`}
-                                                    />
-                                                    {
-                                                        menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
-                                                            <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
-                                                                <BiChevronDown />
-                                                            </div>
-                                                        ) : null
-                                                    }
-                                                </React.Fragment>
-                                            )
+                                            menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
+                                                <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
+                                                    <BiChevronDown />
+                                                </div>
+                                            ) : null
                                         }
                                     </div>
                                     {

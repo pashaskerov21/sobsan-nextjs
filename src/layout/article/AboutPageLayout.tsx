@@ -14,6 +14,11 @@ const AboutPageLayout: React.FC<AboutPageLayoutProps> = ({
     menuTranslateData,
     titleDictionary,
 }) => {
+    const [loading, setLoading] = React.useState<boolean>(true);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
+
     const path = 'about';
     const dispatch = useDispatch();
 
@@ -27,6 +32,7 @@ const AboutPageLayout: React.FC<AboutPageLayoutProps> = ({
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
