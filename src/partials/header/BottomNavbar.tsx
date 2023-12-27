@@ -10,10 +10,11 @@ import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';
 import Categories from './Categories';
 import PageLinks from './PageLinks';
-import { LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components';
+import { LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/components';
 import Search from './Search';
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
+  loading,
   activeLocale,
   categoryData,
   categoryTranslateData,
@@ -56,11 +57,22 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
               </div>
             </div>
             <div className="inner-center">
-              <Categories
-                activeLocale={activeLocale}
-                categoryData={categoryData}
-                categoryTranslateData={categoryTranslateData}
-              />
+              {
+                loading ? (
+                  <React.Fragment>
+                    <Skeleton width='750px' height='60px'/>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <Categories
+                      loading={loading}
+                      activeLocale={activeLocale}
+                      categoryData={categoryData}
+                      categoryTranslateData={categoryTranslateData}
+                    />
+                  </React.Fragment>
+                )
+              }
               <PageLinks
                 className='page-links d-xl-none'
                 activeLocale={activeLocale}

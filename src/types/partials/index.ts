@@ -6,6 +6,7 @@ export type HeaderStateType = {
     searchShow: boolean,
 };
 export type HeaderProps = {
+    loading: boolean,
     activeLocale: LocaleType,
     theme: string,
     toggleTheme: () => void,
@@ -18,6 +19,7 @@ export type HeaderProps = {
     titleDictionary: { [key: string]: string },
 };
 export type TopNavbarProps = {
+    loading: boolean,
     headerState: HeaderStateType,
     theme: string,
     toggleTheme: () => void,
@@ -31,6 +33,7 @@ export type TopNavbarProps = {
     titleDictionary: { [key: string]: string },
 };
 export type BottomNavbarProps = {
+    loading: boolean,
     headerState: HeaderStateType,
     theme: string,
     toggleTheme: () => void,
@@ -52,6 +55,7 @@ export type PageLinksProps = {
     className: string,
 }
 export type CategoryProps = {
+    loading: boolean,
     activeLocale: LocaleType,
     categoryData: CategoriesDataType[],
     categoryTranslateData: CategoriesTranslateDataType[],
@@ -63,6 +67,7 @@ export type SearchProps = {
     titleDictionary: { [key: string]: string },
 };
 export type FooterProps = {
+    loading: boolean,
     activeLocale: LocaleType,
     settingData: SettingDataType,
     settingTranslateData: SettingTranslateDataType[],

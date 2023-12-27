@@ -50,6 +50,7 @@ import {
     ContactPageLayoutProps,
     PaymentDeliveryPageLayoutProps,
     WarrantyConditionPageLayoutProps,
+    HomePageLayoutProps,
 } from './layout';
 
 import {
@@ -141,6 +142,7 @@ export type {
     ContactPageLayoutProps,
     PaymentDeliveryPageLayoutProps,
     WarrantyConditionPageLayoutProps,
+    HomePageLayoutProps,
 
     SiteToolbarProps,
     ThemeButtonProps,

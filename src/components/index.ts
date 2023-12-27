@@ -4,6 +4,7 @@ import ThemeButton from "./buttons/ThemeButton";
 import SocialMedia from "./SocialMedia";
 import PageTitle from "./title/PageTitle";
 import CatalogAccordion from "./catalog/CatalogAccordion";
+import Skeleton from "./skeleton/Skeleton";
 
 export {
     SiteToolbar,
@@ -12,4 +13,5 @@ export {
     SocialMedia,
     PageTitle,
     CatalogAccordion,
+    Skeleton,
 }

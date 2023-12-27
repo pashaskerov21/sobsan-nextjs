@@ -5,8 +5,9 @@ import { CategoriesDataType, CategoryProps } from '@/src/types';
 import { Category } from '@/src/class';
 import { IoChevronForwardOutline } from "react-icons/io5";
 import { CategoryTranslation } from '@/src/utils/translate';
+import { Skeleton } from '@/src/components';
 
-const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categoryTranslateData }) => {
+const Categories: React.FC<CategoryProps> = ({ loading, activeLocale, categoryData, categoryTranslateData }) => {
   const category = new Category(categoryData, categoryTranslateData);
   const mainCategoryData: CategoriesDataType[] | [] = category.getMainCategoryData();
 
@@ -72,18 +73,28 @@ const Categories: React.FC<CategoryProps> = ({ activeLocale, categoryData, categ
       <React.Fragment key={mainData.id}>
         <div className={`category-item`} onMouseMove={() => handleCategoryMouseMove(mainData.id)} onMouseLeave={() => handleCategoryMouseLeave()}>
           <div className="main-row">
-            <CategoryTranslation
-              activeCategoryData={mainData}
-              activeLocale={activeLocale}
-              categoryData={categoryData}
-              categoryTranslateData={categoryTranslateData}
-              translationType='link'
-            />
-            {category.getAltCategoryData(mainData.id).length > 0 && (
-              <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onClick={() => handleCategoryClick(mainData.id)}>
-                <IoChevronForwardOutline />
-              </div>
-            )}
+            {
+              loading ? (
+                <React.Fragment>
+                  <Skeleton width='100%' width_xl='80px' height='20px' height_xl='50px'/>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <CategoryTranslation
+                    activeCategoryData={mainData}
+                    activeLocale={activeLocale}
+                    categoryData={categoryData}
+                    categoryTranslateData={categoryTranslateData}
+                    translationType='link'
+                  />
+                  {category.getAltCategoryData(mainData.id).length > 0 && (
+                    <div className={`arrow-btn ${activeCategories.includes(mainData.id) ? 'active' : ''}`} onClick={() => handleCategoryClick(mainData.id)}>
+                      <IoChevronForwardOutline />
+                    </div>
+                  )}
+                </React.Fragment>
+              )
+            }
           </div>
           {
             category.getAltCategoryData(mainData.id).length > 0 ? (

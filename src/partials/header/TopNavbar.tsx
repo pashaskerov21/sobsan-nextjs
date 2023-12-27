@@ -5,13 +5,14 @@ import { TopNavbarProps } from '@/src/types'
 import { TopNavbarWrapper } from './style'
 import { Container } from '@/src/styles'
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components'
+import { LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/components'
 import { BiLogInCircle } from "react-icons/bi";
 import PageLinks from './PageLinks'
 import Search from './Search'
 
 
 const TopNavbar: React.FC<TopNavbarProps> = ({
+  loading,
   activeLocale,
   headerState,
   menuData,
@@ -34,17 +35,29 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
                 <div className="bar"></div>
                 <div className="bar"></div>
               </div>
-              <PageLinks
-                className='page-links d-none d-xl-flex'
-                activeLocale={activeLocale}
-                menuData={menuData}
-                menuTranslateData={menuTranslateData}
-              />
+              {
+                loading ? (
+                  <React.Fragment>
+                    <Skeleton width='570px' height='32px' className='d-none d-xl-block'/>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <PageLinks
+                      className='page-links d-none d-xl-flex'
+                      activeLocale={activeLocale}
+                      menuData={menuData}
+                      menuTranslateData={menuTranslateData}
+                    />
+                  </React.Fragment>
+                )
+              }
             </div>
             <div className="right">
               <LanguageDropdown activeLocale={activeLocale} />
               <ThemeButton theme={theme} toggleTheme={toggleTheme} />
-              <SocialMedia className='d-none d-xl-flex' settingData={settingData} />
+              <SocialMedia
+                className='d-none d-xl-flex'
+                settingData={settingData} />
               <div className="general-icons">
                 <Link className='icon d-none d-md-flex' href='/basket'><PiShoppingCartSimpleLight /></Link>
                 <Link className='icon d-none d-md-flex' href='/wishlist'><PiHeartStraight /></Link>

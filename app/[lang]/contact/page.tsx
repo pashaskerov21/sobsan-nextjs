@@ -52,7 +52,6 @@ const ContactPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
     ) {
       return (
         <React.Fragment>
-          <Suspense fallback={<div className='preloader'></div>}>
             <ContactPageLayout
               activeLocale={lang}
               settingData={settingData[0]}
@@ -61,7 +60,6 @@ const ContactPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
               menuTranslateData={menuTranslateData}
               titleDictionary={titleDictionary}
             />
-          </Suspense>
         </React.Fragment>
       )
     } else {

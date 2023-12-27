@@ -52,7 +52,6 @@ const AboutPage = async ({ params: { lang } }: { params: { lang: LocaleType } })
     ) {
       return (
         <React.Fragment>
-          <Suspense fallback={<div className='preloader'></div>}>
             <AboutPageLayout
               activeLocale={lang}
               articleData={articleData}
@@ -61,7 +60,6 @@ const AboutPage = async ({ params: { lang } }: { params: { lang: LocaleType } })
               menuTranslateData={menuTranslateData}
               titleDictionary={titleDictionary}
             />
-          </Suspense>
         </React.Fragment>
       )
     } else {

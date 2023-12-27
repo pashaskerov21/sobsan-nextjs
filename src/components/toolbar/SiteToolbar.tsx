@@ -5,8 +5,10 @@ import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
 import { SiteToolbarProps } from '@/src/types';
+import Skeleton from '../skeleton/Skeleton';
 
-const SiteToolbar: React.FC<SiteToolbarProps> = ({settingData,titleDictionary}) => {
+
+const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDictionary }) => {
     const [showScrollBtn, setShowScrollBtn] = React.useState<boolean>(false);
     React.useEffect(() => {
         window.addEventListener('scroll', function () {
@@ -24,27 +26,39 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({settingData,titleDictionary}) 
     return (
         <React.Fragment>
             <CenterToolbarWrapper>
-                <div className="toolbar-card">
-                    <div className="icon">
-                        <PiShoppingCartSimpleLight />
-                        <span className='amount'>0</span>
-                    </div>
-                    <Link href='/basket'>{titleDictionary.basket}</Link>
-                </div>
-                <div className="toolbar-card">
-                    <div className="icon">
-                        <PiHeartStraight />
-                        <span className='amount'>0</span>
-                    </div>
-                    <Link href='/wishlist'>{titleDictionary.wishlist}</Link>
-                </div>
-                <div className="toolbar-card">
-                    <div className="icon">
-                        <PiScalesLight />
-                        <span className='amount'>0</span>
-                    </div>
-                    <Link href='/comparisons'>{titleDictionary.comparisons}</Link>
-                </div>
+                {
+                    loading ? (
+                        <React.Fragment>
+                            <Skeleton width='100%' height='60px' radius='10px' />
+                            <Skeleton width='100%' height='60px' radius='10px' />
+                            <Skeleton width='100%' height='60px' radius='10px' />
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <div className="toolbar-card">
+                                <div className="icon">
+                                    <PiShoppingCartSimpleLight />
+                                    <span className='amount'>0</span>
+                                </div>
+                                <Link href='/basket'>{titleDictionary.basket}</Link>
+                            </div>
+                            <div className="toolbar-card">
+                                <div className="icon">
+                                    <PiHeartStraight />
+                                    <span className='amount'>0</span>
+                                </div>
+                                <Link href='/wishlist'>{titleDictionary.wishlist}</Link>
+                            </div>
+                            <div className="toolbar-card">
+                                <div className="icon">
+                                    <PiScalesLight />
+                                    <span className='amount'>0</span>
+                                </div>
+                                <Link href='/comparisons'>{titleDictionary.comparisons}</Link>
+                            </div>
+                        </React.Fragment>
+                    )
+                }
             </CenterToolbarWrapper>
             <BottomToolbarWrapper>
                 {

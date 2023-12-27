@@ -44,7 +44,6 @@ const GalleryPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
         if (galleryData && menuData && menuTranslateData) {
             return (
                 <React.Fragment>
-                    <Suspense fallback={<div className='preloader'></div>}>
                         <GalleryPageLayout
                             activeLocale={lang}
                             galleryData={galleryData}
@@ -52,7 +51,6 @@ const GalleryPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
                             menuTranslateData={menuTranslateData}
                             titleDictionary={titleDictionary}
                         />
-                    </Suspense>
                 </React.Fragment>
             )
         } else {

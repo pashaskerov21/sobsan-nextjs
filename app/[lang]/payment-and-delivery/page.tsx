@@ -52,7 +52,6 @@ const PaymentDeliveryPage = async ({ params: { lang } }: { params: { lang: Local
     ) {
       return (
         <React.Fragment>
-          <Suspense fallback={<div className='preloader'></div>}>
             <PaymentDeliveryPageLayout
               activeLocale={lang}
               articleData={articleData}
@@ -61,7 +60,6 @@ const PaymentDeliveryPage = async ({ params: { lang } }: { params: { lang: Local
               menuTranslateData={menuTranslateData}
               titleDictionary={titleDictionary}
             />
-          </Suspense>
         </React.Fragment>
       )
     } else {

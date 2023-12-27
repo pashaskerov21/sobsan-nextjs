@@ -1,6 +1,7 @@
 import {
     ArticleDataType, 
     ArticleTranslateDataType, 
+    BannerDataType, 
     CatalogDataType, 
     CatalogTranslateDataType, 
     CategoriesDataType, 
@@ -105,4 +106,10 @@ export type ContactPageLayoutProps = {
     settingData: SettingDataType,
     settingTranslateData: SettingTranslateDataType[],
     titleDictionary: { [key: string]: string },
+}
+export type HomePageLayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    bannerData: BannerDataType[],
 }

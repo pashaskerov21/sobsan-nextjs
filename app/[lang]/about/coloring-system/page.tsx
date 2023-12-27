@@ -53,7 +53,6 @@ const ColoringSystemPage = async ({ params: { lang } }: { params: { lang: Locale
     ) {
       return (
         <React.Fragment>
-          <Suspense fallback={<div className='preloader'></div>}>
             <ColorSystemPageLayout
               activeLocale={lang}
               articleData={articleData}
@@ -62,7 +61,6 @@ const ColoringSystemPage = async ({ params: { lang } }: { params: { lang: Locale
               menuTranslateData={menuTranslateData}
               titleDictionary={titleDictionary}
             />
-          </Suspense>
         </React.Fragment>
       )
     } else {

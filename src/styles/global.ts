@@ -81,7 +81,8 @@ input{
 }
 
 .preloader{
-    position: fixed;
+    display: none;
+    /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -100,8 +101,32 @@ input{
         width: 150px;
         height: 150px;
         animation: ${PreloaderAnimation} 0.7s linear infinite;
+    } */
+}
+
+.slick-slider{
+    width: 100%;
+    overflow: hidden;
+    .slick-track{
+        margin: 0;   
+    }
+    .slick-slide {
+        padding: 0 10px;
+        outline: none !important;
+        div{
+            outline: none !important;
+        }
+    }
+    .slick-list {
+        margin: 0 -10px;
+        padding: 5px 0;
+    }
+    .slide-inner{
+        display: flex !important;
+        justify-content: center  !important;
     }
 }
+
 `;
 
 export default GlobalStyles;

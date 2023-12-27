@@ -2,6 +2,7 @@ import { LocaleType } from "..";
 import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, SettingDataType } from "../data"
 
 export type SiteToolbarProps = {
+    loading: boolean,
     settingData: SettingDataType,
     titleDictionary: { [key: string]: string },
 }
@@ -23,11 +24,13 @@ export type PageTitleDataType = {
     breadcrumbs: BreadcrumbType[],
 }
 export type PageTitleProps = {
+    loading: boolean,
     activeLocale: LocaleType,
     pageTitleData: PageTitleDataType,
     titleDictionary: { [key: string]: string },
 }
 export type CatalogAccordionProps = {
+    loading: boolean,
     activeLocale: LocaleType,
     activeCategoryID: number,
     catalogData: CatalogDataType[],
@@ -37,6 +40,7 @@ export type CatalogAccordionProps = {
     textDictionary: { [key: string]: string },
 }
 export type CatalogColorProps = {
+    loading: boolean,
     activeLocale: LocaleType,
     activeCatalogID: number,
     catalogData: CatalogDataType[],

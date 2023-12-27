@@ -148,7 +148,6 @@ export default async function Root({
             <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
           </head>
           <StyledComponentsRegistry>
-            <Suspense fallback={<div className='preloader'></div>}>
               <RootLayout
                 activeLocale={lang}
                 categoryData={categoryData}
@@ -163,7 +162,6 @@ export default async function Root({
                 {children}
                 <SpeedInsights/>
               </RootLayout>
-            </Suspense>
           </StyledComponentsRegistry>
         </html>
       );

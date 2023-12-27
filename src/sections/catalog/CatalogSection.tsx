@@ -4,9 +4,10 @@ import { CategoryButtonWrapper, Container, Section } from '@/src/styles'
 import { CatalogSectionProps } from '@/src/types'
 import { Catalog, Category } from '@/src/class'
 import { CategoryTranslation } from '@/src/utils'
-import { CatalogAccordion } from '@/src/components'
+import { CatalogAccordion, Skeleton } from '@/src/components'
 
 const CatalogSection: React.FC<CatalogSectionProps> = ({
+  loading,
   activeLocale,
   catalogData,
   catalogTranslateData,
@@ -33,21 +34,32 @@ const CatalogSection: React.FC<CatalogSectionProps> = ({
               category.getMainCategoryData().length > 0 ? (
                 category.getMainCategoryData().map((data) => (
                   <React.Fragment key={data.id}>
-                    <button className={activeCategoryID === data.id ? 'active' : ''} type='button' onClick={() => handleCategoryButton(data.id)}>
-                      <CategoryTranslation
-                        activeCategoryData={data}
-                        activeLocale={activeLocale}
-                        categoryData={categoryData}
-                        categoryTranslateData={categoryTranslateData}
-                        translationType='title'
-                      />
-                    </button>
+                    {
+                      loading ? (
+                        <React.Fragment>
+                          <Skeleton width='150px' height='42px' radius='10px' />
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <button className={activeCategoryID === data.id ? 'active' : ''} type='button' onClick={() => handleCategoryButton(data.id)}>
+                            <CategoryTranslation
+                              activeCategoryData={data}
+                              activeLocale={activeLocale}
+                              categoryData={categoryData}
+                              categoryTranslateData={categoryTranslateData}
+                              translationType='title'
+                            />
+                          </button>
+                        </React.Fragment>
+                      )
+                    }
                   </React.Fragment>
                 ))
               ) : null
             }
           </CategoryButtonWrapper>
           <CatalogAccordion
+            loading={loading}
             activeCategoryID={activeCategoryID}
             activeLocale={activeLocale}
             catalogData={catalogData}

@@ -25,5 +25,6 @@ const DarkTheme = {
     border_color_2: 'rgba(255,255,255,0.2)',
     border_color_3: '#ffffff',
     shadow_color_1: 'rgba(255,255,255,0.2)',
+    skeleton_bg_color: '#292929',
 }
 export default DarkTheme;

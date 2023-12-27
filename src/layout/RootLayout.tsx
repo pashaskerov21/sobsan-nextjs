@@ -15,6 +15,7 @@ import { RootLayoutProps } from '../types';
 import { Footer, Header } from '../partials';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
+import Cookies from 'js-cookie';
 
 
 
@@ -32,21 +33,29 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     titleDictionary,
 }) => {
     React.useEffect(() => { Fancybox.bind("[data-fancybox]", {}) }, [])
-    const [theme, setTheme] = React.useState<string>(`dark`);
+    const storedTheme = Cookies.get('theme');
+    const validThemes = ['dark', 'light'];
+    const initialTheme = (storedTheme && validThemes.includes(storedTheme)) ? storedTheme : settingData.theme;
+
+    const [theme, setTheme] = React.useState<string>(initialTheme);
+    React.useEffect(() => {
+        Cookies.set('theme', theme, { path: '/' })
+    }, []);
     const toggleTheme = React.useCallback(() => {
-        if (theme === 'dark') {
-            setTheme('light');
-        } else {
-            setTheme('dark')
+        setTheme((prev) => prev === 'dark' ? 'light' : 'dark');
+    }, [theme]);
+    React.useEffect(() => {
+        const storedTheme = Cookies.get('theme');
+        if (storedTheme && validThemes.includes(storedTheme)) {
+            setTheme(storedTheme);
         }
-    }, [theme])
+    }, []);
+
 
     const [loading, setLoading] = React.useState(true);
-
     React.useEffect(() => {
         setLoading(false);
-    });
-
+    }, []);
 
     return (
         <React.Fragment>
@@ -54,12 +63,13 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                 <ThemeProvider theme={theme === 'dark' ? DarkTheme : LightTheme}>
                     <GlobalStyles />
                     <body>
-                        {loading && <div className='preloader'></div>}
                         <SiteToolbar
+                            loading={loading}
                             settingData={settingData}
                             titleDictionary={titleDictionary}
                         />
                         <Header
+                            loading={loading}
                             activeLocale={activeLocale}
                             categoryData={categoryData}
                             categoryTranslateData={categoryTranslateData}
@@ -75,6 +85,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                             {children}
                         </main>
                         <Footer
+                            loading={loading}
                             activeLocale={activeLocale}
                             categoryData={categoryData}
                             categoryTranslateData={categoryTranslateData}

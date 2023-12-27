@@ -9,6 +9,7 @@ import GalleryPageLayout from "./gallery/GalleryPageLayout";
 import PaymentDeliveryPageLayout from "./article/PaymentDeliveryPageLayout";
 import WarrantyConditionsPageLayout from "./article/WarrantyConditionsPageLayout";
 import ContactPageLayout from "./contact/ContactPageLayout";
+import HomePageLayout from "./home/HomePageLayout";
 
 export {
     StyledComponentsRegistry,
@@ -22,4 +23,5 @@ export {
     PaymentDeliveryPageLayout,
     WarrantyConditionsPageLayout,
     ContactPageLayout,
+    HomePageLayout,
 }

@@ -5,11 +5,12 @@ import Image from 'next/image'
 import { FooterWrapper } from './style'
 import { FooterProps } from '@/src/types'
 import { Container } from '@/src/styles'
-import { SocialMedia } from '@/src/components'
+import { Skeleton, SocialMedia } from '@/src/components'
 import { Category, Menu } from '@/src/class'
 import { CategoryTranslation, FilialTranslation, MenuTranslation, SettingTranslation } from '@/src/utils'
 
 const Footer: React.FC<FooterProps> = ({
+  loading,
   activeLocale,
   categoryData,
   categoryTranslateData,
@@ -31,7 +32,7 @@ const Footer: React.FC<FooterProps> = ({
             <div className="top-inner">
               <div className="col">
                 <Link href={`/${activeLocale}`}>
-                  <Image src={settingData.logo} width={100} height={130} alt='logo'  priority={true}/>
+                  <Image src={settingData.logo} width={100} height={130} alt='logo' priority={true} />
                 </Link>
                 <SocialMedia className='social-media' settingData={settingData} />
               </div>
@@ -42,26 +43,46 @@ const Footer: React.FC<FooterProps> = ({
                     menu.getMainMenuData().length > 0 ? (
                       menu.getMainMenuData().map((maindata) => (
                         <React.Fragment key={maindata.id}>
-                          <MenuTranslation
-                            activeLocale={activeLocale}
-                            activeMenuData={maindata}
-                            menuData={menuData}
-                            menuTranslateData={menuTranslateData}
-                            translationType='link'
-                            path={`${maindata.path}`}
-                          />
+                          {
+                            loading ? (
+                              <React.Fragment>
+                                <Skeleton width='80%' height='20px' />
+                              </React.Fragment>
+                            ) : (
+                              <React.Fragment>
+                                <MenuTranslation
+                                  activeLocale={activeLocale}
+                                  activeMenuData={maindata}
+                                  menuData={menuData}
+                                  menuTranslateData={menuTranslateData}
+                                  translationType='link'
+                                  path={`${maindata.path}`}
+                                />
+                              </React.Fragment>
+                            )
+                          }
                           {
                             menu.getAltMenuData(maindata.id).length > 0 ? (
                               menu.getAltMenuData(maindata.id).map((altdata) => (
                                 <React.Fragment key={altdata.id}>
-                                  <MenuTranslation
-                                    activeLocale={activeLocale}
-                                    activeMenuData={altdata}
-                                    menuData={menuData}
-                                    menuTranslateData={menuTranslateData}
-                                    translationType='link'
-                                    path={`${maindata.path}/${altdata.path}`}
-                                  />
+                                  {
+                                    loading ? (
+                                      <React.Fragment>
+                                        <Skeleton width='80%' height='20px' />
+                                      </React.Fragment>
+                                    ) : (
+                                      <React.Fragment>
+                                        <MenuTranslation
+                                          activeLocale={activeLocale}
+                                          activeMenuData={altdata}
+                                          menuData={menuData}
+                                          menuTranslateData={menuTranslateData}
+                                          translationType='link'
+                                          path={`${maindata.path}/${altdata.path}`}
+                                        />
+                                      </React.Fragment>
+                                    )
+                                  }
                                 </React.Fragment>
                               ))
                             ) : null
@@ -78,13 +99,23 @@ const Footer: React.FC<FooterProps> = ({
                   {
                     category.getMainCategoryData().map((data) => (
                       <React.Fragment key={data.id}>
-                        <CategoryTranslation
-                          activeCategoryData={data}
-                          activeLocale={activeLocale}
-                          categoryData={categoryData}
-                          categoryTranslateData={categoryTranslateData}
-                          translationType='link'
-                        />
+                        {
+                          loading ? (
+                            <React.Fragment>
+                              <Skeleton width='80%' height='20px' />
+                            </React.Fragment>
+                          ) : (
+                            <React.Fragment>
+                              <CategoryTranslation
+                                activeCategoryData={data}
+                                activeLocale={activeLocale}
+                                categoryData={categoryData}
+                                categoryTranslateData={categoryTranslateData}
+                                translationType='link'
+                              />
+                            </React.Fragment>
+                          )
+                        }
                       </React.Fragment>
                     ))
                   }
@@ -97,12 +128,22 @@ const Footer: React.FC<FooterProps> = ({
                     filialData.map((data) => (
                       <React.Fragment key={data.id}>
                         <Link href={`/${activeLocale}/`}>
-                          <FilialTranslation
-                            activeFilialData={data}
-                            activeLocale={activeLocale}
-                            filialTranslateData={filialTranslateData}
-                            translationType='title'
-                          />
+                          {
+                            loading ? (
+                              <React.Fragment>
+                                <Skeleton width='80%' height='20px' />
+                              </React.Fragment>
+                            ) : (
+                              <React.Fragment>
+                                <FilialTranslation
+                                  activeFilialData={data}
+                                  activeLocale={activeLocale}
+                                  filialTranslateData={filialTranslateData}
+                                  translationType='title'
+                                />
+                              </React.Fragment>
+                            )
+                          }
                         </Link>
                       </React.Fragment>
                     ))
@@ -112,15 +153,27 @@ const Footer: React.FC<FooterProps> = ({
               <div className="col">
                 <div className="footer-links">
                   <h3 className="title">{titleDictionary.useful_links}</h3>
-                  <Link href={`/${activeLocale}/`}>
-                    {titleDictionary.faq}
-                  </Link>
-                  <Link href={`/${activeLocale}/`}>
-                    {titleDictionary.career}
-                  </Link>
-                  <Link href={`/${activeLocale}/`}>
-                    {titleDictionary.service_network}
-                  </Link>
+                  {
+                    loading ? (
+                      <React.Fragment>
+                        <Skeleton width='80%' height='20px' />
+                        <Skeleton width='80%' height='20px' />
+                        <Skeleton width='80%' height='20px' />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <Link href={`/${activeLocale}/`}>
+                          {titleDictionary.faq}
+                        </Link>
+                        <Link href={`/${activeLocale}/`}>
+                          {titleDictionary.career}
+                        </Link>
+                        <Link href={`/${activeLocale}/`}>
+                          {titleDictionary.service_network}
+                        </Link>
+                      </React.Fragment>
+                    )
+                  }
                 </div>
               </div>
             </div>
@@ -131,20 +184,42 @@ const Footer: React.FC<FooterProps> = ({
             <div className="bottom-inner">
               <div className="bottom-left">
                 <div className="copyright">
-                  <SettingTranslation
-                    activeLocale={activeLocale}
-                    settingTranslateData={settingTranslateData}
-                    translationType='copyright'
-                  />
+                  {
+                    loading ? (
+                      <React.Fragment>
+                        <Skeleton width='180px' height='20px' />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <SettingTranslation
+                          activeLocale={activeLocale}
+                          settingTranslateData={settingTranslateData}
+                          translationType='copyright'
+                        />
+                      </React.Fragment>
+                    )
+                  }
                 </div>
                 <div className="powered-by">
                   <Link href='https://alipashaskerov.vercel.app/' target='_blank'>Alipasha Askerov</Link>
                 </div>
               </div>
               <div className="bottom-right">
-                <Link href={`/${activeLocale}`}>{settingData.phone}</Link>
-                <Link href={`/${activeLocale}`}>{settingData.hotline}</Link>
-                <Link href={`/${activeLocale}`}>{settingData.mail}</Link>
+                {
+                  loading ? (
+                    <React.Fragment>
+                      <Skeleton width='180px' height='20px' />
+                      <Skeleton width='180px' height='20px' />
+                      <Skeleton width='180px' height='20px' />
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      <Link href={`/${activeLocale}`}>{settingData.phone}</Link>
+                      <Link href={`/${activeLocale}`}>{settingData.hotline}</Link>
+                      <Link href={`/${activeLocale}`}>{settingData.mail}</Link>
+                    </React.Fragment>
+                  )
+                }
               </div>
             </div>
           </Container>

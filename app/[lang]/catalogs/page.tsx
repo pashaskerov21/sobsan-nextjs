@@ -68,7 +68,6 @@ const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType }
       && colorTranslateData) {
       return (
         <React.Fragment>
-          <Suspense fallback={<div className='preloader'></div>}>
             <CatalogPageLayout
               activeLocale={lang}
               menuData={menuData}
@@ -82,7 +81,6 @@ const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType }
               titleDictionary={titleDictionary}
               textDictionary={textDictionary}
             />
-          </Suspense>
         </React.Fragment>
       );
     } else {

@@ -45,7 +45,12 @@ import {
     SettingTranslation,
     CatalogTranslation,
     ColorTranslation,
-} from './translate'
+} from './translate';
+
+
+import {
+    bannerSettings,
+} from './slider'
 
 export {
     fetchArticleData,
@@ -90,4 +95,7 @@ export {
     SettingTranslation,
     CatalogTranslation,
     ColorTranslation,
+
+
+    bannerSettings,
 }

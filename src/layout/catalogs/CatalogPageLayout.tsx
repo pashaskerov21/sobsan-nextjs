@@ -20,6 +20,11 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
     titleDictionary,
     textDictionary,
 }) => {
+    const [loading, setLoading] = React.useState<boolean>(true);
+    React.useEffect(() => {
+        setLoading(false);
+    }, []);
+
     const path = 'catalogs';
     const dispatch = useDispatch();
 
@@ -35,11 +40,13 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
     return (
         <React.Fragment>
             <PageTitle
+                loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
             />
             <CatalogSection
+                loading={loading}
                 activeLocale={activeLocale}
                 catalogData={catalogData}
                 catalogTranslateData={catalogTranslateData}

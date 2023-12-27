@@ -8,8 +8,10 @@ import { CatalogAccordionBodyInner } from './style';
 import CatalogColors from './CatalogColors';
 import { Accordion } from 'react-bootstrap';
 import { AccordionContainer } from '@/src/styles';
+import Skeleton from '../skeleton/Skeleton';
 
 const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
+  loading,
   activeCategoryID,
   activeLocale,
   catalogData,
@@ -39,18 +41,29 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
               <React.Fragment key={data.id}>
                 <Accordion.Item eventKey={`${data.id}`}>
                   <Accordion.Header>
-                    <CatalogTranslation
-                      activeCatalogData={data}
-                      activeLocale={activeLocale}
-                      catalogData={catalogData}
-                      catalogTranslateData={catalogTranslateData}
-                      translationType='title'
-                    />
+                    {
+                      loading ? (
+                        <React.Fragment>
+                          <Skeleton width='200px' height='25px' />
+                        </React.Fragment>
+                      ) : (
+                        <React.Fragment>
+                          <CatalogTranslation
+                            activeCatalogData={data}
+                            activeLocale={activeLocale}
+                            catalogData={catalogData}
+                            catalogTranslateData={catalogTranslateData}
+                            translationType='title'
+                          />
+                        </React.Fragment>
+                      )
+                    }
                     <FaChevronDown />
                   </Accordion.Header>
                   <Accordion.Body>
                     <CatalogAccordionBodyInner>
                       <CatalogColors
+                        loading={loading}
                         activeCatalogID={data.id}
                         activeLocale={activeLocale}
                         catalogData={catalogData}

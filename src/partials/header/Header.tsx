@@ -4,8 +4,11 @@ import TopNavbar from './TopNavbar';
 import BottomNavbar from './BottomNavbar';
 import { HeaderProps, HeaderStateType } from '@/src/types';
 import { HeaderWrapper } from './style';
+import { Container } from 'react-bootstrap';
+import { Skeleton } from '@/src/components';
 
 const Header: React.FC<HeaderProps> = ({
+  loading,
   activeLocale,
   categoryData,
   categoryTranslateData,
@@ -68,6 +71,7 @@ const Header: React.FC<HeaderProps> = ({
     <React.Fragment>
       <HeaderWrapper>
         <TopNavbar
+          loading={loading}
           activeLocale={activeLocale}
           headerState={headerState}
           menuData={menuData}
@@ -81,6 +85,7 @@ const Header: React.FC<HeaderProps> = ({
           toggleSearch={toggleSearch}
         />
         <BottomNavbar
+          loading={loading}
           activeLocale={activeLocale}
           categoryData={categoryData}
           categoryTranslateData={categoryTranslateData}

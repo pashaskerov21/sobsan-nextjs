@@ -25,5 +25,6 @@ const LightTheme = {
     border_color_2: 'rgba(0,0,0,0.2)',
     border_color_3: '#ed3237',
     shadow_color_1: 'rgba(0,0,0,0.2)',
+    skeleton_bg_color: '#DDDDDD',
 }
 export default LightTheme;
