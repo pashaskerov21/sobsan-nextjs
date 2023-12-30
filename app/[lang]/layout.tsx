@@ -23,10 +23,10 @@ import {
   fetchSettingTranslateData
 } from '@/src/utils';
 import { Setting } from '@/src/class';
-import { RootLayout, StyledComponentsRegistry } from '@/src/layout';
+import { RootLayout } from '@/src/layout';
 import { getTranslate } from '@/get-translate';
-import { Suspense } from 'react';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import StyledComponentsRegistry from '@/lib/registry';
 
 const fetchData = async (): Promise<{
   settingData: SettingDataType[] | undefined;
@@ -147,20 +147,24 @@ export default async function Root({
             <link rel="stylesheet" type="text/css" charSet="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
             <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
           </head>
-          <RootLayout
-            activeLocale={lang}
-            categoryData={categoryData}
-            categoryTranslateData={categoryTranslateData}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            settingData={settingData[0]}
-            settingTranslateData={settingTranslateData}
-            filialData={filialData}
-            filialTranslateData={filialTranslateData}
-            titleDictionary={titleDictionary}>
-            {children}
-            <SpeedInsights />
-          </RootLayout>
+          <body>
+            <StyledComponentsRegistry>
+              <RootLayout
+                activeLocale={lang}
+                categoryData={categoryData}
+                categoryTranslateData={categoryTranslateData}
+                menuData={menuData}
+                menuTranslateData={menuTranslateData}
+                settingData={settingData[0]}
+                settingTranslateData={settingTranslateData}
+                filialData={filialData}
+                filialTranslateData={filialTranslateData}
+                titleDictionary={titleDictionary}>
+                {children}
+                <SpeedInsights />
+              </RootLayout>
+            </StyledComponentsRegistry>
+          </body>
         </html>
       );
     }

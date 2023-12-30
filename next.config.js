@@ -4,14 +4,12 @@ const nextConfig = {
     env: {
         BASE_URL: process.env.BASE_URL
     },
-    compiler: {
-        styledComponents:{
+    compiler:{
+        styledComponents: {
             ssr: true,
             displayName: true,
-            minify: true,
-            cssProp: true,
-        },
-    },
+        }
+    }
 }
 
 

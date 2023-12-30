@@ -1,4 +1,3 @@
-import StyledComponentsRegistry from "./StyledRegistry";
 import RootLayout from "./RootLayout";
 import CatalogPageLayout from "./catalogs/CatalogPageLayout";
 import AboutPageLayout from "./article/AboutPageLayout";
@@ -12,7 +11,6 @@ import ContactPageLayout from "./contact/ContactPageLayout";
 import HomePageLayout from "./home/HomePageLayout";
 
 export {
-    StyledComponentsRegistry,
     RootLayout,
     CatalogPageLayout,
     AboutPageLayout,

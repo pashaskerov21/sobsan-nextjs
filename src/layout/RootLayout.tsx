@@ -16,7 +16,7 @@ import { Footer, Header } from '../partials';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
 import Cookies from 'js-cookie';
-import StyledComponentsRegistry from './StyledRegistry';
+import { useDarkMode } from 'usehooks-ts';
 
 
 
@@ -33,24 +33,13 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     settingTranslateData,
     titleDictionary,
 }) => {
-    React.useEffect(() => { Fancybox.bind("[data-fancybox]", {}) }, [])
-    const storedTheme = Cookies.get('theme');
-    const validThemes = ['dark', 'light'];
-    const initialTheme = (storedTheme && validThemes.includes(storedTheme)) ? storedTheme : 'dark';
-
-    const [theme, setTheme] = React.useState<string>(initialTheme);
-    React.useEffect(() => {
-        Cookies.set('theme', theme)
-    }, [theme]);
-    const toggleTheme = React.useCallback(() => {
-        setTheme((prev) => prev === 'dark' ? 'light' : 'dark');
-    }, [theme]);
-    React.useEffect(() => {
-        const storedTheme = Cookies.get('theme');
-        if (storedTheme && validThemes.includes(storedTheme)) {
-            setTheme(storedTheme);
-        }
-    }, []);
+    React.useEffect(() => { Fancybox.bind("[data-fancybox]", {}) }, []);
+    const themes = ['dark','light']
+    const defaultThemeValue = themes.includes(settingData.theme) ? settingData.theme : themes[0];
+    const { isDarkMode, toggle } = useDarkMode(defaultThemeValue === themes[0] ? true : false);
+    const activeTheme = isDarkMode ? DarkTheme : LightTheme;
+    const activeThemeValue = isDarkMode ? themes[0] : themes[1]; 
+    
 
 
     const [loading, setLoading] = React.useState(true);
@@ -61,47 +50,43 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     return (
         <React.Fragment>
             <Provider store={store}>
-                <StyledComponentsRegistry>
-                    <ThemeProvider theme={theme === 'dark' ? DarkTheme : LightTheme}>
-                        <GlobalStyles />
-                        <body>
-                            <SiteToolbar
-                                loading={loading}
-                                settingData={settingData}
-                                titleDictionary={titleDictionary}
-                            />
-                            <Header
-                                loading={loading}
-                                activeLocale={activeLocale}
-                                categoryData={categoryData}
-                                categoryTranslateData={categoryTranslateData}
-                                menuData={menuData}
-                                menuTranslateData={menuTranslateData}
-                                settingData={settingData}
-                                settingTranslateData={settingTranslateData}
-                                theme={theme}
-                                titleDictionary={titleDictionary}
-                                toggleTheme={toggleTheme}
-                            />
-                            <main>
-                                {children}
-                            </main>
-                            <Footer
-                                loading={loading}
-                                activeLocale={activeLocale}
-                                categoryData={categoryData}
-                                categoryTranslateData={categoryTranslateData}
-                                filialData={filialData}
-                                filialTranslateData={filialTranslateData}
-                                menuData={menuData}
-                                menuTranslateData={menuTranslateData}
-                                settingData={settingData}
-                                settingTranslateData={settingTranslateData}
-                                titleDictionary={titleDictionary}
-                            />
-                        </body>
-                    </ThemeProvider>
-                </StyledComponentsRegistry>
+                <ThemeProvider theme={activeTheme}>
+                    <GlobalStyles />
+                        <SiteToolbar
+                            loading={loading}
+                            settingData={settingData}
+                            titleDictionary={titleDictionary}
+                        />
+                        <Header
+                            loading={loading}
+                            activeLocale={activeLocale}
+                            categoryData={categoryData}
+                            categoryTranslateData={categoryTranslateData}
+                            menuData={menuData}
+                            menuTranslateData={menuTranslateData}
+                            settingData={settingData}
+                            settingTranslateData={settingTranslateData}
+                            theme={activeThemeValue}
+                            titleDictionary={titleDictionary}
+                            toggleTheme={toggle}
+                        />
+                        <main>
+                            {children}
+                        </main>
+                        <Footer
+                            loading={loading}
+                            activeLocale={activeLocale}
+                            categoryData={categoryData}
+                            categoryTranslateData={categoryTranslateData}
+                            filialData={filialData}
+                            filialTranslateData={filialTranslateData}
+                            menuData={menuData}
+                            menuTranslateData={menuTranslateData}
+                            settingData={settingData}
+                            settingTranslateData={settingTranslateData}
+                            titleDictionary={titleDictionary}
+                        />
+                </ThemeProvider>
             </Provider>
         </React.Fragment>
     )

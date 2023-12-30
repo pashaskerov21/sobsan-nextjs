@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
 import { SiteToolbarProps } from '@/src/types';
-import Skeleton from '../skeleton/Skeleton';
 
 
 const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDictionary }) => {
