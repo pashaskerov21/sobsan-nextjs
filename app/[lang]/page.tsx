@@ -46,12 +46,12 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
     ) {
       return (
         <React.Fragment>
-            <HomePageLayout
+          <HomePageLayout
             activeLocale={lang}
             bannerData={bannerData}
             menuData={menuData}
             menuTranslateData={menuTranslateData}
-            />
+          />
         </React.Fragment>
       )
     } else {

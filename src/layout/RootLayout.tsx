@@ -35,8 +35,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({
 }) => {
     React.useEffect(() => { Fancybox.bind("[data-fancybox]", {}) }, []);
     const themes = ['dark','light']
-    const defaultThemeValue = themes.includes(settingData.theme) ? settingData.theme : themes[0];
-    const { isDarkMode, toggle } = useDarkMode(defaultThemeValue === themes[0] ? true : false);
+    const defaultThemeValue = themes.includes(settingData.theme) && settingData.theme === themes[0] ? true : false;
+    const { isDarkMode, toggle } = useDarkMode(defaultThemeValue);
     const activeTheme = isDarkMode ? DarkTheme : LightTheme;
     const activeThemeValue = isDarkMode ? themes[0] : themes[1]; 
     
@@ -46,6 +46,14 @@ const RootLayout: React.FC<RootLayoutProps> = ({
     React.useEffect(() => {
         setLoading(false);
     }, []);
+
+    const [mounted, setMounted] = React.useState(false);
+    React.useEffect(() => {
+        setMounted(true)
+    },[])
+    if(!mounted){
+        return null;
+    }
 
     return (
         <React.Fragment>

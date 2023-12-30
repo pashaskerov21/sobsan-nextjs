@@ -7,21 +7,6 @@ import { bannerSettings } from '@/src/utils'
 import { BannerSlide } from './style'
 import { Skeleton } from '@/src/components'
 
-const BannerSkeleton:React.FC = () => {
-    return (
-        <React.Fragment>
-            <Skeleton
-                width='100%' 
-                height='125px'
-                height_sm='270px'
-                height_md='365px'
-                height_lg='500px'
-                radius='10px'
-                />
-        </React.Fragment>
-    )
-}
-
 const BannerSection: React.FC<{ loading: boolean, bannerData: BannerDataType[] }> = ({ loading, bannerData }) => {
     return (
         <React.Fragment>
@@ -29,7 +14,14 @@ const BannerSection: React.FC<{ loading: boolean, bannerData: BannerDataType[] }
                 <Container>
                     {
                         loading ? (
-                            <BannerSkeleton />
+                            <Skeleton
+                                width='100%'
+                                height='125px'
+                                height_sm='270px'
+                                height_md='365px'
+                                height_lg='500px'
+                                radius='10px'
+                            />
                         ) : (
                             <React.Fragment>
                                 <Slider {...bannerSettings}>
