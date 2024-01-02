@@ -23,20 +23,20 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     React.useEffect(() => {
         setTimeout(() => {
             setLoading((prev) => {
-                return{
+                return {
                     ...prev,
                     standart: false,
                 }
             });
-        },2000);
+        }, 1500);
         setTimeout(() => {
             setLoading((prev) => {
-                return{
+                return {
                     ...prev,
                     lazy: false,
                 }
             });
-        },4000);
+        }, 3000);
     }, []);
 
     const path = '';

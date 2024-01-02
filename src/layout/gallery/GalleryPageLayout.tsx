@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { GalleryPageLayoutProps, LocaleStateType, PageTitleDataType } from '@/src/types'
+import { GalleryPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 
 const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
   activeLocale,
@@ -15,10 +15,28 @@ const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
 }) => {
   const path = 'gallery';
   const dispatch = useDispatch();
-  const [loading, setLoading] = React.useState<boolean>(true);
-  React.useEffect(() => {
-    setLoading(false);
-  }, []);
+  const [loading, setLoading] = React.useState<LoadingType>({
+    standart: true,
+    lazy: true,
+});
+React.useEffect(() => {
+    setTimeout(() => {
+        setLoading((prev) => {
+            return {
+                ...prev,
+                standart: false,
+            }
+        });
+    }, 1500);
+    setTimeout(() => {
+        setLoading((prev) => {
+            return {
+                ...prev,
+                lazy: false,
+            }
+        });
+    }, 3000);
+}, []);
 
   const menu = new Menu(menuData, menuTranslateData);
   const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);

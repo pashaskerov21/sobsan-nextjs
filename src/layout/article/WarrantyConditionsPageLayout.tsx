@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Menu } from '@/src/class';
-import { LocaleStateType, PageTitleDataType, WarrantyConditionPageLayoutProps } from '@/src/types'
+import { LoadingType, LocaleStateType, PageTitleDataType, WarrantyConditionPageLayoutProps } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
@@ -16,9 +16,27 @@ const WarrantyConditionsPageLayout: React.FC<WarrantyConditionPageLayoutProps> =
 }) => {
     const path = 'warranty-conditions';
     const dispatch = useDispatch();
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = React.useState<LoadingType>({
+        standart: true,
+        lazy: true,
+    });
     React.useEffect(() => {
-        setLoading(false);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    standart: false,
+                }
+            });
+        }, 1500);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    lazy: false,
+                }
+            });
+        }, 3000);
     }, []);
 
     const menu = new Menu(menuData, menuTranslateData);

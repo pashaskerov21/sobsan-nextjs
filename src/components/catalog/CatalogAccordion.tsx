@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType } from '@/src/types'
+import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import { CatalogTranslation } from '@/src/utils';
 import { FaChevronDown } from "react-icons/fa6";
 import { Catalog } from '@/src/class';
@@ -11,7 +11,7 @@ import { AccordionContainer } from '@/src/styles';
 import Skeleton from '../skeleton/Skeleton';
 
 type CatalogAccordionProps = {
-  loading: boolean,
+  loading: LoadingType,
   activeLocale: LocaleType,
   activeCategoryID: number,
   catalogData: CatalogDataType[],
@@ -53,7 +53,7 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
                 <Accordion.Item eventKey={`${data.id}`}>
                   <Accordion.Header>
                     {
-                      loading ? (
+                      loading.standart ? (
                         <React.Fragment>
                           <Skeleton width='200px' height='25px' />
                         </React.Fragment>

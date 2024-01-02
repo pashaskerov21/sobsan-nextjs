@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { CatalogPageLayoutProps, LocaleStateType, PageTitleDataType } from '@/src/types'
+import { CatalogPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { PageTitle } from '@/src/components';
 import { Menu } from '@/src/class';
@@ -20,9 +20,27 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
     titleDictionary,
     textDictionary,
 }) => {
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = React.useState<LoadingType>({
+        standart: true,
+        lazy: true,
+    });
     React.useEffect(() => {
-        setLoading(false);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    standart: false,
+                }
+            });
+        }, 1500);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    lazy: false,
+                }
+            });
+        }, 3000);
     }, []);
 
     const path = 'catalogs';

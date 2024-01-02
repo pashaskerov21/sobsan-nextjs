@@ -3,7 +3,7 @@ import React from 'react'
 import { Menu } from '@/src/class';
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { ActionPageLayoutProps, LocaleStateType, PageTitleDataType } from '@/src/types'
+import { ActionPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import { PageTitle } from '@/src/components';
 
 const ActionPageLayout: React.FC<ActionPageLayoutProps> = ({
@@ -16,7 +16,28 @@ const ActionPageLayout: React.FC<ActionPageLayoutProps> = ({
 }) => {
     const path = 'actions';
     const dispatch = useDispatch();
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = React.useState<LoadingType>({
+        standart: true,
+        lazy: true,
+    });
+    React.useEffect(() => {
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    standart: false,
+                }
+            });
+        }, 1500);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    lazy: false,
+                }
+            });
+        }, 3000);
+    }, []);
 
     const menu = new Menu(menuData, menuTranslateData);
     const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);
@@ -25,9 +46,6 @@ const ActionPageLayout: React.FC<ActionPageLayoutProps> = ({
     React.useEffect(() => {
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
-    React.useEffect(() => {
-        setLoading(false);
-    }, []);
     return (
         <React.Fragment>
             <PageTitle

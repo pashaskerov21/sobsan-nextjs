@@ -2,13 +2,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { PageTitleWrapper } from './style'
-import { LocaleType, PageTitleDataType } from '@/src/types'
+import { LoadingType, LocaleType, PageTitleDataType } from '@/src/types'
 import { Container } from '@/src/styles'
 import { BsChevronRight } from 'react-icons/bs'
 import Skeleton from '../skeleton/Skeleton'
 
 type PageTitleProps = {
-    loading: boolean,
+    loading: LoadingType,
     activeLocale: LocaleType,
     pageTitleData: PageTitleDataType,
     titleDictionary: { [key: string]: string },
@@ -26,7 +26,7 @@ const PageTitle: React.FC<PageTitleProps> = ({
                 <Container>
                     <div className="inner">
                         {
-                            loading ? (
+                            loading.standart ? (
                                 <React.Fragment>
                                     <Skeleton width='180px' height='15px' margin='0 0 6px 0'/>
                                     <Skeleton width='240px' height='40px'/>

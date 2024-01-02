@@ -1,6 +1,6 @@
 'use client'
 import { Catalog, Color } from '@/src/class';
-import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType } from '@/src/types'
+import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import React from 'react'
 import { ColorWrapper } from './style';
 import Image from 'next/image';
@@ -9,7 +9,7 @@ import { ColorTranslation } from '@/src/utils';
 import Skeleton from '../skeleton/Skeleton';
 
 type CatalogColorProps = {
-  loading: boolean,
+  loading: LoadingType,
   activeLocale: LocaleType,
   activeCatalogID: number,
   catalogData: CatalogDataType[],
@@ -65,7 +65,7 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                     color.getAltColors(maindata.id).length > 0 ? (
                       <React.Fragment>
                         {
-                          loading ? <ColorCardSkeleton /> : (
+                          loading.lazy ? <ColorCardSkeleton /> : (
                             <React.Fragment>
                               <div className="color-item secondary" onClick={() => handleColorItem(maindata.id)}>
                                 {

@@ -3,7 +3,7 @@ import React from 'react'
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { LocaleStateType, PageTitleDataType, PaymentDeliveryPageLayoutProps } from '@/src/types'
+import { LoadingType, LocaleStateType, PageTitleDataType, PaymentDeliveryPageLayoutProps } from '@/src/types'
 import { useDispatch } from 'react-redux';
 
 const PaymentDeliveryPageLayout: React.FC<PaymentDeliveryPageLayoutProps> = ({
@@ -16,9 +16,27 @@ const PaymentDeliveryPageLayout: React.FC<PaymentDeliveryPageLayoutProps> = ({
 }) => {
     const path = 'payment-and-delivery';
     const dispatch = useDispatch();
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = React.useState<LoadingType>({
+        standart: true,
+        lazy: true,
+    });
     React.useEffect(() => {
-        setLoading(false);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    standart: false,
+                }
+            });
+        }, 1500);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return {
+                    ...prev,
+                    lazy: false,
+                }
+            });
+        }, 3000);
     }, []);
 
     const menu = new Menu(menuData, menuTranslateData);

@@ -1,13 +1,13 @@
 'use client'
 import React from 'react'
 import { CategoryButtonWrapper, Container, Section } from '@/src/styles'
-import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType } from '@/src/types'
+import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import {  Category } from '@/src/class'
 import { CategoryTranslation } from '@/src/utils'
 import { CatalogAccordion, Skeleton } from '@/src/components'
 
 type SectionProps = {
-  loading: boolean,
+  loading: LoadingType,
   activeLocale: LocaleType,
   categoryData: CategoriesDataType[],
   categoryTranslateData: CategoriesTranslateDataType[],
