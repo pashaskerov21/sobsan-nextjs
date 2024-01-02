@@ -1,5 +1,5 @@
 import { Setting } from '@/src/class';
-import { LocaleType, SettingTranslateDataType, SettingTranslationProps } from '@/src/types'
+import { LocaleType, SettingTranslateDataType } from '@/src/types'
 import React from 'react'
 
 type TranslationProps = {

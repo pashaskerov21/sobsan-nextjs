@@ -1,5 +1,5 @@
 import { Color } from '@/src/class'
-import { ColorDataType, ColorTranslateDataType, ColorTranslationProps, LocaleType } from '@/src/types'
+import { ColorDataType, ColorTranslateDataType, LocaleType } from '@/src/types'
 import React from 'react'
 
 type TranslationProps = {
