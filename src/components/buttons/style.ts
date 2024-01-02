@@ -11,7 +11,6 @@ export const ThemeButtonStyle = styled.div`
     position: relative;
     cursor: pointer;
     .icon{
-        
         ${row_center};
         font-size: 14px;
         position: absolute;

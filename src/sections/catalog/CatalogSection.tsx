@@ -47,7 +47,7 @@ const CatalogSection: React.FC<SectionProps> = ({
                 category.getMainCategoryData().map((data) => (
                   <React.Fragment key={data.id}>
                     {
-                      loading ? (
+                      loading.standart ? (
                         <React.Fragment>
                           <Skeleton width='150px' height='42px' radius='10px' />
                         </React.Fragment>
