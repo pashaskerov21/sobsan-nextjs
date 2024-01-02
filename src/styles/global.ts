@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 1px solid red; */
+  /* border: 1px solid #ffffff; */
 }
 html{
     scroll-behavior: smooth;
@@ -79,31 +79,29 @@ input{
         display: none;
     }
 }
-
-.preloader{
-    display: none;
-    /* position: fixed;
-    top: 0;
-    left: 0;
+.swiper{
     width: 100%;
-    min-height: 100vh;
-    max-height: 100vh;
-    overflow: hidden;
-    background-color: ${props => props.theme.bg_color_1};
-    z-index: 99999;
-    ${row_center};
-    &::after{
-        content: '';
-        border-top: 5px solid ${props => props.theme.color_1};
-        border-right: 5px solid ${props => props.theme.color_1};
-        border-radius: 50%;
+    .swiper-slide{
         ${row_center};
-        width: 150px;
-        height: 150px;
-        animation: ${PreloaderAnimation} 0.7s linear infinite;
-    } */
+    }
+    &.pagination-true{
+        padding-bottom: 20px;
+        @media (width >= 992px){
+            padding-bottom: 30px;
+        }
+    }
+    .swiper-pagination{
+        bottom: 0px;
+        &-bullet{
+            opacity: 1;
+            transition: 0.3s;
+            background-color: ${props => props.theme.bg_color_7};
+            &-active{
+                background-color: ${props => props.theme.color_1};
+            }
+        }
+    }
 }
-
 .slick-slider{
     width: 100%;
     overflow: hidden;

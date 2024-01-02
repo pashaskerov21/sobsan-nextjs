@@ -1,12 +1,24 @@
 'use client'
 import React from 'react'
 import { CategoryButtonWrapper, Container, Section } from '@/src/styles'
-import { CatalogSectionProps } from '@/src/types'
-import { Catalog, Category } from '@/src/class'
+import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType } from '@/src/types'
+import {  Category } from '@/src/class'
 import { CategoryTranslation } from '@/src/utils'
 import { CatalogAccordion, Skeleton } from '@/src/components'
 
-const CatalogSection: React.FC<CatalogSectionProps> = ({
+type SectionProps = {
+  loading: boolean,
+  activeLocale: LocaleType,
+  categoryData: CategoriesDataType[],
+  categoryTranslateData: CategoriesTranslateDataType[],
+  catalogData: CatalogDataType[],
+  catalogTranslateData: CatalogTranslateDataType[],
+  colorData: ColorDataType[],
+  colorTranslateData: ColorTranslateDataType[],
+  textDictionary: { [key: string]: string },
+}
+
+const CatalogSection: React.FC<SectionProps> = ({
   loading,
   activeLocale,
   catalogData,

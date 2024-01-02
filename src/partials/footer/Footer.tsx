@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({
                       menu.getMainMenuData().map((maindata) => (
                         <React.Fragment key={maindata.id}>
                           {
-                            loading ? (
+                            loading.standart ? (
                               <React.Fragment>
                                 <Skeleton width='80%' height='20px' />
                               </React.Fragment>
@@ -66,7 +66,7 @@ const Footer: React.FC<FooterProps> = ({
                               menu.getAltMenuData(maindata.id).map((altdata) => (
                                 <React.Fragment key={altdata.id}>
                                   {
-                                    loading ? (
+                                    loading.standart ? (
                                       <React.Fragment>
                                         <Skeleton width='80%' height='20px' />
                                       </React.Fragment>
@@ -100,7 +100,7 @@ const Footer: React.FC<FooterProps> = ({
                     category.getMainCategoryData().map((data) => (
                       <React.Fragment key={data.id}>
                         {
-                          loading ? (
+                          loading.standart ? (
                             <React.Fragment>
                               <Skeleton width='80%' height='20px' />
                             </React.Fragment>
@@ -129,7 +129,7 @@ const Footer: React.FC<FooterProps> = ({
                       <React.Fragment key={data.id}>
                         <Link href={`/${activeLocale}/`}>
                           {
-                            loading ? (
+                            loading.standart ? (
                               <React.Fragment>
                                 <Skeleton width='80%' height='20px' />
                               </React.Fragment>
@@ -154,7 +154,7 @@ const Footer: React.FC<FooterProps> = ({
                 <div className="footer-links">
                   <h3 className="title">{titleDictionary.useful_links}</h3>
                   {
-                    loading ? (
+                    loading.standart ? (
                       <React.Fragment>
                         <Skeleton width='80%' height='20px' />
                         <Skeleton width='80%' height='20px' />
@@ -185,7 +185,7 @@ const Footer: React.FC<FooterProps> = ({
               <div className="bottom-left">
                 <div className="copyright">
                   {
-                    loading ? (
+                    loading.standart ? (
                       <React.Fragment>
                         <Skeleton width='180px' height='20px' />
                       </React.Fragment>
@@ -206,7 +206,7 @@ const Footer: React.FC<FooterProps> = ({
               </div>
               <div className="bottom-right">
                 {
-                  loading ? (
+                  loading.standart ? (
                     <React.Fragment>
                       <Skeleton width='180px' height='20px' />
                       <Skeleton width='180px' height='20px' />

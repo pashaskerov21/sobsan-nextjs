@@ -2,8 +2,11 @@
 import React from 'react'
 import { ThemeButtonStyle } from './style'
 import { BsFillSunFill, BsMoonStarsFill } from 'react-icons/bs'
-import { ThemeButtonProps } from '@/src/types'
 
+type ThemeButtonProps = {
+    theme: string,
+    toggleTheme: () => void,
+}
 
 const ThemeButton: React.FC<ThemeButtonProps> = ({ theme, toggleTheme }) => {
     return (

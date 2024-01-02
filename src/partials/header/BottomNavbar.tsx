@@ -58,7 +58,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
             </div>
             <div className="inner-center">
               {
-                loading ? (
+                loading.standart ? (
                   <React.Fragment>
                     <Skeleton width='750px' height='60px'/>
                   </React.Fragment>

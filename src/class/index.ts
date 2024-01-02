@@ -4,6 +4,7 @@ import Category from "./Category";
 import Filial from "./Filial";
 import Catalog from "./Catalog";
 import Color from "./Color";
+import ProductBanner from "./ProductBanner";
 
 export {
     Setting,
@@ -12,4 +13,5 @@ export {
     Filial,
     Catalog,
     Color,
+    ProductBanner,
 }

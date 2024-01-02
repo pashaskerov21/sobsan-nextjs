@@ -1,8 +1,14 @@
 import { Setting } from '@/src/class';
-import { SettingTranslateDataType, SettingTranslationProps } from '@/src/types'
+import { LocaleType, SettingTranslateDataType, SettingTranslationProps } from '@/src/types'
 import React from 'react'
 
-const SettingTranslation: React.FC<SettingTranslationProps> = ({
+type TranslationProps = {
+    translationType: "title" | "description" | "address" | "copyright",
+    activeLocale: LocaleType,
+    settingTranslateData: SettingTranslateDataType[],
+}
+
+const SettingTranslation: React.FC<TranslationProps> = ({
     activeLocale,
     settingTranslateData,
     translationType,

@@ -1,8 +1,8 @@
 'use client'
 import { Menu } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { BannerSection } from '@/src/sections';
-import { HomePageLayoutProps, LocaleStateType, PageTitleDataType } from '@/src/types'
+import { BannerSection, ProductBannerSection } from '@/src/sections';
+import { HomePageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import React from 'react'
 import { useDispatch } from 'react-redux';
 
@@ -11,12 +11,33 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     bannerData,
     menuData,
     menuTranslateData,
+    generalDictionary,
+    productBannerData,
+    productBannerTranslateData,
 }) => {
 
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = React.useState<LoadingType>({
+        standart: true,
+        lazy: true,
+    });
     React.useEffect(() => {
-        setLoading(false);
-    },[]);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return{
+                    ...prev,
+                    standart: false,
+                }
+            });
+        },2000);
+        setTimeout(() => {
+            setLoading((prev) => {
+                return{
+                    ...prev,
+                    lazy: false,
+                }
+            });
+        },4000);
+    }, []);
 
     const path = '';
     const dispatch = useDispatch();
@@ -29,7 +50,15 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     }, [dispatch]);
     return (
         <React.Fragment>
-            <BannerSection loading={loading} bannerData={bannerData} />
+            <BannerSection
+                loading={loading} bannerData={bannerData} />
+            <ProductBannerSection
+                activeLocale={activeLocale}
+                generalDictionary={generalDictionary}
+                loading={loading}
+                productBannerData={productBannerData}
+                productBannerTranslateData={productBannerTranslateData}
+            />
         </React.Fragment>
     )
 }

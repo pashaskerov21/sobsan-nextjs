@@ -54,14 +54,9 @@ import {
 } from './layout';
 
 import {
-    SiteToolbarProps,
-    ThemeButtonProps,
-    SocialMediaProps,
     BreadcrumbType,
     PageTitleDataType,
-    PageTitleProps,
-    CatalogAccordionProps,
-    CatalogColorProps,
+    LoadingType
 } from './components';
 
 import {
@@ -79,19 +74,6 @@ import {
     LocaleStateType,
     RootStateType,
 } from './redux'
-
-import {
-    CategoryTranslationProps,
-    MenuTranslationProps,
-    FilialTranslationProps,
-    SettingTranslationProps,
-    CatalogTransLationProps,
-    ColorTranslationProps
-} from './translate'
-
-import {
-    CatalogSectionProps,
-} from './section'
 
 export type {
     LocaleType,
@@ -144,14 +126,9 @@ export type {
     WarrantyConditionPageLayoutProps,
     HomePageLayoutProps,
 
-    SiteToolbarProps,
-    ThemeButtonProps,
-    SocialMediaProps,
     BreadcrumbType,
     PageTitleDataType,
-    PageTitleProps,
-    CatalogAccordionProps,
-    CatalogColorProps,
+    LoadingType,
 
     HeaderStateType,
     HeaderProps,
@@ -164,13 +141,4 @@ export type {
 
     LocaleStateType,
     RootStateType,
-
-    CategoryTranslationProps,
-    MenuTranslationProps,
-    FilialTranslationProps,
-    SettingTranslationProps,
-    CatalogTransLationProps,
-    ColorTranslationProps,
-
-    CatalogSectionProps,
 }

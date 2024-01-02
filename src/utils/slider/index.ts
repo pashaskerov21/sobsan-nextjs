@@ -6,4 +6,5 @@ export const bannerSettings = {
     autoplaySpeed: 4000,
     cssEase: "ease",
     arrows: false,
+    dots: true,
 }

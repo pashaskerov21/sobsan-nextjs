@@ -1,6 +1,6 @@
 'use client'
 import { Catalog, Color } from '@/src/class';
-import { CatalogColorProps, ColorDataType } from '@/src/types'
+import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType } from '@/src/types'
 import React from 'react'
 import { ColorWrapper } from './style';
 import Image from 'next/image';
@@ -8,6 +8,15 @@ import Link from 'next/link';
 import { ColorTranslation } from '@/src/utils';
 import Skeleton from '../skeleton/Skeleton';
 
+type CatalogColorProps = {
+  loading: boolean,
+  activeLocale: LocaleType,
+  activeCatalogID: number,
+  catalogData: CatalogDataType[],
+  catalogTranslateData: CatalogTranslateDataType[],
+  colorData: ColorDataType[],
+  colorTranslateData: ColorTranslateDataType[],
+}
 
 const CatalogColors: React.FC<CatalogColorProps> = ({
   loading,
@@ -52,7 +61,6 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
             {
               colors.map((maindata) => (
                 <React.Fragment key={maindata.id}>
-
                   {
                     color.getAltColors(maindata.id).length > 0 ? (
                       <React.Fragment>

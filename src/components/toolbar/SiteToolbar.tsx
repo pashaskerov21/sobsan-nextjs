@@ -5,8 +5,13 @@ import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { SiteToolbarProps } from '@/src/types';
+import { LoadingType, SettingDataType } from '@/src/types';
 
+type SiteToolbarProps = {
+    loading: LoadingType,
+    settingData: SettingDataType,
+    titleDictionary: { [key: string]: string },
+}
 
 const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDictionary }) => {
     const [showScrollBtn, setShowScrollBtn] = React.useState<boolean>(false);
@@ -27,7 +32,7 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
         <React.Fragment>
             <CenterToolbarWrapper>
                 {
-                    loading ? (
+                    loading.standart ? (
                         <React.Fragment>
                             <Skeleton width='100%' height='60px' radius='10px' />
                             <Skeleton width='100%' height='60px' radius='10px' />

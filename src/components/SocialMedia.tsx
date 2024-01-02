@@ -2,7 +2,12 @@
 import Link from 'next/link'
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa6'
-import { SocialMediaProps } from '../types'
+import { SettingDataType } from '../types'
+
+type SocialMediaProps = {
+  className: string,
+  settingData: SettingDataType,
+}
 
 const SocialMedia: React.FC<SocialMediaProps> = ({ settingData, className }) => {
   return (

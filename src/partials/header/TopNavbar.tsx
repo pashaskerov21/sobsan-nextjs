@@ -36,7 +36,7 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
                 <div className="bar"></div>
               </div>
               {
-                loading ? (
+                loading.standart ? (
                   <React.Fragment>
                     <Skeleton width='570px' height='32px' className='d-none d-xl-block'/>
                   </React.Fragment>

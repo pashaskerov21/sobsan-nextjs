@@ -1,4 +1,4 @@
-import { CategoriesDataType, CategoriesTranslateDataType, FilialDataType, FilialTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from ".."
+import { CategoriesDataType, CategoriesTranslateDataType, FilialDataType, FilialTranslateDataType, LoadingType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from ".."
 
 export type HeaderStateType = {
     fixed: boolean,
@@ -6,7 +6,7 @@ export type HeaderStateType = {
     searchShow: boolean,
 };
 export type HeaderProps = {
-    loading: boolean,
+    loading: LoadingType,
     activeLocale: LocaleType,
     theme: string,
     toggleTheme: () => void,
@@ -19,7 +19,7 @@ export type HeaderProps = {
     titleDictionary: { [key: string]: string },
 };
 export type TopNavbarProps = {
-    loading: boolean,
+    loading: LoadingType,
     headerState: HeaderStateType,
     theme: string,
     toggleTheme: () => void,
@@ -33,7 +33,7 @@ export type TopNavbarProps = {
     titleDictionary: { [key: string]: string },
 };
 export type BottomNavbarProps = {
-    loading: boolean,
+    loading: LoadingType,
     headerState: HeaderStateType,
     theme: string,
     toggleTheme: () => void,
@@ -55,7 +55,7 @@ export type PageLinksProps = {
     className: string,
 }
 export type CategoryProps = {
-    loading: boolean,
+    loading: LoadingType,
     activeLocale: LocaleType,
     categoryData: CategoriesDataType[],
     categoryTranslateData: CategoriesTranslateDataType[],
@@ -67,7 +67,7 @@ export type SearchProps = {
     titleDictionary: { [key: string]: string },
 };
 export type FooterProps = {
-    loading: boolean,
+    loading: LoadingType,
     activeLocale: LocaleType,
     settingData: SettingDataType,
     settingTranslateData: SettingTranslateDataType[],

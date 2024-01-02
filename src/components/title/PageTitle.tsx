@@ -2,10 +2,17 @@
 import React from 'react'
 import Link from 'next/link'
 import { PageTitleWrapper } from './style'
-import { PageTitleProps } from '@/src/types'
+import { LocaleType, PageTitleDataType } from '@/src/types'
 import { Container } from '@/src/styles'
 import { BsChevronRight } from 'react-icons/bs'
 import Skeleton from '../skeleton/Skeleton'
+
+type PageTitleProps = {
+    loading: boolean,
+    activeLocale: LocaleType,
+    pageTitleData: PageTitleDataType,
+    titleDictionary: { [key: string]: string },
+}
 
 const PageTitle: React.FC<PageTitleProps> = ({
     loading,

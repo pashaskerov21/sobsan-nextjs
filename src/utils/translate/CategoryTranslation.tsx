@@ -1,10 +1,18 @@
 import React from 'react'
 import Link from 'next/link';
 import { Category } from '@/src/class';
-import { CategoriesTranslateDataType, CategoryTranslationProps } from '@/src/types'
+import { CategoriesDataType, CategoriesTranslateDataType, LocaleType } from '@/src/types'
 
+type TranslationProps = {
+  translationType: "link" | "title",
+  activeLocale: LocaleType,
+  activeCategoryData: CategoriesDataType,
+  categoryData: CategoriesDataType[],
+  categoryTranslateData: CategoriesTranslateDataType[],
+  className?: string,
+}
 
-const CategoryTranslation: React.FC<CategoryTranslationProps> = ({
+const CategoryTranslation: React.FC<TranslationProps> = ({
   activeLocale,
   activeCategoryData,
   categoryData,

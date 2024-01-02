@@ -1,19 +1,4 @@
-import { LocaleType } from "..";
-import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, SettingDataType } from "../data"
 
-export type SiteToolbarProps = {
-    loading: boolean,
-    settingData: SettingDataType,
-    titleDictionary: { [key: string]: string },
-}
-export type ThemeButtonProps = {
-    theme: string,
-    toggleTheme: () => void,
-}
-export type SocialMediaProps = {
-    className: string,
-    settingData: SettingDataType,
-};
 export type BreadcrumbType = {
     id: number;
     name?: string;
@@ -22,29 +7,8 @@ export type BreadcrumbType = {
 export type PageTitleDataType = {
     title: string,
     breadcrumbs: BreadcrumbType[],
-}
-export type PageTitleProps = {
-    loading: boolean,
-    activeLocale: LocaleType,
-    pageTitleData: PageTitleDataType,
-    titleDictionary: { [key: string]: string },
-}
-export type CatalogAccordionProps = {
-    loading: boolean,
-    activeLocale: LocaleType,
-    activeCategoryID: number,
-    catalogData: CatalogDataType[],
-    catalogTranslateData: CatalogTranslateDataType[],
-    colorData: ColorDataType[],
-    colorTranslateData: ColorTranslateDataType[],
-    textDictionary: { [key: string]: string },
-}
-export type CatalogColorProps = {
-    loading: boolean,
-    activeLocale: LocaleType,
-    activeCatalogID: number,
-    catalogData: CatalogDataType[],
-    catalogTranslateData: CatalogTranslateDataType[],
-    colorData: ColorDataType[],
-    colorTranslateData: ColorTranslateDataType[],
-}
+};
+export type LoadingType = {
+    standart: boolean,
+    lazy: boolean,
+};

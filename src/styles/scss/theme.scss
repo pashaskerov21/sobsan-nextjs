@@ -1,0 +1,46 @@
+
+.next-app {
+    --const_color_1: #ed3237;
+    --const_color_2: #ffa300;
+    --const_color_3: #4bb543;
+
+    --theme_color_1: #ffffff;
+    --theme_color_2: #ffffff;
+    --theme_color_3: #ffffff;
+    --theme_color_4: #efefef;
+    --theme_color_5: #f7f7f7;
+    --theme_color_6: #f9f9f9;
+    --theme_color_7: rgba(0, 0, 0, 0.3);
+    --theme_color_8: #f1f1f1;
+    --theme_color_9: #efefef;
+    --theme_color_10: #000000;
+    --theme_color_11: #212121;
+    --theme_color_12: #474747;
+    --theme_color_13: #ed3237;
+    --theme_color_14: #ffffff;
+    --theme_color_15: rgba(0, 0, 0, 0.8);
+    --theme_color_16: rgba(0, 0, 0, 0.1);
+    --theme_color_17: rgba(0, 0, 0, 0.2);
+    --theme_color_18: #DDDDDD;
+
+    &[data-theme="dark"] {
+        --theme_color_1: #000000;
+        --theme_color_2: #212121;
+        --theme_color_3: #474747;
+        --theme_color_4: rgba(0, 0, 0, 0.6);
+        --theme_color_5: rgba(0, 0, 0, 0.4);
+        --theme_color_6: rgba(0, 0, 0, 0.7);
+        --theme_color_7: #ffffff;
+        --theme_color_8: #000000;
+        --theme_color_9: #000000;
+        --theme_color_10: #ffffff;
+        --theme_color_11: #ffffff;
+        --theme_color_12: #ffffff;
+        --theme_color_13: #ffffff;
+        --theme_color_14: #ed3237;
+        --theme_color_15: rgba(255, 255, 255, 0.8);
+        --theme_color_17: rgba(255, 255, 255, 0.2);
+        --theme_color_18: #292929;
+
+    }
+}

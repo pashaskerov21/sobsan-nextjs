@@ -1,8 +1,16 @@
 import { Catalog } from '@/src/class'
-import { CatalogTransLationProps, CatalogTranslateDataType } from '@/src/types'
+import { CatalogDataType, CatalogTranslateDataType, LocaleType } from '@/src/types'
 import React from 'react'
 
-const CatalogTranslation: React.FC<CatalogTransLationProps> = ({
+type TranslationProps = {
+  translationType: "title",
+  activeLocale: LocaleType,
+  activeCatalogData: CatalogDataType,
+  catalogData: CatalogDataType[],
+  catalogTranslateData: CatalogTranslateDataType[],
+}
+
+const CatalogTranslation: React.FC<TranslationProps> = ({
   activeCatalogData,
   activeLocale,
   catalogData,

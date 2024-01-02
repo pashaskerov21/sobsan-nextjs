@@ -1,9 +1,19 @@
 import React from 'react'
 import Link from 'next/link';
 import { Menu } from '@/src/class';
-import { MenuTranslateDataType, MenuTranslationProps } from '@/src/types'
+import { LocaleType, MenuDataType, MenuTranslateDataType } from '@/src/types'
 
-const MenuTranslation: React.FC<MenuTranslationProps> = ({
+type TranslationProps = {
+    translationType: "link" | "title",
+    activeLocale: LocaleType,
+    activeMenuData: MenuDataType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    className?: string,
+    path: string,
+}
+
+const MenuTranslation: React.FC<TranslationProps> = ({
     activeLocale,
     menuData,
     activeMenuData,

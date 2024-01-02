@@ -74,7 +74,7 @@ const Categories: React.FC<CategoryProps> = ({ loading, activeLocale, categoryDa
         <div className={`category-item`} onMouseMove={() => handleCategoryMouseMove(mainData.id)} onMouseLeave={() => handleCategoryMouseLeave()}>
           <div className="main-row">
             {
-              loading ? (
+              loading.standart ? (
                 <React.Fragment>
                   <Skeleton width='100%' width_xl='80px' height='20px' height_xl='50px'/>
                 </React.Fragment>

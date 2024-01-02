@@ -5,6 +5,7 @@ import SocialMedia from "./SocialMedia";
 import PageTitle from "./title/PageTitle";
 import CatalogAccordion from "./catalog/CatalogAccordion";
 import Skeleton from "./skeleton/Skeleton";
+import VanillaComponent from "./VanillaComponent";
 
 export {
     SiteToolbar,
@@ -14,4 +15,5 @@ export {
     PageTitle,
     CatalogAccordion,
     Skeleton,
+    VanillaComponent,
 }

@@ -1,8 +1,15 @@
 import React from 'react'
 import { Filial } from '@/src/class';
-import { FilialTranslateDataType, FilialTranslationProps } from '@/src/types'
+import { FilialDataType, FilialTranslateDataType, LocaleType } from '@/src/types'
 
-const FilialTranslation: React.FC<FilialTranslationProps> = ({
+type TranslationProps = {
+    translationType: "title" | "address",
+    activeLocale: LocaleType,
+    activeFilialData: FilialDataType,
+    filialTranslateData: FilialTranslateDataType[],
+}
+
+const FilialTranslation: React.FC<TranslationProps> = ({
     activeFilialData,
     activeLocale,
     filialTranslateData,

@@ -1,22 +1,26 @@
 import {
-    ArticleDataType, 
-    ArticleTranslateDataType, 
-    BannerDataType, 
-    CatalogDataType, 
-    CatalogTranslateDataType, 
-    CategoriesDataType, 
-    CategoriesTranslateDataType, 
-    ColorDataType, 
-    ColorTranslateDataType, 
-    FilialDataType, 
-    FilialTranslateDataType, 
-    GalleryDataType, 
-    LocaleType, 
-    MenuDataType, 
-    MenuTranslateDataType, 
-    SettingDataType, 
+    ArticleDataType,
+    ArticleTranslateDataType,
+    BannerDataType,
+    CatalogDataType,
+    CatalogTranslateDataType,
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    ColorDataType,
+    ColorTranslateDataType,
+    FilialDataType,
+    FilialTranslateDataType,
+    GalleryDataType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
+    ProductBannerDataType,
+    ProductBannerTranslateDataType,
+    SettingDataType,
     SettingTranslateDataType
 } from ".."
+
+
 
 export type RootLayoutProps = {
     children: React.ReactNode,
@@ -112,4 +116,7 @@ export type HomePageLayoutProps = {
     menuData: MenuDataType[],
     menuTranslateData: MenuTranslateDataType[],
     bannerData: BannerDataType[],
+    productBannerData: ProductBannerDataType[];
+    productBannerTranslateData: ProductBannerTranslateDataType[],
+    generalDictionary: { [key: string]: string },
 }
