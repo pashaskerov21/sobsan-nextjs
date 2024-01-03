@@ -135,7 +135,7 @@ const ProductCard: React.FC<CardProps> = ({
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")}>
+                                <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__image'>
                                     <Image src={activeProductData.image} width={550} height={440} alt='product' />
                                 </Link>
                             </React.Fragment>
