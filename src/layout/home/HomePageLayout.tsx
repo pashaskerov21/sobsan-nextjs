@@ -55,7 +55,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     }, [dispatch]);
     return (
         <React.Fragment>
-            {/* <BannerSection
+            <BannerSection
                 loading={loading} bannerData={bannerData} />
             <ProductBannerSection
                 activeLocale={activeLocale}
@@ -63,7 +63,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
                 loading={loading}
                 productBannerData={productBannerData}
                 productBannerTranslateData={productBannerTranslateData}
-            /> */}
+            />
             <PopularProductSection
                 activeLocale={activeLocale}
                 generalDictionary={generalDictionary}

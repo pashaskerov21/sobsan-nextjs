@@ -117,12 +117,12 @@ const ProductCard: React.FC<CardProps> = ({
             <ProductCardWrapper>
                 <div className="card__top">
                     <div className="product__badges">
-                        {activeProductData.new ? loading.lazy ? (
+                        {activeProductData.new ? loading.standart ? (
                             <Skeleton width='45px' height='23px' radius='5px' />
                         ) : (
                             <div className="product__badge">{generalDictionary["new"]}</div>
                         ) : null}
-                        {activeProductData.offer ? loading.lazy ? (
+                        {activeProductData.offer ? loading.standart ? (
                             <Skeleton width='115px' height='23px' radius='5px' />
                         ) : (
                             <div className="product__badge secondary">{generalDictionary["offered"]}</div>
@@ -144,7 +144,7 @@ const ProductCard: React.FC<CardProps> = ({
                 </div>
                 <div className="card__center">
                     {
-                        loading.lazy ? (
+                        loading.standart ? (
                             <React.Fragment>
                                 <Skeleton width='60px' height='24px' margin='0 0 5px 0' />
                                 <Skeleton width='210px' height='30px' margin='0 0 25px 0' />
@@ -166,7 +166,7 @@ const ProductCard: React.FC<CardProps> = ({
                 </div>
                 <div className="card__bottom">
                     {
-                        loading.lazy ? (
+                        loading.standart ? (
                             <React.Fragment>
                                 <Skeleton width='170px' height='25px' margin='0 0 10px 0' />
                                 <Skeleton width='240px' height='25px' margin='0 0 10px 0' />
@@ -202,7 +202,7 @@ const ProductCard: React.FC<CardProps> = ({
                     }
                     <div className="card__buttons">
                         {
-                            loading.lazy ? (
+                            loading.standart ? (
                                 <React.Fragment>
                                     <Skeleton height='50px' radius='5px' />
                                     <Skeleton height='50px' radius='5px' />
