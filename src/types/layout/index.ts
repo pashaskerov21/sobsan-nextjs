@@ -2,6 +2,8 @@ import {
     ArticleDataType,
     ArticleTranslateDataType,
     BannerDataType,
+    BrandDataType,
+    BrandTranslateDataType,
     CatalogDataType,
     CatalogTranslateDataType,
     CategoriesDataType,
@@ -16,6 +18,8 @@ import {
     MenuTranslateDataType,
     ProductBannerDataType,
     ProductBannerTranslateDataType,
+    ProductDataType,
+    ProductTranslateDataType,
     SettingDataType,
     SettingTranslateDataType
 } from ".."
@@ -118,5 +122,10 @@ export type HomePageLayoutProps = {
     bannerData: BannerDataType[],
     productBannerData: ProductBannerDataType[];
     productBannerTranslateData: ProductBannerTranslateDataType[],
+    productData: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
     generalDictionary: { [key: string]: string },
+    brandData: BrandDataType[],
+    brandTranslateData: BrandTranslateDataType[],
+    titleDictionary: { [key: string]: string },
 }

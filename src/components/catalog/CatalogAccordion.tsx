@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
-import { CatalogTranslation } from '@/src/utils';
 import { FaChevronDown } from "react-icons/fa6";
 import { Catalog } from '@/src/class';
 import { CatalogAccordionBodyInner } from './style';
@@ -59,13 +58,7 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
                         </React.Fragment>
                       ) : (
                         <React.Fragment>
-                          <CatalogTranslation
-                            activeCatalogData={data}
-                            activeLocale={activeLocale}
-                            catalogData={catalogData}
-                            catalogTranslateData={catalogTranslateData}
-                            translationType='title'
-                          />
+                          {catalog.getTranslate(data.id, activeLocale, "title")}
                         </React.Fragment>
                       )
                     }

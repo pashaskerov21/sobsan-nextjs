@@ -2,8 +2,7 @@
 import React from 'react'
 import { CategoryButtonWrapper, Container, Section } from '@/src/styles'
 import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
-import {  Category } from '@/src/class'
-import { CategoryTranslation } from '@/src/utils'
+import { Category } from '@/src/class'
 import { CatalogAccordion, Skeleton } from '@/src/components'
 
 type SectionProps = {
@@ -31,7 +30,6 @@ const CatalogSection: React.FC<SectionProps> = ({
 }) => {
   const category = new Category(categoryData, categoryTranslateData);
 
-
   const [activeCategoryID, setActiveCategoryID] = React.useState<number>(0);
   const handleCategoryButton = React.useCallback((id: number) => {
     setActiveCategoryID(id);
@@ -54,13 +52,7 @@ const CatalogSection: React.FC<SectionProps> = ({
                       ) : (
                         <React.Fragment>
                           <button className={activeCategoryID === data.id ? 'active' : ''} type='button' onClick={() => handleCategoryButton(data.id)}>
-                            <CategoryTranslation
-                              activeCategoryData={data}
-                              activeLocale={activeLocale}
-                              categoryData={categoryData}
-                              categoryTranslateData={categoryTranslateData}
-                              translationType='title'
-                            />
+                            {category.getTranslate(data.id, activeLocale, "title")}
                           </button>
                         </React.Fragment>
                       )

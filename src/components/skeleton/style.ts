@@ -2,6 +2,7 @@ import styled, { css, keyframes } from "styled-components";
 
 
 type SkeletonElementProps = {
+    $max_width?: string,
     $width?: string,
     $width_sm?: string,
     $width_md?: string,
@@ -40,6 +41,7 @@ export const SkeletonElement = styled.div<SkeletonElementProps>`
     animation: ${skeletonAnimation} 1.5s ease-out infinite;
     ${props => props.$margin && css`margin: ${props.$margin};`}; 
     ${props => props.$padding && css`padding: ${props.$padding}`};
+    ${props => props.$max_width && css`max-width: ${props.$max_width}`};
     ${props => props.$width && css`width: ${props.$width}`};
     ${props => props.$width_sm && css`@media (width >= 576px){width: ${props.$width_sm};}`};
     ${props => props.$width_md && css`@media (width >= 768px){width: ${props.$width_md};}`};

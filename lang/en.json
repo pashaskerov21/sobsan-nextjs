@@ -23,7 +23,8 @@
         "news": "News",
         "payment_delivery": "Payment and delivery",
         "warranty_conditions": "Warranty conditions",
-        "contact": "Contact us"
+        "contact": "Contact us",
+        "popular_products": "Popular products"
     },
     "text": {
         "catalog_note": "Note: The catalog colors on the screen may appear different from the original colors that will be applied due to the screen calibration differences of monitors, tablets, laptops and smartphones and the drop of light. For the exact result, you can see our color catalog at the nearest sales address. Also, when applying your chosen color, the color of the paint may look different depending on the natural sunlight falling into the room, the color of the light bulbs you use (eg yellow, led, etc.)."
@@ -31,6 +32,12 @@
     "general": {
         "order": "Order now",
         "write_us": "Write us",
-        "banner_question": "Need advice from a professional advisor?"
+        "banner_question": "Need advice from a professional advisor?",
+        "new": "New",
+        "offered": "Offered",
+        "add_basket": "Add basket",
+        "comparison": "Comparison",
+        "stock": "Stock",
+        "pieces": "pieces"
     }
 }

@@ -84,17 +84,13 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
 
     if (settingData && settingTranslateData) {
       const setting = new Setting(settingTranslateData);
-      const activeTranslate: SettingTranslateDataType | undefined = setting.getTranslate(1, lang);
-
-      if (activeTranslate) {
-        return {
-          title: activeTranslate.title,
-          description: activeTranslate.description,
-          icons: {
-            icon: settingData[0].logo
-          }
-        };
-      }
+      return {
+        title: setting.getTranslate(1, lang, "title"),
+        description: setting.getTranslate(1, lang, "description"),
+        icons: {
+          icon: settingData[0].logo
+        }
+      };
     }
   } catch (error) {
     console.error('Error:', error);

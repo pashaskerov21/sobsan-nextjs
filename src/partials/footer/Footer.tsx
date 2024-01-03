@@ -6,8 +6,7 @@ import { FooterWrapper } from './style'
 import { FooterProps } from '@/src/types'
 import { Container } from '@/src/styles'
 import { Skeleton, SocialMedia } from '@/src/components'
-import { Category, Menu } from '@/src/class'
-import { CategoryTranslation, FilialTranslation, MenuTranslation, SettingTranslation } from '@/src/utils'
+import { Category, Filial, Menu, Setting } from '@/src/class'
 
 const Footer: React.FC<FooterProps> = ({
   loading,
@@ -24,6 +23,8 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   const menu = new Menu(menuData, menuTranslateData);
   const category = new Category(categoryData, categoryTranslateData);
+  const filial = new Filial(filialTranslateData);
+  const setting = new Setting(settingTranslateData);
   return (
     <React.Fragment>
       <FooterWrapper>
@@ -50,14 +51,9 @@ const Footer: React.FC<FooterProps> = ({
                               </React.Fragment>
                             ) : (
                               <React.Fragment>
-                                <MenuTranslation
-                                  activeLocale={activeLocale}
-                                  activeMenuData={maindata}
-                                  menuData={menuData}
-                                  menuTranslateData={menuTranslateData}
-                                  translationType='link'
-                                  path={`${maindata.path}`}
-                                />
+                                <Link href={menu.getTranslate(maindata.id, activeLocale, "url")}>
+                                  {menu.getTranslate(maindata.id, activeLocale, "title")}
+                                </Link>
                               </React.Fragment>
                             )
                           }
@@ -72,14 +68,9 @@ const Footer: React.FC<FooterProps> = ({
                                       </React.Fragment>
                                     ) : (
                                       <React.Fragment>
-                                        <MenuTranslation
-                                          activeLocale={activeLocale}
-                                          activeMenuData={altdata}
-                                          menuData={menuData}
-                                          menuTranslateData={menuTranslateData}
-                                          translationType='link'
-                                          path={`${maindata.path}/${altdata.path}`}
-                                        />
+                                        <Link href={menu.getTranslate(altdata.id, activeLocale, "url")}>
+                                          {menu.getTranslate(altdata.id, activeLocale, "title")}
+                                        </Link>
                                       </React.Fragment>
                                     )
                                   }
@@ -106,13 +97,9 @@ const Footer: React.FC<FooterProps> = ({
                             </React.Fragment>
                           ) : (
                             <React.Fragment>
-                              <CategoryTranslation
-                                activeCategoryData={data}
-                                activeLocale={activeLocale}
-                                categoryData={categoryData}
-                                categoryTranslateData={categoryTranslateData}
-                                translationType='link'
-                              />
+                              <Link href={category.getTranslate(data.id, activeLocale, "url")}>
+                                {category.getTranslate(data.id, activeLocale, "title")}
+                              </Link>
                             </React.Fragment>
                           )
                         }
@@ -135,12 +122,7 @@ const Footer: React.FC<FooterProps> = ({
                               </React.Fragment>
                             ) : (
                               <React.Fragment>
-                                <FilialTranslation
-                                  activeFilialData={data}
-                                  activeLocale={activeLocale}
-                                  filialTranslateData={filialTranslateData}
-                                  translationType='title'
-                                />
+                                {filial.getTranslate(data.id, activeLocale, "title")}
                               </React.Fragment>
                             )
                           }
@@ -191,11 +173,7 @@ const Footer: React.FC<FooterProps> = ({
                       </React.Fragment>
                     ) : (
                       <React.Fragment>
-                        <SettingTranslation
-                          activeLocale={activeLocale}
-                          settingTranslateData={settingTranslateData}
-                          translationType='copyright'
-                        />
+                        {setting.getTranslate(1, activeLocale, "copyright")}
                       </React.Fragment>
                     )
                   }

@@ -5,12 +5,12 @@ import { LoadingType, LocaleType, ProductBannerDataType, ProductBannerTranslateD
 import { ProductBannerWrapper } from './style'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper/modules'
-import { ProductBannerTranslation } from '@/src/utils/translate'
 import Image from 'next/image'
 import Link from 'next/link'
 import VanillaTilt from 'vanilla-tilt';
 import { Skeleton, VanillaComponent } from '@/src/components';
-import { FaPhoneAlt, FaQuestion  } from "react-icons/fa";
+import { FaPhoneAlt, FaQuestion } from "react-icons/fa";
+import { ProductBanner } from '@/src/class'
 
 type SectionProps = {
   loading: LoadingType,
@@ -27,12 +27,13 @@ const ProductBannerSection: React.FC<SectionProps> = ({
   productBannerData,
   productBannerTranslateData,
 }) => {
+  const productBanner = new ProductBanner(productBannerTranslateData);
   const imageRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     if (imageRef.current) {
       VanillaTilt.init(imageRef.current)
     }
-  }, [])
+  }, []);
   return (
     <Section $py={20}>
       <Container>
@@ -72,29 +73,14 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                             <div className="banner-slide">
                               <div className="content">
                                 <div className="title">
-                                  <ProductBannerTranslation
-                                    activeLocale={activeLocale}
-                                    activeProductBannerData={data}
-                                    productBannerTranslateData={productBannerTranslateData}
-                                    translationType='title'
-                                  />
+                                  {productBanner.getTranslate(data.id, activeLocale, "title")}
                                 </div>
                                 <div className="text">
-                                  <ProductBannerTranslation
-                                    activeLocale={activeLocale}
-                                    activeProductBannerData={data}
-                                    productBannerTranslateData={productBannerTranslateData}
-                                    translationType='text'
-                                  />
+                                  {productBanner.getTranslate(data.id, activeLocale, "text")}
                                 </div>
-                                <ProductBannerTranslation
-                                  activeLocale={activeLocale}
-                                  activeProductBannerData={data}
-                                  productBannerTranslateData={productBannerTranslateData}
-                                  translationType='url'
-                                  linkName={generalDictionary.order}
-                                  linkClassName='order-btn'
-                                />
+                                <Link href={productBanner.getTranslate(data.id, activeLocale, "url")} className='order-btn'>
+                                  {generalDictionary.order}
+                                </Link>
                               </div>
                               <VanillaComponent className='banner-image'>
                                 <Image src={data.image} width={500} height={500} alt='' />
@@ -112,11 +98,11 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                   </div>
                   <div className="bottom_right">
                     <Link href={`/${activeLocale}`}>
-                      <div className="icon"><FaPhoneAlt/></div>
+                      <div className="icon"><FaPhoneAlt /></div>
                       <div className="label">(+994 12) 404 45 45</div>
                     </Link>
                     <Link href={`/${activeLocale}`}>
-                      <div className="icon"><FaQuestion/></div>
+                      <div className="icon"><FaQuestion /></div>
                       <div className="label">{generalDictionary.write_us}</div>
                     </Link>
                   </div>

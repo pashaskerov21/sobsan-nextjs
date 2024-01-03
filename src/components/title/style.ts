@@ -52,3 +52,14 @@ export const PageTitleWrapper = styled.div`
         }
     }
 `
+
+export const SectionTitleWrapper = styled.h2`
+    width: 100%;
+    text-align: center;
+    ${row_center};
+    margin-bottom: 25px;
+    @media (width >= 992px){
+        text-align: start;
+        justify-content:flex-start;
+    }
+`

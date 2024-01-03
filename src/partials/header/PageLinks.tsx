@@ -3,7 +3,7 @@ import React from 'react'
 import { PageLinksProps } from '@/src/types';
 import { BiChevronDown } from "react-icons/bi";
 import { Menu } from '@/src/class';
-import { MenuTranslation } from '@/src/utils';
+import Link from 'next/link';
 
 
 const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslateData, activeLocale }) => {
@@ -27,14 +27,9 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                             <React.Fragment key={maindata.id}>
                                 <div className="link-item">
                                     <div className="main-row">
-                                        <MenuTranslation
-                                            activeLocale={activeLocale}
-                                            activeMenuData={maindata}
-                                            menuData={menuData}
-                                            menuTranslateData={menuTranslateData}
-                                            translationType='link'
-                                            path={`${maindata.path}`}
-                                        />
+                                        <Link href={menu.getTranslate(maindata.id, activeLocale, "url")}>
+                                            {menu.getTranslate(maindata.id, activeLocale, "title")}
+                                        </Link>
                                         {
                                             menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
                                                 <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
@@ -50,14 +45,9 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                                     {
                                                         menu.getAltMenuData(maindata.id).map((altdata) => (
                                                             <React.Fragment key={altdata.id}>
-                                                                <MenuTranslation
-                                                                    activeLocale={activeLocale}
-                                                                    activeMenuData={altdata}
-                                                                    menuData={menuData}
-                                                                    menuTranslateData={menuTranslateData}
-                                                                    translationType='link'
-                                                                    path={`${maindata.path}/${altdata.path}`}
-                                                                />
+                                                                <Link href={menu.getTranslate(altdata.id, activeLocale, "url")}>
+                                                                    {menu.getTranslate(altdata.id, activeLocale, "title")}
+                                                                </Link>
                                                             </React.Fragment>
                                                         ))
                                                     }

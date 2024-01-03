@@ -5,7 +5,8 @@ import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { LoadingType, SettingDataType } from '@/src/types';
+import { ComparisonDataType, LoadingType, SettingDataType, WishlistDataType } from '@/src/types';
+import { useLocalStorage } from 'usehooks-ts';
 
 type SiteToolbarProps = {
     loading: LoadingType,
@@ -28,6 +29,9 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
             window.removeEventListener('scroll', () => { });
         }
     }, []);
+
+    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist",[]);
+    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison",[]);
     return (
         <React.Fragment>
             <CenterToolbarWrapper>
@@ -50,14 +54,14 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiHeartStraight />
-                                    <span className='amount'>0</span>
+                                    <span className='amount'>{wishlistStorage.length}</span>
                                 </div>
                                 <Link href='/wishlist'>{titleDictionary.wishlist}</Link>
                             </div>
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiScalesLight />
-                                    <span className='amount'>0</span>
+                                    <span className='amount'>{comparisonStorage.length}</span>
                                 </div>
                                 <Link href='/comparisons'>{titleDictionary.comparisons}</Link>
                             </div>

@@ -217,3 +217,19 @@ export type WeightDataType = {
     id: number,
     title: string,
 };
+
+export type BasketDataType = {
+    id: string | number,
+    user: string | number | null,
+    product: number,
+}
+export type WishlistDataType = {
+    id: string | number,
+    user: string | number | null,
+    product: number,
+}
+export type ComparisonDataType = {
+    id: string | number,
+    user: string | number | null,
+    product: number,
+}

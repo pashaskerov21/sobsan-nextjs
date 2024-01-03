@@ -10,9 +10,20 @@ class Menu {
         this.menuTranslateData = menuTranslateData;
     }
 
-    public getTranslate(id: number, activeLocale: LocaleType) {
+    public getTranslate(id: number, activeLocale: LocaleType, key: "title" | "url") {
         const activeTranslateData: MenuTranslateDataType | undefined = this.menuTranslateData.find((data) => data.menu_id === id && data.lang === activeLocale);
-        return activeTranslateData;
+        let translate = ""
+        if (activeTranslateData) {
+            switch (key) {
+                case "title":
+                    translate = activeTranslateData.title;
+                case "url":
+                    translate = `/${activeLocale}/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                default:
+                    translate = activeTranslateData.title;
+            }
+        }
+        return translate;
     }
     public getMainMenuData() {
         const mainMenuData: MenuDataType[] | [] = this.menuData.filter((data) => data.parent_id === 0);

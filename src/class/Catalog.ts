@@ -4,20 +4,29 @@ class Catalog {
     private catalogData: CatalogDataType[];
     private catalogTranslateData: CatalogTranslateDataType[];
 
-    constructor(catalogData: CatalogDataType[],catalogTranslateData: CatalogTranslateDataType[]){
+    constructor(catalogData: CatalogDataType[], catalogTranslateData: CatalogTranslateDataType[]) {
         this.catalogData = catalogData;
         this.catalogTranslateData = catalogTranslateData;
     }
 
-    public getTranslate(id: number, activeLocale: LocaleType){
+    public getTranslate(id: number, activeLocale: LocaleType, key: "title") {
         const activeTranslate: CatalogTranslateDataType | undefined = this.catalogTranslateData.find((data) => data.lang === activeLocale && data.catalog_id === id);
-        return activeTranslate
+        let translate = "";
+        if (activeTranslate) {
+            switch (key) {
+                case "title":
+                    translate = activeTranslate.title;
+                default:
+                    translate = activeTranslate.title;
+            }
+        }
+        return translate;
     }
-    public getColors(id: number, colorData: ColorDataType[]){
-        const colors:ColorDataType[] | [] = colorData.filter((data) => data.catalog_id === id);
+    public getColors(id: number, colorData: ColorDataType[]) {
+        const colors: ColorDataType[] | [] = colorData.filter((data) => data.catalog_id === id);
         return colors;
     }
-    public filterCatalogsByCategory(categoryID: number){
+    public filterCatalogsByCategory(categoryID: number) {
         const catalogs: CatalogDataType[] | [] = this.catalogData.filter((data) => data.category_id === categoryID);
         return catalogs;
     }

@@ -5,7 +5,6 @@ import React from 'react'
 import { ColorWrapper } from './style';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ColorTranslation } from '@/src/utils';
 import Skeleton from '../skeleton/Skeleton';
 
 type CatalogColorProps = {
@@ -77,12 +76,7 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                                 }
                                 <div className="info">
                                   <div className="name">
-                                    <ColorTranslation
-                                      activeColorData={maindata}
-                                      activeLocale={activeLocale}
-                                      colorData={colorData}
-                                      colorTranslateData={colorTranslateData}
-                                    />
+                                    {color.getTranslate(maindata.id, activeLocale, "title")}
                                   </div>
                                   <div className="code">{maindata.code}</div>
                                 </div>
@@ -104,12 +98,7 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                                   }
                                   <div className="info">
                                     <div className="name">
-                                      <ColorTranslation
-                                        activeColorData={altdata}
-                                        activeLocale={activeLocale}
-                                        colorData={colorData}
-                                        colorTranslateData={colorTranslateData}
-                                      />
+                                      {color.getTranslate(altdata.id, activeLocale, "title")}
                                     </div>
                                     <div className="code">{altdata.code}</div>
                                   </div>
@@ -131,12 +120,7 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                           }
                           <div className="info">
                             <div className="name">
-                              <ColorTranslation
-                                activeColorData={maindata}
-                                activeLocale={activeLocale}
-                                colorData={colorData}
-                                colorTranslateData={colorTranslateData}
-                              />
+                              {color.getTranslate(maindata.id, activeLocale, "title")}
                             </div>
                             <div className="code">{maindata.code}</div>
                           </div>

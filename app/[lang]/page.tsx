@@ -1,7 +1,7 @@
 import { getTranslate } from "@/get-translate";
 import { HomePageLayout } from "@/src/layout";
-import { BannerDataType, LocaleType, MenuDataType, MenuTranslateDataType, ProductBannerDataType, ProductBannerTranslateDataType } from "@/src/types";
-import { fetchBannerData, fetchMenuData, fetchMenuTranslateData, fetchProductBannerData, fetchProductBannerTranslateData } from "@/src/utils";
+import { BannerDataType, BrandDataType, BrandTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, ProductBannerDataType, ProductBannerTranslateDataType, ProductDataType, ProductTranslateDataType } from "@/src/types";
+import { fetchBannerData, fetchBrandData, fetchBrandTranslateData, fetchMenuData, fetchMenuTranslateData, fetchProductBannerData, fetchProductBannerTranslateData, fetchProductData, fetchProductTranslateData } from "@/src/utils";
 import React, { Suspense } from "react"
 
 const fetchData = async (): Promise<{
@@ -10,6 +10,10 @@ const fetchData = async (): Promise<{
   bannerData: BannerDataType[] | undefined;
   productBannerData: ProductBannerDataType[] | undefined;
   productBannerTranslateData: ProductBannerTranslateDataType[] | undefined,
+  productData: ProductDataType[] | undefined,
+  productTranslateData: ProductTranslateDataType[] | undefined,
+  brandData: BrandDataType[] | undefined,
+  brandTranslateData: BrandTranslateDataType[] | undefined
 }> => {
   try {
     const [
@@ -17,13 +21,21 @@ const fetchData = async (): Promise<{
       menuTranslateData,
       bannerData,
       productBannerData,
-      productBannerTranslateData
+      productBannerTranslateData,
+      productData,
+      productTranslateData,
+      brandData,
+      brandTranslateData,
     ] = await Promise.all([
       fetchMenuData(),
       fetchMenuTranslateData(),
       fetchBannerData(),
       fetchProductBannerData(),
       fetchProductBannerTranslateData(),
+      fetchProductData(),
+      fetchProductTranslateData(),
+      fetchBrandData(),
+      fetchBrandTranslateData(),
     ]);
 
     return {
@@ -32,6 +44,10 @@ const fetchData = async (): Promise<{
       bannerData,
       productBannerData,
       productBannerTranslateData,
+      productData,
+      productTranslateData,
+      brandData,
+      brandTranslateData,
     };
   } catch (error) {
     throw new Error('Failed to fetch data');
@@ -48,10 +64,15 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
       bannerData,
       productBannerData,
       productBannerTranslateData,
+      productData,
+      productTranslateData,
+      brandData,
+      brandTranslateData,
     } = await fetchData();
 
     const t = await getTranslate(lang);
     const generalDictionary = t.general;
+    const titleDictionary = t.title;
 
     if (
       menuData
@@ -59,6 +80,10 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
       && bannerData
       && productBannerData
       && productBannerTranslateData
+      && productData
+      && productTranslateData
+      && brandData
+      && brandTranslateData
     ) {
       return (
         <React.Fragment>
@@ -69,8 +94,12 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
             menuTranslateData={menuTranslateData}
             productBannerData={productBannerData}
             productBannerTranslateData={productBannerTranslateData}
+            productData={productData}
+            productTranslateData={productTranslateData}
+            brandData={brandData}
+            brandTranslateData={brandTranslateData}
             generalDictionary={generalDictionary}
-
+            titleDictionary={titleDictionary}
           />
         </React.Fragment>
       )

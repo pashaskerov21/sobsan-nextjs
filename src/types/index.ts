@@ -37,6 +37,9 @@ import {
     SettingDataType,
     SettingTranslateDataType,
     WeightDataType,
+    BasketDataType,
+    WishlistDataType,
+    ComparisonDataType,
 } from './data';
 
 import {
@@ -113,6 +116,9 @@ export type {
     SettingDataType,
     SettingTranslateDataType,
     WeightDataType,
+    BasketDataType,
+    WishlistDataType,
+    ComparisonDataType,
 
     RootLayoutProps,
     CatalogPageLayoutProps,

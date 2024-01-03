@@ -1,7 +1,7 @@
 'use client'
 import { Menu } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { BannerSection, ProductBannerSection } from '@/src/sections';
+import { BannerSection, PopularProductSection, ProductBannerSection } from '@/src/sections';
 import { HomePageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import React from 'react'
 import { useDispatch } from 'react-redux';
@@ -14,6 +14,11 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     generalDictionary,
     productBannerData,
     productBannerTranslateData,
+    productData,
+    productTranslateData,
+    brandData,
+    brandTranslateData,
+    titleDictionary,
 }) => {
 
     const [loading, setLoading] = React.useState<LoadingType>({
@@ -50,7 +55,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     }, [dispatch]);
     return (
         <React.Fragment>
-            <BannerSection
+            {/* <BannerSection
                 loading={loading} bannerData={bannerData} />
             <ProductBannerSection
                 activeLocale={activeLocale}
@@ -58,6 +63,16 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
                 loading={loading}
                 productBannerData={productBannerData}
                 productBannerTranslateData={productBannerTranslateData}
+            /> */}
+            <PopularProductSection
+                activeLocale={activeLocale}
+                generalDictionary={generalDictionary}
+                loading={loading}
+                productData={productData}
+                productTranslateData={productTranslateData}
+                brandData={brandData}
+                brandTranslateData={brandTranslateData}
+                titleDictionary={titleDictionary}
             />
         </React.Fragment>
     )
