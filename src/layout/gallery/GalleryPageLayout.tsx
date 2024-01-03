@@ -18,25 +18,25 @@ const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
   const [loading, setLoading] = React.useState<LoadingType>({
     standart: true,
     lazy: true,
-});
-React.useEffect(() => {
+  });
+  React.useEffect(() => {
     setTimeout(() => {
-        setLoading((prev) => {
-            return {
-                ...prev,
-                standart: false,
-            }
-        });
-    }, 1500);
+      setLoading((prev) => {
+        return {
+          ...prev,
+          standart: false,
+        }
+      });
+    }, 1000);
     setTimeout(() => {
-        setLoading((prev) => {
-            return {
-                ...prev,
-                lazy: false,
-            }
-        });
-    }, 3000);
-}, []);
+      setLoading((prev) => {
+        return {
+          ...prev,
+          lazy: false,
+        }
+      });
+    }, 2000);
+  }, []);
 
   const menu = new Menu(menuData, menuTranslateData);
   const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);

@@ -154,6 +154,7 @@ export type ProductDataType = {
     stock: number,
     new: boolean,
     offer: boolean,
+    popular: boolean,
     discount: number,
     catalog_id: number,
     brand_id: number,

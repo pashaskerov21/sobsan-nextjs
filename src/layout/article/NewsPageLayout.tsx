@@ -29,7 +29,7 @@ const NewsPageLayout: React.FC<NewsPageLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1500);
+        }, 1000);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -37,7 +37,7 @@ const NewsPageLayout: React.FC<NewsPageLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 3000);
+        }, 2000);
     }, []);
 
     const menu = new Menu(menuData, menuTranslateData);

@@ -56,7 +56,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1500);
+        }, 1000);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -64,7 +64,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 3000);
+        }, 2000);
     }, []);
 
     const [mounted, setMounted] = React.useState(false);

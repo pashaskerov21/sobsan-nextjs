@@ -28,7 +28,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1500);
+        }, 1000);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -36,7 +36,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 3000);
+        }, 2000);
     }, []);
 
     const path = '';

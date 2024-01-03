@@ -28,7 +28,7 @@ const ColorSystemPageLayout: React.FC<ColorSystemPageLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1500);
+        }, 1000);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -36,7 +36,7 @@ const ColorSystemPageLayout: React.FC<ColorSystemPageLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 3000);
+        }, 2000);
     }, []);
 
 
