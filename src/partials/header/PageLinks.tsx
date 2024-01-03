@@ -27,7 +27,7 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                             <React.Fragment key={maindata.id}>
                                 <div className="link-item">
                                     <div className="main-row">
-                                        <Link href={menu.getTranslate(maindata.id, activeLocale, "url")}>
+                                        <Link href={`/${activeLocale}/${maindata.path}`}>
                                             {menu.getTranslate(maindata.id, activeLocale, "title")}
                                         </Link>
                                         {
@@ -45,7 +45,7 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                                     {
                                                         menu.getAltMenuData(maindata.id).map((altdata) => (
                                                             <React.Fragment key={altdata.id}>
-                                                                <Link href={menu.getTranslate(altdata.id, activeLocale, "url")}>
+                                                                <Link href={`/${activeLocale}/${altdata.path}`}>
                                                                     {menu.getTranslate(altdata.id, activeLocale, "title")}
                                                                 </Link>
                                                             </React.Fragment>
