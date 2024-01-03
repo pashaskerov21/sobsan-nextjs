@@ -15,9 +15,9 @@ class Color {
         if (activeTranslateData) {
             switch (key) {
                 case "title":
-                    translate = activeTranslateData.title;
+                    return translate = activeTranslateData.title;
                 default:
-                    translate = activeTranslateData.title;
+                    return translate = "";
             }
         }
         return translate;

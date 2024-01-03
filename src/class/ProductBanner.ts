@@ -13,13 +13,13 @@ class ProductBanner {
         if (activeTranslateData) {
             switch (key) {
                 case "title":
-                    translate = activeTranslateData.title;
+                    return translate = activeTranslateData.title;
                 case "text":
-                    translate = activeTranslateData.text;
+                    return translate = activeTranslateData.text;
                 case "url":
-                    translate = activeTranslateData.url;
+                    return translate = activeTranslateData.url;
                 default:
-                    translate = activeTranslateData.title;
+                    return translate = "";
             }
         }
         return translate;

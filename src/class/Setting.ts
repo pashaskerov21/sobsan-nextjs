@@ -13,15 +13,15 @@ class Setting {
         if (activeTranslateData) {
             switch (key) {
                 case "title":
-                    translate = activeTranslateData.title;
+                    return translate = activeTranslateData.title;
                 case "description":
-                    translate = activeTranslateData.description;
+                    return translate = activeTranslateData.description;
                 case "address":
-                    translate = activeTranslateData.address;
+                    return translate = activeTranslateData.address;
                 case "copyright":
-                    translate = activeTranslateData.copyright;
+                    return translate = activeTranslateData.copyright;
                 default:
-                    translate = activeTranslateData.title;
+                    return translate = "";
             }
         }
         return translate;

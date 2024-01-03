@@ -14,13 +14,13 @@ class Product {
         if (activeTranslateData) {
             switch (key) {
                 case "title":
-                    translate = activeTranslateData.title;
+                    return translate = activeTranslateData.title;
                 case "description":
-                    translate = activeTranslateData.description;
+                    return translate = activeTranslateData.description;
                 case "url": 
-                    translate = `/${activeLocale}/products/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                    return translate = `/${activeLocale}/products/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
                 default:
-                    translate = activeTranslateData.title;
+                    return translate = "";
             }
         }
         return translate;

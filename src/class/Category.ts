@@ -15,11 +15,11 @@ class Category {
         if (activeTranslateData) {
             switch (key) {
                 case "title":
-                    translate = activeTranslateData.title;
+                    return translate = activeTranslateData.title;
                 case "url":
-                    translate = `/${activeLocale}/categories/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                    return translate = `/${activeLocale}/categories/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
                 default:
-                    translate = activeTranslateData.title;
+                    return translate = "";
             }
         }
         return translate;

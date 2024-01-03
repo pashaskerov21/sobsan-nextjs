@@ -13,11 +13,11 @@ class Filial {
         if (activeTranslateData) {
             switch (key) {
                 case "title":
-                    translate = activeTranslateData.title;
+                    return translate = activeTranslateData.title;
                 case "address":
-                    translate = activeTranslateData.address;
+                    return translate = activeTranslateData.address;
                 default:
-                    translate = activeTranslateData.title;
+                    return translate = "";
             }
         }
         return translate;

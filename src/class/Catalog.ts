@@ -15,9 +15,9 @@ class Catalog {
         if (activeTranslate) {
             switch (key) {
                 case "title":
-                    translate = activeTranslate.title;
+                    return translate = activeTranslate.title;
                 default:
-                    translate = activeTranslate.title;
+                    return translate = "";
             }
         }
         return translate;
