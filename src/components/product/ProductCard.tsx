@@ -74,13 +74,19 @@ const ProductCard: React.FC<CardProps> = ({
         if (isBasket) {
             const filteredData = basketStorage.filter((data) => data.product !== activeProductData.id);
             setBasketStorage([...filteredData]);
+            setProductState((prev) => {
+                return {
+                    ...prev,
+                    basket: false,
+                }
+            });
         } else {
             setProductState((prev) => {
                 return {
                     ...prev,
                     basket: true,
                 }
-            })
+            });
             setTimeout(() => {
                 router.push(productURL);
             }, 1500);

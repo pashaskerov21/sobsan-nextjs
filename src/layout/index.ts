@@ -9,6 +9,7 @@ import PaymentDeliveryPageLayout from "./article/PaymentDeliveryPageLayout";
 import WarrantyConditionsPageLayout from "./article/WarrantyConditionsPageLayout";
 import ContactPageLayout from "./contact/ContactPageLayout";
 import HomePageLayout from "./home/HomePageLayout";
+import CategoryPageLayout from "./category/CategoryPageLayout";
 
 export {
     RootLayout,
@@ -22,4 +23,5 @@ export {
     WarrantyConditionsPageLayout,
     ContactPageLayout,
     HomePageLayout,
+    CategoryPageLayout
 }

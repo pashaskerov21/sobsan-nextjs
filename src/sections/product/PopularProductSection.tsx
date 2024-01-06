@@ -42,17 +42,17 @@ const PopularProductSection: React.FC<SectionProps> = ({
             dynamicMainBullets: 8,
           }}
           breakpoints={{
-            576: {
+            768: {
               slidesPerView: 2,
               spaceBetween: 20,
               slidesPerGroup: 2,
             },
-            768: {
+            992: {
               slidesPerView: 3,
               spaceBetween: 20,
               slidesPerGroup: 3,
             },
-            992: {
+            1200: {
               slidesPerView: 4,
               spaceBetween: 20,
               slidesPerGroup: 4,

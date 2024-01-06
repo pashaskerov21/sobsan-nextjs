@@ -1,4 +1,5 @@
-import { CategoriesDataType, CategoriesTranslateDataType, LocaleType } from "../types";
+import { i18n } from "@/i18n-config";
+import { CategoriesDataType, CategoriesTranslateDataType, LocaleStateType, LocaleType, PageTitleDataType } from "../types";
 
 class Category {
     private categoryData: CategoriesDataType[];
@@ -17,7 +18,7 @@ class Category {
                 case "title":
                     return translate = activeTranslateData.title;
                 case "url":
-                    return translate = `/${activeLocale}/categories/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                    return translate = `/${activeLocale}/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
                 default:
                     return translate = "";
             }
@@ -31,6 +32,60 @@ class Category {
     public getAltCategoryData(id: number) {
         const altCategoryData: CategoriesDataType[] | [] = this.categoryData.filter((data) => data.parent_id === id);
         return altCategoryData;
+    }
+    public getCategoryBySlug(slug: string, activeLocale: LocaleType) {
+        const activeTranslateData: CategoriesTranslateDataType | undefined = this.categoryTranslateData.find((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase() === decodeURIComponent(slug.trim().toLocaleLowerCase()));
+        let activeData: CategoriesDataType | undefined;
+        if (activeTranslateData) {
+            activeData = this.categoryData.find((data) => data.id === activeTranslateData.category_id);
+        }
+        return activeData;
+    }
+    public getLocaleSlugs(id: number) {
+        let localeSlugs: LocaleStateType[] = i18n.locales.map((locale) => {
+            return {
+                locale: locale,
+                slug: ""
+            }
+        });
+
+        const activeTranslateData: CategoriesTranslateDataType[] | [] = this.categoryTranslateData.filter((data) => data.category_id === id);
+        if (activeTranslateData.length === i18n.locales.length) {
+            localeSlugs = activeTranslateData.map((data) => {
+                return {
+                    locale: data.lang,
+                    slug: encodeURIComponent(data.title.toLocaleLowerCase()),
+                }
+            })
+        };
+        return localeSlugs;
+    }
+    public getPageTitleData(id: number, activeLocale: LocaleType) {
+        let pageData: PageTitleDataType = {
+            title: "", 
+            breadcrumbs: [
+                {
+                    id: 1,
+                    path: `/${activeLocale}`,
+                    name: '',
+                }
+            ]
+        }
+        const activeTranslateData:CategoriesTranslateDataType | undefined = this.categoryTranslateData.find((data) => data.category_id === id && data.lang === activeLocale);
+        if(activeTranslateData){
+            pageData = {
+                title: activeTranslateData.title,
+                breadcrumbs: [
+                    {
+                        id: 1,
+                        path: encodeURIComponent(activeTranslateData.title.toLocaleLowerCase()),
+                        name: activeTranslateData.title,
+                    }
+                ]
+            }
+        }
+
+        return pageData;
     }
 }
 

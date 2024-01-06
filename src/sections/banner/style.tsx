@@ -69,6 +69,9 @@ export const ProductBannerWrapper = styled.div`
                     text-align: center;
                     padding: 0 20px;
                     min-height: 250px;
+                    @media (width >= 992px){
+                        min-height: 150px;
+                    }
                 }
                 .order-btn{
                     ${row_center};
@@ -113,6 +116,10 @@ export const ProductBannerWrapper = styled.div`
             text-align: center;
             a{
                 font-weight: 600;
+                font-size: 14px;
+                @media (width >= 768px){
+                    font-size: 16px;
+                }
             }
             @media (width >= 992px){
                 ${row_justify_start};
@@ -123,7 +130,7 @@ export const ProductBannerWrapper = styled.div`
         &_right{
             ${column_center};
             gap: 10px;
-            @media (width >= 992px){
+            @media (width >= 576px){
                 ${row_justify_end};
                 gap: 20px;
 

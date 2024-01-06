@@ -6,10 +6,15 @@ import { Category } from '@/src/class';
 import { IoChevronForwardOutline } from "react-icons/io5";
 import { Skeleton } from '@/src/components';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Categories: React.FC<CategoryProps> = ({ loading, activeLocale, categoryData, categoryTranslateData }) => {
   const category = new Category(categoryData, categoryTranslateData);
   const mainCategoryData: CategoriesDataType[] | [] = category.getMainCategoryData();
+  const pathName = usePathname();
+  React.useEffect(() => {
+    setActiveCategories([]);
+  }, [pathName])
 
 
   const [activeCategories, setActiveCategories] = React.useState<number[]>([]);

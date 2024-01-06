@@ -60,7 +60,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
               {
                 loading.standart ? (
                   <React.Fragment>
-                    <Skeleton width='750px' height='60px'/>
+                    <Skeleton width='100%' max_width='750px' height='60px'/>
                   </React.Fragment>
                 ) : (
                   <React.Fragment>

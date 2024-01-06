@@ -6,6 +6,7 @@ import { HeaderProps, HeaderStateType } from '@/src/types';
 import { HeaderWrapper } from './style';
 import { Container } from 'react-bootstrap';
 import { Skeleton } from '@/src/components';
+import { usePathname } from 'next/navigation';
 
 const Header: React.FC<HeaderProps> = ({
   loading,
@@ -20,11 +21,19 @@ const Header: React.FC<HeaderProps> = ({
   theme,
   toggleTheme,
 }) => {
+  const pathName = usePathname();
   const [headerState, setHeaderState] = React.useState<HeaderStateType>({
     fixed: false,
     menuShow: false,
     searchShow: false,
   });
+  React.useEffect(() => {
+    setHeaderState({
+      fixed: false,
+      menuShow: false,
+      searchShow: false,
+    })
+  }, [pathName])
   // header fixed
   React.useEffect(() => {
     window.addEventListener('scroll', function () {
