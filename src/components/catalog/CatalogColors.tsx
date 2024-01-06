@@ -44,8 +44,8 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
     return (
       <React.Fragment>
         <div className="color-item">
-          <Skeleton width='200px' height='100px' margin='0 0 10px 0' />
-          <Skeleton width='100px' height='20px' margin='0 auto 25px auto' />
+          <Skeleton width='100%' max_width='200px' height='100px' margin='0 0 10px 0' />
+          <Skeleton width='100%' max_width='100px' height='20px' margin='0 auto 25px auto' />
         </div>
       </React.Fragment>
     )
@@ -110,21 +110,27 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                       </React.Fragment>
                     ) : (
                       <React.Fragment>
-                        <div className="color-item">
-                          {
-                            maindata.image ? (
-                              <Link href={maindata.image} data-fancybox={`catalog-${activeCatalogID}`} className='image'>
-                                <Image src={maindata.image} width={500} height={500} alt='' priority={true} />
-                              </Link>
-                            ) : null
-                          }
-                          <div className="info">
-                            <div className="name">
-                              {color.getTranslate(maindata.id, activeLocale, "title")}
-                            </div>
-                            <div className="code">{maindata.code}</div>
-                          </div>
-                        </div>
+                        {
+                          loading.lazy ? <ColorCardSkeleton /> : (
+                            <React.Fragment>
+                              <div className="color-item">
+                                {
+                                  maindata.image ? (
+                                    <Link href={maindata.image} data-fancybox={`catalog-${activeCatalogID}`} className='image'>
+                                      <Image src={maindata.image} width={500} height={500} alt='' priority={true} />
+                                    </Link>
+                                  ) : null
+                                }
+                                <div className="info">
+                                  <div className="name">
+                                    {color.getTranslate(maindata.id, activeLocale, "title")}
+                                  </div>
+                                  <div className="code">{maindata.code}</div>
+                                </div>
+                              </div>
+                            </React.Fragment>
+                          )
+                        }
                       </React.Fragment>
                     )
                   }

@@ -5,6 +5,7 @@ import { SkeletonElement } from './style'
 type SkeletonProps = {
     width?: string,
     max_width?: string,
+    min_width?:string,
     width_sm?: string,
     width_md?: string,
     width_lg?: string,
@@ -30,6 +31,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
     height_xl,
     height_xxl,
     max_width,
+    min_width,
     width,
     width_sm,
     width_md,
@@ -52,6 +54,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
                 $height_xl={height_xl}
                 $height_xxl={height_xxl}
                 $max_width={max_width}
+                $min_width={min_width}
                 $width={width}
                 $width_sm={width_sm}
                 $width_md={width_md}

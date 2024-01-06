@@ -47,7 +47,7 @@ const CatalogSection: React.FC<SectionProps> = ({
                     {
                       loading.standart ? (
                         <React.Fragment>
-                          <Skeleton width='150px' height='42px' radius='10px' />
+                          <Skeleton min_width='120px' height='42px' radius='10px' />
                         </React.Fragment>
                       ) : (
                         <React.Fragment>
