@@ -51,8 +51,8 @@ const Footer: React.FC<FooterProps> = ({
                               </React.Fragment>
                             ) : (
                               <React.Fragment>
-                                <Link href={`/${activeLocale}/${maindata.path}`}>
-                                  {menu.getTranslate(maindata.id, activeLocale, "title")}
+                                <Link href={menu.getTranslate(maindata, activeLocale, "url")}>
+                                  {menu.getTranslate(maindata, activeLocale, "title")}
                                 </Link>
                               </React.Fragment>
                             )
@@ -68,8 +68,8 @@ const Footer: React.FC<FooterProps> = ({
                                       </React.Fragment>
                                     ) : (
                                       <React.Fragment>
-                                        <Link href={`/${activeLocale}/${altdata.path}`}>
-                                          {menu.getTranslate(altdata.id, activeLocale, "title")}
+                                        <Link href={menu.getTranslate(altdata, activeLocale, "title")}>
+                                          {menu.getTranslate(altdata, activeLocale, "title")}
                                         </Link>
                                       </React.Fragment>
                                     )
