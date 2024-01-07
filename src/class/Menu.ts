@@ -10,15 +10,24 @@ class Menu {
         this.menuTranslateData = menuTranslateData;
     }
 
-    public getTranslate(id: number, activeLocale: LocaleType, key: "title" | "url") {
-        const activeTranslateData: MenuTranslateDataType | undefined = this.menuTranslateData.find((data) => data.menu_id === id && data.lang === activeLocale);
+    public getTranslate(activeData: MenuDataType, activeLocale: LocaleType, key: "title" | "url") {
+        const activeTranslateData: MenuTranslateDataType | undefined = this.menuTranslateData.find((data) => data.menu_id === activeData.id && data.lang === activeLocale);
         let translate = ""
         if (activeTranslateData) {
             switch (key) {
                 case "title":
                     return translate = activeTranslateData.title;
                 case "url":
-                    return translate = `/${activeLocale}/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                    if(activeData.parent_id === 0){
+                        return translate = `/${activeLocale}/${activeData.path}`;
+                    }else{
+                        const parentData: MenuDataType | undefined = this.menuData.find((data) => data.id === activeData.parent_id);
+                        if(parentData){
+                            return translate = `/${activeLocale}/${parentData.path}/${activeData.path}`;
+                        }else{
+                            return translate = `/${activeLocale}/${activeData.path}`;
+                        }
+                    }
                 default:
                     return translate = "";
             }

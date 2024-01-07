@@ -32,7 +32,11 @@ const Header: React.FC<HeaderProps> = ({
       fixed: false,
       menuShow: false,
       searchShow: false,
-    })
+    });
+    const body = document.querySelector('body')
+    if (body) {
+      body.style.overflow = headerState.menuShow ? "auto" : "hidden";
+    }
   }, [pathName])
   // header fixed
   React.useEffect(() => {

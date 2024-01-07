@@ -27,8 +27,8 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                             <React.Fragment key={maindata.id}>
                                 <div className="link-item">
                                     <div className="main-row">
-                                        <Link href={`/${activeLocale}/${maindata.path}`}>
-                                            {menu.getTranslate(maindata.id, activeLocale, "title")}
+                                        <Link href={menu.getTranslate(maindata, activeLocale, "url")}>
+                                            {menu.getTranslate(maindata, activeLocale, "title")}
                                         </Link>
                                         {
                                             menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
@@ -45,8 +45,8 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
                                                     {
                                                         menu.getAltMenuData(maindata.id).map((altdata) => (
                                                             <React.Fragment key={altdata.id}>
-                                                                <Link href={`/${activeLocale}/${altdata.path}`}>
-                                                                    {menu.getTranslate(altdata.id, activeLocale, "title")}
+                                                                <Link href={menu.getTranslate(altdata, activeLocale, "url")}>
+                                                                    {menu.getTranslate(altdata, activeLocale, "title")}
                                                                 </Link>
                                                             </React.Fragment>
                                                         ))
