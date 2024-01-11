@@ -40,6 +40,7 @@ export const ProductGeneralContainer = styled.div`
         .right-top{
             width: 100%;
             ${row_between};
+            gap: 40px;
             .product-sort-filters{
                 ${row_justify_start};
                 gap: 15px;
