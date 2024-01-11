@@ -23,8 +23,8 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 ::-webkit-scrollbar{
-    width: 10px; 
-    height: 10px;
+    width: 6px; 
+    height: 6px;
 }
 ::-webkit-scrollbar-thumb{
     background-color: ${props => props.theme.color_1};

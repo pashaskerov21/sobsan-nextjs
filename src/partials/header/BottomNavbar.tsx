@@ -8,9 +8,8 @@ import { Container } from '@/src/styles';
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';
-import Categories from './Categories';
 import PageLinks from './PageLinks';
-import { LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/components';
+import { Categories, LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/components';
 import Search from './Search';
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
@@ -57,7 +56,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
               </div>
             </div>
             <div className="inner-center">
-              {
+              {/* {
                 loading.standart ? (
                   <React.Fragment>
                     <Skeleton width='100%' max_width='750px' height='60px'/>
@@ -72,7 +71,14 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                     />
                   </React.Fragment>
                 )
-              }
+              } */}
+              <Categories
+                loading={loading}
+                activeLocale={activeLocale}
+                categoryData={categoryData}
+                categoryTranslateData={categoryTranslateData}
+                parentComponent="header"
+              />
               <PageLinks
                 className='page-links d-xl-none'
                 activeLocale={activeLocale}

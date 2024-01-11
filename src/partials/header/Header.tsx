@@ -4,8 +4,6 @@ import TopNavbar from './TopNavbar';
 import BottomNavbar from './BottomNavbar';
 import { HeaderProps, HeaderStateType } from '@/src/types';
 import { HeaderWrapper } from './style';
-import { Container } from 'react-bootstrap';
-import { Skeleton } from '@/src/components';
 import { usePathname } from 'next/navigation';
 
 const Header: React.FC<HeaderProps> = ({
@@ -22,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   toggleTheme,
 }) => {
   const pathName = usePathname();
-  const body = document.querySelector('body')
+  const body = document.querySelector('body');
   const [headerState, setHeaderState] = React.useState<HeaderStateType>({ fixed: false, menuShow: false, searchShow: false, });
   React.useEffect(() => {
     window.addEventListener('scroll', function () {

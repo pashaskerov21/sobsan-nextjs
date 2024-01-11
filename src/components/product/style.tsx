@@ -1,4 +1,4 @@
-import { column_center, row_between, row_center, row_justify_start } from "@/src/styles";
+import { column_center, column_justify_start, row_between, row_center, row_justify_start } from "@/src/styles";
 import styled from "styled-components";
 
 export const ProductCardWrapper = styled.div`
@@ -187,6 +187,69 @@ export const ProductCardWrapper = styled.div`
                     }
                 }
             }
+        }
+    }
+`;
+
+
+
+export const LeftFilterWrapper = styled.div`
+    width: 100%;
+    max-width: 400px;
+    background-color: ${props => props.theme.bg_color_1};
+    height: 100vh;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 350;
+    ${column_justify_start};
+    gap: 20px;
+    padding: 20px 15px;
+    &.active{
+        left: 0;
+        opacity: 1;
+    }
+    .lfw-header{
+        width: 100%;
+        ${row_between};
+        
+        .lfwh-title{
+            font-weight: 600;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+        .close-button{
+            min-width: 30px;
+            min-height: 30px;
+            border: 1px solid ${props => props.theme.text_color_7};
+            border-radius: 50%;
+            ${row_center};
+            color: ${props => props.theme.text_color_7};
+            font-size: 16px;
+            cursor: pointer;
+            &:hover{
+                background-color: ${props => props.theme.text_color_7};
+                color: ${props => props.theme.text_color_8};
+            }
+        }
+    }
+    .lfw-body{
+        width: 100%;
+    }
+    @media (width >= 992px){
+        position: relative;
+        left: 0;
+        opacity: 1;
+        padding: 0;
+        max-width: 320px;
+        height: auto;
+        overflow: visible;
+        z-index: 1;
+        .lfw-header{
+            display: none;
         }
     }
 `;

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Category } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
+import { ProductsSection } from '@/src/sections';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -59,6 +60,14 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
+                titleDictionary={titleDictionary}
+            />
+            <ProductsSection
+                loading={loading}
+                activeLocale={activeLocale}
+                categoryData={categoryData}
+                categoryTranslateData={categoryTranslateData}
+                activeCategoryData={activeCategoryData}
                 titleDictionary={titleDictionary}
             />
         </React.Fragment>
