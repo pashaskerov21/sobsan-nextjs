@@ -38,6 +38,14 @@
         "add_basket": "Səbətə at",
         "comparison": "Müqayisə",
         "stock": "Anbarda",
-        "pieces": "ədəd"
+        "pieces": "ədəd",
+        "filters": "Filterlər",
+        "price": "Qiymət",
+        "brand": "Brend",
+        "confirm": "Təsdiqlə",
+        "reset": "Sıfırla",
+        "by_price": "Qiymətinə görə",
+        "by_name": "Adına görə",
+        "by_popularity": "Populyarlığına görə"
     }
 }

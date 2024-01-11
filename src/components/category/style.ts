@@ -93,8 +93,8 @@ export const CategoryWrapper = styled.div<CategoryWrapperProps>`
     `};
     ${props => props.$parentComponent === "filters" && css`
         @media (width >= 992px){
-            border-left: 1px solid ${props => props.theme.border_color_1};
-            border-right: 1px solid ${props => props.theme.border_color_1};
+            border: 1px solid ${props => props.theme.border_color_1};
+            border-bottom: none;
             .category-item{
                 position: relative;
                 .main-row{

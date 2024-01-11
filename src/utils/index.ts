@@ -1,6 +1,7 @@
 import {
     fetchArticleData,
     fetchAttributeGroupData,
+    fetchAttributeData,
     fetchBannerData,
     fetchBrandData,
     fetchCatalogData,
@@ -26,6 +27,7 @@ import {
 import {
     fetchArticleTranslateData,
     fetchAttributeGroupTranslateData,
+    fetchAttributeTranslateData,
     fetchBrandTranslateData,
     fetchCatalogTranslateData,
     fetchCategoryTranslateData,
@@ -47,6 +49,7 @@ import {
 export {
     fetchArticleData,
     fetchAttributeGroupData,
+    fetchAttributeData,
     fetchBannerData,
     fetchBrandData,
     fetchCatalogData,
@@ -70,6 +73,7 @@ export {
 
     fetchArticleTranslateData,
     fetchAttributeGroupTranslateData,
+    fetchAttributeTranslateData,
     fetchBrandTranslateData,
     fetchCatalogTranslateData,
     fetchCategoryTranslateData,

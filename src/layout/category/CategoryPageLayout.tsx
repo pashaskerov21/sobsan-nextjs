@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { Category } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
@@ -12,15 +12,29 @@ type LayoutProps = {
     activeCategoryData: CategoriesDataType,
     categoryData: CategoriesDataType[],
     categoryTranslateData: CategoriesTranslateDataType[],
+    brandData: BrandDataType[],
+    brandTranslateData: BrandTranslateDataType[],
+    attributeGroupData: AttributeGroupDataType[],
+    attributeGroupTranslateData: AttributeGroupTranslateDataType[],
+    attributeData: AttributeDataType[],
+    attributeTranslateData: AttributeTranslateDataType[],
     titleDictionary: { [key: string]: string },
+    generalDictionary: { [key: string]: string },
 }
 
 const CategoryPageLayout: React.FC<LayoutProps> = ({
     activeCategoryData,
     activeLocale,
+    attributeData,
+    attributeGroupData,
+    attributeGroupTranslateData,
+    attributeTranslateData,
+    brandData,
+    brandTranslateData,
     categoryData,
     categoryTranslateData,
     titleDictionary,
+    generalDictionary,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
         standart: true,
@@ -68,7 +82,14 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                 categoryData={categoryData}
                 categoryTranslateData={categoryTranslateData}
                 activeCategoryData={activeCategoryData}
+                brandData={brandData}
+                brandTranslateData={brandTranslateData}
+                attributeData={attributeData}
+                attributeGroupData={attributeGroupData}
+                attributeGroupTranslateData={attributeGroupTranslateData}
+                attributeTranslateData={attributeTranslateData}
                 titleDictionary={titleDictionary}
+                generalDictionary={generalDictionary}
             />
         </React.Fragment>
     )

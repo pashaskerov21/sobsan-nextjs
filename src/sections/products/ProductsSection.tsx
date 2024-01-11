@@ -3,9 +3,10 @@ import React from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
 import { Container, Section } from '@/src/styles'
-import { CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import { CategoryCoverImage, ProductGeneralContainer } from './style';
 import { FaFilter } from "react-icons/fa";
+import { FaList, FaTableCellsLarge } from "react-icons/fa6";
 
 type SectionProps = {
     loading: LoadingType,
@@ -13,19 +14,34 @@ type SectionProps = {
     activeCategoryData?: CategoriesDataType,
     categoryData: CategoriesDataType[],
     categoryTranslateData: CategoriesTranslateDataType[],
+    brandData: BrandDataType[],
+    brandTranslateData: BrandTranslateDataType[],
+    attributeGroupData: AttributeGroupDataType[],
+    attributeGroupTranslateData: AttributeGroupTranslateDataType[],
+    attributeData: AttributeDataType[],
+    attributeTranslateData: AttributeTranslateDataType[],
     titleDictionary: { [key: string]: string },
+    generalDictionary: { [key: string]: string },
 }
 
 const ProductsSection: React.FC<SectionProps> = ({
     activeLocale,
+    attributeData,
+    attributeGroupData,
+    attributeGroupTranslateData,
+    attributeTranslateData,
+    brandData,
+    brandTranslateData,
     categoryData,
     categoryTranslateData,
     loading,
     titleDictionary,
     activeCategoryData,
+    generalDictionary,
 }) => {
     const body = document.querySelector('body');
     const [filterShow, setFilterShow] = React.useState<boolean>(false);
+    const [productsLayout, setProductsLayout] = React.useState<"grid" | "list">('grid');
     const openFilters = React.useCallback(() => {
         if (window.innerWidth < 1200) {
             setFilterShow(true);
@@ -42,6 +58,12 @@ const ProductsSection: React.FC<SectionProps> = ({
             }
         }
     }, [filterShow]);
+    const changeProductLayout = React.useCallback((value: 'list' | 'grid') => {
+        setProductsLayout(value);
+    }, [productsLayout])
+
+
+
     return (
         <Section $py={20}>
             <Container>
@@ -74,14 +96,38 @@ const ProductsSection: React.FC<SectionProps> = ({
                         categoryData={categoryData}
                         categoryTranslateData={categoryTranslateData}
                         loading={loading}
-                        titleDictionary={titleDictionary}
                         activeCategoryData={activeCategoryData}
+                        brandData={brandData}
+                        brandTranslateData={brandTranslateData}
+                        attributeData={attributeData}
+                        attributeGroupData={attributeGroupData}
+                        attributeGroupTranslateData={attributeGroupTranslateData}
+                        attributeTranslateData={attributeTranslateData}
                         filterShow={filterShow}
                         closeFilters={closeFilters}
+                        titleDictionary={titleDictionary}
+                        generalDictionary={generalDictionary}
                     />
                     <div className="container-right">
                         <div className="right-top">
-                            <ProductSortFilters />
+                            <ProductSortFilters
+                                generalDictionary={generalDictionary}
+                            />
+                            <div className="layout-buttons">
+                                {
+                                    loading.standart ? (
+                                        <React.Fragment>
+                                            <Skeleton width='36px' height='36px' radius='5px' />
+                                            <Skeleton width='36px' height='36px' radius='5px' />
+                                        </React.Fragment>
+                                    ) : (
+                                        <React.Fragment>
+                                            <div className={`layout-button ${productsLayout === 'list' ? 'active' : ''}`} onClick={() => changeProductLayout('list')}><FaList /></div>
+                                            <div className={`layout-button ${productsLayout === 'grid' ? 'active' : ''}`} onClick={() => changeProductLayout('grid')}><FaTableCellsLarge /></div>
+                                        </React.Fragment>
+                                    )
+                                }
+                            </div>
                         </div>
                         <ProductGrid />
                         <ProductPagination />

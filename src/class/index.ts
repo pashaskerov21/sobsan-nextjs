@@ -7,6 +7,8 @@ import Color from "./Color";
 import ProductBanner from "./ProductBanner";
 import Product from "./Product";
 import Brand from "./Brand";
+import Attribute from "./Attribute";
+import AttributeGroup from "./AttributeGroup";
 
 export {
     Setting,
@@ -18,4 +20,6 @@ export {
     ProductBanner,
     Product,
     Brand,
+    Attribute,
+    AttributeGroup,
 }

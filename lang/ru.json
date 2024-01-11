@@ -38,6 +38,14 @@
         "add_basket": "Добавить в корзину",
         "comparison": "Сравнение",
         "stock": "Склад",
-        "pieces": "шт."
+        "pieces": "шт.",
+        "filters": "Фильтры",
+        "price": "Цена",
+        "brand": "Бренд",
+        "confirm": "Подтверждать",
+        "reset": "Сброс",
+        "by_price": "По цене",
+        "by_name": "По имени",
+        "by_popularity": "По популярности"
     }
 }

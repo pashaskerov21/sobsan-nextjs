@@ -38,6 +38,14 @@
         "add_basket": "Add basket",
         "comparison": "Comparison",
         "stock": "Stock",
-        "pieces": "pieces"
+        "pieces": "pieces",
+        "filters": "Filters",
+        "price": "Price",
+        "brand": "Brand",
+        "confirm": "Confirm",
+        "reset": "Reset",
+        "by_price": "By price",
+        "by_name": "By name",
+        "by_popularity": "By popularity"
     }
 }

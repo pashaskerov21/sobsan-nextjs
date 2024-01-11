@@ -12,6 +12,13 @@ export const fetchAttributeGroupData = async () => {
     }
     return res.json()
 }
+export const fetchAttributeData = async () => {
+    const res = await fetch(`${process.env.BASE_URL}/api/main/attributes`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return res.json()
+}
 export const fetchBannerData = async () => {
     const res = await fetch(`${process.env.BASE_URL}/api/main/banners`);
     if (!res.ok) {

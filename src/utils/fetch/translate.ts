@@ -12,6 +12,13 @@ export const fetchAttributeGroupTranslateData = async () => {
     }
     return res.json()
 }
+export const fetchAttributeTranslateData = async () => {
+    const res = await fetch(`${process.env.BASE_URL}/api/translate/attributes`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return res.json()
+}
 export const fetchBrandTranslateData = async () => {
     const res = await fetch(`${process.env.BASE_URL}/api/translate/brands`);
     if (!res.ok) {

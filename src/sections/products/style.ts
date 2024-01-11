@@ -1,4 +1,4 @@
-import { column_center, row_between, row_center } from "@/src/styles";
+import { column_center, column_justify_start, row_align_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles";
 import { styled } from "styled-components";
 
 export const CategoryCoverImage = styled.div`
@@ -32,5 +32,43 @@ export const ProductGeneralContainer = styled.div`
         gap: 10px;
         border-radius: 10px;
         cursor: pointer;
+    }
+    .container-right{
+        width: 100%;
+        ${column_justify_start};
+        gap: 30px;
+        .right-top{
+            width: 100%;
+            ${row_between};
+            .product-sort-filters{
+                ${row_justify_start};
+                gap: 15px;
+                flex-wrap: wrap;
+                .sort-filter-button{
+                    ${row_justify_start};
+                    font-size: 14px;
+                    gap: 0px;
+                    svg{
+                        font-size: 16px;
+                        color: ${props => props.theme.color_1};
+                    }
+                }
+            }
+            .layout-buttons{
+                ${row_justify_end};
+                gap: 10px;
+                .layout-button{
+                    ${row_center};
+                    padding: 10px;
+                    background-color: ${props => props.theme.bg_color_9};
+                    border-radius: 5px;
+                    cursor: pointer;
+                    &.active{
+                        background-color: ${props => props.theme.color_1};
+                        color: #fff;
+                    }
+                }
+            }
+        }
     }
 `;

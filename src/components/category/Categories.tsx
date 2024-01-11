@@ -95,7 +95,7 @@ const Categories: React.FC<CategoriesProps> = ({
     return data.map((mainData: CategoriesDataType) => (
       <React.Fragment key={mainData.id}>
         {
-          loading.lazy ? (
+          loading.standart ? (
             <Skeleton width='100%' height='38px' margin='0 0 2px 0'/>
           ) : (
             <div className={`category-item`} onMouseMove={() => handleCategoryItemMouseMove(mainData.id)} onMouseLeave={() => handleCategoryMouseLeave()}>

@@ -1,8 +1,8 @@
 import { getTranslate } from '@/get-translate';
 import { Category } from '@/src/class';
 import { CategoryPageLayout } from '@/src/layout';
-import { BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types'
-import { fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
 import { redirect } from 'next/navigation';
 import React from 'react'
 
@@ -12,7 +12,11 @@ const fetchData = async (): Promise<{
     productData: ProductDataType[] | undefined,
     productTranslateData: ProductTranslateDataType[] | undefined,
     brandData: BrandDataType[] | undefined,
-    brandTranslateData: BrandTranslateDataType[] | undefined
+    brandTranslateData: BrandTranslateDataType[] | undefined,
+    attributeGroupData: AttributeGroupDataType[] | undefined,
+    attributeGroupTranslateData: AttributeGroupTranslateDataType[] | undefined,
+    attributeData: AttributeDataType[] | undefined,
+    attributeTranslateData: AttributeTranslateDataType[] | undefined,
 }> => {
     try {
         const [
@@ -22,6 +26,10 @@ const fetchData = async (): Promise<{
             productTranslateData,
             brandData,
             brandTranslateData,
+            attributeGroupData,
+            attributeGroupTranslateData,
+            attributeData,
+            attributeTranslateData,
         ] = await Promise.all([
             fetchCategoryData(),
             fetchCategoryTranslateData(),
@@ -29,6 +37,10 @@ const fetchData = async (): Promise<{
             fetchProductTranslateData(),
             fetchBrandData(),
             fetchBrandTranslateData(),
+            fetchAttributeGroupData(),
+            fetchAttributeGroupTranslateData(),
+            fetchAttributeData(),
+            fetchAttributeTranslateData(),
         ]);
 
         return {
@@ -38,6 +50,10 @@ const fetchData = async (): Promise<{
             productTranslateData,
             brandData,
             brandTranslateData,
+            attributeGroupData,
+            attributeGroupTranslateData,
+            attributeData,
+            attributeTranslateData,
         };
     } catch (error) {
         throw new Error('Failed to fetch data');
@@ -47,7 +63,17 @@ const fetchData = async (): Promise<{
 
 const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang: LocaleType, categorySlug: string } }) => {
     try {
-        const { brandData, brandTranslateData, categoryData, categoryTranslateData, productData, productTranslateData } = await fetchData();
+        const {
+            brandData,
+            brandTranslateData,
+            categoryData,
+            categoryTranslateData,
+            productData,
+            productTranslateData,
+            attributeData,
+            attributeGroupData,
+            attributeGroupTranslateData,
+            attributeTranslateData } = await fetchData();
         const t = await getTranslate(lang);
         const generalDictionary = t.general;
         const titleDictionary = t.title;
@@ -57,7 +83,11 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
             categoryData &&
             categoryTranslateData &&
             productData &&
-            productTranslateData
+            productTranslateData &&
+            attributeData &&
+            attributeGroupData &&
+            attributeGroupTranslateData &&
+            attributeTranslateData
         ) {
             const category = new Category(categoryData, categoryTranslateData);
             const activeCategoryData = category.getCategoryBySlug(categorySlug, lang);
@@ -69,7 +99,14 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
                             activeLocale={lang}
                             categoryData={categoryData}
                             categoryTranslateData={categoryTranslateData}
+                            brandData={brandData}
+                            brandTranslateData={brandTranslateData}
+                            attributeData={attributeData}
+                            attributeGroupData={attributeGroupData}
+                            attributeGroupTranslateData={attributeGroupTranslateData}
+                            attributeTranslateData={attributeTranslateData}
                             titleDictionary={titleDictionary}
+                            generalDictionary={generalDictionary}
                         />
                     </React.Fragment>
                 )

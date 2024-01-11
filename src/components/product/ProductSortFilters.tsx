@@ -1,11 +1,18 @@
-import React from 'react'
+'use client'
+import React from 'react';
 
-const ProductSortFilters = () => {
+type SortFilterProps = {
+  generalDictionary: { [key: string]: string },
+}
+
+const ProductSortFilters:React.FC<SortFilterProps> = ({generalDictionary}) => {
   return (
-    <div>
-      
+    <div className='product-sort-filters'>
+      <div className="sort-filter-button">{generalDictionary.by_price}</div>
+      <div className="sort-filter-button">{generalDictionary.by_name}</div>
+      <div className="sort-filter-button">{generalDictionary.by_popularity}</div>
     </div>
   )
 }
 
-export default ProductSortFilters
+export default React.memo(ProductSortFilters)

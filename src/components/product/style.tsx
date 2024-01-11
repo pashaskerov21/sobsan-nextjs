@@ -1,4 +1,4 @@
-import { column_center, column_justify_start, row_between, row_center, row_justify_start } from "@/src/styles";
+import { column_align_start, column_center, column_justify_start, row_between, row_center, row_justify_start } from "@/src/styles";
 import styled from "styled-components";
 
 export const ProductCardWrapper = styled.div`
@@ -238,6 +238,156 @@ export const LeftFilterWrapper = styled.div`
     }
     .lfw-body{
         width: 100%;
+        ${column_center};
+        gap: 30px;
+    }
+    .product-filter-form{
+        width: 100%;
+        ${column_center};
+        gap: 30px;
+    }
+    .filter-item{
+        width: 100%;
+        ${column_align_start};
+        gap: 10px;
+        .filter-title{
+            font-weight: 600;
+        }
+    }
+    .range-filter {
+        width: 100%;
+        position: relative;
+        margin-top: 10px;
+        ${column_center};
+
+        .range-inputs {
+            position: relative;
+            width: 100%;
+            min-height: 20px;
+            margin-bottom: 15px;
+
+            input[type='range'] {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                outline: none;
+                -webkit-appearance: none;
+
+                &::-webkit-slider-runnable-track {
+                    background: ${props => props.theme.color_1};
+                    width: 100%;
+                    height: 6px;
+                }
+
+                &::-webkit-slider-thumb {
+                    position: relative;
+                    width: 20px;
+                    height: 20px;
+                    background-color: #fff;
+                    box-shadow: 0 0 5px ${props => props.theme.color_1};
+                    color: ${props => props.theme.color_1};
+                    z-index: 2;
+                    margin-top: -7px;
+                    -webkit-appearance: none;
+                    border-radius: 50%;
+                    transition: all 0.2s;
+                    border: 1px solid transparent;
+
+                    &:hover {
+                        border-color: ${props => props.theme.color_1};
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+
+        .result-inputs {
+            width: 100%;
+            ${row_between}
+
+            .item {
+                ${row_center};
+                gap: 5px;
+                span{
+                    font-weight: 600;
+                }
+            }
+
+            input {
+                width: 100%;
+                max-width: 55px;
+                text-align: center;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+                padding: 5px;
+                font-weight: 600;
+                background-color: ${props => props.theme.color_1};
+                color: #fff;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button {
+                    display: none;
+                }
+            }
+        }
+    }
+    .filter-checkbox-buttons{
+        width: 100%;
+        ${row_justify_start};
+        gap: 15px;
+        flex-wrap: wrap;
+        .filter-checkbox-button{
+            input{
+                &:checked{
+                    ~label{
+                        background-color: ${props => props.theme.color_1};
+                        color: #fff;
+                    }
+                }
+            }
+            label{
+                ${row_center};
+                padding: 10px 20px;
+                background-color: ${props => props.theme.bg_color_9};
+                text-align: center;
+                border-radius: 10px;
+                user-select: none;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
+        }
+    }
+    .form-buttons {
+        width: 100%;
+        ${row_center};
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            
+
+            &.submit {
+                background-color: ${props => props.theme.color_1};
+                color: #fff;
+                margin-right: 5px;
+                border: 1px solid ${props => props.theme.color_1};
+            }
+
+            &.reset {
+                margin-left: 5px;
+                border: 1px solid ${props => props.theme.border_color_3};
+                color: ${props => props.theme.text_color_7};
+                &:hover {
+                    border-color: #23272B;
+                    background-color: #23272B;
+                    color: #fff;
+                    animation: reset-btn-animation 0.2s ease 4;
+                }
+            }
+        }
     }
     @media (width >= 992px){
         position: relative;
