@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { Category } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
@@ -18,6 +18,9 @@ type LayoutProps = {
     attributeGroupTranslateData: AttributeGroupTranslateDataType[],
     attributeData: AttributeDataType[],
     attributeTranslateData: AttributeTranslateDataType[],
+    productCategoryRelationData: ProductCategoryRelationDataType[],
+    productData: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -33,6 +36,9 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
     brandTranslateData,
     categoryData,
     categoryTranslateData,
+    productCategoryRelationData,
+    productData,
+    productTranslateData,
     titleDictionary,
     generalDictionary,
 }) => {
@@ -64,6 +70,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
     const localeSlugs: LocaleStateType[] = category.getLocaleSlugs(activeCategoryData.id);
     const pageTitleData: PageTitleDataType = category.getPageTitleData(activeCategoryData.id, activeLocale);
 
+    const categoryProducts = category.getProducts(activeCategoryData.id, productCategoryRelationData, productData);
 
     React.useEffect(() => {
         dispatch(updateLocaleSlug(localeSlugs))
@@ -88,6 +95,8 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                 attributeGroupData={attributeGroupData}
                 attributeGroupTranslateData={attributeGroupTranslateData}
                 attributeTranslateData={attributeTranslateData}
+                categoryProducts={categoryProducts}
+                productTranslateData={productTranslateData}
                 titleDictionary={titleDictionary}
                 generalDictionary={generalDictionary}
             />

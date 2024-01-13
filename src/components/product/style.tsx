@@ -191,8 +191,6 @@ export const ProductCardWrapper = styled.div`
     }
 `;
 
-
-
 export const LeftFilterWrapper = styled.div`
     width: 100%;
     max-width: 400px;
@@ -403,3 +401,43 @@ export const LeftFilterWrapper = styled.div`
         }
     }
 `;
+
+
+
+export const ProductGridWrapper = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    place-items: center;
+    @media (width >= 768px){
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (width >= 1200px){
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+`;
+
+export const ProductPaginationWrapper = styled.div`
+    width: 100%;
+    ${row_center};
+    gap: 10px;
+    .numbers{
+        ${row_center};
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    button{
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        border: 1px solid ${props => props.theme.border_color_1};
+        color: ${props => props.theme.color_1};
+        font-size: 12px;
+        ${row_center};
+        &.active{
+            background-color: ${props => props.theme.color_1};
+            color: #fff;
+        }
+    }
+`

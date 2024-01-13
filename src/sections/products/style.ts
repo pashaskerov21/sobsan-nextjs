@@ -36,7 +36,7 @@ export const ProductGeneralContainer = styled.div`
     .container-right{
         width: 100%;
         ${column_justify_start};
-        gap: 30px;
+        gap: 20px;
         .right-top{
             width: 100%;
             ${row_between};

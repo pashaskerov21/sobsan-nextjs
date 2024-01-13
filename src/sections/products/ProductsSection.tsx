@@ -3,10 +3,11 @@ import React from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
 import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
 import { CategoryCoverImage, ProductGeneralContainer } from './style';
 import { FaFilter } from "react-icons/fa";
 import { FaList, FaTableCellsLarge } from "react-icons/fa6";
+import { useLocalStorage } from 'usehooks-ts'
 
 type SectionProps = {
     loading: LoadingType,
@@ -20,6 +21,8 @@ type SectionProps = {
     attributeGroupTranslateData: AttributeGroupTranslateDataType[],
     attributeData: AttributeDataType[],
     attributeTranslateData: AttributeTranslateDataType[],
+    categoryProducts: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -38,6 +41,8 @@ const ProductsSection: React.FC<SectionProps> = ({
     titleDictionary,
     activeCategoryData,
     generalDictionary,
+    categoryProducts,
+    productTranslateData,
 }) => {
     const body = document.querySelector('body');
     const [filterShow, setFilterShow] = React.useState<boolean>(false);
@@ -60,9 +65,31 @@ const ProductsSection: React.FC<SectionProps> = ({
     }, [filterShow]);
     const changeProductLayout = React.useCallback((value: 'list' | 'grid') => {
         setProductsLayout(value);
-    }, [productsLayout])
+    }, [productsLayout]);
 
+    const [productState, setProductState] = React.useState<{
+        filtered: ProductDataType[] | [],
+        finalResult: ProductDataType[] | []
+    }>({
+        filtered: categoryProducts,
+        finalResult: [],
+    });
 
+    const [paginationState] = useLocalStorage("pagination", {
+        currentPage: 1,
+        productCount: 12,
+    });
+
+    const indexOfLastProduct = paginationState.currentPage * paginationState.productCount;
+    const indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
+    React.useEffect(() => {
+        setProductState((prev) => {
+            return {
+                ...prev,
+                finalResult: prev.filtered.slice(indexOfFirstProduct, indexOfLastProduct),
+            }
+        });
+    }, [indexOfFirstProduct, indexOfLastProduct])
 
     return (
         <Section $py={20}>
@@ -87,7 +114,7 @@ const ProductsSection: React.FC<SectionProps> = ({
                         ) : (
                             <div className="show-filters-btn d-lg-none" onClick={openFilters}>
                                 <FaFilter />
-                                <span>Filterlər</span>
+                                <span>{generalDictionary.filters}</span>
                             </div>
                         )
                     }
@@ -111,6 +138,7 @@ const ProductsSection: React.FC<SectionProps> = ({
                     <div className="container-right">
                         <div className="right-top">
                             <ProductSortFilters
+                                loading={loading}
                                 generalDictionary={generalDictionary}
                             />
                             <div className="layout-buttons">
@@ -129,8 +157,22 @@ const ProductsSection: React.FC<SectionProps> = ({
                                 }
                             </div>
                         </div>
-                        <ProductGrid />
-                        <ProductPagination />
+                        <ProductGrid
+                            loading={loading}
+                            activeLocale={activeLocale}
+                            productData={productState.finalResult}
+                            productTranslateData={productTranslateData}
+                            brandData={brandData}
+                            brandTranslateData={brandTranslateData}
+                            generalDictionary={generalDictionary}
+                        />
+                        {
+                            productState.filtered.length > paginationState.productCount && (
+                                <ProductPagination
+                                    loading={loading}
+                                    totalProducts={productState.filtered.length} />
+                            )
+                        }
                     </div>
                 </ProductGeneralContainer>
             </Container>

@@ -1,5 +1,5 @@
 import { i18n } from "@/i18n-config";
-import { CategoriesDataType, CategoriesTranslateDataType, LocaleStateType, LocaleType, PageTitleDataType } from "../types";
+import { CategoriesDataType, CategoriesTranslateDataType, LocaleStateType, LocaleType, PageTitleDataType, ProductCategoryRelationDataType, ProductDataType } from "../types";
 
 class Category {
     private categoryData: CategoriesDataType[];
@@ -62,7 +62,7 @@ class Category {
     }
     public getPageTitleData(id: number, activeLocale: LocaleType) {
         let pageData: PageTitleDataType = {
-            title: "", 
+            title: "",
             breadcrumbs: [
                 {
                     id: 1,
@@ -71,8 +71,8 @@ class Category {
                 }
             ]
         }
-        const activeTranslateData:CategoriesTranslateDataType | undefined = this.categoryTranslateData.find((data) => data.category_id === id && data.lang === activeLocale);
-        if(activeTranslateData){
+        const activeTranslateData: CategoriesTranslateDataType | undefined = this.categoryTranslateData.find((data) => data.category_id === id && data.lang === activeLocale);
+        if (activeTranslateData) {
             pageData = {
                 title: activeTranslateData.title,
                 breadcrumbs: [
@@ -86,6 +86,11 @@ class Category {
         }
 
         return pageData;
+    }
+    public getProducts(activeCategoryID: number, productCategoryRelationData: ProductCategoryRelationDataType[], productData: ProductDataType[]) {
+        const relations: ProductCategoryRelationDataType[] = productCategoryRelationData.filter((data) => data.category_id === activeCategoryID);
+        const products: ProductDataType[] = relations.map((r_data) => productData.find((p_data) => p_data.id === r_data.product_id)).filter((product) => product !== undefined) as ProductDataType[];
+        return products;
     }
 }
 
