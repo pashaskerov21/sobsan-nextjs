@@ -94,6 +94,7 @@ const ProductsSection: React.FC<SectionProps> = ({
     const changeProductLayout = React.useCallback((value: 'list' | 'grid') => {
         setProductsLayout(value);
     }, [productsLayout]);
+
     const handleChangePrice = (key: "min" | "max", value: number) => {
         setProductFilterData((prev) => {
             return {
@@ -104,9 +105,9 @@ const ProductsSection: React.FC<SectionProps> = ({
                 }
             }
         });
-    }
-    const handleSubmitFilterForm = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    };
+
+    const scrollContainerTop = () => {
         if (generalWrapperRef.current) {
             const rect = generalWrapperRef.current.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -119,6 +120,11 @@ const ProductsSection: React.FC<SectionProps> = ({
                 });
             }
         }
+    }
+
+    const handleSubmitFilterForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        scrollContainerTop();
         closeFilters();
         setPaginationState((prev) => {
             return{
@@ -227,7 +233,9 @@ const ProductsSection: React.FC<SectionProps> = ({
                             productState.filtered.length > paginationState.productCount && (
                                 <ProductPagination
                                     loading={loading}
-                                    totalProducts={productState.filtered.length} />
+                                    totalProducts={productState.filtered.length}
+                                    scrollContainerTop={scrollContainerTop}
+                                    />
                             )
                         }
                     </div>

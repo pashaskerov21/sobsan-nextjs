@@ -7,12 +7,18 @@ import { LoadingType } from '@/src/types';
 import Skeleton from '../skeleton/Skeleton';
 import { usePathname } from 'next/navigation';
 
-const ProductPagination: React.FC<{ loading: LoadingType, totalProducts: number }> = ({ loading, totalProducts }) => {
+type PaginationProps = {
+  loading: LoadingType, 
+  totalProducts: number, 
+  scrollContainerTop: () => void
+}
+
+const ProductPagination: React.FC<PaginationProps> = ({ loading, totalProducts, scrollContainerTop }) => {
+  const pathName = usePathname();
   const [paginationState, setPaginationState] = useLocalStorage("pagination", {
     currentPage: 1,
     productCount: 12,
   });
-  const pathName = usePathname();
   const handlePageChange = (pageNumber: number) => {
     setPaginationState((prev) => {
       return {
@@ -20,7 +26,7 @@ const ProductPagination: React.FC<{ loading: LoadingType, totalProducts: number 
         currentPage: pageNumber,
       }
     });
-    window.scrollTo(0, 0);
+    scrollContainerTop();
   };
   const handlePrevChange = () => {
     setPaginationState((prev) => {
@@ -29,7 +35,7 @@ const ProductPagination: React.FC<{ loading: LoadingType, totalProducts: number 
         currentPage: prev.currentPage - 1,
       }
     });
-    window.scrollTo(0, 0);
+    scrollContainerTop();
   };
   const handleNextChange = () => {
     setPaginationState((prev) => {
@@ -38,7 +44,7 @@ const ProductPagination: React.FC<{ loading: LoadingType, totalProducts: number 
         currentPage: prev.currentPage + 1,
       }
     });
-    window.scrollTo(0, 0);
+    scrollContainerTop();
   };
 
   React.useEffect(() => {
@@ -48,7 +54,7 @@ const ProductPagination: React.FC<{ loading: LoadingType, totalProducts: number 
         currentPage: 1,
       }
     })
-  }, [pathName])
+  }, [pathName]);
 
   const pageNumbers: number[] = [];
   for (let i = 1; i <= Math.ceil(totalProducts / paginationState.productCount); i++) {
