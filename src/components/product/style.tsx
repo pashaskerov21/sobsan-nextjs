@@ -360,6 +360,7 @@ export const LeftFilterWrapper = styled.div`
     .form-buttons {
         width: 100%;
         ${row_center};
+        padding-bottom: 50px;
 
         button {
             width: 100%;
