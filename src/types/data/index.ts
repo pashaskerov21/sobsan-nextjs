@@ -232,4 +232,12 @@ export type ComparisonDataType = {
     id: string | number,
     user: string | number | null,
     product: number,
-}
+};
+
+export type ProductFilterDataType = {
+    price: {
+        min: number,
+        max: number,
+    },
+    brand: number,
+};

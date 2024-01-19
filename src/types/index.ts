@@ -40,6 +40,7 @@ import {
     BasketDataType,
     WishlistDataType,
     ComparisonDataType,
+    ProductFilterDataType,
 } from './data';
 
 import {
@@ -59,7 +60,7 @@ import {
 import {
     BreadcrumbType,
     PageTitleDataType,
-    LoadingType
+    LoadingType,
 } from './components';
 
 import {

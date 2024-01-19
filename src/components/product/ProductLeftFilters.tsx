@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import Categories from '../category/Categories'
 import { LeftFilterWrapper } from './style'
 import { FaXmark } from 'react-icons/fa6'
-import { Attribute, AttributeGroup, Brand, Category } from '@/src/class'
+import { Attribute, AttributeGroup, Brand, Category, Product } from '@/src/class'
 import Skeleton from '../skeleton/Skeleton'
+import { useLocalStorage } from 'usehooks-ts'
+import { ProductFilterDataType } from '@/src/types/data'
 
 type LeftFilterProps = {
   loading: LoadingType,
@@ -20,6 +22,10 @@ type LeftFilterProps = {
   attributeTranslateData: AttributeTranslateDataType[],
   filterShow: boolean,
   closeFilters: () => void,
+  productFilterData: ProductFilterDataType,
+  maxPrice: number,
+  handleChangePrice: (key: "min" | "max", value: number) => void,
+  handleSubmitFilterForm: (e:React.FormEvent<HTMLFormElement>) => void,
   titleDictionary: { [key: string]: string },
   generalDictionary: { [key: string]: string },
 }
@@ -37,6 +43,10 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
   closeFilters,
   filterShow,
   loading,
+  productFilterData,
+  maxPrice,
+  handleChangePrice,
+  handleSubmitFilterForm,
   titleDictionary,
   generalDictionary,
   activeCategoryData,
@@ -45,6 +55,8 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
   const brand = new Brand(brandTranslateData);
   const attributeGroup = new AttributeGroup(attributeGroupData, attributeGroupTranslateData);
   const attribute = new Attribute(attributeData, attributeTranslateData);
+
+  
   return (
     <LeftFilterWrapper className={filterShow ? 'active' : ''}>
       <div className="lfw-header">
@@ -60,7 +72,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
           categoryTranslateData={categoryTranslateData}
           activeCategoryData={activeCategoryData}
         />
-        <form className='product-filter-form'>
+        <form className='product-filter-form' onSubmit={(e) => handleSubmitFilterForm(e)}>
           {/* price filter */}
           <div className="filter-item">
             <div className="filter-title">{generalDictionary.price}</div>
@@ -70,16 +82,16 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
               ) : (
                 <div className='range-filter'>
                   <div className='range-inputs'>
-                    <input type="range" value={0} min={0} max={500} step={1} />
-                    <input type="range" value={500} min={0} max={500} step={1} />
+                    <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min",parseInt(e.target.value))}/>
+                    <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max",parseInt(e.target.value))}/>
                   </div>
                   <div className='result-inputs'>
                     <div className="item">
-                      <input type="number" value={0} />
+                      <input type="number" value={productFilterData.price.min}  onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min",parseInt(e.target.value))}/>
                       <span>AZN</span>
                     </div>
                     <div className="item">
-                      <input type="number" value={500} />
+                      <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max",parseInt(e.target.value))}/>
                       <span>AZN</span>
                     </div>
                   </div>

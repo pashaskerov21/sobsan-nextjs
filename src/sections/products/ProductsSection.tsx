@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useRef } from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
 import { Container, Section } from '@/src/styles'
@@ -8,6 +8,9 @@ import { CategoryCoverImage, ProductGeneralContainer } from './style';
 import { FaFilter } from "react-icons/fa";
 import { FaList, FaTableCellsLarge } from "react-icons/fa6";
 import { useLocalStorage } from 'usehooks-ts'
+import { ProductFilterDataType } from '@/src/types/data'
+import { Product } from '@/src/class'
+import { ProductData } from '@/src/data'
 
 type SectionProps = {
     loading: LoadingType,
@@ -44,9 +47,34 @@ const ProductsSection: React.FC<SectionProps> = ({
     categoryProducts,
     productTranslateData,
 }) => {
+    // variables
     const body = document.querySelector('body');
+    const generalWrapperRef = useRef<HTMLDivElement>(null);
+    const product = new Product(ProductData, productTranslateData);
     const [filterShow, setFilterShow] = React.useState<boolean>(false);
     const [productsLayout, setProductsLayout] = React.useState<"grid" | "list">('grid');
+    const [productState, setProductState] = React.useState<{
+        filtered: ProductDataType[] | [],
+        finalResult: ProductDataType[] | []
+    }>({
+        filtered: categoryProducts,
+        finalResult: [],
+    });
+    const [productFilterData, setProductFilterData] = useLocalStorage<ProductFilterDataType>('filter-data', {
+        price: {
+            min: 0,
+            max: product.getMaxPrice(productState.filtered),
+        },
+        brand: 0,
+    });
+    const [paginationState,setPaginationState] = useLocalStorage("pagination", {
+        currentPage: 1,
+        productCount: 12,
+    });
+    const indexOfLastProduct = paginationState.currentPage * paginationState.productCount;
+    const indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
+
+    // functions
     const openFilters = React.useCallback(() => {
         if (window.innerWidth < 1200) {
             setFilterShow(true);
@@ -66,30 +94,55 @@ const ProductsSection: React.FC<SectionProps> = ({
     const changeProductLayout = React.useCallback((value: 'list' | 'grid') => {
         setProductsLayout(value);
     }, [productsLayout]);
+    const handleChangePrice = (key: "min" | "max", value: number) => {
+        setProductFilterData((prev) => {
+            return {
+                ...prev,
+                price: {
+                    ...prev.price,
+                    [key]: value,
+                }
+            }
+        });
+    }
+    const handleSubmitFilterForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (generalWrapperRef.current) {
+            const rect = generalWrapperRef.current.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const distanceFromTop = rect.top + scrollTop - 140;
 
-    const [productState, setProductState] = React.useState<{
-        filtered: ProductDataType[] | [],
-        finalResult: ProductDataType[] | []
-    }>({
-        filtered: categoryProducts,
-        finalResult: [],
-    });
+            if (distanceFromTop > 0) {
+                window.scrollTo({
+                    top: distanceFromTop,
+                    behavior: 'smooth',
+                });
+            }
+        }
+        closeFilters();
+        setPaginationState((prev) => {
+            return{
+                ...prev,
+                currentPage: 1,
+            }
+        })
+        setProductState((prev) => {
+            return {
+                ...prev,
+                filtered: product.filterization(productFilterData, categoryProducts)
+            }
+        })
+    };
 
-    const [paginationState] = useLocalStorage("pagination", {
-        currentPage: 1,
-        productCount: 12,
-    });
-
-    const indexOfLastProduct = paginationState.currentPage * paginationState.productCount;
-    const indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
+    // useeffect
     React.useEffect(() => {
         setProductState((prev) => {
             return {
                 ...prev,
-                finalResult: prev.filtered.slice(indexOfFirstProduct, indexOfLastProduct),
+                finalResult: productState.filtered.slice(indexOfFirstProduct, indexOfLastProduct),
             }
         });
-    }, [indexOfFirstProduct, indexOfLastProduct])
+    }, [indexOfFirstProduct, indexOfLastProduct, productState.filtered]);
 
     return (
         <Section $py={20}>
@@ -107,7 +160,7 @@ const ProductsSection: React.FC<SectionProps> = ({
                         </React.Fragment>
                     )
                 }
-                <ProductGeneralContainer>
+                <ProductGeneralContainer ref={generalWrapperRef}>
                     {
                         loading.standart ? (
                             <Skeleton className='d-lg-none' width='100%' height='54px' radius='10px' />
@@ -132,6 +185,10 @@ const ProductsSection: React.FC<SectionProps> = ({
                         attributeTranslateData={attributeTranslateData}
                         filterShow={filterShow}
                         closeFilters={closeFilters}
+                        productFilterData={productFilterData}
+                        maxPrice={product.getMaxPrice(categoryProducts)}
+                        handleChangePrice={handleChangePrice}
+                        handleSubmitFilterForm={handleSubmitFilterForm}
                         titleDictionary={titleDictionary}
                         generalDictionary={generalDictionary}
                     />

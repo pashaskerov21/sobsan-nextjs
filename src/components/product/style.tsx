@@ -313,8 +313,7 @@ export const LeftFilterWrapper = styled.div`
             }
 
             input {
-                width: 100%;
-                max-width: 55px;
+                width: 65px;
                 text-align: center;
                 outline: none;
                 border: none;
