@@ -240,4 +240,5 @@ export type ProductFilterDataType = {
         max: number,
     },
     brand: number,
+    attributeIDs: number[],
 };

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { Category } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
@@ -21,6 +21,7 @@ type LayoutProps = {
     productCategoryRelationData: ProductCategoryRelationDataType[],
     productData: ProductDataType[],
     productTranslateData: ProductTranslateDataType[],
+    productAttributeRelationData: ProductAttributeRelationDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -39,6 +40,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
     productCategoryRelationData,
     productData,
     productTranslateData,
+    productAttributeRelationData,
     titleDictionary,
     generalDictionary,
 }) => {
@@ -97,6 +99,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                 attributeTranslateData={attributeTranslateData}
                 categoryProducts={categoryProducts}
                 productTranslateData={productTranslateData}
+                productAttributeRelationData={productAttributeRelationData}
                 titleDictionary={titleDictionary}
                 generalDictionary={generalDictionary}
             />

@@ -28,6 +28,9 @@ type LeftFilterProps = {
   handleSubmitFilterForm: (e:React.FormEvent<HTMLFormElement>) => void,
   titleDictionary: { [key: string]: string },
   generalDictionary: { [key: string]: string },
+  handleSelectBrand: (id: number) => void,
+  handleSelectAttribute: (id: number) => void,
+  resetLeftFilterForm: () => void,
 }
 
 const ProductLeftFilters: React.FC<LeftFilterProps> = ({
@@ -42,14 +45,17 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
   categoryTranslateData,
   closeFilters,
   filterShow,
-  loading,
-  productFilterData,
-  maxPrice,
+  generalDictionary,
   handleChangePrice,
   handleSubmitFilterForm,
+  loading,
+  maxPrice,
+  productFilterData,
   titleDictionary,
-  generalDictionary,
   activeCategoryData,
+  handleSelectBrand,
+  handleSelectAttribute,
+  resetLeftFilterForm,
 }) => {
   const category = new Category(categoryData, categoryTranslateData);
   const brand = new Brand(brandTranslateData);
@@ -111,7 +117,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                         <Skeleton width='125px' height='44px' radius='10px' />
                       ) : (
                         <div className="filter-checkbox-button" key={data.id}>
-                          <input type="checkbox" id={`brand-check-${data.id}`} hidden />
+                          <input type="checkbox" id={`brand-check-${data.id}`} value={data.id} hidden checked={productFilterData.brand === data.id ? true : false} onChange={(e: ChangeEvent<HTMLInputElement>) => handleSelectBrand(parseInt(e.target.value))} />
                           <label htmlFor={`brand-check-${data.id}`}>{brand.getTranslate(data.id, activeLocale, "title")}</label>
                         </div>
                       )
@@ -135,7 +141,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                             <Skeleton width='125px' height='44px' radius='10px' />
                           ) : (
                             <div className="filter-checkbox-button" key={attr.id}>
-                              <input type="checkbox" id={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`} hidden />
+                              <input type="checkbox" id={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`} hidden checked={productFilterData.attributeIDs.length > 0 && productFilterData.attributeIDs.includes(attr.id) ? true : false} onChange={() => handleSelectAttribute(attr.id)}/>
                               <label htmlFor={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`}>{attribute.getTranslate(attr.id, activeLocale, "title")}</label>
                             </div>
                           )
@@ -157,7 +163,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
               ) : (
                 <React.Fragment>
                   <button type='submit' className='submit'>{generalDictionary.confirm}</button>
-                  <button type='reset' className='reset'>{generalDictionary.reset}</button>
+                  <button type='button' className='reset' onClick={resetLeftFilterForm}>{generalDictionary.reset}</button>
                 </React.Fragment>
               )
             }

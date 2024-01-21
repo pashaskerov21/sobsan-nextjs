@@ -89,7 +89,9 @@ class Category {
     }
     public getProducts(activeCategoryID: number, productCategoryRelationData: ProductCategoryRelationDataType[], productData: ProductDataType[]) {
         const relations: ProductCategoryRelationDataType[] = productCategoryRelationData.filter((data) => data.category_id === activeCategoryID);
-        const products: ProductDataType[] = relations.map((r_data) => productData.find((p_data) => p_data.id === r_data.product_id)).filter((product) => product !== undefined) as ProductDataType[];
+        const products: ProductDataType[] = relations.map((r_data) =>
+            productData.find((p_data) => p_data.id === r_data.product_id)).
+            filter((product) => product !== undefined) as ProductDataType[];
         return products;
     }
 }

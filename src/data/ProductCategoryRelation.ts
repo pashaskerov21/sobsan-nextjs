@@ -18,7 +18,7 @@ const ProductCategoryRelationData:ProductCategoryRelationDataType[] = [
     },
     {
         id: 4,
-        product_id: 1,
+        product_id: 2,
         category_id: 1,
     },
     {

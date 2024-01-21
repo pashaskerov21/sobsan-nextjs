@@ -1,8 +1,8 @@
 import { getTranslate } from '@/get-translate';
 import { Category } from '@/src/class';
 import { CategoryPageLayout } from '@/src/layout';
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
-import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductCategoryRelationData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import React from 'react'
@@ -19,6 +19,7 @@ const fetchData = async (): Promise<{
     attributeData: AttributeDataType[] | undefined,
     attributeTranslateData: AttributeTranslateDataType[] | undefined,
     productCategoryRelationData: ProductCategoryRelationDataType[] | undefined,
+    productAttributeRelationData: ProductAttributeRelationDataType[] | undefined,
 }> => {
     try {
         const [
@@ -33,6 +34,7 @@ const fetchData = async (): Promise<{
             attributeData,
             attributeTranslateData,
             productCategoryRelationData,
+            productAttributeRelationData,
         ] = await Promise.all([
             fetchCategoryData(),
             fetchCategoryTranslateData(),
@@ -45,6 +47,7 @@ const fetchData = async (): Promise<{
             fetchAttributeData(),
             fetchAttributeTranslateData(),
             fetchProductCategoryRelationData(),
+            fetchProductAttributeRelationData(),
         ]);
 
         return {
@@ -59,6 +62,7 @@ const fetchData = async (): Promise<{
             attributeData,
             attributeTranslateData,
             productCategoryRelationData,
+            productAttributeRelationData,
         };
     } catch (error) {
         throw new Error('Failed to fetch data');
@@ -103,7 +107,8 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
             attributeGroupData,
             attributeGroupTranslateData,
             attributeTranslateData,
-            productCategoryRelationData } = await fetchData();
+            productCategoryRelationData,
+            productAttributeRelationData } = await fetchData();
         const t = await getTranslate(lang);
         const generalDictionary = t.general;
         const titleDictionary = t.title;
@@ -118,7 +123,8 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
             attributeGroupData &&
             attributeGroupTranslateData &&
             attributeTranslateData &&
-            productCategoryRelationData
+            productCategoryRelationData && 
+            productAttributeRelationData
         ) {
             const category = new Category(categoryData, categoryTranslateData);
             const activeCategoryData = category.getCategoryBySlug(categorySlug, lang);
@@ -139,6 +145,7 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
                             productCategoryRelationData={productCategoryRelationData}
                             productData={productData}
                             productTranslateData={productTranslateData}
+                            productAttributeRelationData={productAttributeRelationData}
                             titleDictionary={titleDictionary}
                             generalDictionary={generalDictionary}
                         />

@@ -1,7 +1,7 @@
 import { column_align_start, column_center, column_justify_start, row_between, row_center, row_justify_start } from "@/src/styles";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ProductCardWrapper = styled.div`
+export const ProductCardWrapper = styled.div<{ $productsView?: "grid" | "list" }>`
     width: 100%;
     max-width: 350px;
     padding: 12px 12px 30px;
@@ -61,21 +61,18 @@ export const ProductCardWrapper = styled.div`
         margin-bottom: 10px;
     }
     .product__title{
-        width: 100%;
         text-align: center;
         font-weight: 600;
         min-height: 50px;
         margin-bottom: 5px;
     }
     .product__description{
-        width: 100%;
         text-align: center;
         font-size: 13px;
         min-height: 80px;
         padding: 0 10px;
     }
     .product__price{
-        width: 100%;
         ${row_center};
         gap: 15px;
         margin-bottom: 15px;
@@ -91,7 +88,6 @@ export const ProductCardWrapper = styled.div`
         }
     }
     .product__stock{
-        width: 100%;
         ${row_center};
         text-align: center;
         gap: 10px;
@@ -177,11 +173,19 @@ export const ProductCardWrapper = styled.div`
                     font-size: 28px;
                     opacity: 0;
                     animation: basket-icon 0.5s ease forwards;
+                    display: none;
                 }
                 
                 &.active{
                     justify-content: center;
                     background-color: ${props => props.theme.color_3};
+                    .label,
+                    .icon{
+                        display: none
+                    }
+                    .active-icon{
+                        display: block;
+                    }
                     &:hover{
                         animation: pulse-green 1s ease infinite;
                     }
@@ -189,6 +193,58 @@ export const ProductCardWrapper = styled.div`
             }
         }
     }
+
+    ${props => props.$productsView === "list" && css`
+        min-width: 900px;
+        flex-direction: row;
+        justify-content: flex-start;
+        max-width: 100%;
+        padding-bottom: 12px;
+        .card__top{
+            align-items: flex-start;
+            max-width: 180px;
+        }
+        .card__center{
+            align-items: flex-start;
+        }
+        .card__bottom{
+            align-items: flex-start;
+        }
+        .product__badges{
+            ${column_align_start};
+        }
+        .product__image{
+            width: 150px;
+            height: 150px;
+        }
+        .product__brand,
+        .product__title,
+        .product__description{
+            text-align: start;
+            padding: 0;
+        }
+        .card__buttons{
+            grid-template-columns: repeat(3,1fr);
+            grid-template-areas: 
+            "b c w";
+            .card__button{
+                justify-content: center !important;
+                .label{
+                    display: none;
+                }
+                &.basket__button{
+                    &.active{
+                        .icon{
+                            display: block;
+                        }
+                        .active-icon{
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    `}
 `;
 
 export const LeftFilterWrapper = styled.div`
@@ -404,17 +460,24 @@ export const LeftFilterWrapper = styled.div`
 
 
 
-export const ProductGridWrapper = styled.div`
+export const ProductGridWrapper = styled.div<{ $productsView: "grid" | "list" }>`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
     place-items: center;
-    @media (width >= 768px){
-        grid-template-columns: 1fr 1fr;
-    }
-    @media (width >= 1200px){
-        grid-template-columns: 1fr 1fr 1fr;
+    ${props => props.$productsView === "grid" && css`
+        @media (width >= 768px){
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (width >= 1200px){
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    `}
+    ${
+        props => props.$productsView === "list" && css`
+            overflow-x: auto;
+        `
     }
 `;
 

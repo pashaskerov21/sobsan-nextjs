@@ -8,7 +8,7 @@ import { CategoryCoverImage, ProductGeneralContainer } from './style';
 import { FaFilter } from "react-icons/fa";
 import { FaList, FaTableCellsLarge } from "react-icons/fa6";
 import { useLocalStorage } from 'usehooks-ts'
-import { ProductFilterDataType } from '@/src/types/data'
+import { ProductAttributeRelationDataType, ProductFilterDataType } from '@/src/types/data'
 import { Product } from '@/src/class'
 import { ProductData } from '@/src/data'
 
@@ -26,6 +26,7 @@ type SectionProps = {
     attributeTranslateData: AttributeTranslateDataType[],
     categoryProducts: ProductDataType[],
     productTranslateData: ProductTranslateDataType[],
+    productAttributeRelationData: ProductAttributeRelationDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -46,13 +47,14 @@ const ProductsSection: React.FC<SectionProps> = ({
     generalDictionary,
     categoryProducts,
     productTranslateData,
+    productAttributeRelationData,
 }) => {
     // variables
     const body = document.querySelector('body');
     const generalWrapperRef = useRef<HTMLDivElement>(null);
     const product = new Product(ProductData, productTranslateData);
     const [filterShow, setFilterShow] = React.useState<boolean>(false);
-    const [productsLayout, setProductsLayout] = React.useState<"grid" | "list">('grid');
+    const [productsView, setProductsView] = useLocalStorage<"grid" | "list">("products-view", 'grid');
     const [productState, setProductState] = React.useState<{
         filtered: ProductDataType[] | [],
         finalResult: ProductDataType[] | []
@@ -66,8 +68,9 @@ const ProductsSection: React.FC<SectionProps> = ({
             max: product.getMaxPrice(productState.filtered),
         },
         brand: 0,
+        attributeIDs: [],
     });
-    const [paginationState,setPaginationState] = useLocalStorage("pagination", {
+    const [paginationState, setPaginationState] = useLocalStorage("pagination", {
         currentPage: 1,
         productCount: 12,
     });
@@ -92,8 +95,8 @@ const ProductsSection: React.FC<SectionProps> = ({
         }
     }, [filterShow]);
     const changeProductLayout = React.useCallback((value: 'list' | 'grid') => {
-        setProductsLayout(value);
-    }, [productsLayout]);
+        setProductsView(value);
+    }, [setProductsView]);
 
     const handleChangePrice = (key: "min" | "max", value: number) => {
         setProductFilterData((prev) => {
@@ -120,6 +123,36 @@ const ProductsSection: React.FC<SectionProps> = ({
                 });
             }
         }
+    };
+
+    const handleSelectBrand = (id: number) => {
+        setProductFilterData((prev) => {
+            return {
+                ...prev,
+                brand: prev.brand === id ? 0 : id,
+            }
+        })
+    };
+
+    const handleSelectAttribute = (id: number) => {
+        setProductFilterData((prev) => {
+            return{
+                ...prev,
+                attributeIDs: prev.attributeIDs.includes(id) ? [...prev.attributeIDs.filter((attr_id) => attr_id !== id)] : [...prev.attributeIDs, id],
+            }
+        })
+    }
+
+    const resetLeftFilterForm = () => {
+        scrollContainerTop();
+        setProductFilterData({
+            price: {
+                min: 0,
+                max: product.getMaxPrice(categoryProducts),
+            },
+            brand: 0,
+            attributeIDs: [],
+        })
     }
 
     const handleSubmitFilterForm = (e: React.FormEvent<HTMLFormElement>) => {
@@ -127,7 +160,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         scrollContainerTop();
         closeFilters();
         setPaginationState((prev) => {
-            return{
+            return {
                 ...prev,
                 currentPage: 1,
             }
@@ -135,7 +168,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         setProductState((prev) => {
             return {
                 ...prev,
-                filtered: product.filterization(productFilterData, categoryProducts)
+                filtered: product.filterization(productFilterData, categoryProducts, productAttributeRelationData),
             }
         })
     };
@@ -197,6 +230,9 @@ const ProductsSection: React.FC<SectionProps> = ({
                         handleSubmitFilterForm={handleSubmitFilterForm}
                         titleDictionary={titleDictionary}
                         generalDictionary={generalDictionary}
+                        handleSelectBrand={handleSelectBrand}
+                        handleSelectAttribute={handleSelectAttribute}
+                        resetLeftFilterForm={resetLeftFilterForm}
                     />
                     <div className="container-right">
                         <div className="right-top">
@@ -213,8 +249,8 @@ const ProductsSection: React.FC<SectionProps> = ({
                                         </React.Fragment>
                                     ) : (
                                         <React.Fragment>
-                                            <div className={`layout-button ${productsLayout === 'list' ? 'active' : ''}`} onClick={() => changeProductLayout('list')}><FaList /></div>
-                                            <div className={`layout-button ${productsLayout === 'grid' ? 'active' : ''}`} onClick={() => changeProductLayout('grid')}><FaTableCellsLarge /></div>
+                                            <div className={`layout-button ${productsView === 'list' ? 'active' : ''}`} onClick={() => changeProductLayout('list')}><FaList /></div>
+                                            <div className={`layout-button ${productsView === 'grid' ? 'active' : ''}`} onClick={() => changeProductLayout('grid')}><FaTableCellsLarge /></div>
                                         </React.Fragment>
                                     )
                                 }
@@ -235,7 +271,7 @@ const ProductsSection: React.FC<SectionProps> = ({
                                     loading={loading}
                                     totalProducts={productState.filtered.length}
                                     scrollContainerTop={scrollContainerTop}
-                                    />
+                                />
                             )
                         }
                     </div>

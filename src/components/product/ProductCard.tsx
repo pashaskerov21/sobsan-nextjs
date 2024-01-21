@@ -33,6 +33,9 @@ const ProductCard: React.FC<CardProps> = ({
     productData,
     productTranslateData,
 }) => {
+
+    const [productsView, setProductsView] = useLocalStorage<"grid" | "list">("products-view",'grid');
+
     const product = new Product(productData, productTranslateData);
     const productURL = product.getURL(activeProductData.id, activeLocale);
     const router = useRouter();
@@ -120,7 +123,7 @@ const ProductCard: React.FC<CardProps> = ({
 
     return (
         <React.Fragment>
-            <ProductCardWrapper>
+            <ProductCardWrapper $productsView={productsView} data-id={activeProductData.id}>
                 <div className="card__top">
                     <div className="product__badges">
                         {activeProductData.new ? loading.standart ? (
@@ -137,7 +140,13 @@ const ProductCard: React.FC<CardProps> = ({
                     {
                         loading.lazy ? (
                             <React.Fragment>
-                                <Skeleton width='100%' max_width='350px' height='200px' />
+                                {
+                                    productsView === "grid" ? (
+                                        <Skeleton width='100%' max_width='350px' height='200px' />
+                                    ) : (
+                                        <Skeleton width='150px' height='150px' />
+                                    )
+                                }
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -217,20 +226,11 @@ const ProductCard: React.FC<CardProps> = ({
                             ) : (
                                 <React.Fragment>
                                     <div className={`card__button basket__button ${productState.basket ? 'active' : ''}`} onClick={handleBasketButton}>
-                                        {
-                                            productState.basket ? (
-                                                <React.Fragment>
-                                                    <div className="active-icon">
-                                                        <PiShoppingCartSimpleLight />
-                                                    </div>
-                                                </React.Fragment>
-                                            ) : (
-                                                <React.Fragment>
-                                                    <div className="label">{generalDictionary["add_basket"]}</div>
-                                                    <div className="icon"><PiShoppingCartSimpleLight /></div>
-                                                </React.Fragment>
-                                            )
-                                        }
+                                        <div className="label">{generalDictionary["add_basket"]}</div>
+                                        <div className="icon"><PiShoppingCartSimpleLight /></div>
+                                        <div className="active-icon">
+                                            <PiShoppingCartSimpleLight />
+                                        </div>
                                     </div>
                                     <div className={`card__button comparison__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
                                         <div className="icon"><PiScalesLight /></div>

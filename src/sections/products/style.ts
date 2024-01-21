@@ -49,8 +49,12 @@ export const ProductGeneralContainer = styled.div`
                     ${row_justify_start};
                     font-size: 14px;
                     gap: 0px;
+                    cursor: pointer;
                     svg{
                         font-size: 16px;
+                        color: ${props => props.theme.color_1};
+                    }
+                    &:hover{
                         color: ${props => props.theme.color_1};
                     }
                 }

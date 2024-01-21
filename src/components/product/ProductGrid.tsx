@@ -1,5 +1,6 @@
 import { BrandDataType, BrandTranslateDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types'
 import React from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import ProductCard from './ProductCard'
 import { ProductGridWrapper } from './style'
 
@@ -22,8 +23,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   brandTranslateData,
   generalDictionary,
 }) => {
+  const [productsView, setProductsView] = useLocalStorage<"grid" | "list">("products-view",'grid');
   return (
-    <ProductGridWrapper>
+    <ProductGridWrapper $productsView={productsView}>
       {
         productData.map((data) => (
           <React.Fragment>
@@ -36,7 +38,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               brandData={brandData}
               brandTranslateData={brandTranslateData}
               generalDictionary={generalDictionary}
-
+              
             />
           </React.Fragment>
         ))

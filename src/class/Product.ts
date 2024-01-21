@@ -1,5 +1,5 @@
 import { BrandDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "../types";
-import { ProductFilterDataType } from "../types/data";
+import { ProductAttributeRelationDataType, ProductFilterDataType } from "../types/data";
 
 class Product {
     private productData: ProductDataType[];
@@ -18,7 +18,7 @@ class Product {
                     return translate = activeTranslateData.title;
                 case "description":
                     return translate = activeTranslateData.description;
-                case "url": 
+                case "url":
                     return translate = `/${activeLocale}/products/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
                 default:
                     return translate = "";
@@ -50,9 +50,9 @@ class Product {
         const brand: BrandDataType | undefined = brandData.find((data) => data.id === activeProductData.brand_id);
         return brand;
     }
-    public getMaxPrice(productData:ProductDataType[]){
+    public getMaxPrice(productData: ProductDataType[]) {
         let price = 0;
-        if(productData.length > 0){
+        if (productData.length > 0) {
             const product = productData.reduce((maxProduct, currentProduct) => {
                 return currentProduct.price > maxProduct.price ? currentProduct : maxProduct;
             }, productData[0]);
@@ -60,12 +60,24 @@ class Product {
         }
         return price;
     }
-    public filterization(filterData: ProductFilterDataType, productData: ProductDataType[]){
-        let filteredProducts:ProductDataType[] | [] = productData;
-        if(filterData.brand !== 0){
+    public filterization(filterData: ProductFilterDataType, productData: ProductDataType[], productAttributeRelationData: ProductAttributeRelationDataType[]) {
+        let filteredProducts: ProductDataType[] | [] = productData;
+        if (filterData.brand !== 0) {
             filteredProducts = filteredProducts.filter((data) => data.brand_id === filterData.brand);
-        }else if(filterData.price.max > 0){
+        }
+        if (filterData.price.max > 0) {
             filteredProducts = filteredProducts.filter((data) => filterData.price.min! <= data.price && data.price <= filterData.price.max!);
+        }
+        if (filterData.attributeIDs.length > 0) {
+            const filteredProductIds: number[] = [];
+        
+            filterData.attributeIDs.forEach((attrId) => {
+                const matchingRelations = productAttributeRelationData.filter((par_data) => par_data.attr_id === attrId);
+                const matchingProductIds = matchingRelations.map((relation) => relation.product_id);
+                filteredProductIds.push(...matchingProductIds);
+            });
+        
+            filteredProducts = filteredProducts.filter((product) => filteredProductIds.includes(product.id));
         }
 
         return filteredProducts;

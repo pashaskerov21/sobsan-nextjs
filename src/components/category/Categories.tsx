@@ -63,10 +63,6 @@ const Categories: React.FC<CategoriesProps> = ({
     }
   }
 
-  React.useEffect(() => {
-    console.log(activeCategories);
-  }, [activeCategories]);
-
   const renderAltCategories = (data: CategoriesDataType[], level: number, parentID: number[]): JSX.Element[] => {
     return data.map((altData) => (
       <React.Fragment key={altData.id}>
