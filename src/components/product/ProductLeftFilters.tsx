@@ -25,7 +25,7 @@ type LeftFilterProps = {
   productFilterData: ProductFilterDataType,
   maxPrice: number,
   handleChangePrice: (key: "min" | "max", value: number) => void,
-  handleSubmitFilterForm: (e:React.FormEvent<HTMLFormElement>) => void,
+  handleSubmitFilterForm: (e: React.FormEvent<HTMLFormElement>) => void,
   titleDictionary: { [key: string]: string },
   generalDictionary: { [key: string]: string },
   handleSelectBrand: (id: number) => void,
@@ -62,7 +62,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
   const attributeGroup = new AttributeGroup(attributeGroupData, attributeGroupTranslateData);
   const attribute = new Attribute(attributeData, attributeTranslateData);
 
-  
+
   return (
     <LeftFilterWrapper className={filterShow ? 'active' : ''}>
       <div className="lfw-header">
@@ -81,23 +81,30 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
         <form className='product-filter-form' onSubmit={(e) => handleSubmitFilterForm(e)}>
           {/* price filter */}
           <div className="filter-item">
-            <div className="filter-title">{generalDictionary.price}</div>
+            {
+              loading.standart ? (
+                <Skeleton width='120px' height='20px' margin='10px 0' />
+              ) : (
+                <div className="filter-title">{generalDictionary.price}</div>
+              )
+            }
+
             {
               loading.standart ? (
                 <Skeleton width='100%' height='70px' />
               ) : (
                 <div className='range-filter'>
                   <div className='range-inputs'>
-                    <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min",parseInt(e.target.value))}/>
-                    <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max",parseInt(e.target.value))}/>
+                    <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
+                    <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
                   </div>
                   <div className='result-inputs'>
                     <div className="item">
-                      <input type="number" value={productFilterData.price.min}  onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min",parseInt(e.target.value))}/>
+                      <input type="number" value={productFilterData.price.min} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
                       <span>AZN</span>
                     </div>
                     <div className="item">
-                      <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max",parseInt(e.target.value))}/>
+                      <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
                       <span>AZN</span>
                     </div>
                   </div>
@@ -107,7 +114,13 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
           </div>
           {/* brand filter */}
           <div className="filter-item">
-            <div className="filter-title">{generalDictionary.brand}</div>
+            {
+              loading.standart ? (
+                <Skeleton width='120px' height='20px' margin='10px 0' />
+              ) : (
+                <div className="filter-title">{generalDictionary.brand}</div>
+              )
+            } 
             <div className="filter-checkbox-buttons">
               {
                 brandData.map((data) => (
@@ -131,7 +144,13 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
           {
             attributeGroupData.map((data) => (
               <div className="filter-item" key={data.id}>
-                <div className="filter-title">{attributeGroup.getTranslate(data.id, activeLocale, "title")}</div>
+                {
+                  loading.standart ? (
+                    <Skeleton width='120px' height='20px' margin='10px 0' />
+                  ) : (
+                    <div className="filter-title">{attributeGroup.getTranslate(data.id, activeLocale, "title")}</div>
+                  )
+                }
                 <div className="filter-checkbox-buttons">
                   {
                     attributeGroup.getAttributes(data.id, attributeData).length > 0 && attributeGroup.getAttributes(data.id, attributeData).map((attr) => (
@@ -141,7 +160,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                             <Skeleton width='125px' height='44px' radius='10px' />
                           ) : (
                             <div className="filter-checkbox-button" key={attr.id}>
-                              <input type="checkbox" id={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`} hidden checked={productFilterData.attributeIDs.length > 0 && productFilterData.attributeIDs.includes(attr.id) ? true : false} onChange={() => handleSelectAttribute(attr.id)}/>
+                              <input type="checkbox" id={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`} hidden checked={productFilterData.attributeIDs.length > 0 && productFilterData.attributeIDs.includes(attr.id) ? true : false} onChange={() => handleSelectAttribute(attr.id)} />
                               <label htmlFor={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`}>{attribute.getTranslate(attr.id, activeLocale, "title")}</label>
                             </div>
                           )
@@ -157,8 +176,8 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
             {
               loading.standart ? (
                 <React.Fragment>
-                  <Skeleton width='100%' height='56px'/>
-                  <Skeleton width='100%' height='56px'/>
+                  <Skeleton width='100%' height='56px' />
+                  <Skeleton width='100%' height='56px' />
                 </React.Fragment>
               ) : (
                 <React.Fragment>
