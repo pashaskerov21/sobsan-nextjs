@@ -160,7 +160,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                             <Skeleton width='125px' height='44px' radius='10px' />
                           ) : (
                             <div className="filter-checkbox-button" key={attr.id}>
-                              <input type="checkbox" id={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`} hidden checked={productFilterData.attributeIDs.length > 0 && productFilterData.attributeIDs.includes(attr.id) ? true : false} onChange={() => handleSelectAttribute(attr.id)} />
+                              <input type="checkbox" id={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`} hidden checked={productFilterData.attributeIDs && productFilterData.attributeIDs.length > 0 && productFilterData.attributeIDs.includes(attr.id) ? true : false} onChange={() => handleSelectAttribute(attr.id)} />
                               <label htmlFor={`${attributeGroup.getTranslate(data.id, activeLocale, "title")}-check-${attr.id}`}>{attribute.getTranslate(attr.id, activeLocale, "title")}</label>
                             </div>
                           )
