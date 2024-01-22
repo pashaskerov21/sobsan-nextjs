@@ -503,4 +503,61 @@ export const ProductPaginationWrapper = styled.div`
             color: #fff;
         }
     }
+`;
+
+export const ProductSortFilterWrapper = styled.div`
+    ${row_justify_start};
+    gap: 15px;
+    flex-wrap: wrap;
+    z-index: 90;
+    .sort-filter-dropdown{
+        position: relative;
+        .sfd-title{
+            ${row_justify_start};
+            gap: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            user-select: none;
+            svg{
+                color: ${props => props.theme.color_1};
+                transition: 0.3s;
+            }
+        }
+        .sfd-menu{
+            min-width: 200px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            ${column_align_start};
+            gap: 10px;
+            border: 1px solid ${props => props.theme.border_color_1};
+            padding: 10px;
+            display: none;
+            background-color: ${props => props.theme.bg_color_1};
+            z-index: 99;
+            .sfd-button{
+                font-size: 14px;
+                cursor: pointer;
+                user-select: none;
+                &:hover{
+                        color: ${props => props.theme.color_1};
+                }
+            }
+            &:hover{
+                display: flex;
+            }
+        }
+        &:hover{
+            .sfd-title{
+                /* color: ${props => props.theme.color_1}; */
+                svg{
+                    transform: rotate(90deg);
+                }
+            }
+            .sfd-menu{
+                display: flex;
+            }
+        }
+    }
 `

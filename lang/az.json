@@ -46,6 +46,10 @@
         "reset": "Sıfırla",
         "by_price": "Qiymətinə görə",
         "by_name": "Adına görə",
-        "by_popularity": "Populyarlığına görə"
+        "by_popularity": "Populyarlığına görə",
+        "cheaptoexp": "Ucuzdan bahaya",
+        "exptocheap": "Bahadan ucuza",
+        "a_z": "A-dan Z-yə",
+        "z_a": "Z-dən A-ya"
     }
 }

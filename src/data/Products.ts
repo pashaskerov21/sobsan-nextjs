@@ -13,6 +13,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 2,
@@ -26,6 +27,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 3,
@@ -39,6 +41,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 4,
@@ -52,6 +55,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 5,
@@ -65,6 +69,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 6,
@@ -78,6 +83,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 7,
@@ -91,6 +97,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 6,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 8,
@@ -104,6 +111,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 9,
@@ -117,6 +125,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 10,
@@ -130,6 +139,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 11,
@@ -143,6 +153,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 12,
@@ -156,6 +167,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 13,
@@ -169,6 +181,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 14,
@@ -182,6 +195,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 10,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 15,
@@ -195,6 +209,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 16,
@@ -208,6 +223,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 17,
@@ -221,6 +237,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 18,
@@ -234,6 +251,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 19,
@@ -247,6 +265,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 20,
@@ -260,6 +279,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 21,
@@ -273,6 +293,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 22,
@@ -286,6 +307,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 23,
@@ -299,6 +321,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 24,
@@ -312,6 +335,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 25,
@@ -325,6 +349,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 26,
@@ -338,6 +363,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 27,
@@ -351,6 +377,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 28,
@@ -364,6 +391,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 29,
@@ -377,6 +405,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 30,
@@ -390,6 +419,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 31,
@@ -403,6 +433,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 32,
@@ -416,6 +447,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 33,
@@ -429,6 +461,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 34,
@@ -442,6 +475,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 35,
@@ -455,6 +489,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 9,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 36,
@@ -468,6 +503,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 8,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 37,
@@ -481,6 +517,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 38,
@@ -494,6 +531,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 39,
@@ -507,6 +545,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 11,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 40,
@@ -520,6 +559,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 41,
@@ -533,6 +573,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 42,
@@ -546,6 +587,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 43,
@@ -559,6 +601,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 7,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 44,
@@ -572,6 +615,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 45,
@@ -585,6 +629,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 46,
@@ -598,6 +643,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 47,
@@ -611,6 +657,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 48,
@@ -624,6 +671,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 49,
@@ -637,6 +685,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 50,
@@ -650,6 +699,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 51,
@@ -663,6 +713,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 52,
@@ -676,6 +727,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 53,
@@ -689,6 +741,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 54,
@@ -702,6 +755,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 55,
@@ -715,6 +769,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 56,
@@ -728,6 +783,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 57,
@@ -741,6 +797,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 2,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 58,
@@ -754,6 +811,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 4,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 59,
@@ -767,6 +825,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 3,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 60,
@@ -780,6 +839,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 61,
@@ -793,6 +853,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 5,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 62,
@@ -806,6 +867,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 63,
@@ -819,6 +881,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 64,
@@ -832,6 +895,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 65,
@@ -845,6 +909,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 66,
@@ -858,6 +923,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 67,
@@ -871,6 +937,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 68,
@@ -884,6 +951,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 69,
@@ -897,6 +965,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 70,
@@ -910,6 +979,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 71,
@@ -923,6 +993,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 72,
@@ -936,6 +1007,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 73,
@@ -949,6 +1021,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 74,
@@ -962,6 +1035,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 75,
@@ -975,6 +1049,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 76,
@@ -988,6 +1063,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 77,
@@ -1001,6 +1077,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 78,
@@ -1014,6 +1091,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 79,
@@ -1027,6 +1105,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 1,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 80,
@@ -1040,6 +1119,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 81,
@@ -1053,6 +1133,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 82,
@@ -1066,6 +1147,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 0,
         brand_id: 1,
+        activeTitle: '',
     },
     {
         id: 83,
@@ -1079,6 +1161,7 @@ const ProductData:ProductDataType[] = [
         discount: 0,
         catalog_id: 12,
         brand_id: 1,
+        activeTitle: '',
     }
 ]
 export default ProductData;

@@ -60,7 +60,7 @@ class Product {
         }
         return price;
     }
-    public filterization(filterData: ProductFilterDataType, productData: ProductDataType[], productAttributeRelationData: ProductAttributeRelationDataType[]) {
+    public techFilterization(filterData: ProductFilterDataType, productData: ProductDataType[], productAttributeRelationData: ProductAttributeRelationDataType[]) {
         let filteredProducts: ProductDataType[] | [] = productData;
         if (filterData.brand !== 0) {
             filteredProducts = filteredProducts.filter((data) => data.brand_id === filterData.brand);
@@ -70,17 +70,32 @@ class Product {
         }
         if (filterData.attributeIDs.length > 0) {
             const filteredProductIds: number[] = [];
-        
+
             filterData.attributeIDs.forEach((attrId) => {
                 const matchingRelations = productAttributeRelationData.filter((par_data) => par_data.attr_id === attrId);
                 const matchingProductIds = matchingRelations.map((relation) => relation.product_id);
                 filteredProductIds.push(...matchingProductIds);
             });
-        
+
             filteredProducts = filteredProducts.filter((product) => filteredProductIds.includes(product.id));
         }
 
         return filteredProducts;
+    }
+
+    public sortFilterization(filterType: 'cheaptoexp' | 'exptocheap' | 'a-z' | 'z-a', productData: ProductDataType[],) {
+        switch (filterType) {
+            case "cheaptoexp":
+                return productData.sort((a, b) => a.price - b.price);
+            case "exptocheap":
+                return productData.sort((a, b) => b.price - a.price);
+            case 'a-z':
+                return productData.sort((a, b) => a.activeTitle.localeCompare(b.activeTitle));
+            case 'z-a':
+                return productData.sort((a, b) => b.activeTitle.localeCompare(a.activeTitle));
+            default:
+                return productData;
+        }
     }
 }
 export default Product;

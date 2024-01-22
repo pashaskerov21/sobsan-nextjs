@@ -158,6 +158,7 @@ export type ProductDataType = {
     discount: number,
     catalog_id: number,
     brand_id: number,
+    activeTitle: string,
 };
 export type ProductTranslateDataType = {
     id: number,

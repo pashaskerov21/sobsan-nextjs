@@ -120,6 +120,7 @@ export type {
     BasketDataType,
     WishlistDataType,
     ComparisonDataType,
+    ProductFilterDataType,
 
     RootLayoutProps,
     CatalogPageLayoutProps,

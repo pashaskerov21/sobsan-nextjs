@@ -3,12 +3,26 @@ import React, { useRef } from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
 import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import {
+    AttributeDataType,
+    AttributeGroupDataType,
+    AttributeGroupTranslateDataType,
+    AttributeTranslateDataType,
+    BrandDataType,
+    BrandTranslateDataType,
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    LoadingType,
+    LocaleType,
+    ProductAttributeRelationDataType,
+    ProductDataType,
+    ProductFilterDataType,
+    ProductTranslateDataType
+} from '@/src/types'
 import { CategoryCoverImage, ProductGeneralContainer } from './style';
 import { FaFilter } from "react-icons/fa";
 import { FaList, FaTableCellsLarge } from "react-icons/fa6";
 import { useLocalStorage } from 'usehooks-ts'
-import { ProductAttributeRelationDataType, ProductFilterDataType } from '@/src/types/data'
 import { Product } from '@/src/class'
 import { ProductData } from '@/src/data'
 
@@ -77,6 +91,8 @@ const ProductsSection: React.FC<SectionProps> = ({
     const indexOfLastProduct = paginationState.currentPage * paginationState.productCount;
     const indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
 
+
+
     // functions
     const openFilters = React.useCallback(() => {
         if (window.innerWidth < 1200) {
@@ -136,7 +152,7 @@ const ProductsSection: React.FC<SectionProps> = ({
 
     const handleSelectAttribute = (id: number) => {
         setProductFilterData((prev) => {
-            return{
+            return {
                 ...prev,
                 attributeIDs: prev.attributeIDs.includes(id) ? [...prev.attributeIDs.filter((attr_id) => attr_id !== id)] : [...prev.attributeIDs, id],
             }
@@ -152,8 +168,16 @@ const ProductsSection: React.FC<SectionProps> = ({
             },
             brand: 0,
             attributeIDs: [],
-        })
-    }
+        });
+        scrollContainerTop();
+        closeFilters();
+        setProductState((prev) => {
+            return {
+                ...prev,
+                filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
+            }
+        });
+    };
 
     const handleSubmitFilterForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -168,9 +192,23 @@ const ProductsSection: React.FC<SectionProps> = ({
         setProductState((prev) => {
             return {
                 ...prev,
-                filtered: product.filterization(productFilterData, categoryProducts, productAttributeRelationData),
+                filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
             }
-        })
+        });
+    };
+
+    
+    const handleSortFilters = (type: "cheaptoexp" | "exptocheap" | 'a-z' | 'z-a') => {
+        const productDataWithActiveTitle = productState.filtered.map((data) => {
+            return{
+                ...data,
+                activeTitle: product.getTranslate(data.id, activeLocale, "title"),
+            }
+        });
+        setProductState({
+            filtered: product.sortFilterization(type, productDataWithActiveTitle),
+            finalResult: product.sortFilterization(type, productDataWithActiveTitle).slice(indexOfFirstProduct, indexOfLastProduct),
+        });
     };
 
     // useeffect
@@ -236,10 +274,7 @@ const ProductsSection: React.FC<SectionProps> = ({
                     />
                     <div className="container-right">
                         <div className="right-top">
-                            <ProductSortFilters
-                                loading={loading}
-                                generalDictionary={generalDictionary}
-                            />
+                            <ProductSortFilters generalDictionary={generalDictionary} loading={loading} handleSortFilters={handleSortFilters} />
                             <div className="layout-buttons">
                                 {
                                     loading.standart ? (

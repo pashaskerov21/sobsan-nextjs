@@ -68,26 +68,24 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                   >
                     {
                       productBannerData.map((data) => (
-                        <React.Fragment key={data.id}>
-                          <SwiperSlide>
-                            <div className="banner-slide">
-                              <div className="content">
-                                <div className="title">
-                                  {productBanner.getTranslate(data.id, activeLocale, "title")}
-                                </div>
-                                <div className="text">
-                                  {productBanner.getTranslate(data.id, activeLocale, "text")}
-                                </div>
-                                <Link href={productBanner.getTranslate(data.id, activeLocale, "url")} className='order-btn'>
-                                  {generalDictionary.order}
-                                </Link>
+                        <SwiperSlide key={`product-banner-${data.id}`}>
+                          <div className="banner-slide">
+                            <div className="content">
+                              <div className="title">
+                                {productBanner.getTranslate(data.id, activeLocale, "title")}
                               </div>
-                              <VanillaComponent className='banner-image'>
-                                <Image src={data.image} width={500} height={500} alt='' />
-                              </VanillaComponent>
+                              <div className="text">
+                                {productBanner.getTranslate(data.id, activeLocale, "text")}
+                              </div>
+                              <Link href={productBanner.getTranslate(data.id, activeLocale, "url")} className='order-btn'>
+                                {generalDictionary.order}
+                              </Link>
                             </div>
-                          </SwiperSlide>
-                        </React.Fragment>
+                            <VanillaComponent className='banner-image'>
+                              <Image src={data.image} width={500} height={500} alt='' priority={true} />
+                            </VanillaComponent>
+                          </div>
+                        </SwiperSlide>
                       ))
                     }
                   </Swiper>

@@ -50,6 +50,7 @@ export const ProductGeneralContainer = styled.div`
                     font-size: 14px;
                     gap: 0px;
                     cursor: pointer;
+                    user-select: none;
                     svg{
                         font-size: 16px;
                         color: ${props => props.theme.color_1};

@@ -124,7 +124,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
             <div className="filter-checkbox-buttons">
               {
                 brandData.map((data) => (
-                  <React.Fragment>
+                  <React.Fragment key={data.id}>
                     {
                       loading.standart ? (
                         <Skeleton width='125px' height='44px' radius='10px' />
@@ -143,7 +143,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
           {/* attribute filter */}
           {
             attributeGroupData.map((data) => (
-              <div className="filter-item" key={data.id}>
+              <div className="filter-item" key={`group-${data.id}`}>
                 {
                   loading.standart ? (
                     <Skeleton width='120px' height='20px' margin='10px 0' />
@@ -154,7 +154,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                 <div className="filter-checkbox-buttons">
                   {
                     attributeGroup.getAttributes(data.id, attributeData).length > 0 && attributeGroup.getAttributes(data.id, attributeData).map((attr) => (
-                      <React.Fragment>
+                      <React.Fragment key={`attr-${attr.id}`}>
                         {
                           loading.standart ? (
                             <Skeleton width='125px' height='44px' radius='10px' />

@@ -31,11 +31,11 @@ const ProductCategoryRelationData:ProductCategoryRelationDataType[] = [
         product_id: 2,
         category_id: 3,
     },
-    {
-        id: 7,
-        product_id: 2,
-        category_id: 1,
-    },
+    // {
+    //     id: 7,
+    //     product_id: 2,
+    //     category_id: 1,
+    // },
     {
         id: 8,
         product_id: 3,

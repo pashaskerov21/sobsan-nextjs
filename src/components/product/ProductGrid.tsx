@@ -28,7 +28,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     <ProductGridWrapper $productsView={productsView}>
       {
         productData.map((data) => (
-          <React.Fragment>
+          <React.Fragment key={`product-${data.id}`}>
             <ProductCard
               activeLocale={activeLocale}
               activeProductData={data}

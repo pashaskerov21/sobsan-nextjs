@@ -46,6 +46,10 @@
         "reset": "Reset",
         "by_price": "By price",
         "by_name": "By name",
-        "by_popularity": "By popularity"
+        "by_popularity": "By popularity",
+        "cheaptoexp": "Cheap to expensive",
+        "exptocheap": "Expensive to cheap",
+        "a_z": "A to Z",
+        "z_a": "Z to A"
     }
 }

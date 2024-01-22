@@ -39,9 +39,9 @@ const BannerSection: React.FC<{ loading: LoadingType, bannerData: BannerDataType
                                 >
                                     {
                                         bannerData.map((data) => (
-                                            <SwiperSlide key={data.id}>
+                                            <SwiperSlide key={`banner-${data.id}`}>
                                                 <BannerSlide href=''>
-                                                    <Image src={data.image} width={2000} height={980} alt='banner-image' priority={false} />
+                                                    <Image src={data.image} width={2000} height={980} alt='banner-image' priority={true} />
                                                 </BannerSlide>
                                             </SwiperSlide>
                                         ))
