@@ -1,9 +1,8 @@
-import React from "react"
+import { LocaleType } from "@/src/types";
+import { redirect } from "next/navigation";
 
-const AllProductsPage = () => {
-    return (
-        <React.Fragment></React.Fragment>
-    )
+const AllProductsPage = ({ params: { lang } }: { params: { lang: LocaleType } }) => {
+    redirect(`/${lang}/404`);
 }
 
 export default AllProductsPage

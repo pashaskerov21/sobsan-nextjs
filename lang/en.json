@@ -50,6 +50,7 @@
         "cheaptoexp": "Cheap to expensive",
         "exptocheap": "Expensive to cheap",
         "a_z": "A to Z",
-        "z_a": "Z to A"
+        "z_a": "Z to A",
+        "page_not_found": "Page not found"
     }
 }

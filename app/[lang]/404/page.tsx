@@ -1,4 +1,5 @@
 import { getTranslate } from '@/get-translate';
+import { Page404Layout } from '@/src/layout';
 import { LocaleType } from '@/src/types';
 import { Metadata } from 'next';
 import React from 'react'
@@ -12,10 +13,17 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
   };
 }
 
-const Page404 = () => {
+const Page404 = async ({ params: { lang } }: { params: { lang: LocaleType } }) => {
+  const t = await getTranslate(lang);
+  const titleDictionary = t.title;
+  const generalDictionary = t.general;
   return (
     <React.Fragment>
-        404
+      <Page404Layout
+        activeLocale={lang}
+        titleDictionary={titleDictionary}
+        generalDictionary={generalDictionary}
+      />
     </React.Fragment>
   )
 }

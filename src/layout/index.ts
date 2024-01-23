@@ -11,6 +11,7 @@ import ContactPageLayout from "./contact/ContactPageLayout";
 import HomePageLayout from "./home/HomePageLayout";
 import CategoryPageLayout from "./category/CategoryPageLayout";
 import ProductDetailPageLayout from "./product/ProductDetailPageLayout";
+import Page404Layout from "./error/Page404Layout";
 
 export {
     RootLayout,
@@ -25,5 +26,6 @@ export {
     ContactPageLayout,
     HomePageLayout,
     CategoryPageLayout,
-    ProductDetailPageLayout
+    ProductDetailPageLayout,
+    Page404Layout
 }
