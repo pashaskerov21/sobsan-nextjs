@@ -38,7 +38,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               brandData={brandData}
               brandTranslateData={brandTranslateData}
               generalDictionary={generalDictionary}
-              
             />
           </React.Fragment>
         ))

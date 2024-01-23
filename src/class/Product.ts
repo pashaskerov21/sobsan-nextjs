@@ -1,4 +1,5 @@
-import { BrandDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "../types";
+import { i18n } from "@/i18n-config";
+import { BrandDataType, LocaleStateType, LocaleType, PageTitleDataType, ProductDataType, ProductTranslateDataType } from "../types";
 import { ProductAttributeRelationDataType, ProductFilterDataType } from "../types/data";
 
 class Product {
@@ -19,7 +20,7 @@ class Product {
                 case "description":
                     return translate = activeTranslateData.description;
                 case "url":
-                    return translate = `/${activeLocale}/products/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                    return translate = `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
                 default:
                     return translate = "";
             }
@@ -40,9 +41,9 @@ class Product {
     }
     public getURL(id: number, activeLocale: LocaleType) {
         const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.product_id === id && data.lang === activeLocale);
-        let url = `/${activeLocale}/products/`
+        let url = `/${activeLocale}/product/`
         if (activeTranslateData) {
-            url = `/${activeLocale}/products/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+            url = `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
         }
         return url;
     }
@@ -96,6 +97,61 @@ class Product {
             default:
                 return productData;
         }
+    }
+    public getProductBySlug(slug: string,activeLocale: LocaleType){
+        const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.lang === activeLocale && data.title.toLocaleLowerCase() === decodeURIComponent(slug.toLocaleLowerCase()));
+        let activeData: ProductDataType | undefined;
+        if(activeTranslateData){
+            activeData = this.productData.find((data) => data.id === activeTranslateData.product_id);
+        }
+        return activeData
+    };
+    public getLocaleSlugs(id: number){
+        let localeSlugs: LocaleStateType[] = i18n.locales.map((locale) => {
+            return {
+                locale: locale,
+                slug: ""
+            }
+        });
+
+        const activeTranslateData: ProductTranslateDataType[] | [] = this.productTranslateData.filter((data) => data.product_id === id);
+        if(activeTranslateData.length === i18n.locales.length){
+            localeSlugs = activeTranslateData.map((data) => {
+                return {
+                    locale: data.lang,
+                    slug: encodeURIComponent(data.title.toLocaleLowerCase()),
+                }
+            });
+        };
+        return localeSlugs;
+    };
+    public getPageTitleData(id: number, activeLocale: LocaleType){
+        let pageData: PageTitleDataType = {
+            title: "",
+            breadcrumbs: [
+                {
+                    id: 1,
+                    path: `/${activeLocale}`,
+                    name: '',
+                }
+            ]
+        };
+        const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.product_id === id && data.lang === activeLocale);
+        
+        if(activeTranslateData){
+            pageData = {
+                title: activeTranslateData.title,
+                breadcrumbs: [
+                    {
+                        id: 1,
+                        path: encodeURIComponent(activeTranslateData.title.toLocaleLowerCase()),
+                        name: activeTranslateData.title,
+                    }
+                ]
+            }
+        }
+        
+        return pageData;
     }
 }
 export default Product;

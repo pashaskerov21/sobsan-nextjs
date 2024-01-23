@@ -262,6 +262,7 @@ export const LeftFilterWrapper = styled.div`
     ${column_justify_start};
     gap: 20px;
     padding: 20px 15px;
+    z-index: 100;
     &.active{
         left: 0;
         opacity: 1;
@@ -451,14 +452,12 @@ export const LeftFilterWrapper = styled.div`
         max-width: 320px;
         height: auto;
         overflow: visible;
-        z-index: 1;
+        z-index: 100;
         .lfw-header{
             display: none;
         }
     }
 `;
-
-
 
 export const ProductGridWrapper = styled.div<{ $productsView: "grid" | "list" }>`
     width: 100%;
@@ -509,7 +508,7 @@ export const ProductSortFilterWrapper = styled.div`
     ${row_justify_start};
     gap: 15px;
     flex-wrap: wrap;
-    z-index: 90;
+    z-index: 10;
     .sort-filter-dropdown{
         position: relative;
         .sfd-title{

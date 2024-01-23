@@ -172,7 +172,7 @@ const ProductCard: React.FC<CardProps> = ({
                                     {product.getTranslate(activeProductData.id, activeLocale, "title")}
                                 </Link>
                                 <div className="product__description">
-                                    {product.getTranslate(activeProductData.id, activeLocale, "description")}
+                                    {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0,100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}
                                 </div>
                             </React.Fragment>
                         )

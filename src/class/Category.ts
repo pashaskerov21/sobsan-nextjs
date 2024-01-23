@@ -56,7 +56,7 @@ class Category {
                     locale: data.lang,
                     slug: encodeURIComponent(data.title.toLocaleLowerCase()),
                 }
-            })
+            });
         };
         return localeSlugs;
     }

@@ -292,7 +292,7 @@ export function middleware(request: NextRequest) {
       '/products/product-67.webp',
       '/products/product-68.webp',
       '/products/product-69.webp',
-      '/products/product-79.webp',
+      '/products/product-70.webp',
       '/products/product-71.webp',
       '/products/product-72.webp',
       '/products/product-73.webp',

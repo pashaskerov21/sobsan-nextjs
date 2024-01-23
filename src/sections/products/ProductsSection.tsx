@@ -169,6 +169,12 @@ const ProductsSection: React.FC<SectionProps> = ({
             brand: 0,
             attributeIDs: [],
         });
+        setPaginationState((prev) => {
+            return {
+                ...prev,
+                currentPage: 1,
+            }
+        })
         scrollContainerTop();
         closeFilters();
         setProductState((prev) => {

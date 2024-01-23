@@ -37,6 +37,9 @@ export const ProductGeneralContainer = styled.div`
         width: 100%;
         ${column_justify_start};
         gap: 20px;
+        @media (min-width: 992px){
+            max-width: 75%;
+        }
         .right-top{
             width: 100%;
             ${row_between};

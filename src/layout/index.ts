@@ -10,6 +10,7 @@ import WarrantyConditionsPageLayout from "./article/WarrantyConditionsPageLayout
 import ContactPageLayout from "./contact/ContactPageLayout";
 import HomePageLayout from "./home/HomePageLayout";
 import CategoryPageLayout from "./category/CategoryPageLayout";
+import ProductDetailPageLayout from "./product/ProductDetailPageLayout";
 
 export {
     RootLayout,
@@ -23,5 +24,6 @@ export {
     WarrantyConditionsPageLayout,
     ContactPageLayout,
     HomePageLayout,
-    CategoryPageLayout
+    CategoryPageLayout,
+    ProductDetailPageLayout
 }

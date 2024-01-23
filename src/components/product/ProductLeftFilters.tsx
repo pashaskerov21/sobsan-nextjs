@@ -90,25 +90,31 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
             }
 
             {
-              loading.standart ? (
-                <Skeleton width='100%' height='70px' />
-              ) : (
-                <div className='range-filter'>
-                  <div className='range-inputs'>
-                    <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
-                    <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
-                  </div>
-                  <div className='result-inputs'>
-                    <div className="item">
-                      <input type="number" value={productFilterData.price.min} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
-                      <span>AZN</span>
-                    </div>
-                    <div className="item">
-                      <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
-                      <span>AZN</span>
-                    </div>
-                  </div>
-                </div>
+              maxPrice > 1 && (
+                <React.Fragment>
+                  {
+                    loading.standart ? (
+                      <Skeleton width='100%' height='70px' />
+                    ) : (
+                      <div className='range-filter'>
+                        <div className='range-inputs'>
+                          <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
+                          <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
+                        </div>
+                        <div className='result-inputs'>
+                          <div className="item">
+                            <input type="number" value={productFilterData.price.min} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
+                            <span>AZN</span>
+                          </div>
+                          <div className="item">
+                            <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
+                            <span>AZN</span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }
+                </React.Fragment>
               )
             }
           </div>
@@ -120,7 +126,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
               ) : (
                 <div className="filter-title">{generalDictionary.brand}</div>
               )
-            } 
+            }
             <div className="filter-checkbox-buttons">
               {
                 brandData.map((data) => (

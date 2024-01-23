@@ -120,7 +120,7 @@ type AltCategoryWrapperProps = {
 export const AltCategoryWrapper = styled.div<AltCategoryWrapperProps>`
     z-index: 100;
     width: 100%;
-    display: ${props => props.$active ? 'block' : 'none'};
+    display: ${props => props.$active ? 'block' : 'none'}; 
     .main-row{
         a{
             padding-left: ${props => props.$level * 15}px !important;

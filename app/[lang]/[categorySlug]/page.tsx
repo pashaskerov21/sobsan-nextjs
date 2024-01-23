@@ -127,7 +127,7 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
             productAttributeRelationData
         ) {
             const category = new Category(categoryData, categoryTranslateData);
-            const activeCategoryData = category.getCategoryBySlug(categorySlug, lang);
+            const activeCategoryData:CategoriesDataType | undefined = category.getCategoryBySlug(categorySlug, lang);
             if (activeCategoryData) {
                 return (
                     <React.Fragment>
