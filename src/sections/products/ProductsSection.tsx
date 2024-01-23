@@ -25,6 +25,7 @@ import { FaList, FaTableCellsLarge } from "react-icons/fa6";
 import { useLocalStorage } from 'usehooks-ts'
 import { Product } from '@/src/class'
 import { ProductData } from '@/src/data'
+import { usePathname } from 'next/navigation'
 
 type SectionProps = {
     loading: LoadingType,
@@ -65,6 +66,7 @@ const ProductsSection: React.FC<SectionProps> = ({
 }) => {
     // variables
     const body = document.querySelector('body');
+    const pathName = usePathname();
     const generalWrapperRef = useRef<HTMLDivElement>(null);
     const product = new Product(ProductData, productTranslateData);
     const [filterShow, setFilterShow] = React.useState<boolean>(false);
@@ -226,6 +228,17 @@ const ProductsSection: React.FC<SectionProps> = ({
             }
         });
     }, [indexOfFirstProduct, indexOfLastProduct, productState.filtered]);
+
+    React.useEffect(() => {
+        setProductFilterData({
+            price: {
+                min: 0,
+                max: product.getMaxPrice(productState.filtered),
+            },
+            brand: 0,
+            attributeIDs: [],
+        })
+    },[pathName])
 
     return (
         <Section $py={20}>
