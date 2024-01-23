@@ -21,22 +21,22 @@ const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
   });
   React.useEffect(() => {
     setTimeout(() => {
-      setLoading((prev) => {
-        return {
-          ...prev,
-          standart: false,
-        }
-      });
-    }, 1000);
+        setLoading((prev) => {
+            return {
+                ...prev,
+                standart: false,
+            }
+        });
+    }, 500);
     setTimeout(() => {
-      setLoading((prev) => {
-        return {
-          ...prev,
-          lazy: false,
-        }
-      });
-    }, 2000);
-  }, []);
+        setLoading((prev) => {
+            return {
+                ...prev,
+                lazy: false,
+            }
+        });
+    }, 1000);
+}, []);
 
   const menu = new Menu(menuData, menuTranslateData);
   const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);

@@ -56,7 +56,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1000);
+        }, 500);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -64,7 +64,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 2000);
+        }, 1000);
     }, []);
     const dispatch = useDispatch();
 

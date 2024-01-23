@@ -32,7 +32,7 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1000);
+        }, 500);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -40,7 +40,7 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 2000);
+        }, 1000);
     }, []);
 
     const path = 'catalogs';

@@ -26,7 +26,7 @@ const AboutPageLayout: React.FC<AboutPageLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1000);
+        }, 500);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -34,7 +34,7 @@ const AboutPageLayout: React.FC<AboutPageLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 2000);
+        }, 1000);
     }, []);
 
     const path = 'about';

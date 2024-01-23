@@ -28,7 +28,7 @@ const ContactPageLayout: React.FC<ContactPageLayoutProps> = ({
                     standart: false,
                 }
             });
-        }, 1000);
+        }, 500);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -36,7 +36,7 @@ const ContactPageLayout: React.FC<ContactPageLayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 2000);
+        }, 1000);
     }, []);
 
     const menu = new Menu(menuData, menuTranslateData);

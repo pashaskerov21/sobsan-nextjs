@@ -28,7 +28,7 @@ const Page404Layout: React.FC<LayoutProps> = ({ activeLocale, titleDictionary, g
           standart: false,
         }
       });
-    }, 1000);
+    }, 500);
     setTimeout(() => {
       setLoading((prev) => {
         return {
@@ -36,7 +36,7 @@ const Page404Layout: React.FC<LayoutProps> = ({ activeLocale, titleDictionary, g
           lazy: false,
         }
       });
-    }, 2000);
+    }, 1000);
   }, []);
   const dispatch = useDispatch();
   const localeSlugs: LocaleStateType[] = i18n.locales.map((locale) => {

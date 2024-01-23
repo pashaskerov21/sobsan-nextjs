@@ -28,7 +28,7 @@ const WarrantyConditionsPageLayout: React.FC<WarrantyConditionPageLayoutProps> =
                     standart: false,
                 }
             });
-        }, 1000);
+        }, 500);
         setTimeout(() => {
             setLoading((prev) => {
                 return {
@@ -36,7 +36,7 @@ const WarrantyConditionsPageLayout: React.FC<WarrantyConditionPageLayoutProps> =
                     lazy: false,
                 }
             });
-        }, 2000);
+        }, 1000);
     }, []);
 
     const menu = new Menu(menuData, menuTranslateData);
