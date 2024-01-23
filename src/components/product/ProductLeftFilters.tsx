@@ -80,44 +80,41 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
         />
         <form className='product-filter-form' onSubmit={(e) => handleSubmitFilterForm(e)}>
           {/* price filter */}
-          <div className="filter-item">
-            {
-              loading.standart ? (
-                <Skeleton width='120px' height='20px' margin='10px 0' />
-              ) : (
-                <div className="filter-title">{generalDictionary.price}</div>
-              )
-            }
-
-            {
-              maxPrice > 1 && (
-                <React.Fragment>
-                  {
-                    loading.standart ? (
-                      <Skeleton width='100%' height='70px' />
-                    ) : (
-                      <div className='range-filter'>
-                        <div className='range-inputs'>
-                          <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
-                          <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
+          {
+            maxPrice > 1 && (
+              <div className="filter-item">
+                {
+                  loading.standart ? (
+                    <Skeleton width='120px' height='20px' margin='10px 0' />
+                  ) : (
+                    <div className="filter-title">{generalDictionary.price}</div>
+                  )
+                }
+                {
+                  loading.standart ? (
+                    <Skeleton width='100%' height='70px' />
+                  ) : (
+                    <div className='range-filter'>
+                      <div className='range-inputs'>
+                        <input type="range" value={productFilterData.price.min} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
+                        <input type="range" value={productFilterData.price.max} min={0} max={maxPrice} step={1} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
+                      </div>
+                      <div className='result-inputs'>
+                        <div className="item">
+                          <input type="number" value={productFilterData.price.min} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
+                          <span>AZN</span>
                         </div>
-                        <div className='result-inputs'>
-                          <div className="item">
-                            <input type="number" value={productFilterData.price.min} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("min", parseInt(e.target.value))} />
-                            <span>AZN</span>
-                          </div>
-                          <div className="item">
-                            <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
-                            <span>AZN</span>
-                          </div>
+                        <div className="item">
+                          <input type="number" value={productFilterData.price.max} onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangePrice("max", parseInt(e.target.value))} />
+                          <span>AZN</span>
                         </div>
                       </div>
-                    )
-                  }
-                </React.Fragment>
-              )
-            }
-          </div>
+                    </div>
+                  )
+                }
+              </div>
+            )
+          }
           {/* brand filter */}
           <div className="filter-item">
             {

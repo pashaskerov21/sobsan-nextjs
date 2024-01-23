@@ -10,19 +10,59 @@ import { ProductDetailPageLayout } from "@/src/layout";
 const fetchData = async (): Promise<{
     productData: ProductDataType[] | undefined,
     productTranslateData: ProductTranslateDataType[] | undefined,
+    categoryData: CategoriesDataType[] | undefined;
+    categoryTranslateData: CategoriesTranslateDataType[] | undefined;
+    brandData: BrandDataType[] | undefined,
+    brandTranslateData: BrandTranslateDataType[] | undefined,
+    attributeGroupData: AttributeGroupDataType[] | undefined,
+    attributeGroupTranslateData: AttributeGroupTranslateDataType[] | undefined,
+    attributeData: AttributeDataType[] | undefined,
+    attributeTranslateData: AttributeTranslateDataType[] | undefined,
+    productCategoryRelationData: ProductCategoryRelationDataType[] | undefined,
+    productAttributeRelationData: ProductAttributeRelationDataType[] | undefined,
 }> => {
     try {
         const [
             productData,
             productTranslateData,
+            categoryData,
+            categoryTranslateData,
+            brandData,
+            brandTranslateData,
+            attributeGroupData,
+            attributeGroupTranslateData,
+            attributeData,
+            attributeTranslateData,
+            productCategoryRelationData,
+            productAttributeRelationData,
         ] = await Promise.all([
             fetchProductData(),
             fetchProductTranslateData(),
+            fetchCategoryData(),
+            fetchCategoryTranslateData(),
+            fetchBrandData(),
+            fetchBrandTranslateData(),
+            fetchAttributeGroupData(),
+            fetchAttributeGroupTranslateData(),
+            fetchAttributeData(),
+            fetchAttributeTranslateData(),
+            fetchProductCategoryRelationData(),
+            fetchProductAttributeRelationData(),
         ]);
 
         return {
             productData,
             productTranslateData,
+            categoryData,
+            categoryTranslateData,
+            brandData,
+            brandTranslateData,
+            attributeGroupData,
+            attributeGroupTranslateData,
+            attributeData,
+            attributeTranslateData,
+            productCategoryRelationData,
+            productAttributeRelationData,
         };
     } catch (error) {
         throw new Error('Failed to fetch data');
@@ -61,21 +101,36 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
         const {
             productData,
             productTranslateData,
+            categoryData,
+            categoryTranslateData,
+            brandData,
+            brandTranslateData,
+            attributeGroupData,
+            attributeGroupTranslateData,
+            attributeData,
+            attributeTranslateData,
+            productCategoryRelationData,
+            productAttributeRelationData,
         } = await fetchData();
         const t = await getTranslate(lang);
         const generalDictionary = t.general;
         const titleDictionary = t.title;
         if (
             productData &&
-            productTranslateData
+            productTranslateData &&
+            categoryData &&
+            categoryTranslateData &&
+            brandData &&
+            brandTranslateData &&
+            attributeGroupData &&
+            attributeGroupTranslateData &&
+            attributeData &&
+            attributeTranslateData &&
+            productCategoryRelationData &&
+            productAttributeRelationData
         ) {
             const product = new Product(productData, productTranslateData);
             const activeProductData: ProductDataType | undefined = product.getProductBySlug(productSlug, lang);
-            // return(
-            //     <React.Fragment>
-            //         {decodeURIComponent(productSlug.toLocaleLowerCase())} - {activeProductData ? 'true' : 'false'}
-            //     </React.Fragment>
-            // )
             if (activeProductData) {
                 return (
                     <React.Fragment>
@@ -85,6 +140,16 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
                             generalDictionary={generalDictionary}
                             productData={productData}
                             productTranslateData={productTranslateData}
+                            categoryData={categoryData}
+                            categoryTranslateData={categoryTranslateData}
+                            brandData={brandData}
+                            brandTranslateData={brandTranslateData}
+                            attributeGroupData={attributeGroupData}
+                            attributeGroupTranslateData={attributeGroupTranslateData}
+                            attributeData={attributeData}
+                            attributeTranslateData={attributeTranslateData}
+                            productCategoryRelationData={productCategoryRelationData}
+                            productAttributeRelationData={productAttributeRelationData}
                             titleDictionary={titleDictionary}
                         />
                     </React.Fragment>

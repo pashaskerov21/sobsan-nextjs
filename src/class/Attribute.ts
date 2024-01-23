@@ -21,6 +21,7 @@ class Attribute {
         }
         return translate;
     }
+    public getGroup()
 }
 
 export default Attribute;

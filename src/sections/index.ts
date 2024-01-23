@@ -3,11 +3,13 @@ import BannerSection from "./banner/BannerSection";
 import ProductBannerSection from "./banner/ProductBannerSection";
 import PopularProductSection from "./products/PopularProductSection";
 import ProductsSection from "./products/ProductsSection";
+import ProductDetailSection from "./products/ProductDetailSection";
 
 export {
     CatalogSection,
     BannerSection,
     ProductBannerSection,
     PopularProductSection,
-    ProductsSection
+    ProductsSection,
+    ProductDetailSection
 }

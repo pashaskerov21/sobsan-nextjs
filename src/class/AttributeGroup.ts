@@ -25,6 +25,16 @@ class AttributeGroup {
         const attributes: AttributeDataType[] | [] = attributeData.filter((data) => data.group_id === id);
         return attributes;
     }
+    public getTitleByID(id: number, activeLocale: LocaleType){
+        let title = ''; 
+
+        const activeTranslateData: AttributeGroupTranslateDataType | undefined = this.attributeGroupTranslateData.find((data) => data.lang === activeLocale && data.group_id === id);
+        if(activeTranslateData){
+            title = activeTranslateData.title;
+        }
+
+        return title;
+    }
 }
 
 export default AttributeGroup;
