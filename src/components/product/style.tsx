@@ -39,6 +39,7 @@ export const ProductCardWrapper = styled.div<{ $productsView?: "grid" | "list" }
             text-transform: uppercase;
             letter-spacing: 1px;
             border-radius: 5px;
+            user-select: none;
             &.secondary{
                 background-color: ${props => props.theme.color_2};
             }
@@ -459,7 +460,7 @@ export const LeftFilterWrapper = styled.div`
     }
 `;
 
-export const ProductGridWrapper = styled.div<{ $productsView: "grid" | "list" }>`
+export const ProductGridWrapper = styled.div<{ $productsView?: "grid" | "list" }>`
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;

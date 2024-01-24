@@ -12,6 +12,7 @@ type ProductGridProps = {
   generalDictionary: { [key: string]: string },
   brandData: BrandDataType[],
   brandTranslateData: BrandTranslateDataType[],
+  productsView?: "list" | "grid",
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({
@@ -22,8 +23,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   brandData,
   brandTranslateData,
   generalDictionary,
+  productsView,
 }) => {
-  const [productsView, setProductsView] = useLocalStorage<"grid" | "list">("products-view",'grid');
   return (
     <ProductGridWrapper $productsView={productsView}>
       {
@@ -38,6 +39,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               brandData={brandData}
               brandTranslateData={brandTranslateData}
               generalDictionary={generalDictionary}
+              productsView={productsView}
             />
           </React.Fragment>
         ))

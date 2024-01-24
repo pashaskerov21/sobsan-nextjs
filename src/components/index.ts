@@ -4,6 +4,7 @@ import LanguageDropdown from "./language/LanguageDropdown";
 import ThemeButton from "./buttons/ThemeButton";
 import SocialMedia from "./SocialMedia";
 import PageTitle from "./title/PageTitle";
+import ProductPageTitle from "./title/ProductPageTitle";
 import SectionTitle from "./title/SectionTitle";
 import CatalogAccordion from "./catalog/CatalogAccordion";
 import Skeleton from "./skeleton/Skeleton";
@@ -22,6 +23,7 @@ export {
     ThemeButton,
     SocialMedia,
     PageTitle,
+    ProductPageTitle,
     SectionTitle,
     CatalogAccordion,
     Skeleton,

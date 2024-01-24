@@ -70,7 +70,7 @@ const ProductsSection: React.FC<SectionProps> = ({
     const generalWrapperRef = useRef<HTMLDivElement>(null);
     const product = new Product(ProductData, productTranslateData);
     const [filterShow, setFilterShow] = React.useState<boolean>(false);
-    const [productsView, setProductsView] = useLocalStorage<"grid" | "list">("products-view", 'grid');
+    const [productsView, setProductsView] = React.useState<"grid" | "list">('grid');
     const [productState, setProductState] = React.useState<{
         filtered: ProductDataType[] | [],
         finalResult: ProductDataType[] | []
@@ -318,6 +318,7 @@ const ProductsSection: React.FC<SectionProps> = ({
                             brandData={brandData}
                             brandTranslateData={brandTranslateData}
                             generalDictionary={generalDictionary}
+                            productsView={productsView}
                         />
                         {
                             productState.filtered.length > paginationState.productCount && (

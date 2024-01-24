@@ -21,6 +21,7 @@ type CardProps = {
     brandData: BrandDataType[],
     brandTranslateData: BrandTranslateDataType[]
     generalDictionary: { [key: string]: string },
+    productsView?: "list" | "grid",
 }
 
 const ProductCard: React.FC<CardProps> = ({
@@ -32,9 +33,8 @@ const ProductCard: React.FC<CardProps> = ({
     loading,
     productData,
     productTranslateData,
+    productsView,
 }) => {
-
-    const [productsView, setProductsView] = useLocalStorage<"grid" | "list">("products-view",'grid');
 
     const product = new Product(productData, productTranslateData);
     const productURL = product.getURL(activeProductData.id, activeLocale);
@@ -140,13 +140,7 @@ const ProductCard: React.FC<CardProps> = ({
                     {
                         loading.lazy ? (
                             <React.Fragment>
-                                {
-                                    productsView === "grid" ? (
-                                        <Skeleton width='100%' max_width='350px' height='200px' />
-                                    ) : (
-                                        <Skeleton width='150px' height='150px' />
-                                    )
-                                }
+                                <Skeleton width='100%' max_width='350px' height='200px' />
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -172,7 +166,7 @@ const ProductCard: React.FC<CardProps> = ({
                                     {product.getTranslate(activeProductData.id, activeLocale, "title")}
                                 </Link>
                                 <div className="product__description">
-                                    {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0,100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}
+                                    {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0, 100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}
                                 </div>
                             </React.Fragment>
                         )

@@ -1,11 +1,14 @@
 'use client'
 import React from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
-import { PageTitle } from '@/src/components'
+import { ProductPageTitle } from '@/src/components'
 import { ProductDetailSection } from '@/src/sections'
+import { useLocalStorage } from 'usehooks-ts'
+import { v4 as uuidv4 } from 'uuid';
+
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -74,13 +77,64 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
     React.useEffect(() => {
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
+
+
+    // product button functions
+    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
+    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
+    const wishlistData: WishlistDataType = {
+        id: uuidv4(),
+        user: null,
+        product: activeProductData.id,
+    };
+    const comparisonData: ComparisonDataType = {
+        id: uuidv4(),
+        user: null,
+        product: activeProductData.id,
+    };
+    const isWishlist = wishlistStorage.find((data) => data.product === activeProductData.id);
+    const isComparison = comparisonStorage.find((data) => data.product === activeProductData.id);
+    const [productState, setProductState] = React.useState<{
+        wishlist: boolean,
+        comparison: boolean,
+    }>({
+        wishlist: false,
+        comparison: false,
+    });
+    React.useEffect(() => {
+        setProductState({
+            comparison: isComparison ? true : false,
+            wishlist: isWishlist ? true : false,
+        })
+    }, [isComparison, isWishlist]);
+
+
+    const handleFavoritetButton = React.useCallback(() => {
+        if (isWishlist) {
+            const filteredData = wishlistStorage.filter((data) => data.product !== activeProductData.id);
+            setWishlistStorage([...filteredData]);
+        } else {
+            setWishlistStorage([...wishlistStorage, wishlistData]);
+        };
+    }, [wishlistStorage, setWishlistStorage, isWishlist]);
+    const handleComparisonButton = React.useCallback(() => {
+        if (isComparison) {
+            const filteredData = comparisonStorage.filter((data) => data.product !== activeProductData.id);
+            setComparisonStorage([...filteredData]);
+        } else {
+            setComparisonStorage([...comparisonStorage, comparisonData])
+        };
+    }, [comparisonStorage, setComparisonStorage, isComparison]);
     return (
         <React.Fragment>
-            <PageTitle
+            <ProductPageTitle
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
+                productState={productState}
+                handleFavoritetButton={handleFavoritetButton}
+                handleComparisonButton={handleComparisonButton}
             />
             <ProductDetailSection
                 activeLocale={activeLocale}

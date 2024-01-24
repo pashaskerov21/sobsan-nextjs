@@ -1,4 +1,4 @@
-import { column_align_start, column_center, row_center, row_justify_start } from "@/src/styles";
+import { column_align_start, column_center, row_between, row_center, row_justify_start } from "@/src/styles";
 import styled from "styled-components";
 
 export const PageTitleWrapper = styled.div`
@@ -48,6 +48,27 @@ export const PageTitleWrapper = styled.div`
                 display: block;
                 color: ${props => props.theme.text_color_9};
                 opacity: 0.6;
+            }
+        }
+        .pagetitle__bottom{
+            width: 100%;
+            ${column_center};
+            gap: 5px;
+            @media (min-width: 992px){
+                ${row_between};
+                gap: 30px;
+            }
+        }
+        .product__buttons{
+            ${row_center};
+            gap: 10px;
+            .product__button{
+                font-size: 26px;
+                display: block;
+                cursor: pointer;
+                &.active{
+                    color: ${props => props.theme.color_1};
+                }
             }
         }
     }
