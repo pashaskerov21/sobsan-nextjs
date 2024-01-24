@@ -1,6 +1,6 @@
 import { i18n } from "@/i18n-config";
 import { BrandDataType, LocaleStateType, LocaleType, PageTitleDataType, ProductDataType, ProductTranslateDataType } from "../types";
-import { AttributeDataType, CategoriesDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductFilterDataType, ProductWeightRelationDataType, WeightDataType } from "../types/data";
+import { AttributeDataType, CategoriesDataType, ColorDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductFilterDataType, ProductWeightRelationDataType, WeightDataType } from "../types/data";
 
 class Product {
     private productData: ProductDataType[];
@@ -173,6 +173,13 @@ class Product {
             weightData.find((w_data) => w_data.id === r_data.weight_id)).
             filter((weight) => weight !== undefined) as WeightDataType[]
         return activeWeightData;
+    }
+    public getCustomColors(id: number, colorData: ColorDataType[], productColorRelationData: ProductColorRelationDataType[]) {
+        const relations: ProductColorRelationDataType[] | [] = productColorRelationData.filter((data) => data.product_id === id);
+        let activeColorData: ColorDataType[] | [] = relations.map((r_data) =>
+            colorData.find((w_data) => w_data.id === r_data.color_id)).
+            filter((weight) => weight !== undefined) as ColorDataType[]
+        return activeColorData;
     }
 }
 export default Product;

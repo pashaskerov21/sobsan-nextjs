@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
 import { ProductDetailWrapper } from './style'
 import Image from 'next/image'
-import { Attribute, AttributeGroup, Brand, Category, Product } from '@/src/class'
+import { Attribute, AttributeGroup, Brand, Category, Color, Product } from '@/src/class'
 
 type SectionProps = {
     loading: LoadingType,
@@ -23,6 +23,9 @@ type SectionProps = {
     productAttributeRelationData: ProductAttributeRelationDataType[],
     weightData: WeightDataType[],
     productWeightRelationData: ProductWeightRelationDataType[],
+    colorData: ColorDataType[],
+    colorTranslateData: ColorTranslateDataType[],
+    productColorRelationData: ProductColorRelationDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -46,6 +49,9 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     productTranslateData,
     productWeightRelationData,
     weightData,
+    colorData,
+    colorTranslateData,
+    productColorRelationData,
     titleDictionary,
 }) => {
     const brand = new Brand(brandTranslateData);
@@ -53,10 +59,13 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const category = new Category(categoryData, categoryTranslateData);
     const attribute = new Attribute(attributeData, attributeTranslateData);
     const attributeGroup = new AttributeGroup(attributeGroupData, attributeGroupTranslateData);
+    const color = new Color(colorData, colorTranslateData);
 
     const productCategories: CategoriesDataType[] | [] = product.getCategories(activeProductData.id, categoryData, productCategoryRelationData);
     const productAttributes: AttributeDataType[] | [] = product.getAttributes(activeProductData.id, attributeData, productAttributeRelationData);
     const productWeights: WeightDataType[] | [] = product.getWeightData(activeProductData.id, weightData, productWeightRelationData);
+    const productCustomColors: ColorDataType[] | [] = product.getCustomColors(activeProductData.id, colorData, productColorRelationData);
+
     return (
         <Section $py={20}>
             <Container>
@@ -102,6 +111,20 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                             </div>
                             <div className="wrapper__left__bottom__col">
                                 <div className="col__title">Rəngi seç</div>
+                                <div className="product__custom__color__buttons">
+                                    {
+                                        activeProductData.catalog_id === 0 && productCustomColors.length > 0 && productCustomColors.map((data) => (
+                                            <div className={`product__custom__color__button`} key={`custom-color-${data.id}`}>
+                                                <div className="color__value">
+                                                    <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
+                                                </div>
+                                                <div className="color__title">
+                                                    {color.getTranslate(data.id, activeLocale, "title")}
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
                             </div>
                             <div className="wrapper__left__bottom__col"></div>
                             <div className="wrapper__left__bottom__col"></div>

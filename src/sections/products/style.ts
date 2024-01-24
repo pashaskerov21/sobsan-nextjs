@@ -171,7 +171,7 @@ export const ProductDetailWrapper = styled.div`
             grid-template-columns: 1fr 1fr;
         }
         .wrapper__left__bottom__col{
-            ${column_align_start};
+            ${column_start};
             gap: 10px;
             .col__title{
                 font-weight: 600;
@@ -190,12 +190,44 @@ export const ProductDetailWrapper = styled.div`
                 padding: 10px 20px;
                 border-radius: 10px;
                 background-color: ${props => props.theme.bg_color_9};
+                cursor: pointer;
                 &.active{
                     background-color: ${props => props.theme.color_1};
                     color: #fff;
                 }
             }
-
+        }
+        .product__custom__color__buttons{
+            width: 100%;
+            ${row_justify_start};
+            flex-wrap: wrap;
+            gap: 15px;
+            .product__custom__color__button{
+                ${column_center};
+                gap: 5px;
+                cursor: pointer;
+                .color__value{
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    ${row_center};
+                    border: 1px solid transparent;
+                    &__inner{
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                    }
+                }
+                .color__title{
+                    font-size: 12px;
+                    font-weight: 600; 
+                }
+                &.active{
+                    .color__value{
+                        border-color: ${props => props.theme.color_1};
+                    }
+                }
+            }
         }
     }
 `;

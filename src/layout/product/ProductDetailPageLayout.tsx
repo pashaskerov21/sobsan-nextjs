@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
@@ -27,6 +27,9 @@ type LayoutProps = {
     productAttributeRelationData: ProductAttributeRelationDataType[],
     weightData: WeightDataType[],
     productWeightRelationData: ProductWeightRelationDataType[],
+    colorData: ColorDataType[],
+    colorTranslateData: ColorTranslateDataType[],
+    productColorRelationData: ProductColorRelationDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -49,6 +52,9 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
     productWeightRelationData,
     weightData,
     productTranslateData,
+    colorData,
+    colorTranslateData,
+    productColorRelationData,
     titleDictionary,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
@@ -159,6 +165,9 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
                 productTranslateData={productTranslateData}
                 productWeightRelationData={productWeightRelationData}
                 weightData={weightData}
+                colorData={colorData}
+                colorTranslateData={colorTranslateData}
+                productColorRelationData={productColorRelationData}
                 titleDictionary={titleDictionary}
             />
         </React.Fragment>

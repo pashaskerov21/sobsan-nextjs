@@ -1,8 +1,8 @@
 import React from "react";
 import { getTranslate } from "@/get-translate";
 import { Product } from "@/src/class";
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from "@/src/types";
-import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductData, fetchProductTranslateData, fetchProductWeightRelationData, fetchWeightData } from "@/src/utils";
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from "@/src/types";
+import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchColorData, fetchColorTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductColorRelationData, fetchProductData, fetchProductTranslateData, fetchProductWeightRelationData, fetchWeightData } from "@/src/utils";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { ProductDetailPageLayout } from "@/src/layout";
@@ -22,6 +22,9 @@ const fetchData = async (): Promise<{
     productAttributeRelationData: ProductAttributeRelationDataType[] | undefined,
     weightData: WeightDataType[] | undefined,
     productWeightRelationData: ProductWeightRelationDataType[] | undefined,
+    colorData: ColorDataType[] | undefined,
+    colorTranslateData: ColorTranslateDataType[] | undefined,
+    productColorRelationData: ProductColorRelationDataType[] | undefined,
 }> => {
     try {
         const [
@@ -39,6 +42,9 @@ const fetchData = async (): Promise<{
             productAttributeRelationData,
             weightData,
             productWeightRelationData,
+            colorData,
+            colorTranslateData,
+            productColorRelationData,
         ] = await Promise.all([
             fetchProductData(),
             fetchProductTranslateData(),
@@ -54,6 +60,9 @@ const fetchData = async (): Promise<{
             fetchProductAttributeRelationData(),
             fetchWeightData(),
             fetchProductWeightRelationData(),
+            fetchColorData(),
+            fetchColorTranslateData(),
+            fetchProductColorRelationData(),
         ]);
 
         return {
@@ -71,6 +80,9 @@ const fetchData = async (): Promise<{
             productAttributeRelationData,
             weightData,
             productWeightRelationData,
+            colorData,
+            colorTranslateData,
+            productColorRelationData,
         };
     } catch (error) {
         throw new Error('Failed to fetch data');
@@ -121,6 +133,9 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
             productAttributeRelationData,
             weightData,
             productWeightRelationData,
+            colorData,
+            colorTranslateData,
+            productColorRelationData,
         } = await fetchData();
         const t = await getTranslate(lang);
         const generalDictionary = t.general;
@@ -139,7 +154,10 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
             productCategoryRelationData &&
             productAttributeRelationData &&
             weightData &&
-            productWeightRelationData
+            productWeightRelationData &&
+            colorData &&
+            colorTranslateData &&
+            productColorRelationData
         ) {
             const product = new Product(productData, productTranslateData);
             const activeProductData: ProductDataType | undefined = product.getProductBySlug(productSlug, lang);
@@ -163,6 +181,9 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
                             productCategoryRelationData={productCategoryRelationData}
                             productAttributeRelationData={productAttributeRelationData}
                             productWeightRelationData={productWeightRelationData}
+                            colorData={colorData}
+                            colorTranslateData={colorTranslateData}
+                            productColorRelationData={productColorRelationData}
                             weightData={weightData}
                             titleDictionary={titleDictionary}
                         />
