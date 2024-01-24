@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
 import { ProductDetailWrapper } from './style'
 import Image from 'next/image'
 import { Attribute, AttributeGroup, Brand, Category, Product } from '@/src/class'
@@ -21,6 +21,8 @@ type SectionProps = {
     attributeTranslateData: AttributeTranslateDataType[],
     productCategoryRelationData: ProductCategoryRelationDataType[],
     productAttributeRelationData: ProductAttributeRelationDataType[],
+    weightData: WeightDataType[],
+    productWeightRelationData: ProductWeightRelationDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -42,6 +44,8 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     productCategoryRelationData,
     productData,
     productTranslateData,
+    productWeightRelationData,
+    weightData,
     titleDictionary,
 }) => {
     const brand = new Brand(brandTranslateData);
@@ -49,6 +53,10 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const category = new Category(categoryData, categoryTranslateData);
     const attribute = new Attribute(attributeData, attributeTranslateData);
     const attributeGroup = new AttributeGroup(attributeGroupData, attributeGroupTranslateData);
+
+    const productCategories: CategoriesDataType[] | [] = product.getCategories(activeProductData.id, categoryData, productCategoryRelationData);
+    const productAttributes: AttributeDataType[] | [] = product.getAttributes(activeProductData.id, attributeData, productAttributeRelationData);
+    const productWeights: WeightDataType[] | [] = product.getWeightData(activeProductData.id, weightData, productWeightRelationData);
     return (
         <Section $py={20}>
             <Container>
@@ -60,7 +68,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                 <div className="parameter__value">{brand.getTranslate(activeProductData.brand_id, activeLocale, "title")}</div>
                             </div>
                             {
-                                product.getCategories(activeProductData.id, categoryData, productCategoryRelationData).length > 0 && product.getCategories(activeProductData.id, categoryData, productCategoryRelationData).map((data) => (
+                                productCategories.length > 0 && productCategories.map((data) => (
                                     <div className="product__parameter" key={`category-${data.id}`}>
                                         <div className="parameter__key">Kateqoriya:</div>
                                         <div className="parameter__value">{category.getTranslate(data.id, activeLocale, "title")}</div>
@@ -73,13 +81,30 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                             </div>
                             <div className="parameter__title">Texniki parametrlər</div>
                             {
-                                product.getAttributes(activeProductData.id, attributeData, productAttributeRelationData).length > 0 && product.getAttributes(activeProductData.id, attributeData, productAttributeRelationData).map((data) => (
+                                productAttributes.length > 0 && productAttributes.map((data) => (
                                     <div className="product__parameter" key={`attr-${data.id}`}>
                                         <div className="parameter__key">{attributeGroup.getTitleByID(data.group_id, activeLocale)}:</div>
                                         <div className="parameter__value">{attribute.getTranslate(data.id, activeLocale, "title")}</div>
                                     </div>
                                 ))
                             }
+                        </div>
+                        <div className="wrapper__left__bottom">
+                            <div className="wrapper__left__bottom__col">
+                                <div className="col__title">Çəkini seç</div>
+                                <div className="product__weight__buttons">
+                                    {
+                                        productWeights.length > 0 && productWeights.map((data) => (
+                                            <div className="product__weight__button" key={`weight-${data.id}`}>{data.title}</div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            <div className="wrapper__left__bottom__col">
+                                <div className="col__title">Rəngi seç</div>
+                            </div>
+                            <div className="wrapper__left__bottom__col"></div>
+                            <div className="wrapper__left__bottom__col"></div>
                         </div>
                     </div>
                     <div className="wrapper__right">

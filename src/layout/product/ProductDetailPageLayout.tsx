@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
@@ -25,6 +25,8 @@ type LayoutProps = {
     attributeTranslateData: AttributeTranslateDataType[],
     productCategoryRelationData: ProductCategoryRelationDataType[],
     productAttributeRelationData: ProductAttributeRelationDataType[],
+    weightData: WeightDataType[],
+    productWeightRelationData: ProductWeightRelationDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
 }
@@ -44,6 +46,8 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
     productAttributeRelationData,
     productCategoryRelationData,
     productData,
+    productWeightRelationData,
+    weightData,
     productTranslateData,
     titleDictionary,
 }) => {
@@ -153,6 +157,8 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
                 productCategoryRelationData={productCategoryRelationData}
                 productData={productData}
                 productTranslateData={productTranslateData}
+                productWeightRelationData={productWeightRelationData}
+                weightData={weightData}
                 titleDictionary={titleDictionary}
             />
         </React.Fragment>

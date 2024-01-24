@@ -1,6 +1,6 @@
 import { i18n } from "@/i18n-config";
 import { BrandDataType, LocaleStateType, LocaleType, PageTitleDataType, ProductDataType, ProductTranslateDataType } from "../types";
-import { AttributeDataType, CategoriesDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductFilterDataType } from "../types/data";
+import { AttributeDataType, CategoriesDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductFilterDataType, ProductWeightRelationDataType, WeightDataType } from "../types/data";
 
 class Product {
     private productData: ProductDataType[];
@@ -166,6 +166,13 @@ class Product {
             attributeData.find((a_data) => a_data.id === r_data.attr_id)).
             filter((attr) => attr !== undefined) as AttributeDataType[];
         return activeAttributeData;
+    }
+    public getWeightData(id: number, weightData: WeightDataType[], productWeightRelationData: ProductWeightRelationDataType[]) {
+        const relations: ProductWeightRelationDataType[] | [] = productWeightRelationData.filter((data) => data.product_id === id);
+        let activeWeightData: WeightDataType[] | [] = relations.map((r_data) =>
+            weightData.find((w_data) => w_data.id === r_data.weight_id)).
+            filter((weight) => weight !== undefined) as WeightDataType[]
+        return activeWeightData;
     }
 }
 export default Product;

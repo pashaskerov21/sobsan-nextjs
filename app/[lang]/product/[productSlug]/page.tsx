@@ -1,8 +1,8 @@
 import React from "react";
 import { getTranslate } from "@/get-translate";
 import { Product } from "@/src/class";
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from "@/src/types";
-import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductData, fetchProductTranslateData } from "@/src/utils";
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from "@/src/types";
+import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductData, fetchProductTranslateData, fetchProductWeightRelationData, fetchWeightData } from "@/src/utils";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { ProductDetailPageLayout } from "@/src/layout";
@@ -20,6 +20,8 @@ const fetchData = async (): Promise<{
     attributeTranslateData: AttributeTranslateDataType[] | undefined,
     productCategoryRelationData: ProductCategoryRelationDataType[] | undefined,
     productAttributeRelationData: ProductAttributeRelationDataType[] | undefined,
+    weightData: WeightDataType[] | undefined,
+    productWeightRelationData: ProductWeightRelationDataType[] | undefined,
 }> => {
     try {
         const [
@@ -35,6 +37,8 @@ const fetchData = async (): Promise<{
             attributeTranslateData,
             productCategoryRelationData,
             productAttributeRelationData,
+            weightData,
+            productWeightRelationData,
         ] = await Promise.all([
             fetchProductData(),
             fetchProductTranslateData(),
@@ -48,6 +52,8 @@ const fetchData = async (): Promise<{
             fetchAttributeTranslateData(),
             fetchProductCategoryRelationData(),
             fetchProductAttributeRelationData(),
+            fetchWeightData(),
+            fetchProductWeightRelationData(),
         ]);
 
         return {
@@ -63,6 +69,8 @@ const fetchData = async (): Promise<{
             attributeTranslateData,
             productCategoryRelationData,
             productAttributeRelationData,
+            weightData,
+            productWeightRelationData,
         };
     } catch (error) {
         throw new Error('Failed to fetch data');
@@ -111,6 +119,8 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
             attributeTranslateData,
             productCategoryRelationData,
             productAttributeRelationData,
+            weightData,
+            productWeightRelationData,
         } = await fetchData();
         const t = await getTranslate(lang);
         const generalDictionary = t.general;
@@ -127,7 +137,9 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
             attributeData &&
             attributeTranslateData &&
             productCategoryRelationData &&
-            productAttributeRelationData
+            productAttributeRelationData &&
+            weightData &&
+            productWeightRelationData
         ) {
             const product = new Product(productData, productTranslateData);
             const activeProductData: ProductDataType | undefined = product.getProductBySlug(productSlug, lang);
@@ -150,6 +162,8 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
                             attributeTranslateData={attributeTranslateData}
                             productCategoryRelationData={productCategoryRelationData}
                             productAttributeRelationData={productAttributeRelationData}
+                            productWeightRelationData={productWeightRelationData}
+                            weightData={weightData}
                             titleDictionary={titleDictionary}
                         />
                     </React.Fragment>

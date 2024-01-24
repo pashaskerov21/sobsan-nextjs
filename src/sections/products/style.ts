@@ -1,4 +1,4 @@
-import { column_center, column_justify_start, column_start, row_align_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles";
+import { column_align_start, column_center, column_justify_start, column_start, row_align_start, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles";
 import { styled } from "styled-components";
 
 export const CategoryCoverImage = styled.div`
@@ -94,6 +94,7 @@ export const ProductDetailWrapper = styled.div`
     .wrapper__left{
         width: 100%;
         ${column_start};
+        gap: 30px;
         @media (min-width: 992px){
             width: 50%;
         }
@@ -129,6 +130,8 @@ export const ProductDetailWrapper = styled.div`
         width: 100%;
         ${column_center};
         gap: 5px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid ${props => props.theme.border_color_1};
         .product__parameter{
             width: 100%;
             ${row_between};
@@ -151,6 +154,48 @@ export const ProductDetailWrapper = styled.div`
             margin-top: 20px;
             font-size: 18px;
             font-weight: 600;
+        }
+    }
+    .wrapper__left__bottom{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        @media (min-width: 768px){
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: 992px){
+            grid-template-columns: 1fr;
+        }
+        @media (min-width: 1200px){
+            grid-template-columns: 1fr 1fr;
+        }
+        .wrapper__left__bottom__col{
+            ${column_align_start};
+            gap: 10px;
+            .col__title{
+                font-weight: 600;
+                font-size: 18px;
+            }
+        }
+        .product__weight__buttons{
+            width: 100%;
+            ${row_justify_start};
+            flex-wrap: wrap;
+            gap: 15px;
+            .product__weight__button{
+                ${row_center};
+                text-align: center;
+                font-weight: 600;
+                padding: 10px 20px;
+                border-radius: 10px;
+                background-color: ${props => props.theme.bg_color_9};
+                &.active{
+                    background-color: ${props => props.theme.color_1};
+                    color: #fff;
+                }
+            }
+
         }
     }
 `;
