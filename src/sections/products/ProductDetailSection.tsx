@@ -4,7 +4,7 @@ import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataT
 import { ProductDetailWrapper } from './style'
 import Image from 'next/image'
 import { Attribute, AttributeGroup, Brand, Catalog, Category, Color, Product } from '@/src/class'
-import { CatalogModal } from '@/src/components'
+import { CatalogModal, Skeleton } from '@/src/components'
 
 type SectionProps = {
     loading: LoadingType,
@@ -76,6 +76,16 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const productCatalog: CatalogDataType | undefined = product.getCatalog(activeProductData.catalog_id, catalogData);
     const productCatalogColors: ColorDataType[] | [] = catalog.getColors(productCatalog ? productCatalog.id : 0, colorData);
 
+    const [selectedColor, setSelectedColor] = React.useState<ColorDataType | undefined>();
+    const [selectedWeight, setSelectedWeight] = React.useState<WeightDataType>(productWeights[0]);
+
+    const handleSelectColor = (data: ColorDataType) => {
+        setSelectedColor(data);
+    };
+    const handleSelectWeight = (data: WeightDataType) => {
+        setSelectedWeight(data);
+    }
+
     return (
         <Section $py={20}>
             <Container>
@@ -83,57 +93,114 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                     <div className="wrapper__left">
                         <div className="product__parameters">
                             <div className="product__parameter">
-                                <div className="parameter__key">Brend:</div>
-                                <div className="parameter__value">{brand.getTranslate(activeProductData.brand_id, activeLocale, "title")}</div>
+                                {
+                                    loading.standart ? (
+                                        <React.Fragment>
+                                            <Skeleton width='50%' height='21px' />
+                                            <Skeleton width='50%' height='21px' />
+                                        </React.Fragment>
+                                    ) : (
+                                        <React.Fragment>
+                                            <div className="parameter__key">{generalDictionary.brand}:</div>
+                                            <div className="parameter__value">{brand.getTranslate(activeProductData.brand_id, activeLocale, "title")}</div>
+                                        </React.Fragment>
+                                    )
+                                }
                             </div>
                             {
                                 productCategories.length > 0 && productCategories.map((data) => (
                                     <div className="product__parameter" key={`category-${data.id}`}>
-                                        <div className="parameter__key">Kateqoriya:</div>
-                                        <div className="parameter__value">{category.getTranslate(data.id, activeLocale, "title")}</div>
+                                        {
+                                            loading.standart ? (
+                                                <React.Fragment>
+                                                    <Skeleton width='50%' height='21px' />
+                                                    <Skeleton width='50%' height='21px' />
+                                                </React.Fragment>
+                                            ) : (
+                                                <React.Fragment>
+                                                    <div className="parameter__key">{generalDictionary.category}:</div>
+                                                    <div className="parameter__value">{category.getTranslate(data.id, activeLocale, "title")}</div>
+                                                </React.Fragment>
+                                            )
+                                        }
                                     </div>
                                 ))
                             }
                             <div className="product__parameter">
-                                <div className="parameter__key">Məhsulun kodu:</div>
-                                <div className="parameter__value">{activeProductData.code}</div>
+                                {
+                                    loading.standart ? (
+                                        <React.Fragment>
+                                            <Skeleton width='50%' height='21px' />
+                                            <Skeleton width='50%' height='21px' />
+                                        </React.Fragment>
+                                    ) : (
+                                        <React.Fragment>
+                                            <div className="parameter__key">{generalDictionary.product_code}:</div>
+                                            <div className="parameter__value">{activeProductData.code}</div>
+                                        </React.Fragment>
+                                    )
+                                }
                             </div>
-                            <div className="parameter__title">Texniki parametrlər</div>
+                            <div className="parameter__title">{loading.standart ? <Skeleton width='150px' height='27px' /> : 'Texniki parametrlər'}</div>
                             {
                                 productAttributes.length > 0 && productAttributes.map((data) => (
                                     <div className="product__parameter" key={`attr-${data.id}`}>
-                                        <div className="parameter__key">{attributeGroup.getTitleByID(data.group_id, activeLocale)}:</div>
-                                        <div className="parameter__value">{attribute.getTranslate(data.id, activeLocale, "title")}</div>
+                                        {
+                                            loading.standart ? (
+                                                <React.Fragment>
+                                                    <Skeleton width='50%' height='21px' />
+                                                    <Skeleton width='50%' height='21px' />
+                                                </React.Fragment>
+                                            ) : (
+                                                <React.Fragment>
+                                                    <div className="parameter__key">{attributeGroup.getTitleByID(data.group_id, activeLocale)}:</div>
+                                                    <div className="parameter__value">{attribute.getTranslate(data.id, activeLocale, "title")}</div>
+                                                </React.Fragment>
+                                            )
+                                        }
                                     </div>
                                 ))
                             }
                         </div>
                         <div className="wrapper__left__bottom">
                             <div className="wrapper__left__bottom__col">
-                                <div className="col__title">Çəkini seç</div>
+                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_weight}</div>}
                                 <div className="product__weight__buttons">
                                     {
                                         productWeights.length > 0 && productWeights.map((data) => (
-                                            <div className="product__weight__button" key={`weight-${data.id}`}>{data.title}</div>
+                                            <React.Fragment key={`weight-${data.id}`}>
+                                                {loading.standart ? <Skeleton width='88px' height='44px' radius='10px' /> : (
+                                                    <div className={`product__weight__button ${selectedWeight.id === data.id ? 'active' : ''}`} onClick={() => handleSelectWeight(data)}>{data.title}</div>
+                                                )}
+                                            </React.Fragment>
                                         ))
                                     }
                                 </div>
                             </div>
                             <div className="wrapper__left__bottom__col">
-                                <div className="col__title">Rəngi seç</div>
+                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
                                 <div className="product__custom__color__buttons">
                                     {
                                         activeProductData.catalog_id !== 0 && productCatalog && productCatalogColors.length > 0 && (
-                                            <CatalogModal
-                                                activeCatalog={productCatalog}
-                                                activeLocale={activeLocale}
-                                                catalogData={catalogData}
-                                                catalogTranslateData={catalogTranslateData}
-                                                colorData={productCatalogColors}
-                                                colorTranslateData={colorTranslateData}
-                                                loading={loading}
-                                                textDictionary={textDictionary}
-                                            />
+                                            <React.Fragment>
+                                                {
+                                                    loading.lazy ? <Skeleton width='160px' height='44px' radius='10px' /> : (
+                                                        <CatalogModal
+                                                            activeCatalog={productCatalog}
+                                                            activeLocale={activeLocale}
+                                                            catalogData={catalogData}
+                                                            catalogTranslateData={catalogTranslateData}
+                                                            colorData={productCatalogColors}
+                                                            colorTranslateData={colorTranslateData}
+                                                            loading={loading}
+                                                            selectedColor={selectedColor}
+                                                            handleSelectColor={handleSelectColor}
+                                                            textDictionary={textDictionary}
+                                                            generalDictionary={generalDictionary}
+                                                        />
+                                                    )
+                                                }
+                                            </React.Fragment>
                                         )
                                     }
                                     {
@@ -156,7 +223,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                     </div>
                     <div className="wrapper__right">
                         <div className="product__image">
-                            <Image src={activeProductData.image} width={400} height={400} alt='product' />
+                            {loading.lazy ? <Skeleton width='100%' height='200px' height_md='300px' height_lg='400px' width_lg='400px'/> : <Image src={activeProductData.image} width={400} height={400} alt='product' />}
                         </div>
                     </div>
                 </ProductDetailWrapper>

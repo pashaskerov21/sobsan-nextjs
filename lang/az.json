@@ -51,6 +51,11 @@
         "exptocheap": "Bahadan ucuza",
         "a_z": "A-dan Z-yə",
         "z_a": "Z-dən A-ya",
-        "page_not_found": "Səhifə tapılmadı"
+        "page_not_found": "Səhifə tapılmadı",
+        "category": "Kateqoriya",
+        "product_code": "Məhsulun kodu",
+        "choose_weight": "Çəkini seç",
+        "choose_color": "Rəngi seç",
+        "see_catalog": "Kataloqa bax"
     }
 }

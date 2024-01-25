@@ -51,6 +51,11 @@
         "exptocheap": "Expensive to cheap",
         "a_z": "A to Z",
         "z_a": "Z to A",
-        "page_not_found": "Page not found"
+        "page_not_found": "Page not found",
+        "category": "Category",
+        "product_code": "Product code",
+        "choose_weight": "Choose your weight",
+        "choose_color": "Choose your color",
+        "see_catalog": "See the catalog"
     }
 }

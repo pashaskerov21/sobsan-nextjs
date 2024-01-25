@@ -74,6 +74,7 @@ export type ColorDataType = {
     image: string | null,
     simple_color: boolean,
     color_code: string | null,
+    catalogName?: string,
 };
 export type ColorTranslateDataType = {
     id: number,

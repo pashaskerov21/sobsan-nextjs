@@ -1,4 +1,4 @@
-import { column_center, column_justify_start, row_center } from "@/src/styles";
+import { column_align_start, column_center, column_justify_start, row_center } from "@/src/styles";
 import styled from "styled-components";
 
 export const CatalogAccordionBodyInner = styled.div`
@@ -209,10 +209,12 @@ export const CatalogModalWrapper = styled.div`
             width: 100%;
             ${column_center};
             gap: 5px;
+            cursor: pointer;
             .color__item__image{
                 width: 100%;
                 ${row_center};
                 padding: 10px;
+                border: 1px solid transparent;
                 img{
                     width: 100px;
                     height: 100px;
@@ -223,8 +225,13 @@ export const CatalogModalWrapper = styled.div`
                 width: 100%;
                 ${column_justify_start};
                 min-height: 40px;
-                font-size: 14px;
+                font-size: 12px;
                 font-weight: 500;
+            }
+            &.active{
+                .color__item__image{
+                    border-color: ${props => props.theme.color_1};
+                }
             }
         }
     }
@@ -243,5 +250,28 @@ export const CatalogModalWrapper = styled.div`
         font-size: 18px;
         font-weight: 600;
         ${row_center};
+        cursor: pointer;
+    }
+`
+
+export const CatalogModalButtonWrapper = styled.div`
+    ${row_center};
+    gap: 10px;
+
+    .toggle__button{
+        ${row_center};
+        padding: 10px 25px;
+        font-weight: 600;
+        background-color: ${props => props.theme.bg_color_9};
+        cursor: pointer;
+        transition: all 0.3s;
+        border-radius: 10px;
+        &:hover{
+            background-color: ${props => props.theme.color_1};
+            color: #fff;
+        }
+    }
+    .color__info{
+        ${column_align_start};
     }
 `
