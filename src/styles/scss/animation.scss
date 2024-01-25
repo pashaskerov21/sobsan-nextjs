@@ -111,3 +111,15 @@
 .fa-phone:hover{animation: phone-animation 0.2s ease 5;}
 .fa-envelope:hover{animation: envelope-animation 1s ease;}
 .fa-location-dot:hover{animation: location-animation 0.5s ease;}
+
+
+@keyframes catalogmodalanimation{
+    0%{
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 100px));
+    }
+    100%{
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}

@@ -1,6 +1,6 @@
 import { i18n } from "@/i18n-config";
 import { BrandDataType, LocaleStateType, LocaleType, PageTitleDataType, ProductDataType, ProductTranslateDataType } from "../types";
-import { AttributeDataType, CategoriesDataType, ColorDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductFilterDataType, ProductWeightRelationDataType, WeightDataType } from "../types/data";
+import { AttributeDataType, CatalogDataType, CategoriesDataType, ColorDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductFilterDataType, ProductWeightRelationDataType, WeightDataType } from "../types/data";
 
 class Product {
     private productData: ProductDataType[];
@@ -180,6 +180,10 @@ class Product {
             colorData.find((w_data) => w_data.id === r_data.color_id)).
             filter((weight) => weight !== undefined) as ColorDataType[]
         return activeColorData;
+    }
+    public getCatalog(id: number, catalogData: CatalogDataType[]){
+        const activeCatalog: CatalogDataType | undefined = catalogData.find((data) => data.id === id);
+        return activeCatalog;
     }
 }
 export default Product;

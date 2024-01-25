@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
@@ -30,8 +30,11 @@ type LayoutProps = {
     colorData: ColorDataType[],
     colorTranslateData: ColorTranslateDataType[],
     productColorRelationData: ProductColorRelationDataType[],
+    catalogData: CatalogDataType[];
+    catalogTranslateData: CatalogTranslateDataType[];
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
+    textDictionary: { [key: string]: string },
 }
 
 const ProductDetailPageLayout: React.FC<LayoutProps> = ({
@@ -55,7 +58,10 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
     colorData,
     colorTranslateData,
     productColorRelationData,
+    catalogData,
+    catalogTranslateData,
     titleDictionary,
+    textDictionary,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
         standart: true,
@@ -168,7 +174,10 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
                 colorData={colorData}
                 colorTranslateData={colorTranslateData}
                 productColorRelationData={productColorRelationData}
+                catalogData={catalogData}
+                catalogTranslateData={catalogTranslateData}
                 titleDictionary={titleDictionary}
+                textDictionary={textDictionary}
             />
         </React.Fragment>
     )

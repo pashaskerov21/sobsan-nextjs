@@ -229,5 +229,18 @@ export const ProductDetailWrapper = styled.div`
                 }
             }
         }
+        .catalog__modal__toggle__button{
+            ${row_center};
+            padding: 10px 25px;
+            font-weight: 600;
+            background-color: ${props => props.theme.bg_color_9};
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 10px;
+            &:hover{
+                background-color: ${props => props.theme.color_1};
+                color: #fff;
+            }
+        }
     }
 `;

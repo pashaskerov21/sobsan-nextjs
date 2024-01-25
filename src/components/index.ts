@@ -7,6 +7,7 @@ import PageTitle from "./title/PageTitle";
 import ProductPageTitle from "./title/ProductPageTitle";
 import SectionTitle from "./title/SectionTitle";
 import CatalogAccordion from "./catalog/CatalogAccordion";
+import CatalogModal from "./catalog/CatalogModal";
 import Skeleton from "./skeleton/Skeleton";
 import VanillaComponent from "./VanillaComponent";
 import ProductCard from "./product/ProductCard";
@@ -26,6 +27,7 @@ export {
     ProductPageTitle,
     SectionTitle,
     CatalogAccordion,
+    CatalogModal,
     Skeleton,
     VanillaComponent,
     ProductCard,

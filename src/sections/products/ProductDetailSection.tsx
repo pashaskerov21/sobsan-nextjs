@@ -1,9 +1,10 @@
 import React from 'react'
 import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
 import { ProductDetailWrapper } from './style'
 import Image from 'next/image'
-import { Attribute, AttributeGroup, Brand, Category, Color, Product } from '@/src/class'
+import { Attribute, AttributeGroup, Brand, Catalog, Category, Color, Product } from '@/src/class'
+import { CatalogModal } from '@/src/components'
 
 type SectionProps = {
     loading: LoadingType,
@@ -26,8 +27,11 @@ type SectionProps = {
     colorData: ColorDataType[],
     colorTranslateData: ColorTranslateDataType[],
     productColorRelationData: ProductColorRelationDataType[],
+    catalogData: CatalogDataType[];
+    catalogTranslateData: CatalogTranslateDataType[];
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
+    textDictionary: { [key: string]: string },
 }
 
 const ProductDetailSection: React.FC<SectionProps> = ({
@@ -52,7 +56,10 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     colorData,
     colorTranslateData,
     productColorRelationData,
+    catalogData,
+    catalogTranslateData,
     titleDictionary,
+    textDictionary,
 }) => {
     const brand = new Brand(brandTranslateData);
     const product = new Product(productData, productTranslateData);
@@ -60,11 +67,14 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const attribute = new Attribute(attributeData, attributeTranslateData);
     const attributeGroup = new AttributeGroup(attributeGroupData, attributeGroupTranslateData);
     const color = new Color(colorData, colorTranslateData);
+    const catalog = new Catalog(catalogData, catalogTranslateData);
 
     const productCategories: CategoriesDataType[] | [] = product.getCategories(activeProductData.id, categoryData, productCategoryRelationData);
     const productAttributes: AttributeDataType[] | [] = product.getAttributes(activeProductData.id, attributeData, productAttributeRelationData);
     const productWeights: WeightDataType[] | [] = product.getWeightData(activeProductData.id, weightData, productWeightRelationData);
     const productCustomColors: ColorDataType[] | [] = product.getCustomColors(activeProductData.id, colorData, productColorRelationData);
+    const productCatalog: CatalogDataType | undefined = product.getCatalog(activeProductData.catalog_id, catalogData);
+    const productCatalogColors: ColorDataType[] | [] = catalog.getColors(productCatalog ? productCatalog.id : 0, colorData);
 
     return (
         <Section $py={20}>
@@ -112,6 +122,20 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                             <div className="wrapper__left__bottom__col">
                                 <div className="col__title">Rəngi seç</div>
                                 <div className="product__custom__color__buttons">
+                                    {
+                                        activeProductData.catalog_id !== 0 && productCatalog && productCatalogColors.length > 0 && (
+                                            <CatalogModal
+                                                activeCatalog={productCatalog}
+                                                activeLocale={activeLocale}
+                                                catalogData={catalogData}
+                                                catalogTranslateData={catalogTranslateData}
+                                                colorData={productCatalogColors}
+                                                colorTranslateData={colorTranslateData}
+                                                loading={loading}
+                                                textDictionary={textDictionary}
+                                            />
+                                        )
+                                    }
                                     {
                                         activeProductData.catalog_id === 0 && productCustomColors.length > 0 && productCustomColors.map((data) => (
                                             <div className={`product__custom__color__button`} key={`custom-color-${data.id}`}>
