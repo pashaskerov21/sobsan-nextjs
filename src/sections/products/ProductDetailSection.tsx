@@ -205,14 +205,20 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                     }
                                     {
                                         activeProductData.catalog_id === 0 && productCustomColors.length > 0 && productCustomColors.map((data) => (
-                                            <div className={`product__custom__color__button`} key={`custom-color-${data.id}`}>
-                                                <div className="color__value">
-                                                    <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
-                                                </div>
-                                                <div className="color__title">
-                                                    {color.getTranslate(data.id, activeLocale, "title")}
-                                                </div>
-                                            </div>
+                                            <React.Fragment key={`custom-color-${data.id}`}>
+                                                {
+                                                    loading.standart ? <Skeleton width='65px' height='53px' /> : (
+                                                        <div className={`product__custom__color__button`} >
+                                                            <div className="color__value">
+                                                                <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
+                                                            </div>
+                                                            <div className="color__title">
+                                                                {color.getTranslate(data.id, activeLocale, "title")}
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                }
+                                            </React.Fragment>
                                         ))
                                     }
                                 </div>
@@ -223,7 +229,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                     </div>
                     <div className="wrapper__right">
                         <div className="product__image">
-                            {loading.lazy ? <Skeleton width='100%' height='200px' height_md='300px' height_lg='400px' width_lg='400px'/> : <Image src={activeProductData.image} width={400} height={400} alt='product' />}
+                            {loading.lazy ? <Skeleton width='100%' height='200px' height_md='300px' height_lg='400px' width_lg='400px' /> : <Image src={activeProductData.image} width={400} height={400} alt='product' />}
                         </div>
                     </div>
                 </ProductDetailWrapper>
