@@ -297,31 +297,31 @@ const ProductDetailSection: React.FC<SectionProps> = ({
 
                             </div>
                             <div className="wrapper__left__bottom__col">
+                                {
+                                    activeProductData.catalog_id !== 0 && productCatalog && productCatalogColors.length > 0 && (
+                                        <React.Fragment>
+                                            {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
+                                            {
+                                                loading.lazy ? <Skeleton width='160px' height='44px' radius='10px' /> : (
+                                                    <CatalogModal
+                                                        activeCatalog={productCatalog}
+                                                        activeLocale={activeLocale}
+                                                        catalogData={catalogData}
+                                                        catalogTranslateData={catalogTranslateData}
+                                                        colorData={productCatalogColors}
+                                                        colorTranslateData={colorTranslateData}
+                                                        loading={loading}
+                                                        selectedColor={selectedColor}
+                                                        handleSelectColor={handleSelectColor}
+                                                        textDictionary={textDictionary}
+                                                        generalDictionary={generalDictionary}
+                                                    />
+                                                )
+                                            }
+                                        </React.Fragment>
+                                    )
+                                }
                                 <div className="product__custom__color__buttons">
-                                    {
-                                        activeProductData.catalog_id !== 0 && productCatalog && productCatalogColors.length > 0 && (
-                                            <React.Fragment>
-                                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
-                                                {
-                                                    loading.lazy ? <Skeleton width='160px' height='44px' radius='10px' /> : (
-                                                        <CatalogModal
-                                                            activeCatalog={productCatalog}
-                                                            activeLocale={activeLocale}
-                                                            catalogData={catalogData}
-                                                            catalogTranslateData={catalogTranslateData}
-                                                            colorData={productCatalogColors}
-                                                            colorTranslateData={colorTranslateData}
-                                                            loading={loading}
-                                                            selectedColor={selectedColor}
-                                                            handleSelectColor={handleSelectColor}
-                                                            textDictionary={textDictionary}
-                                                            generalDictionary={generalDictionary}
-                                                        />
-                                                    )
-                                                }
-                                            </React.Fragment>
-                                        )
-                                    }
                                     {
                                         activeProductData.catalog_id === 0 && productCustomColors.length > 0 && (
                                             <React.Fragment>
