@@ -79,7 +79,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         filtered: categoryProducts,
         finalResult: [],
     });
-    const [productFilterData, setProductFilterData] = useState<ProductFilterDataType>({
+    const [productFilterData, setProductFilterData] = useLocalStorage<ProductFilterDataType>('filter-data', {
         price: {
             min: 0,
             max: product.getMaxPrice(productState.filtered),
@@ -87,7 +87,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         brand: 0,
         attributeIDs: [],
     });
-    const [paginationState, setPaginationState] = useState({
+    const [paginationState, setPaginationState] = useLocalStorage("pagination", {
         currentPage: 1,
         productCount: 12,
     });
