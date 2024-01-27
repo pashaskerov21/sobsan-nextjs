@@ -5,6 +5,7 @@ import { ProductDetailWrapper } from './style'
 import Image from 'next/image'
 import { Attribute, AttributeGroup, Brand, Catalog, Category, Color, Product } from '@/src/class'
 import { CatalogModal, Skeleton } from '@/src/components'
+import { FaCheck, FaMinus, FaPlus } from 'react-icons/fa'
 
 type SectionProps = {
     loading: LoadingType,
@@ -78,12 +79,30 @@ const ProductDetailSection: React.FC<SectionProps> = ({
 
     const [selectedColor, setSelectedColor] = React.useState<ColorDataType | undefined>();
     const [selectedWeight, setSelectedWeight] = React.useState<WeightDataType>(productWeights[0]);
+    const [productAmount, setProductAmount] = React.useState<number>(1);
 
     const handleSelectColor = (data: ColorDataType) => {
         setSelectedColor(data);
     };
     const handleSelectWeight = (data: WeightDataType) => {
         setSelectedWeight(data);
+    };
+    const handleMinusButtonClick = () => {
+        if (productAmount !== 1) {
+            setProductAmount(productAmount - 1);
+        }
+    }
+    const handlePlusButtonClick = () => {
+        if (productAmount < activeProductData.stock) {
+            setProductAmount(productAmount + 1);
+        }
+    }
+    const changeProductAmount = (value: number) => {
+        if(value > activeProductData.stock){
+            setProductAmount(activeProductData.stock)
+        }else{
+            setProductAmount(value);
+        }
     }
 
     return (
@@ -176,6 +195,30 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                         ))
                                     }
                                 </div>
+                                <div className="product__stock">
+                                    <div className="icon"><FaCheck /></div>
+                                    <div className="value">{generalDictionary["stock"]}: {activeProductData.stock} {generalDictionary["pieces"]}</div>
+                                </div>
+                                <div className="product__price">
+                                    {
+                                        activeProductData.discount === 0 ? (
+                                            <React.Fragment>
+                                                <div className="main_price">
+                                                    {activeProductData.price.toFixed(2)} AZN
+                                                </div>
+                                            </React.Fragment>
+                                        ) : (
+                                            <React.Fragment>
+                                                <div className="old_price">
+                                                    {activeProductData.price.toFixed(2)} AZN
+                                                </div>
+                                                <div className="main_price">
+                                                    {activeProductData.discount.toFixed(2)} AZN
+                                                </div>
+                                            </React.Fragment>
+                                        )
+                                    }
+                                </div>
                             </div>
                             <div className="wrapper__left__bottom__col">
                                 {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
@@ -207,8 +250,8 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                         activeProductData.catalog_id === 0 && productCustomColors.length > 0 && productCustomColors.map((data) => (
                                             <React.Fragment key={`custom-color-${data.id}`}>
                                                 {
-                                                    loading.standart ? <Skeleton width='65px' height='53px' /> : (
-                                                        <div className={`product__custom__color__button`} >
+                                                    loading.standart ? <Skeleton width='120px' height='30px' /> : (
+                                                        <div className={`product__custom__color__button ${selectedColor && selectedColor.id === data.id ? 'active' : ''}`} onClick={() => handleSelectColor(data)}>
                                                             <div className="color__value">
                                                                 <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
                                                             </div>
@@ -223,8 +266,16 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                     }
                                 </div>
                             </div>
-                            <div className="wrapper__left__bottom__col"></div>
-                            <div className="wrapper__left__bottom__col"></div>
+                            <div className="wrapper__left__bottom__col amount__basket">
+                                <div className="product__amount__counter">
+                                    <div className="counter__button" onClick={handleMinusButtonClick}><FaMinus /></div>
+                                    <input type="number" name="" id="" max={activeProductData.stock} value={productAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeProductAmount(parseInt(e.target.value))} />
+                                    <div className="counter__button" onClick={handlePlusButtonClick}><FaPlus /></div>
+                                </div>
+                                <div className="basket__button">
+                                    {generalDictionary["add_basket"]}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="wrapper__right">

@@ -159,16 +159,16 @@ export const ProductDetailWrapper = styled.div`
     .wrapper__left__bottom{
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(1,1fr);
+        gap: 30px;
         @media (min-width: 768px){
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2,1fr);
         }
         @media (min-width: 992px){
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(1,1fr);
         }
         @media (min-width: 1200px){
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2,1fr);
         }
         .wrapper__left__bottom__col{
             ${column_start};
@@ -177,6 +177,22 @@ export const ProductDetailWrapper = styled.div`
                 font-weight: 600;
                 font-size: 18px;
             }
+            &.amount__basket{
+                grid-column: span 1;
+                @media (min-width: 576px){
+                    flex-direction: row;
+                }
+                @media (min-width: 768px){
+                grid-column: span 2;
+                }
+                @media (min-width: 992px){
+                    grid-column: span 1;
+                }
+                @media (min-width: 1200px){
+                    grid-column: span 2;
+                }
+            }
+            
         }
         .product__weight__buttons{
             width: 100%;
@@ -203,7 +219,7 @@ export const ProductDetailWrapper = styled.div`
             flex-wrap: wrap;
             gap: 15px;
             .product__custom__color__button{
-                ${column_center};
+                ${row_justify_start};
                 gap: 5px;
                 cursor: pointer;
                 .color__value{
@@ -228,6 +244,88 @@ export const ProductDetailWrapper = styled.div`
                     }
                 }
             }
+        }
+        .product__stock{
+            ${row_center};
+            text-align: center;
+            gap: 10px;
+            margin-top: 30px;
+            .icon{
+                width: 20px;
+                height: 20px;
+                background-color: ${props => props.theme.color_3};
+                border-radius: 50%;
+                ${row_center};
+                color: #ffffff;
+                font-size: 12px;
+            }
+            .value{
+                font-size: 14px;
+            }
+        }
+        .product__price{
+            ${row_justify_start};
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            .old_price{
+                font-size: 18px;
+                text-decoration: line-through;
+                opacity: 0.5;
+            }
+            .main_price{
+                color: ${props => props.theme.color_1};
+                font-weight: 600;
+                font-size: 24px;
+            }
+        }
+        .product__amount__counter{
+            width: 100%;
+            height: 70px;
+            ${row_center};
+            gap: 20px;
+            background-color: ${props => props.theme.bg_color_4};
+            border-radius: 10px;
+            padding: 10px;
+            .counter__button{
+                width: 30px;
+                height: 30px;
+                ${row_center};
+                border-radius: 50%;
+                background-color: #cfcfcf;
+                color: #000;
+                font-size: 12px;
+                cursor: pointer;
+                &:hover{
+                    background-color: ${props => props.theme.color_1};
+                    color: #fff;
+                }
+                &:active{
+                    background-color: #cfcfcf;
+                    color: #000;
+                }
+            }
+            input{
+                width: 40px;
+                text-align: center;
+                border: none;
+                outline: none;
+                background-color: transparent;
+                font-weight: 600;
+                color: ${props => props.theme.text_color_1};
+            }
+        }
+        .basket__button{
+            width: 100%;
+            height: 70px;
+            ${row_center};
+            gap: 20px;
+            background-color: ${props => props.theme.color_1};
+            border-radius: 10px;
+            padding: 10px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 22px;
         }
     }
 `;
