@@ -26,6 +26,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { Product } from '@/src/class'
 import { ProductData } from '@/src/data'
 import { usePathname } from 'next/navigation'
+import { AlertComponent } from '@/src/styles/components/alert'
 
 type SectionProps = {
     loading: LoadingType,
@@ -78,7 +79,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         filtered: categoryProducts,
         finalResult: [],
     });
-    const [productFilterData, setProductFilterData] = useLocalStorage<ProductFilterDataType>('filter-data', {
+    const [productFilterData, setProductFilterData] = useState<ProductFilterDataType>({
         price: {
             min: 0,
             max: product.getMaxPrice(productState.filtered),
@@ -86,7 +87,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         brand: 0,
         attributeIDs: [],
     });
-    const [paginationState, setPaginationState] = useLocalStorage("pagination", {
+    const [paginationState, setPaginationState] = useState({
         currentPage: 1,
         productCount: 12,
     });
@@ -313,23 +314,35 @@ const ProductsSection: React.FC<SectionProps> = ({
                                 }
                             </div>
                         </div>
-                        <ProductGrid
-                            loading={loading}
-                            activeLocale={activeLocale}
-                            productData={productState.finalResult}
-                            productTranslateData={productTranslateData}
-                            brandData={brandData}
-                            brandTranslateData={brandTranslateData}
-                            generalDictionary={generalDictionary}
-                            productsView={productsView}
-                        />
                         {
-                            productState.filtered.length > paginationState.productCount && (
-                                <ProductPagination
-                                    loading={loading}
-                                    totalProducts={productState.filtered.length}
-                                    scrollContainerTop={scrollContainerTop}
-                                />
+                            productState.filtered.length > 0 ? (
+                                <React.Fragment>
+                                    <ProductGrid
+                                        loading={loading}
+                                        activeLocale={activeLocale}
+                                        productData={productState.finalResult}
+                                        productTranslateData={productTranslateData}
+                                        brandData={brandData}
+                                        brandTranslateData={brandTranslateData}
+                                        generalDictionary={generalDictionary}
+                                        productsView={productsView}
+                                    />
+                                    {
+                                        productState.filtered.length > paginationState.productCount && (
+                                            <ProductPagination
+                                                loading={loading}
+                                                totalProducts={productState.filtered.length}
+                                                scrollContainerTop={scrollContainerTop}
+                                            />
+                                        )
+                                    }
+                                </React.Fragment>
+                            ) : (
+                                <React.Fragment>
+                                    <AlertComponent>
+                                        {generalDictionary["no_product"]}
+                                    </AlertComponent>
+                                </React.Fragment>
                             )
                         }
                     </div>

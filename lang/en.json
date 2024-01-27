@@ -60,6 +60,7 @@
         "attention": "Attention!",
         "color_message": "Please select a product color.",
         "congratulations": "Congratulations!",
-        "add_basket_message": "Product added to cart."
+        "add_basket_message": "Product added to cart.",
+        "no_product": "No products"
     }
 }

@@ -60,6 +60,7 @@
         "attention": "Diqqət!",
         "color_message": "Zəhmət olmasa, məhsul rəngini seçin.",
         "congratulations": "Təbriklər!",
-        "add_basket_message": "Məhsul səbətə əlavə edildi."
+        "add_basket_message": "Məhsul səbətə əlavə edildi.",
+        "no_product": "Məhsul yoxdur"
     }
 }

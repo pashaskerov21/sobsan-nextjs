@@ -23,7 +23,7 @@ class Catalog {
         return translate;
     }
     public getColors(id: number, colorData: ColorDataType[]) {
-        const colors: ColorDataType[] | [] = colorData.filter((data) => data.catalog_id === id);
+        const colors: ColorDataType[] | [] = colorData.filter((data) => data.catalog_id === id && data.catalog_id !== 0);
         return colors;
     }
     public filterCatalogsByCategory(categoryID: number) {

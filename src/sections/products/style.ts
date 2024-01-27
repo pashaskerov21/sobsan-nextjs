@@ -340,6 +340,10 @@ export const ProductDetailWrapper = styled.div`
                     display: block;
                 }
             }
+            &.disabled{
+                cursor: not-allowed !important;
+                opacity: 0.6;
+            }
         }
     }
 `;

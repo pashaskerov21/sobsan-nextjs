@@ -60,6 +60,7 @@
         "attention": "Внимание!",
         "color_message": "Пожалуйста, выберите цвет продукта.",
         "congratulations": "Поздравляем!",
-        "add_basket_message": "Продукт был добавлен в корзину."
+        "add_basket_message": "Продукт был добавлен в корзину.",
+        "no_product": "Нет продукта"
     }
 }

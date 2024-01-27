@@ -87,7 +87,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
 
     const [selectedColor, setSelectedColor] = useState<ColorDataType | undefined>();
     const [selectedWeight, setSelectedWeight] = useState<WeightDataType>(productWeights[0]);
-    const [productAmount, setProductAmount] = useState<number>(1);
+    const [productAmount, setProductAmount] = useState<number>(activeProductData.stock > 0 ? 1 : 0);
 
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const productBasketStatus: BasketDataType | undefined = basketStorage.find((data) => data.product === activeProductData.id && data.parameters.color?.id === selectedColor?.id && data.parameters.weight.id === selectedWeight.id);
@@ -100,7 +100,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
         setSelectedWeight(data);
     }, []);
     const handleMinusButtonClick = useCallback(() => {
-        if (productAmount !== 1) {
+        if (productAmount > 1) {
             setProductAmount(productAmount - 1);
         }
     }, [productAmount]);
@@ -121,7 +121,8 @@ const ProductDetailSection: React.FC<SectionProps> = ({
 
 
 
-
+    console.log(productCatalogColors);
+    console.log(productCustomColors);
 
     const handleBasketConfirm = () => {
         if (productBasketStatus) {
@@ -261,30 +262,39 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                         ))
                                     }
                                 </div>
-                                <div className="product__stock">
-                                    <div className="icon"><FaCheck /></div>
-                                    <div className="value">{generalDictionary["stock"]}: {activeProductData.stock} {generalDictionary["pieces"]}</div>
-                                </div>
-                                <div className="product__price">
-                                    {
-                                        activeProductData.discount === 0 ? (
-                                            <React.Fragment>
-                                                <div className="main_price">
-                                                    {activeProductData.price.toFixed(2)} AZN
-                                                </div>
-                                            </React.Fragment>
-                                        ) : (
-                                            <React.Fragment>
-                                                <div className="old_price">
-                                                    {activeProductData.price.toFixed(2)} AZN
-                                                </div>
-                                                <div className="main_price">
-                                                    {activeProductData.discount.toFixed(2)} AZN
-                                                </div>
-                                            </React.Fragment>
-                                        )
-                                    }
-                                </div>
+                                {
+                                    loading.standart ? (
+                                        <Skeleton width='150px' height='60px' margin='30px 0 0 0' />
+                                    ) : (
+                                        <React.Fragment>
+                                            <div className="product__stock">
+                                                <div className="icon"><FaCheck /></div>
+                                                <div className="value">{generalDictionary["stock"]}: {activeProductData.stock} {generalDictionary["pieces"]}</div>
+                                            </div>
+                                            <div className="product__price">
+                                                {
+                                                    activeProductData.discount === 0 ? (
+                                                        <React.Fragment>
+                                                            <div className="main_price">
+                                                                {activeProductData.price.toFixed(2)} AZN
+                                                            </div>
+                                                        </React.Fragment>
+                                                    ) : (
+                                                        <React.Fragment>
+                                                            <div className="old_price">
+                                                                {activeProductData.price.toFixed(2)} AZN
+                                                            </div>
+                                                            <div className="main_price">
+                                                                {activeProductData.discount.toFixed(2)} AZN
+                                                            </div>
+                                                        </React.Fragment>
+                                                    )
+                                                }
+                                            </div>
+                                        </React.Fragment>
+                                    )
+                                }
+
                             </div>
                             <div className="wrapper__left__bottom__col">
                                 <div className="product__custom__color__buttons">
@@ -340,22 +350,33 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                 </div>
                             </div>
                             <div className="wrapper__left__bottom__col amount__basket">
-                                <div className="product__amount__counter">
-                                    <div className="counter__button" onClick={handleMinusButtonClick}><FaMinus /></div>
-                                    <input type="number" name="" id="" max={activeProductData.stock} value={productAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeProductAmount(parseInt(e.target.value))} />
-                                    <div className="counter__button" onClick={handlePlusButtonClick}><FaPlus /></div>
-                                </div>
-                                <div className={`basket__button ${productBasketStatus ? 'active' : ''}`} onClick={handleBasketConfirm}>
-                                    {
-                                        productBasketStatus ? (
-                                            <div className="icon">
-                                                <PiShoppingCartSimpleLight />
+                                {
+                                    loading.lazy ? (
+                                        <React.Fragment>
+                                            <Skeleton width='100%' height='70px' radius='10px' />
+                                            <Skeleton width='100%' height='70px' radius='10px' />
+                                        </React.Fragment>
+                                    ) : (
+                                        <React.Fragment>
+                                            <div className="product__amount__counter">
+                                                <div className="counter__button" onClick={handleMinusButtonClick}><FaMinus /></div>
+                                                <input type="number" name="" id="" max={activeProductData.stock} value={productAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeProductAmount(parseInt(e.target.value))} />
+                                                <div className="counter__button" onClick={handlePlusButtonClick}><FaPlus /></div>
                                             </div>
-                                        ) : (
-                                            <span>{generalDictionary["add_basket"]}</span>
-                                        )
-                                    }
-                                </div>
+                                            <button type='button' disabled={productAmount === 0 ? true : false} className={`basket__button ${productBasketStatus ? 'active' : ''} ${productAmount === 0 ? 'disabled' : ''}`} onClick={handleBasketConfirm}>
+                                                {
+                                                    productBasketStatus ? (
+                                                        <div className="icon">
+                                                            <PiShoppingCartSimpleLight />
+                                                        </div>
+                                                    ) : (
+                                                        <span>{generalDictionary["add_basket"]}</span>
+                                                    )
+                                                }
+                                            </button>
+                                        </React.Fragment>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>

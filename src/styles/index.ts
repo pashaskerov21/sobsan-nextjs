@@ -30,6 +30,7 @@ import Section from "./components/section";
 import { Container, GridContainer} from "./components/container";
 import { CategoryButtonWrapper } from "./components/category";
 import { AccordionContainer } from "./components/accordion";
+import { AlertComponent } from "./components/alert";
 
 export {
     GlobalStyles,
