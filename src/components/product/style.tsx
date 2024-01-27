@@ -263,7 +263,7 @@ export const LeftFilterWrapper = styled.div`
     ${column_justify_start};
     gap: 20px;
     padding: 20px 15px;
-    z-index: 100;
+    z-index: 800;
     &.active{
         left: 0;
         opacity: 1;

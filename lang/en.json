@@ -56,6 +56,10 @@
         "product_code": "Product code",
         "choose_weight": "Choose your weight",
         "choose_color": "Choose your color",
-        "see_catalog": "See the catalog"
+        "see_catalog": "See the catalog",
+        "attention": "Attention!",
+        "color_message": "Please select a product color.",
+        "congratulations": "Congratulations!",
+        "add_basket_message": "Product added to cart."
     }
 }

@@ -1,11 +1,17 @@
-import React from 'react'
-import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
-import { ProductDetailWrapper } from './style'
+'use client'
+import React, { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
+import Swal from 'sweetalert2'
+import { Container, Section } from '@/src/styles'
+import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BasketDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
+import { ProductDetailWrapper } from './style'
 import { Attribute, AttributeGroup, Brand, Catalog, Category, Color, Product } from '@/src/class'
 import { CatalogModal, Skeleton } from '@/src/components'
 import { FaCheck, FaMinus, FaPlus } from 'react-icons/fa'
+import { useLocalStorage } from 'usehooks-ts'
+import { v4 as uuidv4 } from 'uuid';
+import { PiShoppingCartSimpleLight } from 'react-icons/pi'
+
 
 type SectionProps = {
     loading: LoadingType,
@@ -62,6 +68,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     titleDictionary,
     textDictionary,
 }) => {
+
     const brand = new Brand(brandTranslateData);
     const product = new Product(productData, productTranslateData);
     const category = new Category(categoryData, categoryTranslateData);
@@ -77,33 +84,92 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const productCatalog: CatalogDataType | undefined = product.getCatalog(activeProductData.catalog_id, catalogData);
     const productCatalogColors: ColorDataType[] | [] = catalog.getColors(productCatalog ? productCatalog.id : 0, colorData);
 
-    const [selectedColor, setSelectedColor] = React.useState<ColorDataType | undefined>();
-    const [selectedWeight, setSelectedWeight] = React.useState<WeightDataType>(productWeights[0]);
-    const [productAmount, setProductAmount] = React.useState<number>(1);
 
-    const handleSelectColor = (data: ColorDataType) => {
+    const [selectedColor, setSelectedColor] = useState<ColorDataType | undefined>();
+    const [selectedWeight, setSelectedWeight] = useState<WeightDataType>(productWeights[0]);
+    const [productAmount, setProductAmount] = useState<number>(1);
+
+    const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
+    const productBasketStatus: BasketDataType | undefined = basketStorage.find((data) => data.product === activeProductData.id && data.parameters.color?.id === selectedColor?.id && data.parameters.weight.id === selectedWeight.id);
+
+    const handleSelectColor = useCallback((data: ColorDataType) => {
         setSelectedColor(data);
-    };
-    const handleSelectWeight = (data: WeightDataType) => {
+    }, []);
+
+    const handleSelectWeight = useCallback((data: WeightDataType) => {
         setSelectedWeight(data);
-    };
-    const handleMinusButtonClick = () => {
+    }, []);
+    const handleMinusButtonClick = useCallback(() => {
         if (productAmount !== 1) {
             setProductAmount(productAmount - 1);
         }
-    }
-    const handlePlusButtonClick = () => {
+    }, [productAmount]);
+
+    const handlePlusButtonClick = useCallback(() => {
         if (productAmount < activeProductData.stock) {
             setProductAmount(productAmount + 1);
         }
-    }
-    const changeProductAmount = (value: number) => {
-        if(value > activeProductData.stock){
-            setProductAmount(activeProductData.stock)
-        }else{
+    }, [productAmount, activeProductData.stock]);
+
+    const changeProductAmount = useCallback((value: number) => {
+        if (value > activeProductData.stock) {
+            setProductAmount(activeProductData.stock);
+        } else {
             setProductAmount(value);
         }
+    }, [activeProductData.stock]);
+
+
+
+
+
+    const handleBasketConfirm = () => {
+        if (productBasketStatus) {
+            setBasketStorage([...basketStorage.filter((data) => data.id !== productBasketStatus.id)]);
+        } else {
+            if ((productCatalogColors.length > 0 || productCustomColors.length > 0) && !selectedColor) {
+                Swal.fire({
+                    icon: "warning",
+                    title: generalDictionary["attention"],
+                    text: generalDictionary["color_message"],
+                });
+            } else {
+                let basketData: BasketDataType = {
+                    id: uuidv4(),
+                    product: activeProductData.id,
+                    user: null,
+                    parameters: {
+                        color: selectedColor,
+                        weight: selectedWeight,
+                        amount: productAmount,
+                    }
+                }
+                setBasketStorage([...basketStorage, basketData]);
+                Swal.fire({
+                    icon: "success",
+                    title: generalDictionary["congratulations"],
+                    text: generalDictionary["add_basket_message"],
+                });
+            }
+        }
     }
+
+
+    useEffect(() => {
+        const updateBasket = () => {
+            if (productBasketStatus) {
+                const updatedBasket = basketStorage.map((data) =>
+                    data.id === productBasketStatus.id
+                        ? { ...data, parameters: { ...data.parameters, amount: productAmount } }
+                        : data
+                );
+                setBasketStorage(updatedBasket);
+            }
+        };
+        if (productBasketStatus && productAmount !== productBasketStatus.parameters.amount) {
+            updateBasket();
+        }
+    }, [productBasketStatus, productAmount, basketStorage]);
 
     return (
         <Section $py={20}>
@@ -221,11 +287,11 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                 </div>
                             </div>
                             <div className="wrapper__left__bottom__col">
-                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
                                 <div className="product__custom__color__buttons">
                                     {
                                         activeProductData.catalog_id !== 0 && productCatalog && productCatalogColors.length > 0 && (
                                             <React.Fragment>
+                                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
                                                 {
                                                     loading.lazy ? <Skeleton width='160px' height='44px' radius='10px' /> : (
                                                         <CatalogModal
@@ -247,22 +313,29 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                         )
                                     }
                                     {
-                                        activeProductData.catalog_id === 0 && productCustomColors.length > 0 && productCustomColors.map((data) => (
-                                            <React.Fragment key={`custom-color-${data.id}`}>
+                                        activeProductData.catalog_id === 0 && productCustomColors.length > 0 && (
+                                            <React.Fragment>
+                                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
                                                 {
-                                                    loading.standart ? <Skeleton width='120px' height='30px' /> : (
-                                                        <div className={`product__custom__color__button ${selectedColor && selectedColor.id === data.id ? 'active' : ''}`} onClick={() => handleSelectColor(data)}>
-                                                            <div className="color__value">
-                                                                <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
-                                                            </div>
-                                                            <div className="color__title">
-                                                                {color.getTranslate(data.id, activeLocale, "title")}
-                                                            </div>
-                                                        </div>
-                                                    )
+                                                    productCustomColors.map((data) => (
+                                                        <React.Fragment key={`custom-color-${data.id}`}>
+                                                            {
+                                                                loading.standart ? <Skeleton width='120px' height='30px' /> : (
+                                                                    <div className={`product__custom__color__button ${selectedColor && selectedColor.id === data.id ? 'active' : ''}`} onClick={() => handleSelectColor(data)}>
+                                                                        <div className="color__value">
+                                                                            <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
+                                                                        </div>
+                                                                        <div className="color__title">
+                                                                            {color.getTranslate(data.id, activeLocale, "title")}
+                                                                        </div>
+                                                                    </div>
+                                                                )
+                                                            }
+                                                        </React.Fragment>
+                                                    ))
                                                 }
                                             </React.Fragment>
-                                        ))
+                                        )
                                     }
                                 </div>
                             </div>
@@ -272,8 +345,16 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                     <input type="number" name="" id="" max={activeProductData.stock} value={productAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeProductAmount(parseInt(e.target.value))} />
                                     <div className="counter__button" onClick={handlePlusButtonClick}><FaPlus /></div>
                                 </div>
-                                <div className="basket__button">
-                                    {generalDictionary["add_basket"]}
+                                <div className={`basket__button ${productBasketStatus ? 'active' : ''}`} onClick={handleBasketConfirm}>
+                                    {
+                                        productBasketStatus ? (
+                                            <div className="icon">
+                                                <PiShoppingCartSimpleLight />
+                                            </div>
+                                        ) : (
+                                            <span>{generalDictionary["add_basket"]}</span>
+                                        )
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image';
 import Skeleton from '../skeleton/Skeleton';
 import Link from 'next/link';
-import { BrandDataType, BrandTranslateDataType, ComparisonDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
+import { BasketDataType, BrandDataType, BrandTranslateDataType, ComparisonDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
 import { ProductCardWrapper } from './style';
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
@@ -39,7 +39,7 @@ const ProductCard: React.FC<CardProps> = ({
     const product = new Product(productData, productTranslateData);
     const productURL = product.getURL(activeProductData.id, activeLocale);
     const router = useRouter();
-    const [basketStorage, setBasketStorage] = useLocalStorage<WishlistDataType[] | []>("basket", []);
+    const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     const wishlistData: WishlistDataType = {
@@ -74,27 +74,30 @@ const ProductCard: React.FC<CardProps> = ({
     }, [isBasket, isComparison, isWishlist]);
 
     const handleBasketButton = React.useCallback(() => {
-        if (isBasket) {
-            const filteredData = basketStorage.filter((data) => data.product !== activeProductData.id);
-            setBasketStorage([...filteredData]);
-            setProductState((prev) => {
-                return {
-                    ...prev,
-                    basket: false,
-                }
-            });
-        } else {
-            setProductState((prev) => {
-                return {
-                    ...prev,
-                    basket: true,
-                }
-            });
-            setTimeout(() => {
-                router.push(productURL);
-            }, 1500);
-        }
-    }, [setProductState, router]);
+        setTimeout(() => {
+            router.push(productURL);
+        }, 1500);
+        // if (isBasket) {
+        //     const filteredData = basketStorage.filter((data) => data.product !== activeProductData.id);
+        //     setBasketStorage([...filteredData]);
+        //     setProductState((prev) => {
+        //         return {
+        //             ...prev,
+        //             basket: false,
+        //         }
+        //     });
+        // } else {
+        //     setProductState((prev) => {
+        //         return {
+        //             ...prev,
+        //             basket: true,
+        //         }
+        //     });
+        //     setTimeout(() => {
+        //         router.push(productURL);
+        //     }, 1500);
+        // }
+    }, [router]);
     const handleFavoritetButton = React.useCallback(() => {
         if (isWishlist) {
             const filteredData = wishlistStorage.filter((data) => data.product !== activeProductData.id);

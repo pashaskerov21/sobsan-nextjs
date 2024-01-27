@@ -224,6 +224,11 @@ export type BasketDataType = {
     id: string | number,
     user: string | number | null,
     product: number,
+    parameters: {
+        color: ColorDataType | undefined,
+        weight: WeightDataType,
+        amount: number,
+    }
 }
 export type WishlistDataType = {
     id: string | number,

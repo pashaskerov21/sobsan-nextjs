@@ -5,7 +5,7 @@ import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { ComparisonDataType, LoadingType, SettingDataType, WishlistDataType } from '@/src/types';
+import { BasketDataType, ComparisonDataType, LoadingType, SettingDataType, WishlistDataType } from '@/src/types';
 import { useLocalStorage } from 'usehooks-ts';
 
 type SiteToolbarProps = {
@@ -30,8 +30,9 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
         }
     }, []);
 
-    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist",[]);
-    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison",[]);
+    const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
+    const [wishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist",[]);
+    const [comparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison",[]);
     return (
         <React.Fragment>
             <CenterToolbarWrapper>
@@ -47,7 +48,7 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiShoppingCartSimpleLight />
-                                    <span className='amount'>0</span>
+                                    <span className='amount'>{basketStorage.length}</span>
                                 </div>
                                 <Link href='/basket'>{titleDictionary.basket}</Link>
                             </div>

@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
 import { Container, Section } from '@/src/styles'
@@ -69,9 +69,9 @@ const ProductsSection: React.FC<SectionProps> = ({
     const pathName = usePathname();
     const generalWrapperRef = useRef<HTMLDivElement>(null);
     const product = new Product(ProductData, productTranslateData);
-    const [filterShow, setFilterShow] = React.useState<boolean>(false);
-    const [productsView, setProductsView] = React.useState<"grid" | "list">('grid');
-    const [productState, setProductState] = React.useState<{
+    const [filterShow, setFilterShow] = useState<boolean>(false);
+    const [productsView, setProductsView] = useState<"grid" | "list">('grid');
+    const [productState, setProductState] = useState<{
         filtered: ProductDataType[] | [],
         finalResult: ProductDataType[] | []
     }>({
@@ -96,27 +96,29 @@ const ProductsSection: React.FC<SectionProps> = ({
 
 
     // functions
-    const openFilters = React.useCallback(() => {
+    const openFilters = useCallback(() => {
         if (window.innerWidth < 1200) {
             setFilterShow(true);
             if (body) {
                 body.style.overflow = "hidden";
             }
         }
-    }, [filterShow]);
-    const closeFilters = React.useCallback(() => {
+    }, [setFilterShow, body]);
+
+    const closeFilters = useCallback(() => {
         if (window.innerWidth < 1200) {
             setFilterShow(false);
             if (body) {
                 body.style.overflow = "visible";
             }
         }
-    }, [filterShow]);
-    const changeProductLayout = React.useCallback((value: 'list' | 'grid') => {
+    }, [setFilterShow, body]);
+
+    const changeProductLayout = useCallback((value: 'list' | 'grid') => {
         setProductsView(value);
     }, [setProductsView]);
 
-    const handleChangePrice = (key: "min" | "max", value: number) => {
+    const handleChangePrice = useCallback((key: "min" | "max", value: number) => {
         setProductFilterData((prev) => {
             return {
                 ...prev,
@@ -124,11 +126,11 @@ const ProductsSection: React.FC<SectionProps> = ({
                     ...prev.price,
                     [key]: value,
                 }
-            }
+            };
         });
-    };
+    }, [setProductFilterData]);
 
-    const scrollContainerTop = () => {
+    const scrollContainerTop = useCallback(() => {
         if (generalWrapperRef.current) {
             const rect = generalWrapperRef.current.getBoundingClientRect();
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -141,86 +143,87 @@ const ProductsSection: React.FC<SectionProps> = ({
                 });
             }
         }
-    };
+    }, [generalWrapperRef]);
 
-    const handleSelectBrand = (id: number) => {
+    const handleSelectBrand = useCallback((id: number) => {
         setProductFilterData((prev) => {
             return {
                 ...prev,
                 brand: prev.brand === id ? 0 : id,
-            }
-        })
-    };
+            };
+        });
+    }, [setProductFilterData]);
 
-    const handleSelectAttribute = (id: number) => {
+    const handleSelectAttribute = useCallback((id: number) => {
         setProductFilterData((prev) => {
             return {
                 ...prev,
-                attributeIDs: prev.attributeIDs.includes(id) ? [...prev.attributeIDs.filter((attr_id) => attr_id !== id)] : [...prev.attributeIDs, id],
-            }
-        })
-    }
+                attributeIDs: prev.attributeIDs.includes(id)
+                    ? [...prev.attributeIDs.filter((attr_id) => attr_id !== id)]
+                    : [...prev.attributeIDs, id],
+            };
+        });
+    }, [setProductFilterData]);
 
-    const resetLeftFilterForm = () => {
+    const resetLeftFilterForm = useCallback(() => {
         scrollContainerTop();
-        setProductFilterData({
+
+        setProductFilterData((prev) => ({
             price: {
                 min: 0,
                 max: product.getMaxPrice(categoryProducts),
             },
             brand: 0,
             attributeIDs: [],
-        });
-        setPaginationState((prev) => {
-            return {
-                ...prev,
-                currentPage: 1,
-            }
-        })
+        }));
+
+        setPaginationState((prev) => ({
+            ...prev,
+            currentPage: 1,
+        }));
+
         scrollContainerTop();
         closeFilters();
-        setProductState((prev) => {
-            return {
-                ...prev,
-                filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
-            }
-        });
-    };
 
-    const handleSubmitFilterForm = (e: React.FormEvent<HTMLFormElement>) => {
+        setProductState((prev) => ({
+            ...prev,
+            filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
+        }));
+    }, [scrollContainerTop, setProductFilterData, product.getMaxPrice, categoryProducts, setPaginationState, closeFilters, setProductState, product.techFilterization]);
+
+
+    const handleSubmitFilterForm = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         scrollContainerTop();
         closeFilters();
-        setPaginationState((prev) => {
-            return {
-                ...prev,
-                currentPage: 1,
-            }
-        })
-        setProductState((prev) => {
-            return {
-                ...prev,
-                filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
-            }
-        });
-    };
 
-    
-    const handleSortFilters = (type: "cheaptoexp" | "exptocheap" | 'a-z' | 'z-a') => {
-        const productDataWithActiveTitle = productState.filtered.map((data) => {
-            return{
-                ...data,
-                activeTitle: product.getTranslate(data.id, activeLocale, "title"),
-            }
-        });
-        setProductState({
+        setPaginationState((prev) => ({
+            ...prev,
+            currentPage: 1,
+        }));
+
+        setProductState((prev) => ({
+            ...prev,
+            filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
+        }));
+    }, [scrollContainerTop, closeFilters, setPaginationState, setProductState, product.techFilterization, productFilterData, categoryProducts, productAttributeRelationData]);
+
+
+    const handleSortFilters = useCallback((type: "cheaptoexp" | "exptocheap" | 'a-z' | 'z-a') => {
+        const productDataWithActiveTitle = productState.filtered.map((data) => ({
+            ...data,
+            activeTitle: product.getTranslate(data.id, activeLocale, "title"),
+        }));
+
+        setProductState((prev) => ({
+            ...prev,
             filtered: product.sortFilterization(type, productDataWithActiveTitle),
             finalResult: product.sortFilterization(type, productDataWithActiveTitle).slice(indexOfFirstProduct, indexOfLastProduct),
-        });
-    };
+        }));
+    }, [productState, setProductState, product, activeLocale, indexOfFirstProduct, indexOfLastProduct]);
 
     // useeffect
-    React.useEffect(() => {
+    useEffect(() => {
         setProductState((prev) => {
             return {
                 ...prev,
@@ -229,7 +232,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         });
     }, [indexOfFirstProduct, indexOfLastProduct, productState.filtered]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         setProductFilterData({
             price: {
                 min: 0,
@@ -238,7 +241,7 @@ const ProductsSection: React.FC<SectionProps> = ({
             brand: 0,
             attributeIDs: [],
         })
-    },[pathName])
+    }, [pathName])
 
     return (
         <Section $py={20}>

@@ -326,6 +326,20 @@ export const ProductDetailWrapper = styled.div`
             color: #fff;
             font-weight: 600;
             font-size: 22px;
+            cursor: pointer;
+            .icon{
+                display: none;
+                font-size: 34px;
+            }
+            &.active{
+                background-color: ${props => props.theme.color_3};
+                span{
+                    display: none;
+                }
+                .icon{
+                    display: block;
+                }
+            }
         }
     }
 `;

@@ -56,6 +56,10 @@
         "product_code": "Məhsulun kodu",
         "choose_weight": "Çəkini seç",
         "choose_color": "Rəngi seç",
-        "see_catalog": "Kataloqa bax"
+        "see_catalog": "Kataloqa bax",
+        "attention": "Diqqət!",
+        "color_message": "Zəhmət olmasa, məhsul rəngini seçin.",
+        "congratulations": "Təbriklər!",
+        "add_basket_message": "Məhsul səbətə əlavə edildi."
     }
 }
