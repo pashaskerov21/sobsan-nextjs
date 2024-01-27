@@ -74,6 +74,12 @@ const ProductCard: React.FC<CardProps> = ({
     }, [isBasket, isComparison, isWishlist]);
 
     const handleBasketButton = React.useCallback(() => {
+        setProductState((prev) => {
+            return {
+                ...prev,
+                basket: true,
+            }
+        });
         setTimeout(() => {
             router.push(productURL);
         }, 1500);
