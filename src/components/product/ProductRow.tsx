@@ -66,33 +66,25 @@ const ProductRow: React.FC<RowProps> = ({
     }, [setBasketStorage, basketStorage])
 
     useEffect(() => {
-        const updateBasket = () => {
-            const updatedBasket = basketStorage.map((data) =>
-                data.id === basketData.id
-                    ? {
-                        ...data,
-                        parameters: {
-                            ...data.parameters,
-                            amount: productAmount,
-                        }
+        console.log('test')
+        setBasketStorage((prev) => {
+            return prev.map((data) =>
+                data.id === basketData.id ? {
+                    ...data,
+                    parameters: {
+                        ...data.parameters,
+                        amount: productAmount,
                     }
-                    : data
-            );
-            setBasketStorage(updatedBasket);
-        };
-        if (productAmount !== basketData.parameters.amount) {
-            updateBasket();
-        }
-    }, [productAmount, basketStorage]);
-    const [paymentTotal, setPaymentTotal] = useLocalStorage<number>("payment-total", 0);
+                } : data)
+        });
+    }, [productAmount])
+
     useEffect(() => {
         if (activeProductData) {
             const price = activeProductData.discount === 0 ? activeProductData.price : activeProductData.discount
             setProductTotal(productAmount * price);
-            let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + productAmount * data.parameters.price, 0);
-            setPaymentTotal(total);
         }
-    }, [productAmount, activeProductData, basketStorage])
+    }, [productAmount, activeProductData])
     return (
         <React.Fragment>
             {

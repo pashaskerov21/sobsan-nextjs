@@ -49,21 +49,21 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settin
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiShoppingCartSimpleLight />
-                                    <span className='amount'>{basketStorage.length}</span>
+                                    <span className='amount'>{basketStorage ? basketStorage.length : 0}</span>
                                 </div>
                                 <Link href={`/${activeLocale}/basket`}>{titleDictionary.basket}</Link>
                             </div>
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiHeartStraight />
-                                    <span className='amount'>{wishlistStorage.length}</span>
+                                    <span className='amount'>{wishlistStorage ? wishlistStorage.length : 0}</span>
                                 </div>
                                 <Link href={`/${activeLocale}/wishlist`}>{titleDictionary.wishlist}</Link>
                             </div>
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiScalesLight />
-                                    <span className='amount'>{comparisonStorage.length}</span>
+                                    <span className='amount'>{comparisonStorage ? comparisonStorage.length : 0}</span>
                                 </div>
                                 <Link href={`/${activeLocale}/comparisons`}>{titleDictionary.comparisons}</Link>
                             </div>

@@ -33,18 +33,19 @@ const BasketSection: React.FC<SectionProps> = ({
     handleClearStorage,
 }) => {
     const [basketStorage] = useLocalStorage<BasketDataType[]>("basket", []);
-    const [paymentTotal, setPaymentTotal] = useLocalStorage<number>("payment-total", 0);
+    const [paymentTotal, setPaymentTotal] = React.useState<number>(0);
 
     React.useEffect(() => {
-        // let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
-        // console.log(total)
-        // setPaymentTotal(total);
+        if (basketStorage && basketStorage.length > 0) {
+            let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
+            setPaymentTotal(total);
+        }
     }, [basketStorage])
     return (
         <Section $py={20}>
             <Container>
                 {
-                    basketStorage.length > 0 ? (
+                    basketStorage && basketStorage.length > 0 ? (
                         <BasketContentWrapper>
                             <div className="basket__table__wrapper">
                                 {

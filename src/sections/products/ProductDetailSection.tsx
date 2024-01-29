@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import { Container, Section } from '@/src/styles'
@@ -90,7 +90,10 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const [productAmount, setProductAmount] = useState<number>(activeProductData.stock > 0 ? 1 : 0);
 
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
-    const productBasketStatus: BasketDataType | undefined = basketStorage.find((data) => data.product === activeProductData.id && data.parameters.color?.id === selectedColor?.id && data.parameters.weight.id === selectedWeight.id);
+    const productBasketStatus: BasketDataType | undefined = basketStorage.find((data) =>
+        data.product === activeProductData.id &&
+        data.parameters.color?.id === selectedColor?.id &&
+        data.parameters.weight.id === selectedWeight.id);
 
     const handleSelectColor = useCallback((data: ColorDataType) => {
         setSelectedColor(data);
@@ -153,30 +156,6 @@ const ProductDetailSection: React.FC<SectionProps> = ({
             }
         }
     }
-
-
-    useEffect(() => {
-        const updateBasket = () => {
-            if (productBasketStatus) {
-                const updatedBasket = basketStorage.map((data) =>
-                    data.id === productBasketStatus.id
-                        ? {
-                            ...data,
-                            parameters: {
-                                ...data.parameters,
-                                amount: productAmount,
-                                total: activeProductData.price * productAmount
-                            }
-                        }
-                        : data
-                );
-                setBasketStorage(updatedBasket);
-            }
-        };
-        if (productBasketStatus && productAmount !== productBasketStatus.parameters.amount) {
-            updateBasket();
-        }
-    }, [productBasketStatus, productAmount, basketStorage]);
 
     return (
         <Section $py={20}>
