@@ -118,7 +118,7 @@ class Product {
             localeSlugs = activeTranslateData.map((data) => {
                 return {
                     locale: data.lang,
-                    slug: encodeURIComponent(data.title.toLocaleLowerCase()),
+                    slug: `product/${encodeURIComponent(data.title.toLocaleLowerCase())}`,
                 }
             });
         };
@@ -143,7 +143,7 @@ class Product {
                 breadcrumbs: [
                     {
                         id: 1,
-                        path: encodeURIComponent(activeTranslateData.title.toLocaleLowerCase()),
+                        path: `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`,
                         name: activeTranslateData.title,
                     }
                 ]

@@ -78,7 +78,7 @@ class Category {
                 breadcrumbs: [
                     {
                         id: 1,
-                        path: encodeURIComponent(activeTranslateData.title.toLocaleLowerCase()),
+                        path: `/${activeLocale}/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`,
                         name: activeTranslateData.title,
                     }
                 ]

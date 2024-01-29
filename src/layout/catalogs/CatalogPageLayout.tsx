@@ -72,6 +72,7 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
                 categoryTranslateData={categoryTranslateData}
                 colorData={colorData}
                 colorTranslateData={colorTranslateData}
+                titleDictionary={titleDictionary}
                 textDictionary={textDictionary}
             />
         </React.Fragment>

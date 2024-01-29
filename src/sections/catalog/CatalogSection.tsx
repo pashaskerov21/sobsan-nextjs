@@ -14,6 +14,7 @@ type SectionProps = {
   catalogTranslateData: CatalogTranslateDataType[],
   colorData: ColorDataType[],
   colorTranslateData: ColorTranslateDataType[],
+  titleDictionary: { [key: string]: string },
   textDictionary: { [key: string]: string },
 }
 
@@ -26,6 +27,7 @@ const CatalogSection: React.FC<SectionProps> = ({
   categoryTranslateData,
   colorData,
   colorTranslateData,
+  titleDictionary,
   textDictionary,
 }) => {
   const category = new Category(categoryData, categoryTranslateData);
@@ -39,7 +41,7 @@ const CatalogSection: React.FC<SectionProps> = ({
       <Section $py={20}>
         <Container>
           <CategoryButtonWrapper>
-            <button className={activeCategoryID === 0 ? 'active' : ''} type='button' onClick={() => handleCategoryButton(0)}>hamısı</button>
+            <button className={activeCategoryID === 0 ? 'active' : ''} type='button' onClick={() => handleCategoryButton(0)}>{titleDictionary["all"]}</button>
             {
               category.getMainCategoryData().length > 0 ? (
                 category.getMainCategoryData().map((data) => (
