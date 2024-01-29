@@ -92,7 +92,7 @@ const ProductRow: React.FC<RowProps> = ({
             let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + productAmount * data.parameters.price, 0);
             setPaymentTotal(total);
         }
-    }, [productAmount, activeProductData])
+    }, [productAmount, activeProductData, basketStorage])
     return (
         <React.Fragment>
             {
