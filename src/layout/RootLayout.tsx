@@ -83,6 +83,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                 <ThemeProvider theme={activeTheme}>
                     <GlobalStyles />
                     <SiteToolbar
+                        activeLocale={activeLocale}
                         loading={loading}
                         settingData={settingData}
                         titleDictionary={titleDictionary}

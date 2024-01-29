@@ -59,9 +59,9 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
                 className='d-none d-xl-flex'
                 settingData={settingData} />
               <div className="general-icons">
-                <Link className='icon d-none d-md-flex' href='/basket'><PiShoppingCartSimpleLight /></Link>
-                <Link className='icon d-none d-md-flex' href='/wishlist'><PiHeartStraight /></Link>
-                <Link className='icon d-none d-md-flex' href='/comparisons'><PiScalesLight /></Link>
+                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/basket`}><PiShoppingCartSimpleLight /></Link>
+                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/wishlist`}><PiHeartStraight /></Link>
+                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/comparisons`}><PiScalesLight /></Link>
                 <Search
                   headerState={headerState}
                   titleDictionary={titleDictionary}

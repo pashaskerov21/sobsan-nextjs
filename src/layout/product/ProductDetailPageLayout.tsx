@@ -4,7 +4,7 @@ import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataT
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
-import { ProductPageTitle } from '@/src/components'
+import { PageTitle } from '@/src/components'
 import { ProductDetailSection } from '@/src/sections'
 import { useLocalStorage } from 'usehooks-ts'
 import { v4 as uuidv4 } from 'uuid';
@@ -143,11 +143,12 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
     }, [comparisonStorage, setComparisonStorage, isComparison]);
     return (
         <React.Fragment>
-            <ProductPageTitle
+            <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
+                type="product"
                 productState={productState}
                 handleFavoritetButton={handleFavoritetButton}
                 handleComparisonButton={handleComparisonButton}

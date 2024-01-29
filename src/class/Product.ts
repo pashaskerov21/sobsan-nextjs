@@ -185,5 +185,9 @@ class Product {
         const activeCatalog: CatalogDataType | undefined = catalogData.find((data) => data.id === id);
         return activeCatalog;
     }
+    public getProductByID(id: number){
+        const product: ProductDataType | undefined = this.productData.find((data) => data.id === id);
+        return product;
+    }
 }
 export default Product;

@@ -86,7 +86,7 @@ const ProductCard: React.FC<CardProps> = ({
     }, [router]);
     const handleFavoritetButton = React.useCallback(() => {
         if (isWishlist) {
-            const filteredData = wishlistStorage.filter((data) => data.product !== activeProductData.id);
+            const filteredData = wishlistStorage.filter((data) => data.id !== isWishlist.id);
             setWishlistStorage([...filteredData]);
         } else {
             setWishlistStorage([...wishlistStorage, wishlistData]);
@@ -94,7 +94,7 @@ const ProductCard: React.FC<CardProps> = ({
     }, [wishlistStorage, setWishlistStorage, isWishlist]);
     const handleComparisonButton = React.useCallback(() => {
         if (isComparison) {
-            const filteredData = comparisonStorage.filter((data) => data.product !== activeProductData.id);
+            const filteredData = comparisonStorage.filter((data) => data.id !== isComparison.id);
             setComparisonStorage([...filteredData]);
         } else {
             setComparisonStorage([...comparisonStorage, comparisonData])

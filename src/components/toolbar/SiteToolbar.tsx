@@ -5,16 +5,17 @@ import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { BasketDataType, ComparisonDataType, LoadingType, SettingDataType, WishlistDataType } from '@/src/types';
+import { BasketDataType, ComparisonDataType, LoadingType, LocaleType, SettingDataType, WishlistDataType } from '@/src/types';
 import { useLocalStorage } from 'usehooks-ts';
 
 type SiteToolbarProps = {
+    activeLocale: LocaleType,
     loading: LoadingType,
     settingData: SettingDataType,
     titleDictionary: { [key: string]: string },
 }
 
-const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDictionary }) => {
+const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settingData, titleDictionary }) => {
     const [showScrollBtn, setShowScrollBtn] = React.useState<boolean>(false);
     React.useEffect(() => {
         window.addEventListener('scroll', function () {
@@ -31,8 +32,8 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
     }, []);
 
     const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
-    const [wishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist",[]);
-    const [comparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison",[]);
+    const [wishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
+    const [comparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     return (
         <React.Fragment>
             <CenterToolbarWrapper>
@@ -50,21 +51,21 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ loading, settingData, titleDi
                                     <PiShoppingCartSimpleLight />
                                     <span className='amount'>{basketStorage.length}</span>
                                 </div>
-                                <Link href='/basket'>{titleDictionary.basket}</Link>
+                                <Link href={`/${activeLocale}/basket`}>{titleDictionary.basket}</Link>
                             </div>
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiHeartStraight />
                                     <span className='amount'>{wishlistStorage.length}</span>
                                 </div>
-                                <Link href='/wishlist'>{titleDictionary.wishlist}</Link>
+                                <Link href={`/${activeLocale}/wishlist`}>{titleDictionary.wishlist}</Link>
                             </div>
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiScalesLight />
                                     <span className='amount'>{comparisonStorage.length}</span>
                                 </div>
-                                <Link href='/comparisons'>{titleDictionary.comparisons}</Link>
+                                <Link href={`/${activeLocale}/comparisons`}>{titleDictionary.comparisons}</Link>
                             </div>
                         </React.Fragment>
                     )

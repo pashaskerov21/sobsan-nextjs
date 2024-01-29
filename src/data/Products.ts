@@ -10,7 +10,7 @@ const ProductData:ProductDataType[] = [
         new: true,
         offer: true,
         popular: true,
-        discount: 0,
+        discount: 9,
         catalog_id: 1,
         brand_id: 1,
         activeTitle: '',

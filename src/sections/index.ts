@@ -4,6 +4,7 @@ import ProductBannerSection from "./banner/ProductBannerSection";
 import PopularProductSection from "./products/PopularProductSection";
 import ProductsSection from "./products/ProductsSection";
 import ProductDetailSection from "./products/ProductDetailSection";
+import BasketSection from "./basket/BasketSection";
 
 export {
     CatalogSection,
@@ -11,5 +12,6 @@ export {
     ProductBannerSection,
     PopularProductSection,
     ProductsSection,
-    ProductDetailSection
+    ProductDetailSection,
+    BasketSection,   
 }

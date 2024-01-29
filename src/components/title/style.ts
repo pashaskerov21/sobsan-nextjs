@@ -71,6 +71,18 @@ export const PageTitleWrapper = styled.div`
                 }
             }
         }
+        .clear__button{
+            ${row_center};
+            gap: 6px;
+            cursor: pointer;
+            span{
+                display: block;
+                font-weight: 600;
+            }
+            svg{
+                color: ${props => props.theme.text_color_7};
+            }
+        }
     }
 `
 

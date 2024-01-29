@@ -228,6 +228,7 @@ export type BasketDataType = {
         color: ColorDataType | undefined,
         weight: WeightDataType,
         amount: number,
+        price: number,
     }
 }
 export type WishlistDataType = {

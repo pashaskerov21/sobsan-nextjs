@@ -4,7 +4,6 @@ import LanguageDropdown from "./language/LanguageDropdown";
 import ThemeButton from "./buttons/ThemeButton";
 import SocialMedia from "./SocialMedia";
 import PageTitle from "./title/PageTitle";
-import ProductPageTitle from "./title/ProductPageTitle";
 import SectionTitle from "./title/SectionTitle";
 import CatalogAccordion from "./catalog/CatalogAccordion";
 import CatalogModal from "./catalog/CatalogModal";
@@ -15,6 +14,7 @@ import ProductGrid from "./product/ProductGrid";
 import ProductLeftFilters from "./product/ProductLeftFilters";
 import ProductPagination from "./product/ProductPagination";
 import ProductSortFilters from "./product/ProductSortFilters";
+import ProductRow from "./product/ProductRow";
 
 
 export {
@@ -24,7 +24,6 @@ export {
     ThemeButton,
     SocialMedia,
     PageTitle,
-    ProductPageTitle,
     SectionTitle,
     CatalogAccordion,
     CatalogModal,
@@ -35,4 +34,5 @@ export {
     ProductLeftFilters,
     ProductPagination,
     ProductSortFilters,
+    ProductRow,
 }

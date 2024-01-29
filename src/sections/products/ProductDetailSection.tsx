@@ -112,17 +112,15 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     }, [productAmount, activeProductData.stock]);
 
     const changeProductAmount = useCallback((value: number) => {
-        if (value > activeProductData.stock) {
+        if (isNaN(value)) {
+            setProductAmount(activeProductData.stock > 1 ? 1 : 0);
+        } else if (value > activeProductData.stock) {
             setProductAmount(activeProductData.stock);
         } else {
             setProductAmount(value);
         }
     }, [activeProductData.stock]);
 
-
-
-    console.log(productCatalogColors);
-    console.log(productCustomColors);
 
     const handleBasketConfirm = () => {
         if (productBasketStatus) {
@@ -143,6 +141,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                         color: selectedColor,
                         weight: selectedWeight,
                         amount: productAmount,
+                        price: activeProductData.discount === 0 ? activeProductData.price : activeProductData.discount,
                     }
                 }
                 setBasketStorage([...basketStorage, basketData]);
@@ -161,7 +160,14 @@ const ProductDetailSection: React.FC<SectionProps> = ({
             if (productBasketStatus) {
                 const updatedBasket = basketStorage.map((data) =>
                     data.id === productBasketStatus.id
-                        ? { ...data, parameters: { ...data.parameters, amount: productAmount } }
+                        ? {
+                            ...data,
+                            parameters: {
+                                ...data.parameters,
+                                amount: productAmount,
+                                total: activeProductData.price * productAmount
+                            }
+                        }
                         : data
                 );
                 setBasketStorage(updatedBasket);
@@ -321,33 +327,32 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                         </React.Fragment>
                                     )
                                 }
-                                <div className="product__custom__color__buttons">
-                                    {
-                                        activeProductData.catalog_id === 0 && productCustomColors.length > 0 && (
-                                            <React.Fragment>
-                                                {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
-                                                {
-                                                    productCustomColors.map((data) => (
-                                                        <React.Fragment key={`custom-color-${data.id}`}>
-                                                            {
-                                                                loading.standart ? <Skeleton width='120px' height='30px' /> : (
-                                                                    <div className={`product__custom__color__button ${selectedColor && selectedColor.id === data.id ? 'active' : ''}`} onClick={() => handleSelectColor(data)}>
-                                                                        <div className="color__value">
-                                                                            <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
-                                                                        </div>
-                                                                        <div className="color__title">
-                                                                            {color.getTranslate(data.id, activeLocale, "title")}
-                                                                        </div>
+                                {activeProductData.catalog_id === 0 && productCustomColors.length > 0 && (
+                                    <React.Fragment>
+                                        {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
+                                        <div className="product__custom__color__buttons">
+                                            {
+                                                productCustomColors.map((data) => (
+                                                    <React.Fragment key={`custom-color-${data.id}`}>
+                                                        {
+                                                            loading.standart ? <Skeleton width='120px' height='30px' /> : (
+                                                                <div className={`product__custom__color__button ${selectedColor && selectedColor.id === data.id ? 'active' : ''}`} onClick={() => handleSelectColor(data)}>
+                                                                    <div className="color__value">
+                                                                        <div className="color__value__inner" style={{ backgroundColor: `${data.color_code}` }}></div>
                                                                     </div>
-                                                                )
-                                                            }
-                                                        </React.Fragment>
-                                                    ))
-                                                }
-                                            </React.Fragment>
-                                        )
-                                    }
-                                </div>
+                                                                    <div className="color__title">
+                                                                        {color.getTranslate(data.id, activeLocale, "title")}
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </React.Fragment>
+                                                ))
+                                            }
+                                        </div>
+                                    </React.Fragment>
+                                )}
+
                             </div>
                             <div className="wrapper__left__bottom__col amount__basket">
                                 {

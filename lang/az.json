@@ -24,7 +24,8 @@
         "payment_delivery": "Ödəniş və çatdırılma",
         "warranty_conditions": "Zəmanət şərtləri",
         "contact": "Bizimlə əlaqə",
-        "popular_products": "Populyar məhsullar"
+        "popular_products": "Populyar məhsullar",
+        "clear": "Təmizlə"
     },
     "text": {
         "catalog_note": "Qeyd: Ekrandakı kataloq rəngləri monitor, planşet, noutbuk və smartfonların ekran kalibrasiya fərqlərinə və işığın düşməsinə görə tətbiq olunacaq orijinal rənglərindən fərqli görünə bilər. Dəqiq nəticə üçün rəng kataloqumuza ən yaxın satış ünvanlarında baxa bilərsiniz. Həmçinin seçdiyiniz rəngi tətbiq edərkən, boyanın rəngi otağa təbii günəş işığının düşməsinə, istifadə etdiyiniz aydınlatma cihazlarının lampa rənginə (məs: sarı, led və s.) görə də fərqli görünə bilər."
@@ -61,6 +62,17 @@
         "color_message": "Zəhmət olmasa, məhsul rəngini seçin.",
         "congratulations": "Təbriklər!",
         "add_basket_message": "Məhsul səbətə əlavə edildi.",
-        "no_product": "Məhsul yoxdur"
+        "no_product": "Məhsul yoxdur",
+        "no_product_in_basket": "Səbətdə məhsul yoxdur",
+        "photo": "Foto",
+        "product_name_brand": "Məhsul adı & Brend",
+        "color": "Rəng",
+        "weight": "Çəki",
+        "amount_stock": "Miqdar & Anbarda",
+        "total": "Cəmi",
+        "total_payment": "Ümumi məbləğ",
+        "delete": "Sil",
+        "clear": "Təmizlə",
+        "clear_basket": "Səbəti təmizlə"
     }
 }

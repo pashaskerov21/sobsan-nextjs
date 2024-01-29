@@ -1,3 +1,4 @@
+import React from 'react'
 import { getTranslate } from '@/get-translate';
 import { Category } from '@/src/class';
 import { CategoryPageLayout } from '@/src/layout';
@@ -5,7 +6,6 @@ import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataT
 import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import React from 'react'
 
 const fetchData = async (): Promise<{
     categoryData: CategoriesDataType[] | undefined;
