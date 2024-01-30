@@ -66,7 +66,7 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
                   headerState={headerState}
                   titleDictionary={titleDictionary}
                   toggleSearch={toggleSearch} />
-                <Link className='icon d-none d-md-flex' href='/login'><span>{titleDictionary.login}</span><BiLogInCircle /></Link>
+                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/login`}><span>{titleDictionary.login}</span><BiLogInCircle /></Link>
               </div>
             </div>
           </div>

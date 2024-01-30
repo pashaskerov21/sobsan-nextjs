@@ -31,12 +31,18 @@ const fetchData = async (): Promise<{
 }
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
-  const t = await getTranslate(lang);
-  const titleDictionary = t.title;
-  const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.warranty_conditions}`;
-  return {
-    title: pageTitle
-  };
+  try {
+    const t = await getTranslate(lang);
+    const titleDictionary = t.title;
+    const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.warranty_conditions}`;
+    return {
+      title: pageTitle
+    };
+  } catch (error) {
+    return {
+      title: `Sobsan | ${error}`
+    };
+  }
 }
 
 const WarrantyConditionsPage = async ({ params: { lang } }: { params: { lang: LocaleType } }) => {
@@ -52,14 +58,14 @@ const WarrantyConditionsPage = async ({ params: { lang } }: { params: { lang: Lo
     ) {
       return (
         <React.Fragment>
-            <WarrantyConditionsPageLayout
-              activeLocale={lang}
-              articleData={articleData}
-              articleTranslateData={articleTranslateData}
-              menuData={menuData}
-              menuTranslateData={menuTranslateData}
-              titleDictionary={titleDictionary}
-            />
+          <WarrantyConditionsPageLayout
+            activeLocale={lang}
+            articleData={articleData}
+            articleTranslateData={articleTranslateData}
+            menuData={menuData}
+            menuTranslateData={menuTranslateData}
+            titleDictionary={titleDictionary}
+          />
         </React.Fragment>
       )
     } else {

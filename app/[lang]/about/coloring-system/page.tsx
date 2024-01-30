@@ -31,12 +31,18 @@ const fetchData = async (): Promise<{
 }
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
-  const t = await getTranslate(lang);
-  const titleDictionary = t.title;
-  const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.coloring_system}`;
-  return {
-    title: pageTitle
-  };
+  try {
+    const t = await getTranslate(lang);
+    const titleDictionary = t.title;
+    const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.coloring_system}`;
+    return {
+      title: pageTitle
+    };
+  } catch (error) {
+    return {
+      title: `Sobsan | ${error}`
+    };
+  }
 }
 
 const ColoringSystemPage = async ({ params: { lang } }: { params: { lang: LocaleType } }) => {
@@ -44,7 +50,7 @@ const ColoringSystemPage = async ({ params: { lang } }: { params: { lang: Locale
     const t = await getTranslate(lang);
     const titleDictionary = t.title;
     const { articleData, articleTranslateData, menuData, menuTranslateData } = await fetchData();
-    
+
     if (
       articleData
       && articleTranslateData
@@ -53,14 +59,14 @@ const ColoringSystemPage = async ({ params: { lang } }: { params: { lang: Locale
     ) {
       return (
         <React.Fragment>
-            <ColorSystemPageLayout
-              activeLocale={lang}
-              articleData={articleData}
-              articleTranslateData={articleTranslateData}
-              menuData={menuData}
-              menuTranslateData={menuTranslateData}
-              titleDictionary={titleDictionary}
-            />
+          <ColorSystemPageLayout
+            activeLocale={lang}
+            articleData={articleData}
+            articleTranslateData={articleTranslateData}
+            menuData={menuData}
+            menuTranslateData={menuTranslateData}
+            titleDictionary={titleDictionary}
+          />
         </React.Fragment>
       )
     } else {

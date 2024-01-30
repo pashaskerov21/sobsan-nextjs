@@ -28,12 +28,18 @@ const fetchData = async (): Promise<{
 }
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
-    const t = await getTranslate(lang);
-    const titleDictionary = t.title;
-    const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.gallery}`;
-    return {
-        title: pageTitle
-    };
+    try {
+        const t = await getTranslate(lang);
+        const titleDictionary = t.title;
+        const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.gallery}`;
+        return {
+            title: pageTitle
+        };
+    } catch (error) {
+        return {
+            title: `Sobsan | ${error}`
+        };
+    }
 }
 
 const GalleryPage = async ({ params: { lang } }: { params: { lang: LocaleType } }) => {
@@ -44,13 +50,13 @@ const GalleryPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
         if (galleryData && menuData && menuTranslateData) {
             return (
                 <React.Fragment>
-                        <GalleryPageLayout
-                            activeLocale={lang}
-                            galleryData={galleryData}
-                            menuData={menuData}
-                            menuTranslateData={menuTranslateData}
-                            titleDictionary={titleDictionary}
-                        />
+                    <GalleryPageLayout
+                        activeLocale={lang}
+                        galleryData={galleryData}
+                        menuData={menuData}
+                        menuTranslateData={menuTranslateData}
+                        titleDictionary={titleDictionary}
+                    />
                 </React.Fragment>
             )
         } else {

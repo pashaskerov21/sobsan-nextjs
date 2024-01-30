@@ -48,7 +48,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                   <Link href='/'><FaPhoneAlt /></Link>
                   <Link href='/'><FaQuestion /></Link>
                 </div>
-                <Link href='/login' className='login-link'>
+                <Link href={`/${activeLocale}/login`} className='login-link'>
                   <div className="icon"><BiLogInCircle /></div>
                   <span>{titleDictionary.login}</span>
                 </Link>
@@ -56,22 +56,6 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
               </div>
             </div>
             <div className="inner-center">
-              {/* {
-                loading.standart ? (
-                  <React.Fragment>
-                    <Skeleton width='100%' max_width='750px' height='60px'/>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    <Categories
-                      loading={loading}
-                      activeLocale={activeLocale}
-                      categoryData={categoryData}
-                      categoryTranslateData={categoryTranslateData}
-                    />
-                  </React.Fragment>
-                )
-              } */}
               <Categories
                 loading={loading}
                 activeLocale={activeLocale}

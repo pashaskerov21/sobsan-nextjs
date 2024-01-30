@@ -43,12 +43,18 @@ const fetchData = async (): Promise<{
 };
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
-  const t = await getTranslate(lang);
-  const titleDictionary = t.title;
-  const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.catalogs}`;
-  return {
-    title: pageTitle
-  };
+  try {
+    const t = await getTranslate(lang);
+    const titleDictionary = t.title;
+    const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.catalogs}`;
+    return {
+      title: pageTitle
+    };
+  } catch (error) {
+    return {
+      title: `Sobsan | ${error}`
+    };
+  }
 }
 
 const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType } }) => {
@@ -68,19 +74,19 @@ const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType }
       && colorTranslateData) {
       return (
         <React.Fragment>
-            <CatalogPageLayout
-              activeLocale={lang}
-              menuData={menuData}
-              menuTranslateData={menuTranslateData}
-              categoryData={categoryData}
-              categoryTranslateData={categoryTranslateData}
-              catalogData={catalogData}
-              catalogTranslateData={catalogTranslateData}
-              colorData={colorData}
-              colorTranslateData={colorTranslateData}
-              titleDictionary={titleDictionary}
-              textDictionary={textDictionary}
-            />
+          <CatalogPageLayout
+            activeLocale={lang}
+            menuData={menuData}
+            menuTranslateData={menuTranslateData}
+            categoryData={categoryData}
+            categoryTranslateData={categoryTranslateData}
+            catalogData={catalogData}
+            catalogTranslateData={catalogTranslateData}
+            colorData={colorData}
+            colorTranslateData={colorTranslateData}
+            titleDictionary={titleDictionary}
+            textDictionary={textDictionary}
+          />
         </React.Fragment>
       );
     } else {

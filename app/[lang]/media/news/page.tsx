@@ -31,12 +31,18 @@ const fetchData = async (): Promise<{
 }
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
-    const t = await getTranslate(lang);
-    const titleDictionary = t.title;
-    const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.news}`;
-    return {
-        title: pageTitle
-    };
+    try {
+        const t = await getTranslate(lang);
+        const titleDictionary = t.title;
+        const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.news}`;
+        return {
+            title: pageTitle
+        };
+    } catch (error) {
+      return {
+        title: `Sobsan | ${error}`
+      };
+    }
 }
 
 const NewsPage = async ({ params: { lang } }: { params: { lang: LocaleType } }) => {

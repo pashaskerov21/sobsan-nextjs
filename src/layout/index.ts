@@ -13,6 +13,8 @@ import CategoryPageLayout from "./category/CategoryPageLayout";
 import ProductDetailPageLayout from "./product/ProductDetailPageLayout";
 import Page404Layout from "./error/Page404Layout";
 import BasketPageLayout from "./basket/BasketPageLayout";
+import LoginPageLayout from "./account/LoginPageLayout";
+import RegisterPageLayout from "./account/RegisterPageLayout";
 
 export {
     RootLayout,
@@ -29,5 +31,7 @@ export {
     CategoryPageLayout,
     ProductDetailPageLayout,
     Page404Layout,
-    BasketPageLayout
+    BasketPageLayout,
+    LoginPageLayout,
+    RegisterPageLayout
 }
