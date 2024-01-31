@@ -75,5 +75,34 @@
         "delete": "Sil",
         "clear": "Təmizlə",
         "clear_basket": "Səbəti təmizlə"
+    },
+    "form": {
+        "label": {
+            "email": "E-mail",
+            "password": "Şifrə",
+            "password_confirm": "Şifrənizi təsdiq edin",
+            "firstName": "Adınız",
+            "lastName": "Soyadınız",
+            "phone": "Telefon",
+            "address": "Ünvan"
+        },
+        "error": {
+            "email_required": "E-mail tələb olunur",
+            "email_format": "E-mail formatı yanlışdır",
+            "email_login": "E-mail yanlışdır",
+            "password_required": "Şifrə tələb olunur",
+            "password_confirm_required": "Şifrənizi yenidən daxil edin",
+            "password_confirm_match": "Şifrə yanlışdır",
+            "password_login": "Şifrə yanlışdır",
+            "password_min_length": "Şifrə minimum 8 simvol olmalıdır",
+            "password_lowercase": "Bir kiçik hərf olmalıdır",
+            "password_uppercase": "Bir böyük hərf olmalıdır",
+            "password_digit": "Bir ədəd rəqəm olmalıdır",
+            "password_special_character": "Bir xüsusi simvol olmalıdır",
+            "account_login": "E-mail və ya şifrə yanlışdır",
+            "firstName_required": "Ad tələb olunur",
+            "lastName_required": "Soyad tələb olunur",
+            "phone_required": "Telefon tələb olunur"
+        }
     }
 }

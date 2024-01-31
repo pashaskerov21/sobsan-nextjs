@@ -1,9 +1,23 @@
 import React from "react";
 import { getTranslate } from "@/get-translate";
-import { LocaleType } from "@/src/types";
+import { LocaleType, SettingDataType } from "@/src/types";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { RegisterPageLayout } from "@/src/layout";
+import { fetchSettingData } from "@/src/utils";
+
+const fetchData = async (): Promise<{
+    settingData: SettingDataType[] | undefined;
+}> => {
+    try {
+        const [settingData] = await Promise.all([fetchSettingData()]);
+        return {
+            settingData,
+        };
+    } catch (error) {
+        throw new Error('Failed to fetch data');
+    }
+}
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
     try {
@@ -26,15 +40,25 @@ const RegisterPage = async ({ params: { lang } }: { params: { lang: LocaleType }
         const t = await getTranslate(lang);
         const titleDictionary = t.title;
         const generalDictionary = t.general;
-        return (
-            <React.Fragment>
-                <RegisterPageLayout
-                    activeLocale={lang}
-                    generalDictionary={generalDictionary}
-                    titleDictionary={titleDictionary}
-                />
-            </React.Fragment>
-        )
+        const formDictionary = t.form;
+        const { settingData } = await fetchData();
+        if (settingData) {
+            return (
+                <React.Fragment>
+                    <RegisterPageLayout
+                        activeLocale={lang}
+                        settingData={settingData[0]}
+                        generalDictionary={generalDictionary}
+                        titleDictionary={titleDictionary}
+                        formDictionary={formDictionary}
+                    />
+                </React.Fragment>
+            )
+        }else{
+            return(
+                <React.Fragment></React.Fragment>
+            )
+        }
     } catch (error) {
         console.error('Error:', error);
         redirect(`/${lang}/404`);

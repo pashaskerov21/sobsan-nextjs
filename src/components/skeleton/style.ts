@@ -4,6 +4,8 @@ import styled, { css, keyframes } from "styled-components";
 type SkeletonElementProps = {
     $max_width?: string,
     $min_width?: string,
+    $min_height?:string,
+    $max_height?:string,
     $width?: string,
     $width_sm?: string,
     $width_md?: string,
@@ -50,6 +52,9 @@ export const SkeletonElement = styled.div<SkeletonElementProps>`
     ${props => props.$width_lg && css`@media (width >= 992px){width: ${props.$width_lg};}`};
     ${props => props.$width_xl && css`@media (width >= 1200px){width: ${props.$width_xl};}`};
     ${props => props.$width_xxl && css`@media (width >= 1400px){width: ${props.$width_xxl};}`};
+    ${props => props.$height && css`height: ${props.$height};`};
+    ${props => props.$min_height && css`min-height: ${props.$min_height};`};
+    ${props => props.$max_height && css`max-height: ${props.$max_height};`};
     ${props => props.$height && css`height: ${props.$height};`};
     ${props => props.$height_sm && css`@media (width >= 576px){height: ${props.$height_sm};}`};
     ${props => props.$height_md && css`@media (width >= 768px){height: ${props.$height_md};}`};

@@ -94,4 +94,4 @@ const ProductPagination: React.FC<PaginationProps> = ({ loading, totalProducts, 
   )
 }
 
-export default ProductPagination
+export default React.memo(ProductPagination)

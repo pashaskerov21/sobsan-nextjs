@@ -75,5 +75,34 @@
         "delete": "Delete",
         "clear": "Clean",
         "clear_basket": "Clean basket"
+    },
+    "form": {
+        "label": {
+            "email": "E-mail",
+            "password": "Password",
+            "password_confirm": "Confirm your password",
+            "firstName": "Name",
+            "lastName": "Surname",
+            "phone": "Phone",
+            "address": "Address"
+        },
+        "error": {
+            "email_required": "Email is required",
+            "email_format": "Email format is incorrect",
+            "email_login": "Email is incorrect",
+            "password_required": "Password is required",
+            "password_confirm_required": "Re-enter your password",
+            "password_confirm_match": "Password is incorrect",
+            "password_login": "Password is incorrect",
+            "password_min_length": "Password must be at least 8 characters long",
+            "password_lowercase": "Must be one lowercase letter",
+            "password_uppercase": "Must be one uppercase letter",
+            "password_digit": "Must be a number",
+            "password_special_character": "Must be one special character",
+            "account_login": "The e-mail or password is incorrect",
+            "firstName_required": "Name required",
+            "lastName_required": "Surname required",
+            "phone_required": "Phone is required"
+        }
     }
 }

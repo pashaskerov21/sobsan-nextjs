@@ -75,5 +75,34 @@
         "delete": "Удалить",
         "clear": "Чистый",
         "clear_basket": "Чистая корзина"
+    },
+    "form": {
+        "label": {
+            "email": "Эл. почта",
+            "password": "Пароль",
+            "password_confirm": "Подтвердите ваш пароль",
+            "firstName": "Имя",
+            "lastName": "Фамилия",
+            "phone": "Телефон",
+            "address": "Адрес"
+        },
+        "error": {
+            "email_required": "Требуется электронная почта",
+            "email_format": "Формат электронной почты неверен",
+            "email_login": "Электронная почта неверна",
+            "password_required": "Требуется пароль",
+            "password_confirm_required": "Повторно введите свой пароль",
+            "password_confirm_match": "Неправильный пароль",
+            "password_login": "Неправильный пароль",
+            "password_min_length": "Пароль должен быть длиной не менее 8 символов",
+            "password_lowercase": "Должна быть одна строчная буква",
+            "password_uppercase": "Должна быть одна заглавная буква",
+            "password_digit": "Должен быть числом",
+            "password_special_character": "Должен быть один специальный символ",
+            "account_login": "Электронная почта или пароль неверны",
+            "firstName_required": "Требуется имя",
+            "lastName_required": "Требуется фамилия",
+            "phone_required": "Требуется телефон"
+        }
     }
 }

@@ -6,6 +6,8 @@ type SkeletonProps = {
     width?: string,
     max_width?: string,
     min_width?:string,
+    min_height?:string,
+    max_height?:string,
     width_sm?: string,
     width_md?: string,
     width_lg?: string,
@@ -24,6 +26,8 @@ type SkeletonProps = {
 }
 
 const Skeleton: React.FC<SkeletonProps> = ({
+    min_height,
+    max_height,
     height,
     height_sm,
     height_md,
@@ -47,6 +51,8 @@ const Skeleton: React.FC<SkeletonProps> = ({
         <React.Fragment>
             <SkeletonElement
                 className={className}
+                $min_height={min_height}
+                $max_height={max_height}
                 $height={height}
                 $height_sm={height_sm}
                 $height_md={height_md}

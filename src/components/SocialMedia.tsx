@@ -15,7 +15,6 @@ const SocialMedia: React.FC<SocialMediaProps> = ({ settingData, className }) => 
       <Link href={settingData.facebook} target='_blank'><FaFacebookF /></Link>
       <Link href={settingData.instagram} target='_blank'><FaInstagram /></Link>
       <Link href={settingData.youtube} target='_blank'><FaYoutube /></Link>
-
     </div>
   )
 }

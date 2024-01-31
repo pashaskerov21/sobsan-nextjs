@@ -5,6 +5,8 @@ import PopularProductSection from "./products/PopularProductSection";
 import ProductsSection from "./products/ProductsSection";
 import ProductDetailSection from "./products/ProductDetailSection";
 import BasketSection from "./basket/BasketSection";
+import LoginSection from "./account/LoginSection";
+import RegistrationSection from "./account/RegistrationSection";
 
 export {
     CatalogSection,
@@ -14,4 +16,6 @@ export {
     ProductsSection,
     ProductDetailSection,
     BasketSection,   
+    LoginSection,
+    RegistrationSection,
 }

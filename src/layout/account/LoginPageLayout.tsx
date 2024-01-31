@@ -3,20 +3,29 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { LoadingType, LocaleStateType, LocaleType, PageTitleDataType} from '@/src/types';
+import { LoadingType, LocaleStateType, LocaleType, PageTitleDataType, SettingDataType } from '@/src/types';
 import { i18n } from '@/i18n-config';
+import { LoginSection } from '@/src/sections';
 
 
 type LayoutProps = {
     activeLocale: LocaleType,
+    settingData: SettingDataType,
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
+    formDictionary: {
+        [key: string]: {
+            [key: string]: string
+        }
+    },
 }
 
 const LoginPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
+    settingData,
     titleDictionary,
     generalDictionary,
+    formDictionary,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
         standart: true,
@@ -70,6 +79,13 @@ const LoginPageLayout: React.FC<LayoutProps> = ({
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
+            />
+            <LoginSection
+                activeLocale={activeLocale}
+                settingData={settingData}
+                titleDictionary={titleDictionary}
+                formDictionary={formDictionary}
+                loading={loading}
             />
         </React.Fragment>
     )

@@ -15,6 +15,8 @@ import ProductLeftFilters from "./product/ProductLeftFilters";
 import ProductPagination from "./product/ProductPagination";
 import ProductSortFilters from "./product/ProductSortFilters";
 import ProductRow from "./product/ProductRow";
+import LoginForm from "./form/LoginForm";
+import RegistrationForm from "./form/RegistrationForm";
 
 
 export {
@@ -35,4 +37,6 @@ export {
     ProductPagination,
     ProductSortFilters,
     ProductRow,
+    LoginForm,
+    RegistrationForm,
 }
