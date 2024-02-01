@@ -3,7 +3,7 @@ import React, { Fragment, useCallback, useState } from 'react'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import { Container, Section } from '@/src/styles'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BasketDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
+import { AccountDataType, AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BasketDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
 import { ProductDetailWrapper } from './style'
 import { Attribute, AttributeGroup, Brand, Catalog, Category, Color, Product } from '@/src/class'
 import { CatalogModal, Skeleton } from '@/src/components'
@@ -89,6 +89,10 @@ const ProductDetailSection: React.FC<SectionProps> = ({
     const [selectedWeight, setSelectedWeight] = useState<WeightDataType>(productWeights[0]);
     const [productAmount, setProductAmount] = useState<number>(activeProductData.stock > 0 ? 1 : 0);
 
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const productBasketStatus: BasketDataType | undefined = basketStorage.find((data) =>
         data.product === activeProductData.id &&
@@ -139,7 +143,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                 let basketData: BasketDataType = {
                     id: uuidv4(),
                     product: activeProductData.id,
-                    user: null,
+                    user: accountData.activeUser ? accountData.activeUser : null,
                     parameters: {
                         color: selectedColor,
                         weight: selectedWeight,

@@ -1,6 +1,6 @@
 'use client'
 import React, { Fragment } from 'react'
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
+import { AccountDataType, AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
@@ -96,16 +96,20 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
 
 
     // product button functions
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
     const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     const wishlistData: WishlistDataType = {
         id: uuidv4(),
-        user: null,
+        user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
     const comparisonData: ComparisonDataType = {
         id: uuidv4(),
-        user: null,
+        user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
     const isWishlist = wishlistStorage.find((data) => data.product === activeProductData.id);

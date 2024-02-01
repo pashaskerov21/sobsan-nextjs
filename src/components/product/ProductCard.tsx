@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import Image from 'next/image';
 import Skeleton from '../skeleton/Skeleton';
 import Link from 'next/link';
-import { BasketDataType, BrandDataType, BrandTranslateDataType, ComparisonDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
+import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ComparisonDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
 import { ProductCardWrapper } from './style';
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
@@ -40,17 +40,21 @@ const ProductCard: React.FC<CardProps> = ({
     const product = new Product(productData, productTranslateData);
     const productURL = product.getURL(activeProductData.id, activeLocale);
     const router = useRouter();
-    const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     const wishlistData: WishlistDataType = {
         id: uuidv4(),
-        user: null,
+        user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
     const comparisonData: ComparisonDataType = {
         id: uuidv4(),
-        user: null,
+        user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
     const isBasket = basketStorage.find((data) => data.product === activeProductData.id);

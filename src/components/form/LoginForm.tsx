@@ -2,7 +2,7 @@
 import React from 'react'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
-import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/types'
+import { AccountDataType, BasketDataType, ComparisonDataType, LoadingType, LocaleType, UserDataType, WishlistDataType } from '@/src/types'
 import { Form, Formik, FormikHelpers } from 'formik'
 import FormComponent from './FormComponent'
 import { FormWrapper } from './style'
@@ -31,6 +31,14 @@ const LoginForm: React.FC<FormProps> = ({
     loading,
     titleDictionary,
 }) => {
+    const router = useRouter();
+    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
+    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
+    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     const initialValues: LoginFormValueType = {
         email: '',
         password: '',
@@ -58,15 +66,11 @@ const LoginForm: React.FC<FormProps> = ({
             ),
     });
 
-    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
-        activeUser: undefined,
-        users: [],
-    });
-    const router = useRouter();
+
     const onSubmit = (values: LoginFormValueType, actions: FormikHelpers<LoginFormValueType>) => {
 
         const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
-        
+
         const searchAccount: UserDataType | undefined = userData.find((data) => data.email === values.email && data.password === values.password);
         if (searchAccount) {
             setAccountData((prev) => {
@@ -76,7 +80,10 @@ const LoginForm: React.FC<FormProps> = ({
                 }
             });
             actions.resetForm();
-            router.push(`/${activeLocale}`)
+            setBasketStorage(basketStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
+            setWishlistStorage(wishlistStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
+            setComparisonStorage(comparisonStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
+            router.push(`/${activeLocale}`);
         } else {
             Swal.fire({
                 icon: "error",
