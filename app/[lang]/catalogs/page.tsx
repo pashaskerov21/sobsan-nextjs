@@ -73,21 +73,19 @@ const CatalogsPage = async ({ params: { lang } }: { params: { lang: LocaleType }
       && colorData
       && colorTranslateData) {
       return (
-        <React.Fragment>
-          <CatalogPageLayout
-            activeLocale={lang}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            categoryData={categoryData}
-            categoryTranslateData={categoryTranslateData}
-            catalogData={catalogData}
-            catalogTranslateData={catalogTranslateData}
-            colorData={colorData}
-            colorTranslateData={colorTranslateData}
-            titleDictionary={titleDictionary}
-            textDictionary={textDictionary}
-          />
-        </React.Fragment>
+        <CatalogPageLayout
+          activeLocale={lang}
+          menuData={menuData}
+          menuTranslateData={menuTranslateData}
+          categoryData={categoryData}
+          categoryTranslateData={categoryTranslateData}
+          catalogData={catalogData}
+          catalogTranslateData={catalogTranslateData}
+          colorData={colorData}
+          colorTranslateData={colorTranslateData}
+          titleDictionary={titleDictionary}
+          textDictionary={textDictionary}
+        />
       );
     } else {
       redirect(`/${lang}/404`);

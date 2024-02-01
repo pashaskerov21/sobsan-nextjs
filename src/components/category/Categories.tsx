@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Category } from '@/src/class';
 import { CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import Link from 'next/link';
@@ -65,7 +65,7 @@ const Categories: React.FC<CategoriesProps> = ({
 
   const renderAltCategories = (data: CategoriesDataType[], level: number, parentID: number[]): JSX.Element[] => {
     return data.map((altData) => (
-      <React.Fragment key={altData.id}>
+      <Fragment key={altData.id}>
         <div className={`category-item`}>
           <div className={`main-row ${(activeCategoryData && activeCategoryData.id === altData.id) ? 'active' : ''}`} onMouseMove={() => handleCategoryMouseMove([...parentID, altData.id])} onMouseLeave={() => handleCategoryMouseLeave()}>
             <Link href={category.getTranslate(altData.id, activeLocale, "url")}>
@@ -83,13 +83,13 @@ const Categories: React.FC<CategoriesProps> = ({
             </AltCategoryWrapper>
           )}
         </div>
-      </React.Fragment>
+      </Fragment>
     ));
   };
 
   const renderCategories = (data: CategoriesDataType[] | []): JSX.Element[] => {
     return data.map((mainData: CategoriesDataType) => (
-      <React.Fragment key={mainData.id}>
+      <Fragment key={mainData.id}>
         {
           loading.standart ? (
             <Skeleton width='100%' height='38px' margin='0 0 2px 0'/>
@@ -115,15 +115,15 @@ const Categories: React.FC<CategoriesProps> = ({
             </div>
           )
         }
-      </React.Fragment>
+      </Fragment>
     ))
   }
   return (
-    <React.Fragment>
+    <Fragment>
       <CategoryWrapper $parentComponent={parentComponent}>
         {mainCategoryData.length > 0 ? renderCategories(mainCategoryData as CategoriesDataType[]) : null}
       </CategoryWrapper>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

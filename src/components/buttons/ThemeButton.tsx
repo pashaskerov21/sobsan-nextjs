@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ThemeButtonStyle } from './style'
 import { BsFillSunFill, BsMoonStarsFill } from 'react-icons/bs'
 
@@ -10,22 +10,22 @@ type ThemeButtonProps = {
 
 const ThemeButton: React.FC<ThemeButtonProps> = ({ theme, toggleTheme }) => {
     return (
-        <React.Fragment>
+        <Fragment>
             <ThemeButtonStyle className={theme} onClick={toggleTheme}>
                 <div className="icon">
                     {
                         theme === 'dark' ?
                             (
-                                <React.Fragment>
+                                <Fragment>
                                     <BsFillSunFill />
-                                </React.Fragment>
-                            ) : <React.Fragment>
+                                </Fragment>
+                            ) : <Fragment>
                                 <BsMoonStarsFill />
-                            </React.Fragment>
+                            </Fragment>
                     }
                 </div>
             </ThemeButtonStyle>
-        </React.Fragment>
+        </Fragment>
     )
 }
 

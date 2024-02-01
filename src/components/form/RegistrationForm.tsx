@@ -1,16 +1,21 @@
 'use client'
 import React from 'react'
 import * as Yup from 'yup'
-import { LoadingType, LocaleType } from '@/src/types'
+import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/types'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { FormWrapper } from './style'
 import FormComponent from './FormComponent'
-import Skeleton from '../skeleton/Skeleton'
+import { v4 as uuidv4 } from 'uuid';
+import { useLocalStorage } from 'usehooks-ts'
+import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation'
+import { decryptData, encryptData } from '@/src/utils/crypto'
 
 type FormProps = {
     activeLocale: LocaleType,
     loading: LoadingType,
     titleDictionary: { [key: string]: string },
+    generalDictionary: { [key: string]: string },
     formDictionary: {
         [key: string]: {
             [key: string]: string
@@ -28,11 +33,17 @@ type RegistrationFormValueType = {
     password_confirm: string,
 }
 
+type EncryptedData = {
+    ciphertext: string;
+    key: string;
+}
+
 const RegistrationForm: React.FC<FormProps> = ({
     activeLocale,
     formDictionary,
     loading,
     titleDictionary,
+    generalDictionary,
 }) => {
     const initialValues: RegistrationFormValueType = {
         firstName: "",
@@ -87,10 +98,46 @@ const RegistrationForm: React.FC<FormProps> = ({
                 /^(?=.*[@$!%*?&])/,
                 `${formDictionary.error.password_special_character}`
             ),
-    })
+    });
+
+    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const router = useRouter();
     const onSubmit = (values: RegistrationFormValueType, actions: FormikHelpers<RegistrationFormValueType>) => {
-        console.log(values);
-        actions.resetForm();
+        console.log(values)
+        const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
+        
+        const searchAccount: UserDataType | undefined = userData.find((data) => data.email === values.email);
+        if (searchAccount) {
+            Swal.fire({
+                icon: "error",
+                title: formDictionary.error["error"],
+                text: formDictionary.error["account_exist"],
+            });
+        } else {
+            const account: UserDataType = {
+                id: uuidv4(),
+                ...values,
+            }
+            setAccountData((prev) => {
+                return {
+                    ...prev,
+                    users: [...prev.users, encryptData(account)],
+                }
+            });
+            Swal.fire({
+                icon: "success",
+                title: generalDictionary["congratulations"],
+                text: generalDictionary["resgistration_messsage"],
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    actions.resetForm();
+                    router.push(`/${activeLocale}/login`);
+                }
+            });
+        }
     }
     return (
         <FormWrapper className='login__form'>
@@ -101,7 +148,7 @@ const RegistrationForm: React.FC<FormProps> = ({
             >
                 {
                     formik => (
-                        <Form>
+                        <Form autoComplete='off'>
                             <FormComponent
                                 control='input'
                                 name='firstName'
@@ -119,7 +166,7 @@ const RegistrationForm: React.FC<FormProps> = ({
                             <FormComponent
                                 control='input'
                                 name='phone'
-                                type='number'
+                                type='text'
                                 label={formDictionary.label.phone + ' *'}
                                 formik={formik}
                             />

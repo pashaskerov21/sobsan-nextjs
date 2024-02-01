@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
@@ -46,14 +46,14 @@ const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
     dispatch(updateLocaleSlug(localeSlugs))
   }, [dispatch]);
   return (
-    <React.Fragment>
+    <Fragment>
       <PageTitle
         loading={loading}
         activeLocale={activeLocale}
         pageTitleData={pageTitleData}
         titleDictionary={titleDictionary}
       />
-    </React.Fragment>
+    </Fragment>
   )
 }
 

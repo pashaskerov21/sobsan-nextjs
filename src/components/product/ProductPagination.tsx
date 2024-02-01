@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useLocalStorage } from 'usehooks-ts';
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { ProductPaginationWrapper } from './style';
@@ -72,7 +72,7 @@ const ProductPagination: React.FC<PaginationProps> = ({ loading, totalProducts, 
       }
       <div className="numbers">
         {pageNumbers.map((number) => (
-          <React.Fragment key={number}>
+          <Fragment key={number}>
             {
               loading.standart ? (
                 <Skeleton width='30px' height='30px' radius='5px' />
@@ -80,7 +80,7 @@ const ProductPagination: React.FC<PaginationProps> = ({ loading, totalProducts, 
                 <button type='button' className={paginationState.currentPage === number ? 'active' : ''} onClick={() => handlePageChange(number)}>{number}</button>
               )
             }
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
       {

@@ -2,7 +2,7 @@
 import { Catalog, Color } from '@/src/class'
 import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import Image from 'next/image'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { FaXmark } from 'react-icons/fa6'
 import { Navigation, Pagination } from 'swiper/modules'
@@ -91,7 +91,7 @@ const CatalogModal: React.FC<CatalogModalProps> = ({
         handleSelectColor(data);
     }
     return (
-        <React.Fragment>
+        <Fragment>
             <CatalogModalButtonWrapper onClick={openModal}>
                 <div className={`toggle__button`}>
                     <span>{generalDictionary.see_catalog}</span>
@@ -107,7 +107,7 @@ const CatalogModal: React.FC<CatalogModalProps> = ({
             </CatalogModalButtonWrapper>
             {
                 showModal && (
-                    <React.Fragment>
+                    <Fragment>
                         <div className="black-backdrop" onClick={closeModal}></div>
                         <CatalogModalWrapper>
                             <div className="catalog__modal__close__button" onClick={closeModal}>
@@ -152,7 +152,7 @@ const CatalogModal: React.FC<CatalogModalProps> = ({
                                 <div className="catalog__color__wrapper">
                                     {
                                         colorData.map((data, index) => (
-                                            <React.Fragment key={`color-item-${data.id}`}>
+                                            <Fragment key={`color-item-${data.id}`}>
                                                 <div className={`color__item ${activeColorIndex === index ? 'active' : ''}`} onClick={() => handleColorButtonClick(index)}>
                                                     <div className="color__item__image">
                                                         {
@@ -165,7 +165,7 @@ const CatalogModal: React.FC<CatalogModalProps> = ({
                                                         {color.getTranslate(data.id, activeLocale, "title").length > 0 ? color.getTranslate(data.id, activeLocale, "title") : data.code}
                                                     </div>
                                                 </div>
-                                            </React.Fragment>
+                                            </Fragment>
                                         ))
                                     }
                                 </div>
@@ -177,10 +177,10 @@ const CatalogModal: React.FC<CatalogModalProps> = ({
                                 </div>
                             </div>
                         </CatalogModalWrapper>
-                    </React.Fragment>
+                    </Fragment>
                 )
             }
-        </React.Fragment>
+        </Fragment>
     )
 }
 

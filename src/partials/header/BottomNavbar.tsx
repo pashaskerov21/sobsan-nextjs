@@ -1,8 +1,8 @@
 'use client'
-import React from 'react';
+import React, { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BottomNavbarProps } from '@/src/types';
+import { AccountDataType, BottomNavbarProps } from '@/src/types';
 import { BottomNavbarWrapper } from './style';
 import { Container } from '@/src/styles';
 import { FaPhoneAlt } from "react-icons/fa";
@@ -11,6 +11,8 @@ import { BiLogInCircle } from 'react-icons/bi';
 import PageLinks from './PageLinks';
 import { Categories, LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/components';
 import Search from './Search';
+import { useLocalStorage } from 'usehooks-ts';
+import { HiMiniUser } from 'react-icons/hi2';
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
   loading,
@@ -27,13 +29,17 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
   toggleMenu,
   toggleSearch,
 }) => {
+  const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+    activeUser: undefined,
+    users: [],
+  });
   return (
-    <React.Fragment>
+    <Fragment>
       {
         headerState.menuShow ? (
-          <React.Fragment>
+          <Fragment>
             <div className="black-backdrop" onClick={toggleMenu}></div>
-          </React.Fragment>
+          </Fragment>
         ) : null
       }
       <BottomNavbarWrapper $fixed={headerState.fixed}>
@@ -47,11 +53,17 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                 <div className="menu-header-icons">
                   <Link href='/'><FaPhoneAlt /></Link>
                   <Link href='/'><FaQuestion /></Link>
+                  <Link className='user-icon' href={`/${activeLocale}/account`}><HiMiniUser /></Link>
                 </div>
-                <Link href={`/${activeLocale}/login`} className='login-link'>
-                  <div className="icon"><BiLogInCircle /></div>
-                  <span>{titleDictionary.login}</span>
-                </Link>
+                {
+                  !accountData.activeUser && (
+                    <Link href={`/${activeLocale}/login`} className='login-link'>
+                      <div className="icon"><BiLogInCircle /></div>
+                      <span>{titleDictionary.login}</span>
+                    </Link>
+                  )
+                }
+
                 <button className='close-button' onClick={toggleMenu}><FaXmark /></button>
               </div>
             </div>
@@ -89,7 +101,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
           </div>
         </Container>
       </BottomNavbarWrapper>
-    </React.Fragment>
+    </Fragment >
   )
 }
 

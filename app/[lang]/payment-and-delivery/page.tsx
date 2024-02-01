@@ -57,16 +57,14 @@ const PaymentDeliveryPage = async ({ params: { lang } }: { params: { lang: Local
       && menuTranslateData
     ) {
       return (
-        <React.Fragment>
-          <PaymentDeliveryPageLayout
-            activeLocale={lang}
-            articleData={articleData}
-            articleTranslateData={articleTranslateData}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            titleDictionary={titleDictionary}
-          />
-        </React.Fragment>
+        <PaymentDeliveryPageLayout
+          activeLocale={lang}
+          articleData={articleData}
+          articleTranslateData={articleTranslateData}
+          menuData={menuData}
+          menuTranslateData={menuTranslateData}
+          titleDictionary={titleDictionary}
+        />
       )
     } else {
       redirect(`/${lang}/404`);

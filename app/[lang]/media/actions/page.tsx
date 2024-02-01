@@ -57,16 +57,14 @@ const ActionsPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
             && menuTranslateData
         ) {
             return (
-                <React.Fragment>
-                    <ActionPageLayout
-                        activeLocale={lang}
-                        articleData={articleData}
-                        articleTranslateData={articleTranslateData}
-                        menuData={menuData}
-                        menuTranslateData={menuTranslateData}
-                        titleDictionary={titleDictionary}
-                    />
-                </React.Fragment>
+                <ActionPageLayout
+                    activeLocale={lang}
+                    articleData={articleData}
+                    articleTranslateData={articleTranslateData}
+                    menuData={menuData}
+                    menuTranslateData={menuTranslateData}
+                    titleDictionary={titleDictionary}
+                />
             )
         } else {
             redirect(`/${lang}/404`);

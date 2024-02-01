@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { Fragment } from 'react'
 import Image from 'next/image';
 import Skeleton from '../skeleton/Skeleton';
 import Link from 'next/link';
@@ -111,124 +112,122 @@ const ProductCard: React.FC<CardProps> = ({
     }, [productBrandData]);
 
     return (
-        <React.Fragment>
-            <ProductCardWrapper $productsView={productsView} data-id={activeProductData.id}>
-                <div className="card__top">
-                    <div className="product__badges">
-                        {activeProductData.new ? loading.standart ? (
-                            <Skeleton width='45px' height='23px' radius='5px' />
-                        ) : (
-                            <div className="product__badge">{generalDictionary["new"]}</div>
-                        ) : null}
-                        {activeProductData.offer ? loading.standart ? (
-                            <Skeleton width='115px' height='23px' radius='5px' />
-                        ) : (
-                            <div className="product__badge secondary">{generalDictionary["offered"]}</div>
-                        ) : null}
-                    </div>
-                    {
-                        loading.lazy ? (
-                            <React.Fragment>
-                                <Skeleton width='100%' max_width='350px' height='200px' />
-                            </React.Fragment>
-                        ) : (
-                            <React.Fragment>
-                                <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__image'>
-                                    <Image src={activeProductData.image} width={550} height={440} alt='product' />
-                                </Link>
-                            </React.Fragment>
-                        )
-                    }
+        <ProductCardWrapper $productsView={productsView} data-id={activeProductData.id}>
+            <div className="card__top">
+                <div className="product__badges">
+                    {activeProductData.new ? loading.standart ? (
+                        <Skeleton width='45px' height='23px' radius='5px' />
+                    ) : (
+                        <div className="product__badge">{generalDictionary["new"]}</div>
+                    ) : null}
+                    {activeProductData.offer ? loading.standart ? (
+                        <Skeleton width='115px' height='23px' radius='5px' />
+                    ) : (
+                        <div className="product__badge secondary">{generalDictionary["offered"]}</div>
+                    ) : null}
                 </div>
-                <div className="card__center">
-                    {
-                        loading.standart ? (
-                            <React.Fragment>
-                                <Skeleton width='60px' height='24px' margin='0 0 5px 0' />
-                                <Skeleton width='210px' height='30px' margin='0 0 25px 0' />
-                                <Skeleton width='270px' height='40px' margin='0 0 45px 0' />
-                            </React.Fragment>
-                        ) : (
-                            <React.Fragment>
-                                <div className="product__brand">{brandTitle}</div>
-                                <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__title'>
-                                    {product.getTranslate(activeProductData.id, activeLocale, "title")}
-                                </Link>
-                                <div className="product__description">
-                                    {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0, 100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}
-                                </div>
-                            </React.Fragment>
-                        )
-                    }
+                {
+                    loading.lazy ? (
+                        <Fragment>
+                            <Skeleton width='100%' max_width='350px' height='200px' />
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+                            <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__image'>
+                                <Image src={activeProductData.image} width={550} height={440} alt='product' />
+                            </Link>
+                        </Fragment>
+                    )
+                }
+            </div>
+            <div className="card__center">
+                {
+                    loading.standart ? (
+                        <Fragment>
+                            <Skeleton width='60px' height='24px' margin='0 0 5px 0' />
+                            <Skeleton width='210px' height='30px' margin='0 0 25px 0' />
+                            <Skeleton width='270px' height='40px' margin='0 0 45px 0' />
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+                            <div className="product__brand">{brandTitle}</div>
+                            <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__title'>
+                                {product.getTranslate(activeProductData.id, activeLocale, "title")}
+                            </Link>
+                            <div className="product__description">
+                                {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0, 100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}
+                            </div>
+                        </Fragment>
+                    )
+                }
 
-                </div>
-                <div className="card__bottom">
+            </div>
+            <div className="card__bottom">
+                {
+                    loading.standart ? (
+                        <Fragment>
+                            <Skeleton width='170px' height='25px' margin='0 0 10px 0' />
+                            <Skeleton width='240px' height='25px' margin='0 0 10px 0' />
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+                            <div className="product__price">
+                                {
+                                    activeProductData.discount === 0 ? (
+                                        <Fragment>
+                                            <div className="main_price">
+                                                {activeProductData.price.toFixed(2)} AZN
+                                            </div>
+                                        </Fragment>
+                                    ) : (
+                                        <Fragment>
+                                            <div className="old_price">
+                                                {activeProductData.price.toFixed(2)} AZN
+                                            </div>
+                                            <div className="main_price">
+                                                {activeProductData.discount.toFixed(2)} AZN
+                                            </div>
+                                        </Fragment>
+                                    )
+                                }
+                            </div>
+                            <div className="product__stock">
+                                <div className="icon"><FaCheck /></div>
+                                <div className="value">{generalDictionary["stock"]}: {activeProductData.stock} {generalDictionary["pieces"]}</div>
+                            </div>
+                        </Fragment>
+                    )
+                }
+                <div className="card__buttons">
                     {
                         loading.standart ? (
-                            <React.Fragment>
-                                <Skeleton width='170px' height='25px' margin='0 0 10px 0' />
-                                <Skeleton width='240px' height='25px' margin='0 0 10px 0' />
-                            </React.Fragment>
+                            <Fragment>
+                                <Skeleton height='50px' radius='5px' />
+                                <Skeleton height='50px' radius='5px' />
+                                <Skeleton height='50px' radius='5px' />
+                            </Fragment>
                         ) : (
-                            <React.Fragment>
-                                <div className="product__price">
-                                    {
-                                        activeProductData.discount === 0 ? (
-                                            <React.Fragment>
-                                                <div className="main_price">
-                                                    {activeProductData.price.toFixed(2)} AZN
-                                                </div>
-                                            </React.Fragment>
-                                        ) : (
-                                            <React.Fragment>
-                                                <div className="old_price">
-                                                    {activeProductData.price.toFixed(2)} AZN
-                                                </div>
-                                                <div className="main_price">
-                                                    {activeProductData.discount.toFixed(2)} AZN
-                                                </div>
-                                            </React.Fragment>
-                                        )
-                                    }
+                            <Fragment>
+                                <div className={`card__button basket__button ${productState.basket ? 'active' : ''}`} onClick={handleBasketButton}>
+                                    <div className="label">{generalDictionary["add_basket"]}</div>
+                                    <div className="icon"><PiShoppingCartSimpleLight /></div>
+                                    <div className="active-icon">
+                                        <PiShoppingCartSimpleLight />
+                                    </div>
                                 </div>
-                                <div className="product__stock">
-                                    <div className="icon"><FaCheck /></div>
-                                    <div className="value">{generalDictionary["stock"]}: {activeProductData.stock} {generalDictionary["pieces"]}</div>
+                                <div className={`card__button comparison__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
+                                    <div className="icon"><PiScalesLight /></div>
+                                    <div className="label">{generalDictionary["comparison"]}</div>
                                 </div>
-                            </React.Fragment>
+                                <div className={`card__button favorite__button ${productState.wishlist ? 'active' : ''}`} onClick={handleFavoritetButton}>
+                                    <div className="icon">{productState.wishlist ? <FaHeart /> : <FaRegHeart />}</div>
+                                </div>
+                            </Fragment>
                         )
                     }
-                    <div className="card__buttons">
-                        {
-                            loading.standart ? (
-                                <React.Fragment>
-                                    <Skeleton height='50px' radius='5px' />
-                                    <Skeleton height='50px' radius='5px' />
-                                    <Skeleton height='50px' radius='5px' />
-                                </React.Fragment>
-                            ) : (
-                                <React.Fragment>
-                                    <div className={`card__button basket__button ${productState.basket ? 'active' : ''}`} onClick={handleBasketButton}>
-                                        <div className="label">{generalDictionary["add_basket"]}</div>
-                                        <div className="icon"><PiShoppingCartSimpleLight /></div>
-                                        <div className="active-icon">
-                                            <PiShoppingCartSimpleLight />
-                                        </div>
-                                    </div>
-                                    <div className={`card__button comparison__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
-                                        <div className="icon"><PiScalesLight /></div>
-                                        <div className="label">{generalDictionary["comparison"]}</div>
-                                    </div>
-                                    <div className={`card__button favorite__button ${productState.wishlist ? 'active' : ''}`} onClick={handleFavoritetButton}>
-                                        <div className="icon">{productState.wishlist ? <FaHeart /> : <FaRegHeart />}</div>
-                                    </div>
-                                </React.Fragment>
-                            )
-                        }
-                    </div>
                 </div>
-            </ProductCardWrapper>
-        </React.Fragment >
+            </div>
+        </ProductCardWrapper>
     )
 }
 

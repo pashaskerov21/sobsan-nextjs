@@ -68,7 +68,7 @@ export const ProductBannerWrapper = styled.div`
                 .text{
                     text-align: center;
                     padding: 0 20px;
-                    min-height: 250px;
+                    min-height: 200px;
                     @media (width >= 992px){
                         min-height: 150px;
                     }
@@ -89,11 +89,30 @@ export const ProductBannerWrapper = styled.div`
             }
             .banner-image{
                 width: 100%;
-                max-width: 400px;
+                max-width: 200px;
                 img{
                     width: 100%;
                     height: auto;
+                    max-height: 200px;
                     object-fit: contain;
+                }
+                @media (min-width: 576px){
+                    max-width: 250px;
+                    img{
+                        max-height: 250px;
+                    }
+                }
+                @media (min-width: 992px){
+                    max-width: 300px;
+                    img{
+                        max-height: 300px;
+                    }
+                }
+                @media (min-width: 1200px){
+                    max-width: 400px;
+                    img{
+                        max-height: 400px;
+                    }
                 }
             }
         }

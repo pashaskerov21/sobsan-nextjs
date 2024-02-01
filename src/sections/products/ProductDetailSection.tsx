@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useState } from 'react'
+import React, { Fragment, useCallback, useState } from 'react'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import { Container, Section } from '@/src/styles'
@@ -166,15 +166,15 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                             <div className="product__parameter">
                                 {
                                     loading.standart ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Skeleton width='50%' height='21px' />
                                             <Skeleton width='50%' height='21px' />
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <div className="parameter__key">{generalDictionary.brand}:</div>
                                             <div className="parameter__value">{brand.getTranslate(activeProductData.brand_id, activeLocale, "title")}</div>
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
                             </div>
@@ -183,15 +183,15 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                     <div className="product__parameter" key={`category-${data.id}`}>
                                         {
                                             loading.standart ? (
-                                                <React.Fragment>
+                                                <Fragment>
                                                     <Skeleton width='50%' height='21px' />
                                                     <Skeleton width='50%' height='21px' />
-                                                </React.Fragment>
+                                                </Fragment>
                                             ) : (
-                                                <React.Fragment>
+                                                <Fragment>
                                                     <div className="parameter__key">{generalDictionary.category}:</div>
                                                     <div className="parameter__value">{category.getTranslate(data.id, activeLocale, "title")}</div>
-                                                </React.Fragment>
+                                                </Fragment>
                                             )
                                         }
                                     </div>
@@ -200,15 +200,15 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                             <div className="product__parameter">
                                 {
                                     loading.standart ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Skeleton width='50%' height='21px' />
                                             <Skeleton width='50%' height='21px' />
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <div className="parameter__key">{generalDictionary.product_code}:</div>
                                             <div className="parameter__value">{activeProductData.code}</div>
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
                             </div>
@@ -218,15 +218,15 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                     <div className="product__parameter" key={`attr-${data.id}`}>
                                         {
                                             loading.standart ? (
-                                                <React.Fragment>
+                                                <Fragment>
                                                     <Skeleton width='50%' height='21px' />
                                                     <Skeleton width='50%' height='21px' />
-                                                </React.Fragment>
+                                                </Fragment>
                                             ) : (
-                                                <React.Fragment>
+                                                <Fragment>
                                                     <div className="parameter__key">{attributeGroup.getTitleByID(data.group_id, activeLocale)}:</div>
                                                     <div className="parameter__value">{attribute.getTranslate(data.id, activeLocale, "title")}</div>
-                                                </React.Fragment>
+                                                </Fragment>
                                             )
                                         }
                                     </div>
@@ -239,11 +239,11 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                 <div className="product__weight__buttons">
                                     {
                                         productWeights.length > 0 && productWeights.map((data) => (
-                                            <React.Fragment key={`weight-${data.id}`}>
+                                            <Fragment key={`weight-${data.id}`}>
                                                 {loading.standart ? <Skeleton width='88px' height='44px' radius='10px' /> : (
                                                     <div className={`product__weight__button ${selectedWeight.id === data.id ? 'active' : ''}`} onClick={() => handleSelectWeight(data)}>{data.title}</div>
                                                 )}
-                                            </React.Fragment>
+                                            </Fragment>
                                         ))
                                     }
                                 </div>
@@ -251,7 +251,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                     loading.standart ? (
                                         <Skeleton width='150px' height='60px' margin='30px 0 0 0' />
                                     ) : (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <div className="product__stock">
                                                 <div className="icon"><FaCheck /></div>
                                                 <div className="value">{generalDictionary["stock"]}: {activeProductData.stock} {generalDictionary["pieces"]}</div>
@@ -259,24 +259,24 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                             <div className="product__price">
                                                 {
                                                     activeProductData.discount === 0 ? (
-                                                        <React.Fragment>
+                                                        <Fragment>
                                                             <div className="main_price">
                                                                 {activeProductData.price.toFixed(2)} AZN
                                                             </div>
-                                                        </React.Fragment>
+                                                        </Fragment>
                                                     ) : (
-                                                        <React.Fragment>
+                                                        <Fragment>
                                                             <div className="old_price">
                                                                 {activeProductData.price.toFixed(2)} AZN
                                                             </div>
                                                             <div className="main_price">
                                                                 {activeProductData.discount.toFixed(2)} AZN
                                                             </div>
-                                                        </React.Fragment>
+                                                        </Fragment>
                                                     )
                                                 }
                                             </div>
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
 
@@ -284,7 +284,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                             <div className="wrapper__left__bottom__col">
                                 {
                                     activeProductData.catalog_id !== 0 && productCatalog && productCatalogColors.length > 0 && (
-                                        <React.Fragment>
+                                        <Fragment>
                                             {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
                                             {
                                                 loading.lazy ? <Skeleton width='160px' height='44px' radius='10px' /> : (
@@ -303,16 +303,16 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                                     />
                                                 )
                                             }
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
                                 {activeProductData.catalog_id === 0 && productCustomColors.length > 0 && (
-                                    <React.Fragment>
+                                    <Fragment>
                                         {loading.standart ? <Skeleton width='120px' height='27px' /> : <div className="col__title">{generalDictionary.choose_color}</div>}
                                         <div className="product__custom__color__buttons">
                                             {
                                                 productCustomColors.map((data) => (
-                                                    <React.Fragment key={`custom-color-${data.id}`}>
+                                                    <Fragment key={`custom-color-${data.id}`}>
                                                         {
                                                             loading.standart ? <Skeleton width='120px' height='30px' /> : (
                                                                 <div className={`product__custom__color__button ${selectedColor && selectedColor.id === data.id ? 'active' : ''}`} onClick={() => handleSelectColor(data)}>
@@ -325,23 +325,23 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                                                 </div>
                                                             )
                                                         }
-                                                    </React.Fragment>
+                                                    </Fragment>
                                                 ))
                                             }
                                         </div>
-                                    </React.Fragment>
+                                    </Fragment>
                                 )}
 
                             </div>
                             <div className="wrapper__left__bottom__col amount__basket">
                                 {
                                     loading.lazy ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Skeleton width='100%' height='70px' radius='10px' />
                                             <Skeleton width='100%' height='70px' radius='10px' />
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <div className="product__amount__counter">
                                                 <div className="counter__button" onClick={handleMinusButtonClick}><FaMinus /></div>
                                                 <input type="number" name="" id="" max={activeProductData.stock} value={productAmount} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeProductAmount(parseInt(e.target.value))} />
@@ -358,7 +358,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                                                     )
                                                 }
                                             </button>
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
                             </div>

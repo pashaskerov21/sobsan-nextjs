@@ -74,7 +74,8 @@
         "total_payment": "Всего к оплате",
         "delete": "Удалить",
         "clear": "Чистый",
-        "clear_basket": "Чистая корзина"
+        "clear_basket": "Чистая корзина",
+        "resgistration_messsage": "Регистрация прошла успешно!"
     },
     "form": {
         "label": {
@@ -87,6 +88,7 @@
             "address": "Адрес"
         },
         "error": {
+            "error": "Ошибка",
             "email_required": "Требуется электронная почта",
             "email_format": "Формат электронной почты неверен",
             "email_login": "Электронная почта неверна",
@@ -100,6 +102,7 @@
             "password_digit": "Должен быть числом",
             "password_special_character": "Должен быть один специальный символ",
             "account_login": "Электронная почта или пароль неверны",
+            "account_exist": "Этот электронный адрес был использован",
             "firstName_required": "Требуется имя",
             "lastName_required": "Требуется фамилия",
             "phone_required": "Требуется телефон"

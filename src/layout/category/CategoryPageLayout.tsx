@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductDataType, ProductTranslateDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { Category } from '@/src/class';
@@ -78,7 +78,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
@@ -103,7 +103,7 @@ const CategoryPageLayout: React.FC<LayoutProps> = ({
                 titleDictionary={titleDictionary}
                 generalDictionary={generalDictionary}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

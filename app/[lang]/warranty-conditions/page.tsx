@@ -57,16 +57,14 @@ const WarrantyConditionsPage = async ({ params: { lang } }: { params: { lang: Lo
       && menuTranslateData
     ) {
       return (
-        <React.Fragment>
-          <WarrantyConditionsPageLayout
-            activeLocale={lang}
-            articleData={articleData}
-            articleTranslateData={articleTranslateData}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            titleDictionary={titleDictionary}
-          />
-        </React.Fragment>
+        <WarrantyConditionsPageLayout
+          activeLocale={lang}
+          articleData={articleData}
+          articleTranslateData={articleTranslateData}
+          menuData={menuData}
+          menuTranslateData={menuTranslateData}
+          titleDictionary={titleDictionary}
+        />
       )
     } else {
       redirect(`/${lang}/404`);

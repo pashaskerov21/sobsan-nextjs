@@ -51,11 +51,11 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
     }
     input{
         width: 100%;
-        background-color: transparent;
+        background-color: transparent !important;
         outline: none;
-        border-bottom: 1px solid ${props => props.theme.border_color_1};
-        caret-color: ${props => props.theme.color_1};
-        color: ${props => props.theme.text_color_1};
+        border-bottom: 1px solid ${props => props.theme.border_color_1} !important;
+        caret-color: ${props => props.theme.color_1} !important;
+        color: ${props => props.theme.text_color_1} !important;
         padding: 25px 15px 15px;
         &:focus{
             &~label{
@@ -63,7 +63,25 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
                 font-size: 14px;
             }
         }
+        &:-webkit-autofill{
+            width: 100%;
+            background-color: transparent !important;
+            outline: none;
+            border-bottom: 1px solid ${props => props.theme.border_color_1} !important;
+            caret-color: ${props => props.theme.color_1} !important;
+            color: ${props => props.theme.text_color_1} !important;
+            padding: 25px 15px 15px;
+        }
     }
+    /* input:-webkit-autofill {
+        width: 100%;
+        background-color: transparent;
+        outline: none;
+        border-bottom: 1px solid ${props => props.theme.border_color_1};
+        caret-color: ${props => props.theme.color_1};
+        color: ${props => props.theme.text_color_1};
+        padding: 25px 15px 15px;
+    } */
     .invalid__message{
         font-size: 14px;
         margin-top: 15px;
@@ -72,7 +90,7 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
     }
     &.invalid{
         input{
-            border-bottom: 1px solid ${props => props.theme.color_1};
+            border-bottom: 1px solid ${props => props.theme.color_1} !important;
         }
     }
 `

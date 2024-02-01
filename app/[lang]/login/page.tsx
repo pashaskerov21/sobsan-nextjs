@@ -45,17 +45,15 @@ const LoginPage = async ({ params: { lang } }: { params: { lang: LocaleType } })
         const { settingData } = await fetchData();
         if (settingData) {
             return (
-                <React.Fragment>
-                    <LoginPageLayout
-                        activeLocale={lang}
-                        settingData={settingData[0]}
-                        generalDictionary={generalDictionary}
-                        titleDictionary={titleDictionary}
-                        formDictionary={formDictionary}
-                    />
-                </React.Fragment>
+                <LoginPageLayout
+                    activeLocale={lang}
+                    settingData={settingData[0]}
+                    generalDictionary={generalDictionary}
+                    titleDictionary={titleDictionary}
+                    formDictionary={formDictionary}
+                />
             )
-        }else{
+        } else {
             return (
                 <React.Fragment></React.Fragment>
             )

@@ -12,6 +12,7 @@ type SectionProps = {
     settingData: SettingDataType,
     loading: LoadingType,
     titleDictionary: { [key: string]: string },
+    generalDictionary: { [key: string]: string },
     formDictionary: {
         [key: string]: {
             [key: string]: string
@@ -25,6 +26,7 @@ const RegistrationSection: React.FC<SectionProps> = ({
     titleDictionary,
     formDictionary,
     loading,
+    generalDictionary,
 }) => {
     return (
         <Section $py={20}>
@@ -39,6 +41,7 @@ const RegistrationSection: React.FC<SectionProps> = ({
                                 formDictionary={formDictionary}
                                 loading={loading}
                                 titleDictionary={titleDictionary}
+                                generalDictionary={generalDictionary}
                             />
                         )
                     }

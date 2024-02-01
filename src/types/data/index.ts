@@ -250,3 +250,17 @@ export type ProductFilterDataType = {
     brand: number,
     attributeIDs: number[],
 };
+
+export type UserDataType = {
+    id: string | number,
+    firstName: string,
+    lastName: string,
+    phone: string | number,
+    address: string | null,
+    email: string,
+    password: string,
+}
+export type AccountDataType = {
+    activeUser: string | number | undefined,
+    users: string[],
+}

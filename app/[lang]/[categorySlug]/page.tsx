@@ -123,33 +123,31 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
             attributeGroupData &&
             attributeGroupTranslateData &&
             attributeTranslateData &&
-            productCategoryRelationData && 
+            productCategoryRelationData &&
             productAttributeRelationData
         ) {
             const category = new Category(categoryData, categoryTranslateData);
-            const activeCategoryData:CategoriesDataType | undefined = category.getCategoryBySlug(categorySlug, lang);
+            const activeCategoryData: CategoriesDataType | undefined = category.getCategoryBySlug(categorySlug, lang);
             if (activeCategoryData) {
                 return (
-                    <React.Fragment>
-                        <CategoryPageLayout
-                            activeCategoryData={activeCategoryData}
-                            activeLocale={lang}
-                            categoryData={categoryData}
-                            categoryTranslateData={categoryTranslateData}
-                            brandData={brandData}
-                            brandTranslateData={brandTranslateData}
-                            attributeData={attributeData}
-                            attributeGroupData={attributeGroupData}
-                            attributeGroupTranslateData={attributeGroupTranslateData}
-                            attributeTranslateData={attributeTranslateData}
-                            productCategoryRelationData={productCategoryRelationData}
-                            productData={productData}
-                            productTranslateData={productTranslateData}
-                            productAttributeRelationData={productAttributeRelationData}
-                            titleDictionary={titleDictionary}
-                            generalDictionary={generalDictionary}
-                        />
-                    </React.Fragment>
+                    <CategoryPageLayout
+                        activeCategoryData={activeCategoryData}
+                        activeLocale={lang}
+                        categoryData={categoryData}
+                        categoryTranslateData={categoryTranslateData}
+                        brandData={brandData}
+                        brandTranslateData={brandTranslateData}
+                        attributeData={attributeData}
+                        attributeGroupData={attributeGroupData}
+                        attributeGroupTranslateData={attributeGroupTranslateData}
+                        attributeTranslateData={attributeTranslateData}
+                        productCategoryRelationData={productCategoryRelationData}
+                        productData={productData}
+                        productTranslateData={productTranslateData}
+                        productAttributeRelationData={productAttributeRelationData}
+                        titleDictionary={titleDictionary}
+                        generalDictionary={generalDictionary}
+                    />
                 )
             } else {
                 redirect(`/${lang}/404`)

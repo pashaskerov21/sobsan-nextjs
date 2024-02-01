@@ -74,7 +74,8 @@
         "total_payment": "Ümumi məbləğ",
         "delete": "Sil",
         "clear": "Təmizlə",
-        "clear_basket": "Səbəti təmizlə"
+        "clear_basket": "Səbəti təmizlə",
+        "resgistration_messsage": "Qeydiyyat uğurla tamamlandı!"
     },
     "form": {
         "label": {
@@ -87,6 +88,7 @@
             "address": "Ünvan"
         },
         "error": {
+            "error": "Xəta",
             "email_required": "E-mail tələb olunur",
             "email_format": "E-mail formatı yanlışdır",
             "email_login": "E-mail yanlışdır",
@@ -100,6 +102,7 @@
             "password_digit": "Bir ədəd rəqəm olmalıdır",
             "password_special_character": "Bir xüsusi simvol olmalıdır",
             "account_login": "E-mail və ya şifrə yanlışdır",
+            "account_exist": "Bu e-mail istifadə olunub",
             "firstName_required": "Ad tələb olunur",
             "lastName_required": "Soyad tələb olunur",
             "phone_required": "Telefon tələb olunur"

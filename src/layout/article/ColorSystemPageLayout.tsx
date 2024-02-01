@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ColorSystemPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { Menu } from '@/src/class';
@@ -49,14 +49,14 @@ const ColorSystemPageLayout: React.FC<ColorSystemPageLayoutProps> = ({
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

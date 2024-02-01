@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { PageTitleWrapper } from './style'
 import { LoadingType, LocaleType, PageTitleDataType } from '@/src/types'
@@ -36,60 +36,58 @@ const PageTitle: React.FC<PageTitleProps> = ({
     productState,
 }) => {
     return (
-        <React.Fragment>
-            <PageTitleWrapper>
-                <Container>
-                    <div className="inner">
+        <PageTitleWrapper>
+            <Container>
+                <div className="inner">
+                    {
+                        loading.standart ? (
+                            <Skeleton width='180px' height='15px' margin='0 0 6px 0' />
+                        ) : (
+                            <div className="breadcrumbs">
+                                <Link href={`/${activeLocale}`}>{titleDictionary.home_page}</Link>
+                                {
+                                    pageTitleData.breadcrumbs.map((data) => (
+                                        <Fragment key={data.id}>
+                                            <BsChevronRight />
+                                            <Link href={data.path}>{data.name}</Link>
+                                        </Fragment>
+                                    ))
+                                }
+                            </div>
+                        )
+                    }
+                    <div className="pagetitle__bottom">
                         {
                             loading.standart ? (
-                                <Skeleton width='180px' height='15px' margin='0 0 6px 0' />
+                                <Skeleton width='240px' height='40px' />
                             ) : (
-                                <div className="breadcrumbs">
-                                    <Link href={`/${activeLocale}`}>{titleDictionary.home_page}</Link>
-                                    {
-                                        pageTitleData.breadcrumbs.map((data) => (
-                                            <React.Fragment key={data.id}>
-                                                <BsChevronRight />
-                                                <Link href={data.path}>{data.name}</Link>
-                                            </React.Fragment>
-                                        ))
-                                    }
+                                <h2 className="title">{pageTitleData.title}</h2>
+                            )
+                        }
+                        {
+                            type === "product" && productState && (
+                                <div className="product__buttons">
+                                    <div className={`product__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
+                                        <FaBalanceScale />
+                                    </div>
+                                    <div className={`product__button ${productState.wishlist ? 'active' : ''}`} onClick={handleFavoritetButton}>
+                                        {productState.wishlist ? <FaHeart /> : <FaRegHeart />}
+                                    </div>
                                 </div>
                             )
                         }
-                        <div className="pagetitle__bottom">
-                            {
-                                loading.standart ? (
-                                    <Skeleton width='240px' height='40px' />
-                                ) : (
-                                    <h2 className="title">{pageTitleData.title}</h2>
-                                )
-                            }
-                            {
-                                type === "product" && productState && (
-                                    <div className="product__buttons">
-                                        <div className={`product__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
-                                            <FaBalanceScale />
-                                        </div>
-                                        <div className={`product__button ${productState.wishlist ? 'active' : ''}`} onClick={handleFavoritetButton}>
-                                            {productState.wishlist ? <FaHeart /> : <FaRegHeart />}
-                                        </div>
-                                    </div>
-                                )
-                            }
-                            {
-                                (type === "basket" || type === "wishlist" || type === "comparison") && (
-                                    <div className="clear__button" onClick={handleClearStorage}>
-                                        <FaRegTrashCan/>
-                                        <span>{titleDictionary["clear"]}</span>
-                                    </div>
-                                )
-                            }
-                        </div>
+                        {
+                            (type === "basket" || type === "wishlist" || type === "comparison") && (
+                                <div className="clear__button" onClick={handleClearStorage}>
+                                    <FaRegTrashCan />
+                                    <span>{titleDictionary["clear"]}</span>
+                                </div>
+                            )
+                        }
                     </div>
-                </Container>
-            </PageTitleWrapper >
-        </React.Fragment >
+                </div>
+            </Container>
+        </PageTitleWrapper >
     )
 }
 

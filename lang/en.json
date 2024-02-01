@@ -74,7 +74,8 @@
         "total_payment": "Total payment",
         "delete": "Delete",
         "clear": "Clean",
-        "clear_basket": "Clean basket"
+        "clear_basket": "Clean basket",
+        "resgistration_messsage": "Registration completed successfully!"
     },
     "form": {
         "label": {
@@ -87,6 +88,7 @@
             "address": "Address"
         },
         "error": {
+            "error": "Error",
             "email_required": "Email is required",
             "email_format": "Email format is incorrect",
             "email_login": "Email is incorrect",
@@ -100,6 +102,7 @@
             "password_digit": "Must be a number",
             "password_special_character": "Must be one special character",
             "account_login": "The e-mail or password is incorrect",
+            "account_exist": "This e-mail has been used",
             "firstName_required": "Name required",
             "lastName_required": "Surname required",
             "phone_required": "Phone is required"

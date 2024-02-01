@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({
     if (body) {
       body.style.overflow = "visible";
     }
-  },[pathName])
+  }, [pathName])
   const openMenu = React.useCallback(() => {
     if (window.innerWidth < 1200) {
       setHeaderState((prev) => ({ ...prev, menuShow: true }));
@@ -62,40 +62,38 @@ const Header: React.FC<HeaderProps> = ({
   }, [headerState.searchShow])
 
   return (
-    <React.Fragment>
-      <HeaderWrapper>
-        <TopNavbar
-          loading={loading}
-          activeLocale={activeLocale}
-          headerState={headerState}
-          menuData={menuData}
-          menuTranslateData={menuTranslateData}
-          settingData={settingData}
-          settingTranslateData={settingTranslateData}
-          titleDictionary={titleDictionary}
-          theme={theme}
-          toggleTheme={toggleTheme}
-          toggleMenu={openMenu}
-          toggleSearch={toggleSearch}
-        />
-        <BottomNavbar
-          loading={loading}
-          activeLocale={activeLocale}
-          categoryData={categoryData}
-          categoryTranslateData={categoryTranslateData}
-          headerState={headerState}
-          menuData={menuData}
-          menuTranslateData={menuTranslateData}
-          settingData={settingData}
-          settingTranslateData={settingTranslateData}
-          titleDictionary={titleDictionary}
-          theme={theme}
-          toggleTheme={toggleTheme}
-          toggleMenu={closeMenu}
-          toggleSearch={toggleSearch}
-        />
-      </HeaderWrapper>
-    </React.Fragment>
+    <HeaderWrapper>
+      <TopNavbar
+        loading={loading}
+        activeLocale={activeLocale}
+        headerState={headerState}
+        menuData={menuData}
+        menuTranslateData={menuTranslateData}
+        settingData={settingData}
+        settingTranslateData={settingTranslateData}
+        titleDictionary={titleDictionary}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        toggleMenu={openMenu}
+        toggleSearch={toggleSearch}
+      />
+      <BottomNavbar
+        loading={loading}
+        activeLocale={activeLocale}
+        categoryData={categoryData}
+        categoryTranslateData={categoryTranslateData}
+        headerState={headerState}
+        menuData={menuData}
+        menuTranslateData={menuTranslateData}
+        settingData={settingData}
+        settingTranslateData={settingTranslateData}
+        titleDictionary={titleDictionary}
+        theme={theme}
+        toggleTheme={toggleTheme}
+        toggleMenu={closeMenu}
+        toggleSearch={toggleSearch}
+      />
+    </HeaderWrapper>
   )
 }
 

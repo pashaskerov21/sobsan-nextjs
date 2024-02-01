@@ -24,13 +24,11 @@ const Page404 = async ({ params: { lang } }: { params: { lang: LocaleType } }) =
   const titleDictionary = t.title;
   const generalDictionary = t.general;
   return (
-    <React.Fragment>
-      <Page404Layout
-        activeLocale={lang}
-        titleDictionary={titleDictionary}
-        generalDictionary={generalDictionary}
-      />
-    </React.Fragment>
+    <Page404Layout
+      activeLocale={lang}
+      titleDictionary={titleDictionary}
+      generalDictionary={generalDictionary}
+    />
   )
 }
 

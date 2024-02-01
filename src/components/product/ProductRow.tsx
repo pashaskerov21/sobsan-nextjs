@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { Brand, Color, Product } from "@/src/class";
 import { BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "@/src/types";
 import Image from "next/image";
@@ -86,7 +86,7 @@ const ProductRow: React.FC<RowProps> = ({
         }
     }, [productAmount, activeProductData])
     return (
-        <React.Fragment>
+        <Fragment>
             {
                 activeProductData && (
                     <tr>
@@ -111,9 +111,9 @@ const ProductRow: React.FC<RowProps> = ({
                             <div className="product__col">
                                 <div className="product__color">
                                     {basketData.parameters.color ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             {basketData.parameters.color.catalogName} {color.getTranslate(basketData.parameters.color.id, activeLocale, "title")} {basketData.parameters.color.code}
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : '-'}
                                 </div>
                             </div>
@@ -162,7 +162,7 @@ const ProductRow: React.FC<RowProps> = ({
                     </tr>
                 )
             }
-        </React.Fragment>
+        </Fragment>
     )
 }
 

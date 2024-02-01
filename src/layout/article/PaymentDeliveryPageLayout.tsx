@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
@@ -47,14 +47,14 @@ const PaymentDeliveryPageLayout: React.FC<PaymentDeliveryPageLayoutProps> = ({
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

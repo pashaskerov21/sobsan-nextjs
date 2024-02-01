@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Container, Section } from '@/src/styles'
 import { BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types'
 import { BasketContentWrapper } from './style'
@@ -50,16 +50,16 @@ const BasketSection: React.FC<SectionProps> = ({
                             <div className="basket__table__wrapper">
                                 {
                                     loading.lazy ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Skeleton min_width='1200px' width='100%' height='45px' margin='0 0 5px 0' />
                                             {
                                                 basketStorage.map((data) => (
-                                                    <React.Fragment key={`skeleton-${data.id}`}>
+                                                    <Fragment key={`skeleton-${data.id}`}>
                                                         <Skeleton min-width='1200px' width='100%' height='110px' margin='0 0 3px 0' />
-                                                    </React.Fragment>
+                                                    </Fragment>
                                                 ))
                                             }
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (
                                         <table className='basket__table'>
                                             <thead>
@@ -77,7 +77,7 @@ const BasketSection: React.FC<SectionProps> = ({
                                             <tbody>
                                                 {
                                                     basketStorage.map((data) => (
-                                                        <React.Fragment key={`product-row-${data.id}`}>
+                                                        <Fragment key={`product-row-${data.id}`}>
                                                             <ProductRow
                                                                 activeLocale={activeLocale}
                                                                 basketData={data}
@@ -88,7 +88,7 @@ const BasketSection: React.FC<SectionProps> = ({
                                                                 colorTranslateData={colorTranslateData}
                                                                 generalDictionary={generalDictionary}
                                                             />
-                                                        </React.Fragment>
+                                                        </Fragment>
                                                     ))
                                                 }
                                             </tbody>
@@ -99,30 +99,30 @@ const BasketSection: React.FC<SectionProps> = ({
                             <div className="basket__content__bottom">
                                 {
                                     loading.lazy ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Skeleton width='100%' max_width='300px' height='25px' />
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <div className="total__payment">
                                                 <div className="label">{generalDictionary['total_payment']}:</div>
                                                 <div className='value'>{paymentTotal.toFixed(2)} AZN</div>
                                             </div>
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
                                 <div className="basket__buttons">
                                     {
                                         loading.lazy ? (
-                                            <React.Fragment>
+                                            <Fragment>
                                                 <Skeleton width='100%' max_width='250px' height='56px' radius='10px' />
                                                 <Skeleton width='100%' max_width='250px' height='56px' radius='10px' />
-                                            </React.Fragment>
+                                            </Fragment>
                                         ) : (
-                                            <React.Fragment>
+                                            <Fragment>
                                                 <div className="basket__button clear" onClick={handleClearStorage}>{generalDictionary["clear_basket"]}</div>
                                                 <div className="basket__button confirm">{generalDictionary["confirm"]}</div>
-                                            </React.Fragment>
+                                            </Fragment>
                                         )
                                     }
                                 </div>

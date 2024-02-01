@@ -57,16 +57,14 @@ const ContactPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
       && menuTranslateData
     ) {
       return (
-        <React.Fragment>
-          <ContactPageLayout
-            activeLocale={lang}
-            settingData={settingData[0]}
-            settingTranslateData={settingTranslateData}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            titleDictionary={titleDictionary}
-          />
-        </React.Fragment>
+        <ContactPageLayout
+          activeLocale={lang}
+          settingData={settingData[0]}
+          settingTranslateData={settingTranslateData}
+          menuData={menuData}
+          menuTranslateData={menuTranslateData}
+          titleDictionary={titleDictionary}
+        />
       )
     } else {
       redirect(`/${lang}/404`);

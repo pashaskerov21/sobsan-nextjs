@@ -1,8 +1,8 @@
+import React, { Fragment } from "react"
 import { getTranslate } from "@/get-translate";
 import { HomePageLayout } from "@/src/layout";
 import { BannerDataType, BrandDataType, BrandTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, ProductBannerDataType, ProductBannerTranslateDataType, ProductDataType, ProductTranslateDataType } from "@/src/types";
 import { fetchBannerData, fetchBrandData, fetchBrandTranslateData, fetchMenuData, fetchMenuTranslateData, fetchProductBannerData, fetchProductBannerTranslateData, fetchProductData, fetchProductTranslateData } from "@/src/utils";
-import React, { Suspense } from "react"
 
 const fetchData = async (): Promise<{
   menuData: MenuDataType[] | undefined;
@@ -86,26 +86,24 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
       && brandTranslateData
     ) {
       return (
-        <React.Fragment>
-          <HomePageLayout
-            activeLocale={lang}
-            bannerData={bannerData}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            productBannerData={productBannerData}
-            productBannerTranslateData={productBannerTranslateData}
-            productData={productData}
-            productTranslateData={productTranslateData}
-            brandData={brandData}
-            brandTranslateData={brandTranslateData}
-            generalDictionary={generalDictionary}
-            titleDictionary={titleDictionary}
-          />
-        </React.Fragment>
+        <HomePageLayout
+          activeLocale={lang}
+          bannerData={bannerData}
+          menuData={menuData}
+          menuTranslateData={menuTranslateData}
+          productBannerData={productBannerData}
+          productBannerTranslateData={productBannerTranslateData}
+          productData={productData}
+          productTranslateData={productTranslateData}
+          brandData={brandData}
+          brandTranslateData={brandTranslateData}
+          generalDictionary={generalDictionary}
+          titleDictionary={titleDictionary}
+        />
       )
     } else {
       return (
-        <React.Fragment></React.Fragment>
+        <Fragment></Fragment>
       )
     }
 
@@ -114,7 +112,7 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
   }
 
   return (
-    <React.Fragment></React.Fragment>
+    <Fragment></Fragment>
   )
 }
 export default HomePage

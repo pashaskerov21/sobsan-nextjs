@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { Fragment } from 'react';
 import { LoadingType } from '@/src/types';
 import Skeleton from '../skeleton/Skeleton';
 import { IoChevronForward  } from "react-icons/io5";
@@ -16,13 +16,13 @@ const ProductSortFilters: React.FC<SortFilterProps> = ({ loading, generalDiction
     <ProductSortFilterWrapper>
       {
         loading.standart ? (
-          <React.Fragment>
+          <Fragment>
             <Skeleton width='120px' height='21px' />
             <Skeleton width='120px' height='21px' />
             <Skeleton width='120px' height='21px' />
-          </React.Fragment>
+          </Fragment>
         ) : (
-          <React.Fragment>
+          <Fragment>
             <div className="sort-filter-dropdown">
               <div className="sfd-title">{generalDictionary.by_price} <IoChevronForward  /></div>
               <div className="sfd-menu">
@@ -37,7 +37,7 @@ const ProductSortFilters: React.FC<SortFilterProps> = ({ loading, generalDiction
                 <div className="sfd-button" onClick={() => handleSortFilters('z-a')}>{generalDictionary.z_a}</div>
               </div>
             </div>
-          </React.Fragment>
+          </Fragment>
         )
       }
     </ProductSortFilterWrapper>

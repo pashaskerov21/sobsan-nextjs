@@ -1,11 +1,14 @@
 'use client'
 import React from 'react'
 import * as Yup from 'yup'
-import { LoadingType, LocaleType } from '@/src/types'
+import Swal from 'sweetalert2'
+import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/types'
 import { Form, Formik, FormikHelpers } from 'formik'
 import FormComponent from './FormComponent'
 import { FormWrapper } from './style'
-import Skeleton from '../skeleton/Skeleton'
+import { useLocalStorage } from 'usehooks-ts'
+import { useRouter } from 'next/navigation'
+import { decryptData } from '@/src/utils/crypto'
 
 type FormProps = {
     activeLocale: LocaleType,
@@ -53,11 +56,34 @@ const LoginForm: React.FC<FormProps> = ({
                 /^(?=.*[@$!%*?&])/,
                 `${formDictionary.error.password_special_character}`
             ),
-    })
+    });
 
+    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const router = useRouter();
     const onSubmit = (values: LoginFormValueType, actions: FormikHelpers<LoginFormValueType>) => {
-        console.log(values);
-        actions.resetForm();
+
+        const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
+        
+        const searchAccount: UserDataType | undefined = userData.find((data) => data.email === values.email && data.password === values.password);
+        if (searchAccount) {
+            setAccountData((prev) => {
+                return {
+                    ...prev,
+                    activeUser: searchAccount.id,
+                }
+            });
+            actions.resetForm();
+            router.push(`/${activeLocale}`)
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: formDictionary.error["error"],
+                text: formDictionary.error["account_login"],
+            });
+        }
     }
     return (
         <FormWrapper className='login__form'>
@@ -68,7 +94,7 @@ const LoginForm: React.FC<FormProps> = ({
             >
                 {
                     formik => (
-                        <Form>
+                        <Form autoComplete='off'>
                             <FormComponent
                                 control='input'
                                 name='email'

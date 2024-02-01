@@ -1,7 +1,7 @@
 'use client'
 import { Catalog, Color } from '@/src/class';
 import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ColorWrapper } from './style';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -42,30 +42,28 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
 
   const ColorCardSkeleton = () => {
     return (
-      <React.Fragment>
-        <div className="color-item">
-          <Skeleton width='100%' max_width='200px' height='100px' margin='0 0 10px 0' />
-          <Skeleton width='100%' max_width='100px' height='20px' margin='0 auto 25px auto' />
-        </div>
-      </React.Fragment>
+      <div className="color-item">
+        <Skeleton width='100%' max_width='200px' height='100px' margin='0 0 10px 0' />
+        <Skeleton width='100%' max_width='100px' height='20px' margin='0 auto 25px auto' />
+      </div>
     )
   }
 
 
   return (
-    <React.Fragment>
+    <Fragment>
       {
         colors.length > 0 ? (
           <ColorWrapper>
             {
               colors.map((maindata) => (
-                <React.Fragment key={maindata.id}>
+                <Fragment key={maindata.id}>
                   {
                     color.getAltColors(maindata.id).length > 0 ? (
-                      <React.Fragment>
+                      <Fragment>
                         {
                           loading.lazy ? <ColorCardSkeleton /> : (
-                            <React.Fragment>
+                            <Fragment>
                               <div className="color-item secondary" onClick={() => handleColorItem(maindata.id)}>
                                 {
                                   maindata.image ? (
@@ -81,13 +79,13 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                                   <div className="code">{maindata.code}</div>
                                 </div>
                               </div>
-                            </React.Fragment>
+                            </Fragment>
                           )
                         }
                         <div className={`subcolors ${activeColorID === maindata.id ? '' : 'd-none'}`}>
                           {
                             color.getAltColors(maindata.id).map((altdata) => (
-                              <React.Fragment key={altdata.id}>
+                              <Fragment key={altdata.id}>
                                 <div className="color-item secondary">
                                   {
                                     altdata.image ? (
@@ -103,16 +101,16 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                                     <div className="code">{altdata.code}</div>
                                   </div>
                                 </div>
-                              </React.Fragment>
+                              </Fragment>
                             ))
                           }
                         </div>
-                      </React.Fragment>
+                      </Fragment>
                     ) : (
-                      <React.Fragment>
+                      <Fragment>
                         {
                           loading.lazy ? <ColorCardSkeleton /> : (
-                            <React.Fragment>
+                            <Fragment>
                               <div className="color-item">
                                 {
                                   maindata.image ? (
@@ -128,20 +126,20 @@ const CatalogColors: React.FC<CatalogColorProps> = ({
                                   <div className="code">{maindata.code}</div>
                                 </div>
                               </div>
-                            </React.Fragment>
+                            </Fragment>
                           )
                         }
-                      </React.Fragment>
+                      </Fragment>
                     )
                   }
-                </React.Fragment>
+                </Fragment>
               ))
             }
           </ColorWrapper>
 
         ) : null
       }
-    </React.Fragment>
+    </Fragment>
   )
 }
 

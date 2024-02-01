@@ -58,16 +58,14 @@ const ColoringSystemPage = async ({ params: { lang } }: { params: { lang: Locale
       && menuTranslateData
     ) {
       return (
-        <React.Fragment>
-          <ColorSystemPageLayout
-            activeLocale={lang}
-            articleData={articleData}
-            articleTranslateData={articleTranslateData}
-            menuData={menuData}
-            menuTranslateData={menuTranslateData}
-            titleDictionary={titleDictionary}
-          />
-        </React.Fragment>
+        <ColorSystemPageLayout
+          activeLocale={lang}
+          articleData={articleData}
+          articleTranslateData={articleTranslateData}
+          menuData={menuData}
+          menuTranslateData={menuTranslateData}
+          titleDictionary={titleDictionary}
+        />
       )
     } else {
       redirect(`/${lang}/404`);

@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback } from 'react'
+import React, { Fragment, useCallback } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
@@ -80,7 +80,7 @@ const BasketPageLayout: React.FC<LayoutProps> = ({
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
@@ -102,7 +102,7 @@ const BasketPageLayout: React.FC<LayoutProps> = ({
                 handleClearStorage={handleClearStorage}
                 
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

@@ -39,74 +39,70 @@ const ProductBannerSection: React.FC<SectionProps> = ({
       <Container>
         {
           loading.lazy ? (
-            <React.Fragment>
-              {/* <Skeleton
-                width='100%'
-                height='125px'
-                height_sm='270px'
-                height_md='365px'
-                height_lg='500px'
-                radius='10px'
-              /> */}
-            </React.Fragment>
+            <Skeleton
+              width='100%'
+              height='125px'
+              height_sm='270px'
+              height_md='365px'
+              height_lg='500px'
+              radius='10px'
+            />
           ) : (
-            <React.Fragment>
-              <ProductBannerWrapper>
-                <div className="top">
-                  <Swiper
-                    className='pagination-true'
-                    loop={true}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    spaceBetween={20}
-                    autoplay={{
-                      delay: 2500,
-                      disableOnInteraction: false,
-                    }}
-                    modules={[Pagination, Autoplay]}
-                  >
-                    {
-                      productBannerData.map((data) => (
-                        <SwiperSlide key={`product-banner-${data.id}`}>
-                          <div className="banner-slide">
-                            <div className="content">
-                              <div className="title">
-                                {productBanner.getTranslate(data.id, activeLocale, "title")}
-                              </div>
-                              <div className="text">
-                                {productBanner.getTranslate(data.id, activeLocale, "text")}
-                              </div>
-                              <Link href={productBanner.getTranslate(data.id, activeLocale, "url")} className='order-btn'>
-                                {generalDictionary.order}
-                              </Link>
+            <ProductBannerWrapper>
+              <div className="top">
+                <Swiper
+                  className='pagination-true'
+                  loop={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  spaceBetween={20}
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
+                  modules={[Pagination, Autoplay]}
+                >
+                  {
+                    productBannerData.map((data) => (
+                      <SwiperSlide key={`product-banner-${data.id}`}>
+                        <div className="banner-slide">
+                          <div className="content">
+                            <div className="title">
+                              {productBanner.getTranslate(data.id, activeLocale, "title")}
                             </div>
-                            <VanillaComponent className='banner-image'>
-                              <Image src={data.image} width={500} height={500} alt='' priority={true} />
-                            </VanillaComponent>
+                            <div className="text">
+                              {productBanner.getTranslate(data.id, activeLocale, "text")}
+                            </div>
+                            <Link href={productBanner.getTranslate(data.id, activeLocale, "url")} className='order-btn'>
+                              {generalDictionary.order}
+                            </Link>
                           </div>
-                        </SwiperSlide>
-                      ))
-                    }
-                  </Swiper>
+                          <VanillaComponent className='banner-image'>
+                            <Image src={data.image} width={400} height={400} alt='' priority={true} />
+                          </VanillaComponent>
+                        </div>
+                      </SwiperSlide>
+                    ))
+                  }
+                </Swiper>
+              </div>
+              <div className="bottom">
+                <div className="bottom_left">
+                  <Link href={`/${activeLocale}`}>{generalDictionary.banner_question}</Link>
                 </div>
-                <div className="bottom">
-                  <div className="bottom_left">
-                    <Link href={`/${activeLocale}`}>{generalDictionary.banner_question}</Link>
-                  </div>
-                  <div className="bottom_right">
-                    <Link href={`/${activeLocale}`}>
-                      <div className="icon"><FaPhoneAlt /></div>
-                      <div className="label">(+994 12) 404 45 45</div>
-                    </Link>
-                    <Link href={`/${activeLocale}`}>
-                      <div className="icon"><FaQuestion /></div>
-                      <div className="label">{generalDictionary.write_us}</div>
-                    </Link>
-                  </div>
+                <div className="bottom_right">
+                  <Link href={`/${activeLocale}`}>
+                    <div className="icon"><FaPhoneAlt /></div>
+                    <div className="label">(+994 12) 404 45 45</div>
+                  </Link>
+                  <Link href={`/${activeLocale}`}>
+                    <div className="icon"><FaQuestion /></div>
+                    <div className="label">{generalDictionary.write_us}</div>
+                  </Link>
                 </div>
-              </ProductBannerWrapper>
-            </React.Fragment>
+              </div>
+            </ProductBannerWrapper>
           )
         }
       </Container>

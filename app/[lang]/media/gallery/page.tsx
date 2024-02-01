@@ -49,15 +49,13 @@ const GalleryPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
         const { galleryData, menuData, menuTranslateData } = await fetchData();
         if (galleryData && menuData && menuTranslateData) {
             return (
-                <React.Fragment>
-                    <GalleryPageLayout
-                        activeLocale={lang}
-                        galleryData={galleryData}
-                        menuData={menuData}
-                        menuTranslateData={menuTranslateData}
-                        titleDictionary={titleDictionary}
-                    />
-                </React.Fragment>
+                <GalleryPageLayout
+                    activeLocale={lang}
+                    galleryData={galleryData}
+                    menuData={menuData}
+                    menuTranslateData={menuTranslateData}
+                    titleDictionary={titleDictionary}
+                />
             )
         } else {
             redirect(`/${lang}/404`);

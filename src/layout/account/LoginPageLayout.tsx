@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
@@ -73,7 +73,7 @@ const LoginPageLayout: React.FC<LayoutProps> = ({
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
@@ -87,7 +87,7 @@ const LoginPageLayout: React.FC<LayoutProps> = ({
                 formDictionary={formDictionary}
                 loading={loading}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

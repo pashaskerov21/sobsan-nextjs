@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { DarkTheme } from '../styles';
 import { LightTheme } from '../styles';
 import GlobalStyles from '../styles/global';
@@ -78,7 +78,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
 
 
     return (
-        <React.Fragment>
+        <Fragment>
             <Provider store={store}>
                 <ThemeProvider theme={activeTheme}>
                     <GlobalStyles />
@@ -119,7 +119,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
                     />
                 </ThemeProvider>
             </Provider>
-        </React.Fragment>
+        </Fragment>
     )
 }
 

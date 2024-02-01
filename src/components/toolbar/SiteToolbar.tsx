@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
 import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
@@ -35,17 +35,17 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settin
     const [wishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     return (
-        <React.Fragment>
+        <Fragment>
             <CenterToolbarWrapper>
                 {
                     loading.standart ? (
-                        <React.Fragment>
+                        <Fragment>
                             <Skeleton width='100%' height='60px' radius='10px' />
                             <Skeleton width='100%' height='60px' radius='10px' />
                             <Skeleton width='100%' height='60px' radius='10px' />
-                        </React.Fragment>
+                        </Fragment>
                     ) : (
-                        <React.Fragment>
+                        <Fragment>
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiShoppingCartSimpleLight />
@@ -67,7 +67,7 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settin
                                 </div>
                                 <Link href={`/${activeLocale}/comparisons`}>{titleDictionary.comparisons}</Link>
                             </div>
-                        </React.Fragment>
+                        </Fragment>
                     )
                 }
             </CenterToolbarWrapper>
@@ -81,7 +81,7 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settin
                 }
                 <Link href='' className="hot-line "><span>{settingData.hotline}</span></Link>
             </BottomToolbarWrapper>
-        </React.Fragment>
+        </Fragment>
     )
 }
 

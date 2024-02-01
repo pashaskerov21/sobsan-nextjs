@@ -11,17 +11,15 @@ const Search: React.FC<SearchProps> = ({
 }) => {
     const [searchValue, setSearchValue] = React.useState<string>('');
     return (
-        <React.Fragment>
-            <SearchFormWrapper>
-                <div className='search-icon' onClick={toggleSearch}><IoIosSearch /></div>
-                <div className={`input-row ${headerState.searchShow ? 'active' : ''}`}>
-                    <input type="text" placeholder={titleDictionary.search} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-                    <button type='submit'>
-                        <IoIosSearch />
-                    </button>
-                </div>
-            </SearchFormWrapper>
-        </React.Fragment>
+        <SearchFormWrapper>
+            <div className='search-icon' onClick={toggleSearch}><IoIosSearch /></div>
+            <div className={`input-row ${headerState.searchShow ? 'active' : ''}`}>
+                <input type="text" placeholder={titleDictionary.search} value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+                <button type='submit'>
+                    <IoIosSearch />
+                </button>
+            </div>
+        </SearchFormWrapper>
     )
 }
 

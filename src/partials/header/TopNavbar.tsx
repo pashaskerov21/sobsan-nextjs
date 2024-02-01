@@ -1,7 +1,7 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Link from 'next/link'
-import { TopNavbarProps } from '@/src/types'
+import { AccountDataType, TopNavbarProps } from '@/src/types'
 import { TopNavbarWrapper } from './style'
 import { Container } from '@/src/styles'
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
@@ -9,6 +9,9 @@ import { LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/comp
 import { BiLogInCircle } from "react-icons/bi";
 import PageLinks from './PageLinks'
 import Search from './Search'
+import { useLocalStorage } from 'usehooks-ts'
+import { FaUser } from "react-icons/fa";
+import { HiMiniUser } from "react-icons/hi2";
 
 
 const TopNavbar: React.FC<TopNavbarProps> = ({
@@ -24,55 +27,63 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
   toggleMenu,
   toggleSearch,
 }) => {
+  const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+    activeUser: undefined,
+    users: [],
+  });
   return (
-    <React.Fragment>
-      <TopNavbarWrapper $fixed={headerState.fixed}>
-        <Container>
-          <div className="nav-inner">
-            <div className="left">
-              <div className="menu-button d-xl-none" onClick={toggleMenu}>
-                <div className="bar"></div>
-                <div className="bar"></div>
-                <div className="bar"></div>
-              </div>
+    <TopNavbarWrapper $fixed={headerState.fixed}>
+      <Container>
+        <div className="nav-inner">
+          <div className="left">
+            <div className="menu-button d-xl-none" onClick={toggleMenu}>
+              <div className="bar"></div>
+              <div className="bar"></div>
+              <div className="bar"></div>
+            </div>
+            {
+              loading.standart ? (
+                <Fragment>
+                  <Skeleton width='570px' height='32px' className='d-none d-xl-block' />
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <PageLinks
+                    className='page-links d-none d-xl-flex'
+                    activeLocale={activeLocale}
+                    menuData={menuData}
+                    menuTranslateData={menuTranslateData}
+                  />
+                </Fragment>
+              )
+            }
+          </div>
+          <div className="right">
+            <LanguageDropdown activeLocale={activeLocale} />
+            <ThemeButton theme={theme} toggleTheme={toggleTheme} />
+            <SocialMedia
+              className='d-none d-xl-flex'
+              settingData={settingData} />
+            <div className="general-icons">
+              <Link className='icon d-none d-md-flex' href={`/${activeLocale}/basket`}><PiShoppingCartSimpleLight /></Link>
+              <Link className='icon d-none d-md-flex' href={`/${activeLocale}/wishlist`}><PiHeartStraight /></Link>
+              <Link className='icon d-none d-md-flex' href={`/${activeLocale}/comparisons`}><PiScalesLight /></Link>
+              <Search
+                headerState={headerState}
+                titleDictionary={titleDictionary}
+                toggleSearch={toggleSearch} />
               {
-                loading.standart ? (
-                  <React.Fragment>
-                    <Skeleton width='570px' height='32px' className='d-none d-xl-block'/>
-                  </React.Fragment>
+                accountData.activeUser ? (
+                  <Link className='icon d-none d-md-flex' href={`/${activeLocale}/account`}><HiMiniUser /></Link>
                 ) : (
-                  <React.Fragment>
-                    <PageLinks
-                      className='page-links d-none d-xl-flex'
-                      activeLocale={activeLocale}
-                      menuData={menuData}
-                      menuTranslateData={menuTranslateData}
-                    />
-                  </React.Fragment>
+                  <Link className='icon d-none d-md-flex' href={`/${activeLocale}/login`}><span>{titleDictionary.login}</span><BiLogInCircle /></Link>
                 )
               }
             </div>
-            <div className="right">
-              <LanguageDropdown activeLocale={activeLocale} />
-              <ThemeButton theme={theme} toggleTheme={toggleTheme} />
-              <SocialMedia
-                className='d-none d-xl-flex'
-                settingData={settingData} />
-              <div className="general-icons">
-                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/basket`}><PiShoppingCartSimpleLight /></Link>
-                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/wishlist`}><PiHeartStraight /></Link>
-                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/comparisons`}><PiScalesLight /></Link>
-                <Search
-                  headerState={headerState}
-                  titleDictionary={titleDictionary}
-                  toggleSearch={toggleSearch} />
-                <Link className='icon d-none d-md-flex' href={`/${activeLocale}/login`}><span>{titleDictionary.login}</span><BiLogInCircle /></Link>
-              </div>
-            </div>
           </div>
-        </Container>
-      </TopNavbarWrapper>
-    </React.Fragment>
+        </div>
+      </Container>
+    </TopNavbarWrapper>
   )
 }
 

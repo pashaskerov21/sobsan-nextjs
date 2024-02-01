@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { CatalogDataType, CatalogTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import { FaChevronDown } from "react-icons/fa6";
 import { Catalog } from '@/src/class';
@@ -43,51 +43,48 @@ const CatalogAccordion: React.FC<CatalogAccordionProps> = ({
   }, [activeCategoryID])
 
   return (
-    <React.Fragment>
-      <AccordionContainer>
-        <Accordion alwaysOpen>
-          {
-            catalogs.map((data) => (
-              <React.Fragment key={data.id}>
-                <Accordion.Item eventKey={`${data.id}`}>
-                  <Accordion.Header>
-                    {
-                      loading.standart ? (
-                        <React.Fragment>
-                          <Skeleton width='200px' height='25px' />
-                        </React.Fragment>
-                      ) : (
-                        <React.Fragment>
-                          {catalog.getTranslate(data.id, activeLocale, "title")}
-                        </React.Fragment>
-                      )
-                    }
-                    <FaChevronDown />
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <CatalogAccordionBodyInner>
-                      <CatalogColors
-                        loading={loading}
-                        activeCatalogID={data.id}
-                        activeLocale={activeLocale}
-                        catalogData={catalogData}
-                        catalogTranslateData={catalogTranslateData}
-                        colorData={colorData}
-                        colorTranslateData={colorTranslateData}
-                      />
-                      <div className="note">
-                        {textDictionary.catalog_note}
-                      </div>
-                    </CatalogAccordionBodyInner>
-                  </Accordion.Body>
-                </Accordion.Item>
-              </React.Fragment>
-            ))
-          }
-        </Accordion>
-      </AccordionContainer>
-
-    </React.Fragment>
+    <AccordionContainer>
+      <Accordion alwaysOpen>
+        {
+          catalogs.map((data) => (
+            <Fragment key={data.id}>
+              <Accordion.Item eventKey={`${data.id}`}>
+                <Accordion.Header>
+                  {
+                    loading.standart ? (
+                      <Fragment>
+                        <Skeleton width='200px' height='25px' />
+                      </Fragment>
+                    ) : (
+                      <Fragment>
+                        {catalog.getTranslate(data.id, activeLocale, "title")}
+                      </Fragment>
+                    )
+                  }
+                  <FaChevronDown />
+                </Accordion.Header>
+                <Accordion.Body>
+                  <CatalogAccordionBodyInner>
+                    <CatalogColors
+                      loading={loading}
+                      activeCatalogID={data.id}
+                      activeLocale={activeLocale}
+                      catalogData={catalogData}
+                      catalogTranslateData={catalogTranslateData}
+                      colorData={colorData}
+                      colorTranslateData={colorTranslateData}
+                    />
+                    <div className="note">
+                      {textDictionary.catalog_note}
+                    </div>
+                  </CatalogAccordionBodyInner>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Fragment>
+          ))
+        }
+      </Accordion>
+    </AccordionContainer>
   )
 }
 

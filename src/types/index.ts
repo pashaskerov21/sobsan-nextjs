@@ -41,6 +41,8 @@ import {
     WishlistDataType,
     ComparisonDataType,
     ProductFilterDataType,
+    AccountDataType,
+    UserDataType,
 } from './data';
 
 import {
@@ -121,6 +123,8 @@ export type {
     WishlistDataType,
     ComparisonDataType,
     ProductFilterDataType,
+    AccountDataType,
+    UserDataType,
 
     RootLayoutProps,
     CatalogPageLayoutProps,

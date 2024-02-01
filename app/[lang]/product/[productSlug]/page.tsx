@@ -176,34 +176,32 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
             const activeProductData: ProductDataType | undefined = product.getProductBySlug(productSlug, lang);
             if (activeProductData) {
                 return (
-                    <React.Fragment>
-                        <ProductDetailPageLayout
-                            activeLocale={lang}
-                            activeProductData={activeProductData}
-                            generalDictionary={generalDictionary}
-                            productData={productData}
-                            productTranslateData={productTranslateData}
-                            categoryData={categoryData}
-                            categoryTranslateData={categoryTranslateData}
-                            brandData={brandData}
-                            brandTranslateData={brandTranslateData}
-                            attributeGroupData={attributeGroupData}
-                            attributeGroupTranslateData={attributeGroupTranslateData}
-                            attributeData={attributeData}
-                            attributeTranslateData={attributeTranslateData}
-                            productCategoryRelationData={productCategoryRelationData}
-                            productAttributeRelationData={productAttributeRelationData}
-                            productWeightRelationData={productWeightRelationData}
-                            colorData={colorData}
-                            colorTranslateData={colorTranslateData}
-                            productColorRelationData={productColorRelationData}
-                            weightData={weightData}
-                            catalogData={catalogData}
-                            catalogTranslateData={catalogTranslateData}
-                            titleDictionary={titleDictionary}
-                            textDictionary={textDictionary}
-                        />
-                    </React.Fragment>
+                    <ProductDetailPageLayout
+                        activeLocale={lang}
+                        activeProductData={activeProductData}
+                        generalDictionary={generalDictionary}
+                        productData={productData}
+                        productTranslateData={productTranslateData}
+                        categoryData={categoryData}
+                        categoryTranslateData={categoryTranslateData}
+                        brandData={brandData}
+                        brandTranslateData={brandTranslateData}
+                        attributeGroupData={attributeGroupData}
+                        attributeGroupTranslateData={attributeGroupTranslateData}
+                        attributeData={attributeData}
+                        attributeTranslateData={attributeTranslateData}
+                        productCategoryRelationData={productCategoryRelationData}
+                        productAttributeRelationData={productAttributeRelationData}
+                        productWeightRelationData={productWeightRelationData}
+                        colorData={colorData}
+                        colorTranslateData={colorTranslateData}
+                        productColorRelationData={productColorRelationData}
+                        weightData={weightData}
+                        catalogData={catalogData}
+                        catalogTranslateData={catalogTranslateData}
+                        titleDictionary={titleDictionary}
+                        textDictionary={textDictionary}
+                    />
                 )
             } else {
                 redirect(`/${lang}/404`);

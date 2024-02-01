@@ -3,7 +3,7 @@ import { Menu } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { BannerSection, PopularProductSection, ProductBannerSection } from '@/src/sections';
 import { HomePageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 
 const HomePageLayout: React.FC<HomePageLayoutProps> = ({
@@ -54,7 +54,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
     return (
-        <React.Fragment>
+        <Fragment>
             <BannerSection
                 loading={loading} bannerData={bannerData} />
             <ProductBannerSection
@@ -74,7 +74,7 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
                 brandTranslateData={brandTranslateData}
                 titleDictionary={titleDictionary}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

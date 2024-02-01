@@ -1,5 +1,5 @@
 'use client'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
 import { Container, Section } from '@/src/styles'
@@ -249,15 +249,15 @@ const ProductsSection: React.FC<SectionProps> = ({
             <Container>
                 {
                     activeCategoryData && activeCategoryData.cover_img && (
-                        <React.Fragment>
+                        <Fragment>
                             {loading.lazy ? (
-                                <React.Fragment></React.Fragment>
+                                <Fragment></Fragment>
                             ) : (
                                 <CategoryCoverImage>
                                     <Image src={activeCategoryData.cover_img} width={1000} height={100} alt='' />
                                 </CategoryCoverImage>
                             )}
-                        </React.Fragment>
+                        </Fragment>
                     )
                 }
                 <ProductGeneralContainer ref={generalWrapperRef}>
@@ -301,22 +301,22 @@ const ProductsSection: React.FC<SectionProps> = ({
                             <div className="layout-buttons">
                                 {
                                     loading.standart ? (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <Skeleton width='36px' height='36px' radius='5px' />
                                             <Skeleton width='36px' height='36px' radius='5px' />
-                                        </React.Fragment>
+                                        </Fragment>
                                     ) : (
-                                        <React.Fragment>
+                                        <Fragment>
                                             <div className={`layout-button ${productsView === 'list' ? 'active' : ''}`} onClick={() => changeProductLayout('list')}><FaList /></div>
                                             <div className={`layout-button ${productsView === 'grid' ? 'active' : ''}`} onClick={() => changeProductLayout('grid')}><FaTableCellsLarge /></div>
-                                        </React.Fragment>
+                                        </Fragment>
                                     )
                                 }
                             </div>
                         </div>
                         {
                             productState.filtered.length > 0 ? (
-                                <React.Fragment>
+                                <Fragment>
                                     <ProductGrid
                                         loading={loading}
                                         activeLocale={activeLocale}
@@ -336,13 +336,13 @@ const ProductsSection: React.FC<SectionProps> = ({
                                             />
                                         )
                                     }
-                                </React.Fragment>
+                                </Fragment>
                             ) : (
-                                <React.Fragment>
+                                <Fragment>
                                     <AlertComponent>
                                         {generalDictionary["no_product"]}
                                     </AlertComponent>
-                                </React.Fragment>
+                                </Fragment>
                             )
                         }
                     </div>

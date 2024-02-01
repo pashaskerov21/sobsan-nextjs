@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
 import { Product } from '@/src/class'
@@ -142,7 +142,7 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
         };
     }, [comparisonStorage, setComparisonStorage, isComparison]);
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
@@ -180,7 +180,7 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
                 titleDictionary={titleDictionary}
                 textDictionary={textDictionary}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 

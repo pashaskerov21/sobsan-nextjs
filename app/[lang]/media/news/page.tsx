@@ -39,9 +39,9 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
             title: pageTitle
         };
     } catch (error) {
-      return {
-        title: `Sobsan | ${error}`
-      };
+        return {
+            title: `Sobsan | ${error}`
+        };
     }
 }
 
@@ -57,16 +57,14 @@ const NewsPage = async ({ params: { lang } }: { params: { lang: LocaleType } }) 
             && menuTranslateData
         ) {
             return (
-                <React.Fragment>
-                        <NewsPageLayout
-                            activeLocale={lang}
-                            articleData={articleData}
-                            articleTranslateData={articleTranslateData}
-                            menuData={menuData}
-                            menuTranslateData={menuTranslateData}
-                            titleDictionary={titleDictionary}
-                        />
-                </React.Fragment>
+                <NewsPageLayout
+                    activeLocale={lang}
+                    articleData={articleData}
+                    articleTranslateData={articleTranslateData}
+                    menuData={menuData}
+                    menuTranslateData={menuTranslateData}
+                    titleDictionary={titleDictionary}
+                />
             )
         } else {
             redirect(`/${lang}/404`);

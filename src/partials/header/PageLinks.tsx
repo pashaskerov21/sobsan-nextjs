@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { PageLinksProps } from '@/src/types';
 import { BiChevronDown } from "react-icons/bi";
 import { Menu } from '@/src/class';
@@ -19,49 +19,47 @@ const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslat
         }
     }
     return (
-        <React.Fragment>
-            <div className={className}>
-                {
-                    mainMenuData.length > 0 ? (
-                        mainMenuData.map((maindata) => (
-                            <React.Fragment key={maindata.id}>
-                                <div className="link-item">
-                                    <div className="main-row">
-                                        <Link href={menu.getTranslate(maindata, activeLocale, "url")}>
-                                            {menu.getTranslate(maindata, activeLocale, "title")}
-                                        </Link>
-                                        {
-                                            menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
-                                                <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
-                                                    <BiChevronDown />
-                                                </div>
-                                            ) : null
-                                        }
-                                    </div>
+        <div className={className}>
+            {
+                mainMenuData.length > 0 ? (
+                    mainMenuData.map((maindata) => (
+                        <Fragment key={maindata.id}>
+                            <div className="link-item">
+                                <div className="main-row">
+                                    <Link href={menu.getTranslate(maindata, activeLocale, "url")}>
+                                        {menu.getTranslate(maindata, activeLocale, "title")}
+                                    </Link>
                                     {
-                                        menu.getAltMenuData(maindata.id).length > 0 ? (
-                                            <React.Fragment>
-                                                <div className={`link-menu ${activeLinkID === maindata.id ? 'active' : ''}`}>
-                                                    {
-                                                        menu.getAltMenuData(maindata.id).map((altdata) => (
-                                                            <React.Fragment key={altdata.id}>
-                                                                <Link href={menu.getTranslate(altdata, activeLocale, "url")}>
-                                                                    {menu.getTranslate(altdata, activeLocale, "title")}
-                                                                </Link>
-                                                            </React.Fragment>
-                                                        ))
-                                                    }
-                                                </div>
-                                            </React.Fragment>
+                                        menuData.filter((filterdata) => filterdata.parent_id === maindata.id).length > 0 ? (
+                                            <div className={`arrow-btn ${activeLinkID === maindata.id ? 'active' : ''}`} onClick={() => toggleLinkMenu(maindata.id)}>
+                                                <BiChevronDown />
+                                            </div>
                                         ) : null
                                     }
                                 </div>
-                            </React.Fragment>
-                        ))
-                    ) : null
-                }
-            </div>
-        </React.Fragment>
+                                {
+                                    menu.getAltMenuData(maindata.id).length > 0 ? (
+                                        <Fragment>
+                                            <div className={`link-menu ${activeLinkID === maindata.id ? 'active' : ''}`}>
+                                                {
+                                                    menu.getAltMenuData(maindata.id).map((altdata) => (
+                                                        <Fragment key={altdata.id}>
+                                                            <Link href={menu.getTranslate(altdata, activeLocale, "url")}>
+                                                                {menu.getTranslate(altdata, activeLocale, "title")}
+                                                            </Link>
+                                                        </Fragment>
+                                                    ))
+                                                }
+                                            </div>
+                                        </Fragment>
+                                    ) : null
+                                }
+                            </div>
+                        </Fragment>
+                    ))
+                ) : null
+            }
+        </div>
     )
 }
 

@@ -1,11 +1,10 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, Fragment } from 'react'
 import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import Categories from '../category/Categories'
 import { LeftFilterWrapper } from './style'
 import { FaXmark } from 'react-icons/fa6'
 import { Attribute, AttributeGroup, Brand, Category, Product } from '@/src/class'
 import Skeleton from '../skeleton/Skeleton'
-import { useLocalStorage } from 'usehooks-ts'
 import { ProductFilterDataType } from '@/src/types/data'
 
 type LeftFilterProps = {
@@ -64,7 +63,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
 
 
   return (
-    <React.Fragment>
+    <Fragment>
       {filterShow && <div className="black-backdrop" onClick={closeFilters}></div>}
       <LeftFilterWrapper className={filterShow ? 'active' : ''}>
         <div className="lfw-header">
@@ -129,7 +128,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
               <div className="filter-checkbox-buttons">
                 {
                   brandData.map((data) => (
-                    <React.Fragment key={data.id}>
+                    <Fragment key={data.id}>
                       {
                         loading.standart ? (
                           <Skeleton width='125px' height='44px' radius='10px' />
@@ -140,7 +139,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                           </div>
                         )
                       }
-                    </React.Fragment>
+                    </Fragment>
                   ))
                 }
               </div>
@@ -159,7 +158,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                   <div className="filter-checkbox-buttons">
                     {
                       attributeGroup.getAttributes(data.id, attributeData).length > 0 && attributeGroup.getAttributes(data.id, attributeData).map((attr) => (
-                        <React.Fragment key={`attr-${attr.id}`}>
+                        <Fragment key={`attr-${attr.id}`}>
                           {
                             loading.standart ? (
                               <Skeleton width='125px' height='44px' radius='10px' />
@@ -170,7 +169,7 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
                               </div>
                             )
                           }
-                        </React.Fragment>
+                        </Fragment>
                       ))
                     }
                   </div>
@@ -180,22 +179,22 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
             <div className="form-buttons">
               {
                 loading.standart ? (
-                  <React.Fragment>
+                  <Fragment>
                     <Skeleton width='100%' height='56px' />
                     <Skeleton width='100%' height='56px' />
-                  </React.Fragment>
+                  </Fragment>
                 ) : (
-                  <React.Fragment>
+                  <Fragment>
                     <button type='submit' className='submit'>{generalDictionary.confirm}</button>
                     <button type='button' className='reset' onClick={resetLeftFilterForm}>{generalDictionary.reset}</button>
-                  </React.Fragment>
+                  </Fragment>
                 )
               }
             </div>
           </form>
         </div>
       </LeftFilterWrapper>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

@@ -75,18 +75,16 @@ const BasketPage = async ({ params: { lang } }: { params: { lang: LocaleType } }
             && colorTranslateData
         ) {
             return (
-                <React.Fragment>
-                    <BasketPageLayout
-                        activeLocale={lang}
-                        productData={productData}
-                        productTranslateData={productTranslateData}
-                        brandTranslateData={brandTranslateData}
-                        colorData={colorData}
-                        colorTranslateData={colorTranslateData}
-                        titleDictionary={titleDictionary}
-                        generalDictionary={generalDictionary}
-                    />
-                </React.Fragment>
+                <BasketPageLayout
+                    activeLocale={lang}
+                    productData={productData}
+                    productTranslateData={productTranslateData}
+                    brandTranslateData={brandTranslateData}
+                    colorData={colorData}
+                    colorTranslateData={colorTranslateData}
+                    titleDictionary={titleDictionary}
+                    generalDictionary={generalDictionary}
+                />
             )
         } else {
             redirect(`/${lang}/404`);

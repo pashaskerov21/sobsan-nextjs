@@ -1,6 +1,6 @@
+'use client'
+import React, { Fragment } from 'react'
 import { BrandDataType, BrandTranslateDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types'
-import React from 'react'
-import { useLocalStorage } from 'usehooks-ts'
 import ProductCard from './ProductCard'
 import { ProductGridWrapper } from './style'
 
@@ -29,7 +29,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     <ProductGridWrapper $productsView={productsView}>
       {
         productData.map((data) => (
-          <React.Fragment key={`product-${data.id}`}>
+          <Fragment key={`product-${data.id}`}>
             <ProductCard
               activeLocale={activeLocale}
               activeProductData={data}
@@ -41,7 +41,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               generalDictionary={generalDictionary}
               productsView={productsView}
             />
-          </React.Fragment>
+          </Fragment>
         ))
       }
     </ProductGridWrapper>

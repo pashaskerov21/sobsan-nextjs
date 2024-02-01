@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { CategoryButtonWrapper, Container, Section } from '@/src/styles'
 import { CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType } from '@/src/types'
 import { Category } from '@/src/class'
@@ -37,7 +37,7 @@ const CatalogSection: React.FC<SectionProps> = ({
     setActiveCategoryID(id);
   }, [activeCategoryID])
   return (
-    <React.Fragment>
+    <Fragment>
       <Section $py={20}>
         <Container>
           <CategoryButtonWrapper>
@@ -45,21 +45,21 @@ const CatalogSection: React.FC<SectionProps> = ({
             {
               category.getMainCategoryData().length > 0 ? (
                 category.getMainCategoryData().map((data) => (
-                  <React.Fragment key={data.id}>
+                  <Fragment key={data.id}>
                     {
                       loading.standart ? (
-                        <React.Fragment>
+                        <Fragment>
                           <Skeleton min_width='120px' height='42px' radius='10px' />
-                        </React.Fragment>
+                        </Fragment>
                       ) : (
-                        <React.Fragment>
+                        <Fragment>
                           <button className={activeCategoryID === data.id ? 'active' : ''} type='button' onClick={() => handleCategoryButton(data.id)}>
                             {category.getTranslate(data.id, activeLocale, "title")}
                           </button>
-                        </React.Fragment>
+                        </Fragment>
                       )
                     }
-                  </React.Fragment>
+                  </Fragment>
                 ))
               ) : null
             }
@@ -76,7 +76,7 @@ const CatalogSection: React.FC<SectionProps> = ({
           />
         </Container>
       </Section>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

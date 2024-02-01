@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { CatalogPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
@@ -56,7 +56,7 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
     }, [dispatch]);
 
     return (
-        <React.Fragment>
+        <Fragment>
             <PageTitle
                 loading={loading}
                 activeLocale={activeLocale}
@@ -75,7 +75,7 @@ const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
                 titleDictionary={titleDictionary}
                 textDictionary={textDictionary}
             />
-        </React.Fragment>
+        </Fragment>
     )
 }
 
