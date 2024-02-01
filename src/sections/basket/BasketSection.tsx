@@ -1,11 +1,13 @@
 'use client'
-import React, { Fragment } from 'react'
+import React, { Fragment, useCallback } from 'react'
 import { Container, Section } from '@/src/styles'
-import { BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types'
+import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, UserDataType } from '@/src/types'
 import { BasketContentWrapper } from './style'
 import { useLocalStorage } from 'usehooks-ts'
 import { AlertComponent } from '@/src/styles/components/alert'
 import { ProductRow, Skeleton } from '@/src/components'
+import { useRouter } from 'next/navigation'
+import { decryptData, encryptData } from '@/src/utils/crypto'
 
 type SectionProps = {
     activeLocale: LocaleType,
@@ -32,15 +34,52 @@ const BasketSection: React.FC<SectionProps> = ({
     titleDictionary,
     handleClearStorage,
 }) => {
+    const router = useRouter();
     const [basketStorage] = useLocalStorage<BasketDataType[]>("basket", []);
     const [paymentTotal, setPaymentTotal] = React.useState<number>(0);
+    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
+
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
             let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
             setPaymentTotal(total);
         }
-    }, [basketStorage])
+    }, [basketStorage]);
+
+    const handleBasketConfirm = useCallback(() => {
+        if (accountData.activeUser) {
+            const searchAccount: UserDataType | undefined = userData.find((data) => data.id === accountData.activeUser);
+            if (searchAccount) {
+                const updateUserData: UserDataType[] = userData.map((data) => data.id === searchAccount.id ?
+                    {
+                        ...data,
+                        orders: {
+                            ...data.orders,
+                            product_payment: paymentTotal,
+                            basketData: basketStorage.filter((data) => data.user === searchAccount.id),
+                        }
+                    } : data);
+                const encryptedData:string[] = updateUserData.map((data) => encryptData(data));
+                console.log(encryptedData)
+                setAccountData((prev) => {
+                    return {
+                        ...prev,
+                        users: encryptedData,
+                    }
+                });
+                router.push(`/${activeLocale}/checkout`);
+            }else{
+                router.push(`/${activeLocale}/login`);
+            }
+        } else {
+            router.push(`/${activeLocale}/login`);
+        }
+    }, [router, accountData.activeUser]);
     return (
         <Section $py={20}>
             <Container>
@@ -121,7 +160,7 @@ const BasketSection: React.FC<SectionProps> = ({
                                         ) : (
                                             <Fragment>
                                                 <div className="basket__button clear" onClick={handleClearStorage}>{generalDictionary["clear_basket"]}</div>
-                                                <div className="basket__button confirm">{generalDictionary["confirm"]}</div>
+                                                <div className="basket__button confirm" onClick={handleBasketConfirm}>{generalDictionary["confirm"]}</div>
                                             </Fragment>
                                         )
                                     }

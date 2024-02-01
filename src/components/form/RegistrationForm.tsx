@@ -106,7 +106,6 @@ const RegistrationForm: React.FC<FormProps> = ({
     });
     const router = useRouter();
     const onSubmit = (values: RegistrationFormValueType, actions: FormikHelpers<RegistrationFormValueType>) => {
-        console.log(values)
         const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
         
         const searchAccount: UserDataType | undefined = userData.find((data) => data.email === values.email);

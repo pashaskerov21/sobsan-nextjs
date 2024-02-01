@@ -259,6 +259,22 @@ export type UserDataType = {
     address: string | null,
     email: string,
     password: string,
+    gender?: "male" | "female",
+    phone_2?: string | number,
+    city?: string,
+    region?: string,
+    address_detail?: string,
+    orders?: {
+        order_date?: string,
+        order_address?: string,
+        order_note?: string,
+        payment_type?: "card" | "cash",
+        discount?: number,
+        delivery_payment?: number,
+        product_payment?: number,
+        total_payment?: number,
+        basketData?: BasketDataType[],
+    },
 }
 export type AccountDataType = {
     activeUser: string | number | undefined,

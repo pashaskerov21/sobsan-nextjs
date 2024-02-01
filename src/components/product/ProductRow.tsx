@@ -66,7 +66,6 @@ const ProductRow: React.FC<RowProps> = ({
     }, [setBasketStorage, basketStorage])
 
     useEffect(() => {
-        console.log('test')
         setBasketStorage((prev) => {
             return prev.map((data) =>
                 data.id === basketData.id ? {
