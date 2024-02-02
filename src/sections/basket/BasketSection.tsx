@@ -67,6 +67,7 @@ const BasketSection: React.FC<SectionProps> = ({
                     orders: [...searchUserData.orders, newOrder],
                     activeOrderID: newOrder.id,
                 }
+                console.log('basket',basketStorage.filter((data) => data.user === searchUserData.id))
                 setAccountData(account.updateUserData(accountData.activeUser, updateData))
                 router.push(`/${activeLocale}/basket/checkout`);
             } else {

@@ -90,9 +90,10 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
     }
     if(accountData.activeUser){
         let userData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
-        console.log(userData);
+        console.log('userdata',userData);
         if(userData && userData.activeOrderID){
             const activeOrderData: OrderDataType | undefined = userData.orders.find((data) => data.id === userData?.activeOrderID);
+            console.log('orderdata',activeOrderData);
             if(activeOrderData && activeOrderData.basketData.length === 0){
                 console.log('congrulations')
                 router.push(`/${activeLocale}/basket`);
