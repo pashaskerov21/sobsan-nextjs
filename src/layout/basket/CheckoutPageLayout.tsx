@@ -90,6 +90,7 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
     }
     if(accountData.activeUser){
         let userData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
+        console.log(userData);
         if(userData && userData.activeOrderID){
             const activeOrderData: OrderDataType | undefined = userData.orders.find((data) => data.id === userData?.activeOrderID);
             if(activeOrderData?.basketData?.length === 0){
