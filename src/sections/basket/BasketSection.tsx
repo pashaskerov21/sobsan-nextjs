@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment, useCallback } from 'react'
 import { Container, Section } from '@/src/styles'
-import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, UserDataType } from '@/src/types'
+import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, UserDataType, WishlistDataType } from '@/src/types'
 import { BasketContentWrapper } from './style'
 import { useLocalStorage } from 'usehooks-ts'
 import { AlertComponent } from '@/src/styles/components/alert'
@@ -36,13 +36,15 @@ const BasketSection: React.FC<SectionProps> = ({
     handleClearStorage,
 }) => {
     const router = useRouter();
-    const [basketStorage] = useLocalStorage<BasketDataType[]>("basket", []);
     const [paymentTotal, setPaymentTotal] = React.useState<number>(0);
     const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
     const account = new Account(accountData);
+    const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[]>("basket", []);
+    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
+    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
@@ -55,6 +57,9 @@ const BasketSection: React.FC<SectionProps> = ({
         if (accountData.activeUser) {
             const searchUserData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
             if (searchUserData) {
+                setBasketStorage(basketStorage.map((data) => data.user === null ? { ...data, user: searchUserData.id } : data));
+                setWishlistStorage(wishlistStorage.map((data) => data.user === null ? { ...data, user: searchUserData.id } : data));
+                setComparisonStorage(comparisonStorage.map((data) => data.user === null ? { ...data, user: searchUserData.id } : data));
                 const updateData: UserDataType = {
                     ...searchUserData,
                     order: {

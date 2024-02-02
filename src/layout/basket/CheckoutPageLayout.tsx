@@ -3,10 +3,11 @@ import React, { Fragment, useCallback } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType} from '@/src/types';
+import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType} from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
 import { useRouter } from 'next/navigation';
+import { Account } from '@/src/class';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -83,11 +84,15 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
         activeUser: undefined,
         users: [],
     });
+    const account = new Account(accountData);
     if(!accountData.activeUser){
         router.push(`/${activeLocale}/login`);
     }
-    if(accountData.activeUser && basketStorage.filter((data) => data.user === accountData.activeUser).length === 0){
-        router.push(`/${activeLocale}/basket`);
+    if(accountData.activeUser){
+        let userData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
+        if(userData && userData.order?.basketData?.length === 0){
+            router.push(`/${activeLocale}/basket`);
+        }
     }
     return (
         <Fragment>

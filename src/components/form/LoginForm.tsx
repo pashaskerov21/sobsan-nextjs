@@ -37,9 +37,6 @@ const LoginForm: React.FC<FormProps> = ({
         users: [],
     });
     const account = new Account(accountData);
-    const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
-    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
-    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     const initialValues: LoginFormValueType = {
         email: '',
         password: '',
@@ -72,9 +69,6 @@ const LoginForm: React.FC<FormProps> = ({
         if (searchAccount) {
             setAccountData(account.login(searchAccount.id));
             actions.resetForm();
-            setBasketStorage(basketStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
-            setWishlistStorage(wishlistStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
-            setComparisonStorage(comparisonStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
             router.push(`/${activeLocale}/account`);
         } else {
             Swal.fire({
