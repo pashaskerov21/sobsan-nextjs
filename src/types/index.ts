@@ -43,6 +43,7 @@ import {
     ProductFilterDataType,
     AccountDataType,
     UserDataType,
+    OrderDataType,
 } from './data';
 
 import {
@@ -125,6 +126,7 @@ export type {
     ProductFilterDataType,
     AccountDataType,
     UserDataType,
+    OrderDataType,
 
     RootLayoutProps,
     CatalogPageLayoutProps,

@@ -122,7 +122,8 @@ const RegistrationForm: React.FC<FormProps> = ({
                     lastName: values.lastName,
                     phone: values.phone,
                     address: values.address,
-                }
+                },
+                orders: [],
             }
             setAccountData(account.registration(newUser));
             Swal.fire({

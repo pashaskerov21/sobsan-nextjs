@@ -1,9 +1,9 @@
 'use client'
-import React, { Fragment, useCallback } from 'react'
+import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType} from '@/src/types';
+import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType, OrderDataType} from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
 import { useRouter } from 'next/navigation';
@@ -90,8 +90,11 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
     }
     if(accountData.activeUser){
         let userData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
-        if(userData && userData.order?.basketData?.length === 0){
-            router.push(`/${activeLocale}/basket`);
+        if(userData && userData.activeOrderID){
+            const activeOrderData: OrderDataType | undefined = userData.orders.find((data) => data.id === userData?.activeOrderID);
+            if(activeOrderData?.basketData?.length === 0){
+                router.push(`/${activeLocale}/basket`);
+            }
         }
     }
     return (
