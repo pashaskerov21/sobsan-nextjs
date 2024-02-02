@@ -22,7 +22,7 @@ const Input: React.FC<InputControlProps> = ({ label, name, ...rest }) => {
         }
     }, [rest.formik])
     return (
-        <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[name] && rest.formik?.values[name].length > 0 ? true : false}>
+        <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[name] || rest.formik?.values[name].length > 0 ? true : false}>
             <Field id={name} name={name} {...rest} />
             <label htmlFor={name}>{label}</label>
             <ErrorMessage name={name}>

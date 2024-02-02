@@ -8,7 +8,7 @@ import FormComponent from './FormComponent'
 import { FormWrapper } from './style'
 import { useLocalStorage } from 'usehooks-ts'
 import { useRouter } from 'next/navigation'
-import { decryptData } from '@/src/utils/crypto'
+import { Account } from '@/src/class'
 
 type FormProps = {
     activeLocale: LocaleType,
@@ -31,11 +31,12 @@ const LoginForm: React.FC<FormProps> = ({
     loading,
     titleDictionary,
 }) => {
-    const router = useRouter();
+    const router = useRouter();  
     const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
+    const account = new Account(accountData);
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
@@ -66,19 +67,10 @@ const LoginForm: React.FC<FormProps> = ({
             ),
     });
 
-
     const onSubmit = (values: LoginFormValueType, actions: FormikHelpers<LoginFormValueType>) => {
-
-        const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
-
-        const searchAccount: UserDataType | undefined = userData.find((data) => data.email === values.email && data.password === values.password);
+        const searchAccount: UserDataType | undefined = account.searchUserByEmailPassword(values.email, values.password);
         if (searchAccount) {
-            setAccountData((prev) => {
-                return {
-                    ...prev,
-                    activeUser: searchAccount.id,
-                }
-            });
+            setAccountData(account.login(searchAccount.id));
             actions.resetForm();
             setBasketStorage(basketStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
             setWishlistStorage(wishlistStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));

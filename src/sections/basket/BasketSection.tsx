@@ -8,6 +8,7 @@ import { AlertComponent } from '@/src/styles/components/alert'
 import { ProductRow, Skeleton } from '@/src/components'
 import { useRouter } from 'next/navigation'
 import { decryptData, encryptData } from '@/src/utils/crypto'
+import { Account } from '@/src/class'
 
 type SectionProps = {
     activeLocale: LocaleType,
@@ -41,8 +42,7 @@ const BasketSection: React.FC<SectionProps> = ({
         activeUser: undefined,
         users: [],
     });
-    const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
-
+    const account = new Account(accountData);
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
@@ -53,27 +53,19 @@ const BasketSection: React.FC<SectionProps> = ({
 
     const handleBasketConfirm = useCallback(() => {
         if (accountData.activeUser) {
-            const searchAccount: UserDataType | undefined = userData.find((data) => data.id === accountData.activeUser);
-            if (searchAccount) {
-                const updateUserData: UserDataType[] = userData.map((data) => data.id === searchAccount.id ?
-                    {
-                        ...data,
-                        orders: {
-                            ...data.orders,
-                            product_payment: paymentTotal,
-                            basketData: basketStorage.filter((data) => data.user === searchAccount.id),
-                        }
-                    } : data);
-                const encryptedData:string[] = updateUserData.map((data) => encryptData(data));
-                console.log(encryptedData)
-                setAccountData((prev) => {
-                    return {
-                        ...prev,
-                        users: encryptedData,
+            const searchUserData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
+            if (searchUserData) {
+                const updateData: UserDataType = {
+                    ...searchUserData,
+                    order: {
+                        ...searchUserData.order,
+                        product_payment: paymentTotal,
+                        basketData: basketStorage.filter((data) => data.user === searchUserData.id),
                     }
-                });
+                }
+                setAccountData(account.updateUserData(accountData.activeUser, updateData))
                 router.push(`/${activeLocale}/checkout`);
-            }else{
+            } else {
                 router.push(`/${activeLocale}/login`);
             }
         } else {

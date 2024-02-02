@@ -77,17 +77,43 @@
         "delete": "Sil",
         "clear": "Təmizlə",
         "clear_basket": "Səbəti təmizlə",
-        "resgistration_messsage": "Qeydiyyat uğurla tamamlandı!"
+        "resgistration_messsage": "Qeydiyyat uğurla tamamlandı!",
+        "order_informations": "Sifariş məlumatları",
+        "delivery": "Çatdırılma",
+        "discount": "Endirim",
+        "confirm_order": "Sifarişi təsdiqlə",
+        "my_account": "Mənim hesabım",
+        "account_settings": "Tənzimləmələr",
+        "delete_account": "Hesabı sil",
+        "logout": "Çıxış",
+        "orders": "Sifarişlər",
+        "profil_informations": "Profil məlumatları",
+        "account_informations": "Hesab məlumatları",
+        "delivery_informations": "Çatdırılma məlumatları",
+        "save": "Yadda saxla"
     },
     "form": {
         "label": {
             "email": "E-mail",
             "password": "Şifrə",
             "password_confirm": "Şifrənizi təsdiq edin",
-            "firstName": "Adınız",
-            "lastName": "Soyadınız",
+            "firstName": "Ad",
+            "lastName": "Soyad",
+            "your_firstName": "Adınız",
+            "your_lastName": "Soyadınız",
             "phone": "Telefon",
-            "address": "Ünvan"
+            "address": "Ünvan",
+            "delivery_address": "Çatdırılma ünvanı",
+            "additional_notes": "Əlavə qeydləriniz",
+            "cash_payment": "Nağd ödəniş",
+            "card_payment": "Visa/Master ilə ödəniş",
+            "delivery_city": "Bakı şəhəri daxili",
+            "delivery_region": "Regionlar",
+            "phone_2": "Telefon (əlavə)",
+            "gender": "Cinsi",
+            "city": "Şəhər",
+            "region": "Rayon, qəsəbə",
+            "address_additional_info": "Əlavə təsvir (küçə, ev və s.)"
         },
         "error": {
             "error": "Xəta",
@@ -107,7 +133,8 @@
             "account_exist": "Bu e-mail istifadə olunub",
             "firstName_required": "Ad tələb olunur",
             "lastName_required": "Soyad tələb olunur",
-            "phone_required": "Telefon tələb olunur"
+            "phone_required": "Telefon tələb olunur",
+            "delivery_address_required": "Çatdırılma ünvanı tələb olunur"
         }
     }
 }

@@ -6,7 +6,7 @@ import { PageTitle } from '@/src/components';
 import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType} from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -78,12 +78,16 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
     }, [dispatch]);
 
     const router = useRouter();
+    const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
     if(!accountData.activeUser){
-        router.push(`/${activeLocale}/login`)
+        router.push(`/${activeLocale}/login`);
+    }
+    if(accountData.activeUser && basketStorage.filter((data) => data.user === accountData.activeUser).length === 0){
+        router.push(`/${activeLocale}/basket`);
     }
     return (
         <Fragment>

@@ -1,7 +1,7 @@
 'use client'
+import React from 'react'
 import { Container, Section } from '@/src/styles'
 import { LoadingType } from '@/src/types'
-import React from 'react'
 
 type SectionProps = {
     activeLocale: string,

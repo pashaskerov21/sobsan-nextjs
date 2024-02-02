@@ -42,11 +42,11 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
     label{
         transition: all 0.3s;
         position: absolute;
-        top: 20px;
+        top: 25px;
         left: 15px;
         ${props => props.$hasValue && css`
-            top: 0;
-            font-size: 14px;
+            top: 5px;
+            font-size: 13px;
         `}
     }
     input{
@@ -56,11 +56,11 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
         border-bottom: 1px solid ${props => props.theme.border_color_1} !important;
         caret-color: ${props => props.theme.color_1} !important;
         color: ${props => props.theme.text_color_1} !important;
-        padding: 25px 15px 15px;
+        padding: 30px 15px 15px;
         &:focus{
             &~label{
-                top: 0;
-                font-size: 14px;
+                top: 5px;
+                font-size: 13px;
             }
         }
         &:-webkit-autofill{
@@ -73,15 +73,6 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
             padding: 25px 15px 15px;
         }
     }
-    /* input:-webkit-autofill {
-        width: 100%;
-        background-color: transparent;
-        outline: none;
-        border-bottom: 1px solid ${props => props.theme.border_color_1};
-        caret-color: ${props => props.theme.color_1};
-        color: ${props => props.theme.text_color_1};
-        padding: 25px 15px 15px;
-    } */
     .invalid__message{
         font-size: 14px;
         margin-top: 15px;

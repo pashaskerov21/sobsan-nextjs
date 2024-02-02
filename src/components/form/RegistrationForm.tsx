@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useLocalStorage } from 'usehooks-ts'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
-import { decryptData, encryptData } from '@/src/utils/crypto'
+import { Account } from '@/src/class'
 
 type FormProps = {
     activeLocale: LocaleType,
@@ -33,11 +33,6 @@ type RegistrationFormValueType = {
     password_confirm: string,
 }
 
-type EncryptedData = {
-    ciphertext: string;
-    key: string;
-}
-
 const RegistrationForm: React.FC<FormProps> = ({
     activeLocale,
     formDictionary,
@@ -45,6 +40,13 @@ const RegistrationForm: React.FC<FormProps> = ({
     titleDictionary,
     generalDictionary,
 }) => {
+    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const router = useRouter();
+    const account = new Account(accountData);
+
     const initialValues: RegistrationFormValueType = {
         firstName: "",
         lastName: "",
@@ -100,15 +102,8 @@ const RegistrationForm: React.FC<FormProps> = ({
             ),
     });
 
-    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
-        activeUser: undefined,
-        users: [],
-    });
-    const router = useRouter();
     const onSubmit = (values: RegistrationFormValueType, actions: FormikHelpers<RegistrationFormValueType>) => {
-        const userData: UserDataType[] = accountData.users.map((data) => decryptData(data));
-        
-        const searchAccount: UserDataType | undefined = userData.find((data) => data.email === values.email);
+        const searchAccount: UserDataType | undefined = account.searchUserByEmail(values.email);
         if (searchAccount) {
             Swal.fire({
                 icon: "error",
@@ -116,16 +111,20 @@ const RegistrationForm: React.FC<FormProps> = ({
                 text: formDictionary.error["account_exist"],
             });
         } else {
-            const account: UserDataType = {
+            const newUser: UserDataType = {
                 id: uuidv4(),
-                ...values,
-            }
-            setAccountData((prev) => {
-                return {
-                    ...prev,
-                    users: [...prev.users, encryptData(account)],
+                account: {
+                    email: values.email,
+                    password: values.password,
+                },
+                profile: {
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                    phone: values.phone,
+                    address: values.address,
                 }
-            });
+            }
+            setAccountData(account.registration(newUser));
             Swal.fire({
                 icon: "success",
                 title: generalDictionary["congratulations"],
@@ -152,20 +151,20 @@ const RegistrationForm: React.FC<FormProps> = ({
                                 control='input'
                                 name='firstName'
                                 type='text'
-                                label={formDictionary.label.firstName + ' *'}
+                                label={formDictionary.label.your_firstName + ' *'}
                                 formik={formik}
                             />
                             <FormComponent
                                 control='input'
                                 name='lastName'
                                 type='text'
-                                label={formDictionary.label.lastName + ' *'}
+                                label={formDictionary.label.your_lastName + ' *'}
                                 formik={formik}
                             />
                             <FormComponent
                                 control='input'
                                 name='phone'
-                                type='text'
+                                type='number'
                                 label={formDictionary.label.phone + ' *'}
                                 formik={formik}
                             />

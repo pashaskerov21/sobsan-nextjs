@@ -77,7 +77,20 @@
         "delete": "Удалить",
         "clear": "Чистый",
         "clear_basket": "Чистая корзина",
-        "resgistration_messsage": "Регистрация прошла успешно!"
+        "resgistration_messsage": "Регистрация прошла успешно!",
+        "order_informations": "Информация о заказе",
+        "delivery": "Доставка",
+        "discount": "Скидка",
+        "confirm_order": "Подтвердите заказ",
+        "my_account": "Мой аккаунт",
+        "account_settings": "Корректировки",
+        "delete_account": "Удалить аккаунт",
+        "logout": "Выход",
+        "orders": "Заказы",
+        "profil_informations": "Информация профиля",
+        "account_informations": "Информация об аккаунте",
+        "delivery_informations": "Информация о доставке",
+        "save": "Сохранять"
     },
     "form": {
         "label": {
@@ -86,8 +99,21 @@
             "password_confirm": "Подтвердите ваш пароль",
             "firstName": "Имя",
             "lastName": "Фамилия",
+            "your_firstName": "Твое имя",
+            "your_lastName": "Твоя фамилия",
             "phone": "Телефон",
-            "address": "Адрес"
+            "address": "Адрес",
+            "delivery_address": "Адрес доставки",
+            "additional_notes": "Ваши дополнительные заметки",
+            "cash_payment": "Оплата наличными",
+            "card_payment": "Оплата по Visa/Master",
+            "delivery_city": "Внутри города Баку",
+            "delivery_region": "Регионы",
+            "phone_2": "Телефон (доп.)",
+            "gender": "Пол",
+            "city": "Город",
+            "region": "Район, поселок",
+            "address_additional_info": "Дополнительное описание (улица, дом и т.п.)"
         },
         "error": {
             "error": "Ошибка",
@@ -107,7 +133,8 @@
             "account_exist": "Этот электронный адрес был использован",
             "firstName_required": "Требуется имя",
             "lastName_required": "Требуется фамилия",
-            "phone_required": "Требуется телефон"
+            "phone_required": "Требуется телефон",
+            "delivery_address_required": "Требуется адрес доставки"
         }
     }
 }

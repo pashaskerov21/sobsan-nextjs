@@ -15,7 +15,7 @@ export const AccountFormWrapper = styled.div`
     .wrapper__right{
         width: 100%;
         background: url('/design/large-drop-bg.webp') no-repeat;
-        background-size: cover;
+        background-size: contain;
         background-color: #ed3237 !important;
         ${column_center};
         gap: 30px;

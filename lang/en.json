@@ -77,7 +77,20 @@
         "delete": "Delete",
         "clear": "Clean",
         "clear_basket": "Clean basket",
-        "resgistration_messsage": "Registration completed successfully!"
+        "resgistration_messsage": "Registration completed successfully!",
+        "order_informations": "Order information",
+        "delivery": "Delivery",
+        "discount": "Discount",
+        "confirm_order": "Confirm Order",
+        "my_account": "My account",
+        "account_settings": "Adjustments",
+        "delete_account": "Delete the account",
+        "logout": "Exit",
+        "orders": "Orders",
+        "profil_informations": "Profile information",
+        "account_informations": "Account information",
+        "delivery_informations": "Delivery information",
+        "save": "Save"
     },
     "form": {
         "label": {
@@ -86,8 +99,21 @@
             "password_confirm": "Confirm your password",
             "firstName": "Name",
             "lastName": "Surname",
+            "your_firstName": "Your name",
+            "your_lastName": "Your surname",
             "phone": "Phone",
-            "address": "Address"
+            "address": "Address",
+            "delivery_address": "Delivery address",
+            "additional_notes": "Your additional notes",
+            "cash_payment": "Cash payment",
+            "card_payment": "Payment by Visa/Master",
+            "delivery_city": "Inside Baku city",
+            "delivery_region": "Regions",
+            "phone_2": "Phone (additional)",
+            "gender": "Gender",
+            "city": "City",
+            "region": "District, settlement",
+            "address_additional_info": "Additional description (street, house, etc.)"
         },
         "error": {
             "error": "Error",
@@ -107,7 +133,8 @@
             "account_exist": "This e-mail has been used",
             "firstName_required": "Name required",
             "lastName_required": "Surname required",
-            "phone_required": "Phone is required"
+            "phone_required": "Phone is required",
+            "delivery_address_required": "Delivery address is required"
         }
     }
 }

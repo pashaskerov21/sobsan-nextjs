@@ -253,28 +253,38 @@ export type ProductFilterDataType = {
 
 export type UserDataType = {
     id: string | number,
-    firstName: string,
-    lastName: string,
-    phone: string | number,
-    address: string | null,
-    email: string,
-    password: string,
-    gender?: "male" | "female",
-    phone_2?: string | number,
-    city?: string,
-    region?: string,
-    address_detail?: string,
-    orders?: {
-        order_date?: string,
-        order_address?: string,
-        order_note?: string,
+    profile: {
+        firstName: string,
+        lastName: string,
+        gender?: "male" | "female",
+        address?: string | null,
+        phone: string | number,
+        phone_2?: string | number,
+    },
+    account: {
+        email: string,
+        password: string,
+    },
+    delivery?:{
+        city?: string,
+        region?: string,
+        address_detail?: string,
+    },
+    order?: {
+        fullName?: string,
+        address?: string,
+        date?: string,
+        phone?: string,
+        email?: string,
+        note?: string,
         payment_type?: "card" | "cash",
+        delivery_type?: "city" | "region",
         discount?: number,
         delivery_payment?: number,
         product_payment?: number,
         total_payment?: number,
         basketData?: BasketDataType[],
-    },
+    }
 }
 export type AccountDataType = {
     activeUser: string | number | undefined,

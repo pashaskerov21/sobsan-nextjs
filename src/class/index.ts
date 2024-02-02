@@ -9,6 +9,7 @@ import Product from "./Product";
 import Brand from "./Brand";
 import Attribute from "./Attribute";
 import AttributeGroup from "./AttributeGroup";
+import Account from "./Account";
 
 export {
     Setting,
@@ -22,4 +23,5 @@ export {
     Brand,
     Attribute,
     AttributeGroup,
+    Account,
 }
