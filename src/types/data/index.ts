@@ -266,7 +266,7 @@ export type OrderDataType = {
     delivery_payment?: number,
     product_payment?: number,
     total_payment?: number,
-    basketData?: BasketDataType[],
+    basketData: BasketDataType[] | [],
 }
 
 export type UserDataType = {
