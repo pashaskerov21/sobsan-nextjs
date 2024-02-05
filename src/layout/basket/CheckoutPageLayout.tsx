@@ -90,8 +90,10 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
     if (!accountData.activeUser) {
         router.push(`/${activeLocale}/login`);
     }
-    if(activeOrder && activeOrder.basketData.length === 0){
-        router.push(`/${activeLocale}/basket`);
+    if(activeOrder){
+        if(activeOrder.basketData.length === 0){
+            router.push(`/${activeLocale}/basket`);
+        }
     }
     return (
         <Fragment>
