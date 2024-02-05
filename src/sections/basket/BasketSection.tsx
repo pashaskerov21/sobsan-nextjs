@@ -54,7 +54,7 @@ const BasketSection: React.FC<SectionProps> = ({
             setActiveUserBasketStorage(filteredBasketStorage)
         }   
         console.log('test')     
-    },[activeUser, basketStorage])
+    },[activeUser])
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
