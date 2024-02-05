@@ -1,23 +1,39 @@
 'use client'
 import React from 'react'
 import { Container, Section } from '@/src/styles'
-import { LoadingType } from '@/src/types'
+import { LoadingType, LocaleType } from '@/src/types'
+import { CheckoutForm } from '@/src/components'
 
 type SectionProps = {
-    activeLocale: string,
-    loading: LoadingType,
-    titleDictionary: { [key: string]: string },
-    formDictionary: {
-        [key: string]: {
-            [key: string]: string
-        }
-    },
+  activeLocale: LocaleType,
+  loading: LoadingType,
+  titleDictionary: { [key: string]: string },
+  generalDictionary: { [key: string]: string },
+  formDictionary: {
+    [key: string]: {
+      [key: string]: string
+    }
+  },
 }
 
-const CheckoutSection:React.FC<SectionProps> = () => {
+const CheckoutSection: React.FC<SectionProps> = ({
+  activeLocale,
+  formDictionary,
+  loading,
+  titleDictionary,
+  generalDictionary
+}) => {
   return (
     <Section $py={20}>
-        <Container></Container>
+      <Container>
+        <CheckoutForm
+          activeLocale={activeLocale}
+          formDictionary={formDictionary}
+          generalDictionary={generalDictionary}
+          loading={loading}
+          titleDictionary={titleDictionary}
+        />
+      </Container>
     </Section>
   )
 }

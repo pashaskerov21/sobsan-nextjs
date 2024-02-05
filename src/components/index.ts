@@ -17,6 +17,7 @@ import ProductSortFilters from "./product/ProductSortFilters";
 import ProductRow from "./product/ProductRow";
 import LoginForm from "./form/LoginForm";
 import RegistrationForm from "./form/RegistrationForm";
+import CheckoutForm from "./form/CheckoutForm";
 
 
 export {
@@ -39,4 +40,5 @@ export {
     ProductRow,
     LoginForm,
     RegistrationForm,
+    CheckoutForm,
 }

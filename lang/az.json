@@ -90,7 +90,8 @@
         "profil_informations": "Profil məlumatları",
         "account_informations": "Hesab məlumatları",
         "delivery_informations": "Çatdırılma məlumatları",
-        "save": "Yadda saxla"
+        "save": "Yadda saxla",
+        "order_complete_message": "Sifariş uğurla tamamlandı!"
     },
     "form": {
         "label": {
@@ -134,7 +135,9 @@
             "firstName_required": "Ad tələb olunur",
             "lastName_required": "Soyad tələb olunur",
             "phone_required": "Telefon tələb olunur",
-            "delivery_address_required": "Çatdırılma ünvanı tələb olunur"
+            "delivery_address_required": "Çatdırılma ünvanı tələb olunur",
+            "payment_type_required": "Ödəniş növünü seçin",
+            "delivery_type_required": "Çatdırılma növünü seçin"
         }
     }
 }

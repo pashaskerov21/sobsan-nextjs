@@ -5,27 +5,28 @@ import { FormikProps } from "formik";
 import { FormComponentWrapper } from '../style';
 
 export type InputControlProps = {
-    label: string,
     name: string,
+    label?: string,
     type?: "text" | "number" | "email" | "password",
     placeholder?: string,
+    value?: string,
     formik?: FormikProps<any>,
 }
 
-const Input: React.FC<InputControlProps> = ({ label, name, ...rest }) => {
+const Input: React.FC<InputControlProps> = ({...rest }) => {
     const [invalidStatus, setInvalidStatus] = React.useState(false);
     React.useEffect(() => {
-        if (rest.formik?.errors[name] && rest.formik.touched[name]) {
+        if (rest.formik?.errors[rest.name] && rest.formik.touched[rest.name]) {
             setInvalidStatus(true)
         } else {
             setInvalidStatus(false);
         }
     }, [rest.formik])
     return (
-        <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[name] || rest.formik?.values[name].length > 0 ? true : false}>
-            <Field id={name} name={name} {...rest} />
-            <label htmlFor={name}>{label}</label>
-            <ErrorMessage name={name}>
+        <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[rest.name] || rest.formik?.values[rest.name].length > 0 ? true : false}>
+            <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} value={rest.value} />
+            <label htmlFor={`input-${rest.type}-${rest.name}`}>{rest.label}</label>
+            <ErrorMessage name={rest.name}>
                 {(message: string) => (
                     <div className='invalid__message'>{message}</div>
                 )}

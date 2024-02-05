@@ -1,4 +1,4 @@
-import { AccountDataType, UserDataType } from "../types";
+import { AccountDataType, OrderDataType, UserDataType } from "../types";
 import CryptoJS from 'crypto-js';
 
 
@@ -48,8 +48,8 @@ class Account {
         }
         return updateAccountData;
     }
-    public updateUserData(id: string | number, updateData: UserDataType) {
-        const updateUsers: UserDataType[] = this.users.map((data) => data.id === id ? updateData : data);
+    public updateUserData(updateData: UserDataType) {
+        const updateUsers: UserDataType[] = this.users.map((data) => data.id === updateData.id ? updateData : data);
         const encryptedData: string[] = updateUsers.map((data) => this.encryptData(data));
         const updateAccountData: AccountDataType = {
             ...this.accountData,
@@ -57,7 +57,35 @@ class Account {
         }
         return updateAccountData;
     }
-
+    public getActiveUser(){
+        let activeUserData:UserDataType | undefined;
+        if(this.accountData.activeUser){
+            activeUserData = this.users.find((data) => data.id === this.accountData.activeUser);
+        }
+        return activeUserData
+    }
+    public getActiveOrder(){
+        let activeOrder: OrderDataType | undefined;
+        if(this.accountData.activeUser){
+            const activeUserData:UserDataType | undefined = this.getActiveUser();
+            if(activeUserData && activeUserData.activeOrderID){
+                activeOrder = activeUserData.orders.find((data) => data.id === activeUserData.activeOrderID);
+            }
+        }
+        return activeOrder;
+    }
+    public updateOrderData(newData: OrderDataType){
+        let activeUserData: UserDataType | undefined = this.getActiveUser();
+        if(activeUserData){
+            const updateOrders = activeUserData.orders.map((data) => data.id === activeUserData?.activeOrderID ? newData : data);
+            activeUserData = {
+                ...activeUserData,
+                orders: updateOrders,
+            }
+            return this.updateUserData(activeUserData);
+        }
+        return this.accountData;
+    }
 }
 
 export default Account;

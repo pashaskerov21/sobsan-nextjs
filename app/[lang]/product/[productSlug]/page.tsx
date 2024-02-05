@@ -1,8 +1,49 @@
 import React from "react";
 import { getTranslate } from "@/get-translate";
 import { Product } from "@/src/class";
-import { AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from "@/src/types";
-import { fetchAttributeData, fetchAttributeGroupData, fetchAttributeGroupTranslateData, fetchAttributeTranslateData, fetchBrandData, fetchBrandTranslateData, fetchCatalogData, fetchCatalogTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchColorData, fetchColorTranslateData, fetchProductAttributeRelationData, fetchProductCategoryRelationData, fetchProductColorRelationData, fetchProductData, fetchProductTranslateData, fetchProductWeightRelationData, fetchWeightData } from "@/src/utils";
+import {
+    AttributeDataType,
+    AttributeGroupDataType,
+    AttributeGroupTranslateDataType,
+    AttributeTranslateDataType,
+    BrandDataType,
+    BrandTranslateDataType,
+    CatalogDataType,
+    CatalogTranslateDataType,
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    ColorDataType,
+    ColorTranslateDataType,
+    LocaleType,
+    ProductAttributeRelationDataType,
+    ProductCategoryRelationDataType,
+    ProductColorRelationDataType,
+    ProductDataType,
+    ProductTranslateDataType,
+    ProductWeightRelationDataType,
+    WeightDataType
+} from "@/src/types";
+import {
+    fetchAttributeData,
+    fetchAttributeGroupData,
+    fetchAttributeGroupTranslateData,
+    fetchAttributeTranslateData,
+    fetchBrandData,
+    fetchBrandTranslateData,
+    fetchCatalogData,
+    fetchCatalogTranslateData,
+    fetchCategoryData,
+    fetchCategoryTranslateData,
+    fetchColorData,
+    fetchColorTranslateData,
+    fetchProductAttributeRelationData,
+    fetchProductCategoryRelationData,
+    fetchProductColorRelationData,
+    fetchProductData,
+    fetchProductTranslateData,
+    fetchProductWeightRelationData,
+    fetchWeightData
+} from "@/src/utils";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
 import { ProductDetailPageLayout } from "@/src/layout";

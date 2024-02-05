@@ -90,7 +90,8 @@
         "profil_informations": "Profile information",
         "account_informations": "Account information",
         "delivery_informations": "Delivery information",
-        "save": "Save"
+        "save": "Save",
+        "order_complete_message": "Order completed successfully!"
     },
     "form": {
         "label": {
@@ -134,7 +135,9 @@
             "firstName_required": "Name required",
             "lastName_required": "Surname required",
             "phone_required": "Phone is required",
-            "delivery_address_required": "Delivery address is required"
+            "delivery_address_required": "Delivery address is required",
+            "payment_type_required": "Select the payment type",
+            "delivery_type_required": "Select the delivery type"
         }
     }
 }

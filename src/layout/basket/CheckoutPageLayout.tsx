@@ -3,11 +3,12 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType, OrderDataType} from '@/src/types';
+import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType, OrderDataType } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
 import { useRouter } from 'next/navigation';
 import { Account } from '@/src/class';
+import { CheckoutSection } from '@/src/sections';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -79,26 +80,25 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
     }, [dispatch]);
 
     const router = useRouter();
-    const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
-    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
     const account = new Account(accountData);
-    if(!accountData.activeUser){
+    if (!accountData.activeUser) {
         router.push(`/${activeLocale}/login`);
     }
-    if(accountData.activeUser){
+    if (accountData.activeUser) {
         let userData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
-        if(userData){
-            if(userData.activeOrderID){
+        if (userData) {
+            if (userData.activeOrderID) {
                 const activeOrderData: OrderDataType | undefined = userData.orders.find((data) => data.id === userData?.activeOrderID);
-                if(activeOrderData && activeOrderData.basketData.length === 0){
+                if (activeOrderData && activeOrderData.basketData.length === 0) {
                     router.push(`/${activeLocale}/basket`);
                 }
-            }else{
+            } else {
                 router.push(`/${activeLocale}/basket`);
-            }            
+            }
         }
     }
     return (
@@ -107,6 +107,13 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
+                titleDictionary={titleDictionary}
+            />
+            <CheckoutSection
+                activeLocale={activeLocale}
+                formDictionary={formDictionary}
+                generalDictionary={generalDictionary}
+                loading={loading}
                 titleDictionary={titleDictionary}
             />
         </Fragment>
