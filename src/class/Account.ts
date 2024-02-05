@@ -74,6 +74,18 @@ class Account {
         }
         return activeOrder;
     }
+    public addNewOrder(newData: OrderDataType){
+        let activeUserData: UserDataType | undefined = this.getActiveUser();
+        if(activeUserData){
+            activeUserData = {
+                ...activeUserData,
+                orders: [...activeUserData.orders, newData],
+                activeOrderID: newData.id,
+            }
+            return this.updateUserData(activeUserData);
+        }
+        return this.accountData;
+    }
     public updateOrderData(newData: OrderDataType){
         let activeUserData: UserDataType | undefined = this.getActiveUser();
         if(activeUserData){

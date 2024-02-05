@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { AccountDataType, BasketDataType, LoadingType, LocaleType, OrderDataType, UserDataType } from '@/src/types'
-import { decryptData } from '@/src/utils/crypto'
 import { useLocalStorage } from 'usehooks-ts'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { FormWrapper } from './style'

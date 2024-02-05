@@ -85,21 +85,13 @@ const CheckoutPageLayout: React.FC<LayoutProps> = ({
         users: [],
     });
     const account = new Account(accountData);
+    const activeUser:UserDataType | undefined = account.getActiveUser();
+    const activeOrder: OrderDataType | undefined = account.getActiveOrder();
     if (!accountData.activeUser) {
         router.push(`/${activeLocale}/login`);
     }
-    if (accountData.activeUser) {
-        let userData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
-        if (userData) {
-            if (userData.activeOrderID) {
-                const activeOrderData: OrderDataType | undefined = userData.orders.find((data) => data.id === userData?.activeOrderID);
-                if (activeOrderData && activeOrderData.basketData.length === 0) {
-                    router.push(`/${activeLocale}/basket`);
-                }
-            } else {
-                router.push(`/${activeLocale}/basket`);
-            }
-        }
+    if(activeOrder && activeOrder.basketData.length === 0){
+        router.push(`/${activeLocale}/basket`);
     }
     return (
         <Fragment>

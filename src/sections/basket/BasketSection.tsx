@@ -44,6 +44,8 @@ const BasketSection: React.FC<SectionProps> = ({
         users: [],
     });
     const account = new Account(accountData);
+    const activeUser:UserDataType | undefined = account.getActiveUser();
+    const activeUserBasketStorage: BasketDataType[] | [] = basketStorage.filter((data) => data.user === activeUser?.id)
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
@@ -53,26 +55,20 @@ const BasketSection: React.FC<SectionProps> = ({
     }, [basketStorage]);
 
     const handleBasketConfirm = useCallback(() => {
-        if (accountData.activeUser) {
-            const searchUserData: UserDataType | undefined = account.searchUserByID(accountData.activeUser);
-            if (searchUserData) {
+        if(activeUser){
+            if(activeUserBasketStorage.length > 0){
                 const newOrder: OrderDataType = {
                     id: uuidv4(),
                     status: false,
                     product_payment: paymentTotal,
-                    basketData: basketStorage.filter((data) => data.user === searchUserData.id),
+                    basketData: activeUserBasketStorage,
                 }
-                const updateData: UserDataType = {
-                    ...searchUserData,
-                    orders: [...searchUserData.orders, newOrder],
-                    activeOrderID: newOrder.id,
-                }
-                setAccountData(account.updateUserData(updateData))
+                setAccountData(account.addNewOrder(newOrder));
                 router.push(`/${activeLocale}/basket/checkout`);
-            } else {
-                router.push(`/${activeLocale}/login`);
+            }else{
+                router.push(`/${activeLocale}/basket`);
             }
-        } else {
+        }else{
             router.push(`/${activeLocale}/login`);
         }
     }, [router, accountData.activeUser]);
