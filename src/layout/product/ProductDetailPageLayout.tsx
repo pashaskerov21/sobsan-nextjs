@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react'
 import { AccountDataType, AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, ComparisonDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType, WishlistDataType } from '@/src/types'
 import { useDispatch } from 'react-redux'
-import { Product } from '@/src/class'
+import { Comparison, Product, Wishlist } from '@/src/class'
 import { updateLocaleSlug } from '@/src/redux/actions'
 import { PageTitle } from '@/src/components'
 import { ProductDetailSection } from '@/src/sections'
@@ -102,6 +102,10 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
     });
     const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
+
+    const wishlist = new Wishlist(wishlistStorage, accountData);
+    const comparison = new Comparison(comparisonStorage, accountData);
+
     const wishlistData: WishlistDataType = {
         id: uuidv4(),
         user: accountData.activeUser ? accountData.activeUser : null,
@@ -112,8 +116,9 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
         user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
-    const isWishlist = wishlistStorage.find((data) => data.product === activeProductData.id);
-    const isComparison = comparisonStorage.find((data) => data.product === activeProductData.id);
+    const isWishlist = wishlist.check(activeProductData.id);
+    const isComparison = comparison.check(activeProductData.id);
+
     const [productState, setProductState] = React.useState<{
         wishlist: boolean,
         comparison: boolean,
@@ -131,18 +136,16 @@ const ProductDetailPageLayout: React.FC<LayoutProps> = ({
 
     const handleFavoritetButton = React.useCallback(() => {
         if (isWishlist) {
-            const filteredData = wishlistStorage.filter((data) => data.product !== activeProductData.id);
-            setWishlistStorage([...filteredData]);
+            setWishlistStorage(wishlist.remove(isWishlist.id));
         } else {
-            setWishlistStorage([...wishlistStorage, wishlistData]);
+            setWishlistStorage(wishlist.add(wishlistData));
         };
     }, [wishlistStorage, setWishlistStorage, isWishlist]);
     const handleComparisonButton = React.useCallback(() => {
         if (isComparison) {
-            const filteredData = comparisonStorage.filter((data) => data.product !== activeProductData.id);
-            setComparisonStorage([...filteredData]);
+            setComparisonStorage(comparison.remove(isComparison.id));
         } else {
-            setComparisonStorage([...comparisonStorage, comparisonData])
+            setComparisonStorage(comparison.add(comparisonData))
         };
     }, [comparisonStorage, setComparisonStorage, isComparison]);
     return (

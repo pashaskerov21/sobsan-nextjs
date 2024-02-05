@@ -70,7 +70,7 @@ const ProductRow: React.FC<RowProps> = ({
     }, [setBasketStorage])
 
     useEffect(() => {
-        setBasketStorage(basket.updateAmount(basketData.id, productAmount));
+        setBasketStorage(basket.update(basketData.id, productAmount));
     }, [productAmount])
 
     useEffect(() => {

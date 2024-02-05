@@ -5,8 +5,9 @@ import Skeleton from '../skeleton/Skeleton';
 import { BottomToolbarWrapper, CenterToolbarWrapper } from './style'
 import { FaArrowUp } from "react-icons/fa";
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
-import { BasketDataType, ComparisonDataType, LoadingType, LocaleType, SettingDataType, WishlistDataType } from '@/src/types';
+import { AccountDataType, BasketDataType, ComparisonDataType, LoadingType, LocaleType, SettingDataType, WishlistDataType } from '@/src/types';
 import { useLocalStorage } from 'usehooks-ts';
+import { Basket } from '@/src/class';
 
 type SiteToolbarProps = {
     activeLocale: LocaleType,
@@ -34,6 +35,12 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settin
     const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const [wishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const basket = new Basket(basketStorage, accountData);
+    const basketData: BasketDataType[] = basket.data();
     return (
         <Fragment>
             <CenterToolbarWrapper>
@@ -49,7 +56,7 @@ const SiteToolbar: React.FC<SiteToolbarProps> = ({ activeLocale, loading, settin
                             <div className="toolbar-card">
                                 <div className="icon">
                                     <PiShoppingCartSimpleLight />
-                                    <span className='amount'>{basketStorage ? basketStorage.length : 0}</span>
+                                    <span className='amount'>{basketData ? basketData.length : 0}</span>
                                 </div>
                                 <Link href={`/${activeLocale}/basket`}>{titleDictionary.basket}</Link>
                             </div>

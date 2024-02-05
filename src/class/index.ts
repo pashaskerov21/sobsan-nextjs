@@ -11,6 +11,8 @@ import Attribute from "./Attribute";
 import AttributeGroup from "./AttributeGroup";
 import Account from "./Account";
 import Basket from "./Basket";
+import Wishlist from "./Wishlist";
+import Comparison from "./Comparison";
 
 export {
     Setting,
@@ -25,5 +27,7 @@ export {
     Attribute,
     AttributeGroup,
     Account,
-    Basket
+    Basket,
+    Wishlist,
+    Comparison
 }

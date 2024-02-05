@@ -3,12 +3,10 @@ import { AccountDataType, BasketDataType } from "../types";
 
 class Basket {
     private basketStorage: BasketDataType[];
-    private accountData: AccountDataType;
     private activeUserID: string | number | undefined;
 
     constructor(basketStorage: BasketDataType[], accountData: AccountDataType) {
         this.basketStorage = basketStorage;
-        this.accountData = accountData;
         this.activeUserID = accountData.activeUser;
     }
 
@@ -31,7 +29,7 @@ class Basket {
         }
         return result;
     }
-    public getDataByProductId(id: number) {
+    public check(id: number) {
         const result: BasketDataType | undefined = this.basketStorage.find((data) => data.product === id);
         return result;
     }
@@ -39,7 +37,7 @@ class Basket {
         const result: BasketDataType[] = this.basketStorage.filter((data) => data.id !== id);
         return result;
     }
-    public updateAmount(id: string | number, amount: number) {
+    public update(id: string | number, amount: number) {
         const result: BasketDataType[] = this.basketStorage.map((data) => data.id === id ? {
             ...data,
             parameters: {
@@ -50,7 +48,11 @@ class Basket {
         return result;
     }
     public add(data: BasketDataType){
-        return [...this.basketStorage, data];
+        const result: BasketDataType = {
+            ...data,
+            user: this.activeUserID ? this.activeUserID : null
+        }
+        return [...this.basketStorage, result];
     }
 }
 

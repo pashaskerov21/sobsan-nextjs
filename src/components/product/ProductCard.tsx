@@ -7,7 +7,7 @@ import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType,
 import { ProductCardWrapper } from './style';
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
-import { Basket, Brand, Product } from '@/src/class';
+import { Basket, Brand, Comparison, Product, Wishlist } from '@/src/class';
 import { useLocalStorage } from 'usehooks-ts';
 import { v4 as uuidv4 } from 'uuid';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -49,6 +49,8 @@ const ProductCard: React.FC<CardProps> = ({
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
 
     const basket = new Basket(basketStorage, accountData);
+    const wishlist = new Wishlist(wishlistStorage, accountData);
+    const comparison = new Comparison(comparisonStorage, accountData);
 
     const wishlistData: WishlistDataType = {
         id: uuidv4(),
@@ -60,9 +62,9 @@ const ProductCard: React.FC<CardProps> = ({
         user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
-    const isBasket = basket.getDataByProductId(activeProductData.id);
-    const isWishlist = wishlistStorage.find((data) => data.product === activeProductData.id);
-    const isComparison = comparisonStorage.find((data) => data.product === activeProductData.id);
+    const isBasket = basket.check(activeProductData.id);
+    const isWishlist = wishlist.check(activeProductData.id);
+    const isComparison = comparison.check(activeProductData.id);
     const [productState, setProductState] = React.useState<{
         basket: boolean,
         wishlist: boolean,
@@ -94,18 +96,16 @@ const ProductCard: React.FC<CardProps> = ({
     }, [router]);
     const handleFavoritetButton = React.useCallback(() => {
         if (isWishlist) {
-            const filteredData = wishlistStorage.filter((data) => data.id !== isWishlist.id);
-            setWishlistStorage([...filteredData]);
+            setWishlistStorage(wishlist.remove(isWishlist.id));
         } else {
-            setWishlistStorage([...wishlistStorage, wishlistData]);
+            setWishlistStorage(wishlist.add(wishlistData));
         };
     }, [wishlistStorage, setWishlistStorage, isWishlist]);
     const handleComparisonButton = React.useCallback(() => {
         if (isComparison) {
-            const filteredData = comparisonStorage.filter((data) => data.id !== isComparison.id);
-            setComparisonStorage([...filteredData]);
+            setComparisonStorage(comparison.remove(isComparison.id));
         } else {
-            setComparisonStorage([...comparisonStorage, comparisonData])
+            setComparisonStorage(comparison.add(comparisonData))
         };
     }, [comparisonStorage, setComparisonStorage, isComparison]);
 

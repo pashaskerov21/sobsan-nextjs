@@ -73,7 +73,7 @@ const AccountPageLayout: React.FC<LayoutProps> = ({
     }, [dispatch]);
 
     const router = useRouter();
-    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
