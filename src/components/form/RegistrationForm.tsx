@@ -132,8 +132,8 @@ const RegistrationForm: React.FC<FormProps> = ({
                 text: generalDictionary["resgistration_messsage"],
             }).then((result) => {
                 if (result.isConfirmed) {
-                    actions.resetForm();
                     router.push(`/${activeLocale}/login`);
+                    actions.resetForm();
                 }
             });
         }

@@ -129,15 +129,14 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
             }
             setAccountData(account.updateOrderData(newOrderData));
             setBasketStorage([]);
-            actions.resetForm();
             Swal.fire({
                 icon: "success",
                 title: generalDictionary["congratulations"],
                 text: generalDictionary["order_complete_message"],
             }).then((result) => {
                 if (result.isConfirmed) {
-                    actions.resetForm();
                     router.push(`/${activeLocale}/account`);
+                    actions.resetForm();
                 }
             });
         }

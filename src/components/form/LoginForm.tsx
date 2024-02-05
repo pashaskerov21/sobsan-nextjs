@@ -71,11 +71,11 @@ const LoginForm: React.FC<FormProps> = ({
         const searchAccount: UserDataType | undefined = account.searchUserByEmailPassword(values.email, values.password);
         if (searchAccount) {
             setAccountData(account.login(searchAccount.id));
-            actions.resetForm();
             setBasketStorage(basketStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
             setWishlistStorage(wishlistStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
             setComparisonStorage(comparisonStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
             router.push(`/${activeLocale}/account`);
+            actions.resetForm();
         } else {
             Swal.fire({
                 icon: "error",
