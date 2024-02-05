@@ -67,7 +67,7 @@ const BasketSection: React.FC<SectionProps> = ({
                     orders: [...searchUserData.orders, newOrder],
                     activeOrderID: newOrder.id,
                 }
-                setAccountData(account.updateUserData(accountData.activeUser, updateData))
+                setAccountData(account.updateUserData(updateData))
                 router.push(`/${activeLocale}/basket/checkout`);
             } else {
                 router.push(`/${activeLocale}/login`);
