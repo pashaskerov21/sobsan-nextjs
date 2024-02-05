@@ -44,16 +44,16 @@ const BasketSection: React.FC<SectionProps> = ({
         users: [],
     });
     const account = new Account(accountData);
-    const activeUser:UserDataType | undefined = account.getActiveUser();
+    const activeUser: UserDataType | undefined = account.getActiveUser();
     const [activeUserBasketStorage, setActiveUserBasketStorage] = React.useState<BasketDataType[] | []>([]);
 
 
     React.useEffect(() => {
-        if(activeUser){
+        if (activeUser) {
             let filteredBasketStorage = basketStorage.filter((data) => data.user === activeUser.id)
             setActiveUserBasketStorage(filteredBasketStorage)
-        }   
-    },[])
+        }
+    }, [])
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
@@ -63,8 +63,10 @@ const BasketSection: React.FC<SectionProps> = ({
     }, [basketStorage]);
 
     const handleBasketConfirm = useCallback(() => {
-        if(activeUser){
-            if(activeUserBasketStorage.length > 0){
+        if (activeUser) {
+            console.log('test-1')
+            if (activeUserBasketStorage.length > 0) {
+                console.log('test-2')
                 const newOrder: OrderDataType = {
                     id: uuidv4(),
                     status: false,
@@ -73,10 +75,10 @@ const BasketSection: React.FC<SectionProps> = ({
                 }
                 setAccountData(account.addNewOrder(newOrder));
                 router.push(`/${activeLocale}/basket/checkout`);
-            }else{
+            } else {
                 router.push(`/${activeLocale}/basket`);
             }
-        }else{
+        } else {
             router.push(`/${activeLocale}/login`);
         }
     }, [router, accountData.activeUser]);
@@ -168,9 +170,15 @@ const BasketSection: React.FC<SectionProps> = ({
                             </div>
                         </BasketContentWrapper>
                     ) : (
-                        <AlertComponent>
-                            {generalDictionary["no_product_in_basket"]}
-                        </AlertComponent>
+                        <Fragment>
+                            {
+                                loading.standart ? <Skeleton width='100%' height='45px' radius='10px' /> : (
+                                    <AlertComponent>
+                                        {generalDictionary["no_product_in_basket"]}
+                                    </AlertComponent>
+                                )
+                            }
+                        </Fragment>
                     )
                 }
             </Container>

@@ -67,21 +67,36 @@ const PageTitle: React.FC<PageTitleProps> = ({
                         {
                             type === "product" && productState && (
                                 <div className="product__buttons">
-                                    <div className={`product__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
-                                        <FaBalanceScale />
-                                    </div>
-                                    <div className={`product__button ${productState.wishlist ? 'active' : ''}`} onClick={handleFavoritetButton}>
-                                        {productState.wishlist ? <FaHeart /> : <FaRegHeart />}
-                                    </div>
+                                    {
+                                        loading.standart ? (
+                                            <Fragment>
+                                                <Skeleton width='26px' height='26px'/>
+                                                <Skeleton width='26px' height='26px'/>
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                                <div className={`product__button ${productState.comparison ? 'active' : ''}`} onClick={handleComparisonButton}>
+                                                    <FaBalanceScale />
+                                                </div>
+                                                <div className={`product__button ${productState.wishlist ? 'active' : ''}`} onClick={handleFavoritetButton}>
+                                                    {productState.wishlist ? <FaHeart /> : <FaRegHeart />}
+                                                </div>
+                                            </Fragment>
+                                        )
+                                    }
                                 </div>
                             )
                         }
                         {
                             (type === "basket" || type === "wishlist" || type === "comparison") && (
-                                <div className="clear__button" onClick={handleClearStorage}>
-                                    <FaRegTrashCan />
-                                    <span>{titleDictionary["clear"]}</span>
-                                </div>
+                                <Fragment>
+                                    {loading.standart ? <Skeleton width='90px' height='25px' /> : (
+                                        <div className="clear__button" onClick={handleClearStorage}>
+                                            <FaRegTrashCan />
+                                            <span>{titleDictionary["clear"]}</span>
+                                        </div>
+                                    )}
+                                </Fragment>
                             )
                         }
                     </div>
