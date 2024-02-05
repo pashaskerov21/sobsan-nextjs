@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { AccountDataType, BasketDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType, OrderDataType } from '@/src/types';
+import { AccountDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, UserDataType, OrderDataType } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
 import { useRouter } from 'next/navigation';

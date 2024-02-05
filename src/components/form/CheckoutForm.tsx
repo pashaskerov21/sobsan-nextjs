@@ -9,7 +9,7 @@ import { FormWrapper } from './style'
 import FormComponent from './FormComponent'
 import { Account } from '@/src/class'
 import Swal from 'sweetalert2'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 type CheckoutFormProps = {
     activeLocale: LocaleType,
