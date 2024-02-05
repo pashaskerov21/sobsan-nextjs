@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import * as Yup from 'yup'
 import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/types'
 import { Form, Formik, FormikHelpers } from 'formik'
@@ -10,6 +10,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
 import { Account } from '@/src/class'
+import Skeleton from '../skeleton/Skeleton'
 
 type FormProps = {
     activeLocale: LocaleType,
@@ -148,56 +149,71 @@ const RegistrationForm: React.FC<FormProps> = ({
                 {
                     formik => (
                         <Form autoComplete='off'>
-                            <FormComponent
-                                control='input'
-                                name='firstName'
-                                type='text'
-                                label={formDictionary.label.your_firstName + ' *'}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='lastName'
-                                type='text'
-                                label={formDictionary.label.your_lastName + ' *'}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='phone'
-                                type='number'
-                                label={formDictionary.label.phone + ' *'}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='address'
-                                type='text'
-                                label={formDictionary.label.address}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='email'
-                                type='email'
-                                label={formDictionary.label.email + ' *'}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='password'
-                                type='password'
-                                label={formDictionary.label.password + ' *'}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='password_confirm'
-                                type='password'
-                                label={formDictionary.label.password_confirm + ' *'}
-                                formik={formik}
-                            />
-                            <button type='submit'>{titleDictionary["registration"]}</button>
+                            {
+                                loading.lazy ? (
+                                    <Fragment>
+                                        <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
+                                    </Fragment>
+                                ) : (
+                                    <Fragment>
+                                        <FormComponent
+                                            control='input'
+                                            name='firstName'
+                                            type='text'
+                                            label={formDictionary.label.your_firstName + ' *'}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='lastName'
+                                            type='text'
+                                            label={formDictionary.label.your_lastName + ' *'}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='phone'
+                                            type='number'
+                                            label={formDictionary.label.phone + ' *'}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='address'
+                                            type='text'
+                                            label={formDictionary.label.address}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='email'
+                                            type='email'
+                                            label={formDictionary.label.email + ' *'}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='password'
+                                            type='password'
+                                            label={formDictionary.label.password + ' *'}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='password_confirm'
+                                            type='password'
+                                            label={formDictionary.label.password_confirm + ' *'}
+                                            formik={formik}
+                                        />
+                                    </Fragment>
+                                )
+                            }
+                            {
+                                loading.lazy ?
+                                    <Skeleton width='100%' max_width='200px' height='55px' className='button__skeleton' />
+                                    : <button type='submit'>{titleDictionary["registration"]}</button>
+                            }
                         </Form>
                     )
                 }

@@ -30,18 +30,12 @@ const LoginSection: React.FC<SectionProps> = ({
         <Section $py={20}>
             <Container>
                 <AccountFormWrapper>
-                    {
-                        loading.lazy ? (
-                            <Skeleton width='100%' min_height='365px'/>
-                        ) : (
-                            <LoginForm
-                                activeLocale={activeLocale}
-                                formDictionary={formDictionary}
-                                loading={loading}
-                                titleDictionary={titleDictionary}
-                            />
-                        )
-                    }
+                    <LoginForm
+                        activeLocale={activeLocale}
+                        formDictionary={formDictionary}
+                        loading={loading}
+                        titleDictionary={titleDictionary}
+                    />
                     {
                         loading.standart ? (
                             <Skeleton width='100%' min_height='365px' />

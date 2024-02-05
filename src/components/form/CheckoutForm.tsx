@@ -207,10 +207,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                         </Fragment>
                                     )
                                 }
-
                             </div>
                             <div className="checkout__form__right">
-
                                 <div className="order__info__wrapper">
                                     {
                                         loading.lazy ? (

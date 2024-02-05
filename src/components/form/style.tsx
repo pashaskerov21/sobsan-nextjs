@@ -80,7 +80,7 @@ export const FormWrapper = styled.div`
             }
             @media (min-width: 992px){
                 ${row_between};
-                align-items: stretch;
+                align-items: flex-start;
             }
             
         }

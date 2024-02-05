@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import * as Yup from 'yup'
 import Swal from 'sweetalert2'
 import { AccountDataType, BasketDataType, ComparisonDataType, LoadingType, LocaleType, UserDataType, WishlistDataType } from '@/src/types'
@@ -9,6 +9,7 @@ import { FormWrapper } from './style'
 import { useLocalStorage } from 'usehooks-ts'
 import { useRouter } from 'next/navigation'
 import { Account } from '@/src/class'
+import Skeleton from '../skeleton/Skeleton'
 
 type FormProps = {
     activeLocale: LocaleType,
@@ -31,7 +32,7 @@ const LoginForm: React.FC<FormProps> = ({
     loading,
     titleDictionary,
 }) => {
-    const router = useRouter();  
+    const router = useRouter();
     const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
@@ -71,9 +72,9 @@ const LoginForm: React.FC<FormProps> = ({
         const searchAccount: UserDataType | undefined = account.searchUserByEmailPassword(values.email, values.password);
         if (searchAccount) {
             setAccountData(account.login(searchAccount.id));
-            setBasketStorage(basketStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
-            setWishlistStorage(wishlistStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
-            setComparisonStorage(comparisonStorage.map((data) => data.user === null ? {...data, user: searchAccount.id} : data));
+            setBasketStorage(basketStorage.map((data) => data.user === null ? { ...data, user: searchAccount.id } : data));
+            setWishlistStorage(wishlistStorage.map((data) => data.user === null ? { ...data, user: searchAccount.id } : data));
+            setComparisonStorage(comparisonStorage.map((data) => data.user === null ? { ...data, user: searchAccount.id } : data));
             router.push(`/${activeLocale}/account`);
             actions.resetForm();
         } else {
@@ -94,21 +95,36 @@ const LoginForm: React.FC<FormProps> = ({
                 {
                     formik => (
                         <Form autoComplete='off'>
-                            <FormComponent
-                                control='input'
-                                name='email'
-                                type='email'
-                                label={formDictionary.label.email + ' *'}
-                                formik={formik}
-                            />
-                            <FormComponent
-                                control='input'
-                                name='password'
-                                type='password'
-                                label={formDictionary.label.password + ' *'}
-                                formik={formik}
-                            />
-                            <button type='submit'>{titleDictionary["login"]}</button>
+                            {
+                                loading.lazy ? (
+                                    <Fragment>
+                                        <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
+                                    </Fragment>
+                                ) : (
+                                    <Fragment>
+                                        <FormComponent
+                                            control='input'
+                                            name='email'
+                                            type='email'
+                                            label={formDictionary.label.email + ' *'}
+                                            formik={formik}
+                                        />
+                                        <FormComponent
+                                            control='input'
+                                            name='password'
+                                            type='password'
+                                            label={formDictionary.label.password + ' *'}
+                                            formik={formik}
+                                        />
+                                    </Fragment>
+                                )
+                            }
+                            {
+                                loading.lazy ?
+                                    <Skeleton width='100%' max_width='200px' height='55px' className='button__skeleton' />
+                                    : <button type='submit'>{titleDictionary["login"]}</button>
+                            }
                         </Form>
                     )
                 }
