@@ -30,7 +30,7 @@ class Basket {
         return result;
     }
     public check(id: number) {
-        const result: BasketDataType | undefined = this.basketStorage.find((data) => data.product === id);
+        const result: BasketDataType | undefined = this.data().find((data) => data.product === id);
         return result;
     }
     public remove(id: string | number) {

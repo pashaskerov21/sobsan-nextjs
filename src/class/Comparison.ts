@@ -29,7 +29,7 @@ class Comparison {
         return result;
     }
     public check(id: number) {
-        const result: ComparisonDataType | undefined = this.comparisonStorage.find((data) => data.product === id);
+        const result: ComparisonDataType | undefined = this.data().find((data) => data.product === id);
         return result;
     }
     public remove(id: string | number) {

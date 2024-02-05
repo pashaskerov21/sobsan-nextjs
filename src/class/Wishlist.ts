@@ -30,7 +30,7 @@ class Wishlist {
         return result;
     }
     public check(id: number) {
-        const result: WishlistDataType | undefined = this.wishlistStorage.find((data) => data.product === id);
+        const result: WishlistDataType | undefined = this.data().find((data) => data.product === id);
         return result;
     }
     public remove(id: string | number) {
