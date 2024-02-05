@@ -38,47 +38,31 @@ const BasketSection: React.FC<SectionProps> = ({
 }) => {
     const router = useRouter();
     const [basketStorage] = useLocalStorage<BasketDataType[]>("basket", []);
-    const [paymentTotal, setPaymentTotal] = React.useState<number>(0);
+    const [basketTotal, setBasketTotal] = React.useState<number>(0);
     const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
     const account = new Account(accountData);
     const activeUser: UserDataType | undefined = account.getActiveUser();
-    const [activeUserBasketStorage, setActiveUserBasketStorage] = React.useState<BasketDataType[] | []>([]);
-
-
-    React.useEffect(() => {
-        console.log('useffect-test')
-        if (activeUser) {
-            let filteredBasketStorage = basketStorage.filter((data) => data.user === activeUser.id)
-            setActiveUserBasketStorage([...filteredBasketStorage])
-        }
-    }, [activeUser, basketStorage])
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
             let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
-            setPaymentTotal(total);
+            setBasketTotal(total);
         }
     }, [basketStorage]);
 
     const handleBasketConfirm = useCallback(() => {
         if (activeUser) {
-            console.log('test-1')
-            if (activeUserBasketStorage.length > 0) {
-                console.log('test-2')
-                const newOrder: OrderDataType = {
-                    id: uuidv4(),
-                    status: false,
-                    product_payment: paymentTotal,
-                    basketData: activeUserBasketStorage,
-                }
-                setAccountData(account.addNewOrder(newOrder));
-                router.push(`/${activeLocale}/basket/checkout`);
-            } else {
-                router.push(`/${activeLocale}/basket`);
+            const newOrder: OrderDataType = {
+                id: uuidv4(),
+                status: false,
+                product_payment: basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0),
+                basketData: basketStorage,
             }
+            setAccountData(account.addNewOrder(newOrder));
+            router.push(`/${activeLocale}/basket/checkout`);
         } else {
             router.push(`/${activeLocale}/login`);
         }
@@ -148,7 +132,7 @@ const BasketSection: React.FC<SectionProps> = ({
                                         <Fragment>
                                             <div className="total__payment">
                                                 <div className="label">{generalDictionary['total_payment']}:</div>
-                                                <div className='value'>{paymentTotal.toFixed(2)} AZN</div>
+                                                <div className='value'>{basketTotal.toFixed(2)} AZN</div>
                                             </div>
                                         </Fragment>
                                     )

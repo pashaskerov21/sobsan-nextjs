@@ -69,13 +69,14 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         delivery_type: Yup.string().required(`${formDictionary.error.delivery_type_required}`),
     });
 
+    console.log(activeOrderData)
     const [paymentValues, setPaymentValues] = useState<{
         product_total: number,
         delivery: number,
         discount: number,
         payment_total: number
     }>({
-        product_total: 0,
+        product_total: activeOrderData ? activeOrderData.product_payment ? activeOrderData.product_payment : 0 : 0,
         delivery: 5,
         discount: 0,
         payment_total: 0,
@@ -89,22 +90,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
             }
         })
     };
-    useEffect(() => {
-        if (activeOrderData) {
-            setPaymentValues((prev) => {
-                return {
-                    ...prev,
-                    product_total: activeOrderData.product_payment ? activeOrderData.product_payment : 0,
-                }
-            })
-        }
-    }, [activeOrderData])
+
 
     useEffect(() => {
         setPaymentValues((prev) => {
             return {
                 ...prev,
-                payment_total: prev.product_total + prev.delivery - prev.discount,
+                payment_total: paymentValues.product_total + paymentValues.delivery - paymentValues.discount,
             }
         })
     }, [paymentValues.product_total, paymentValues.delivery, paymentValues.discount]);
@@ -220,18 +212,10 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                     </div>
                                     <div className="info__row">
                                         <div className="row__left">
-                                            {generalDictionary['delivery']}
-                                        </div>
-                                        <div className="row__right">
-                                            {paymentValues.discount.toFixed(2)}AZN
-                                        </div>
-                                    </div>
-                                    <div className="info__row">
-                                        <div className="row__left">
                                             {generalDictionary['discount']}
                                         </div>
                                         <div className="row__right">
-                                            {paymentValues.payment_total.toFixed(2)}AZN
+                                            {paymentValues.discount.toFixed(2)}AZN
                                         </div>
                                     </div>
                                     <div className="info__row main">
@@ -239,7 +223,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                             {generalDictionary['total_payment']}
                                         </div>
                                         <div className="row__right">
-                                            0.00AZN
+                                            {paymentValues.payment_total.toFixed(2)}AZN
                                         </div>
                                     </div>
                                     <div className="info__row">
@@ -251,7 +235,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                             name='payment_type'
                                             formik={formik}
                                             checked={formik.values.payment_type === "cash"}
-                                            
+
                                         />
                                         <FormComponent
                                             control='radio'
@@ -282,7 +266,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                             name='delivery_type'
                                             formik={formik}
                                             handleInputChange={handleChangeDeliveryType}
-                                            checked={formik.values.delivery_type === "region"} 
+                                            checked={formik.values.delivery_type === "region"}
                                         />
                                     </div>
                                 </div>
