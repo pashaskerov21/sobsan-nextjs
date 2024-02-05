@@ -3,10 +3,11 @@ import React, { Fragment, useCallback } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductDataType, ProductTranslateDataType } from '@/src/types';
+import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, ProductDataType, ProductTranslateDataType } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { BasketSection } from '@/src/sections';
 import { useLocalStorage } from 'usehooks-ts';
+import { Basket } from '@/src/class';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -71,8 +72,13 @@ const BasketPageLayout: React.FC<LayoutProps> = ({
         ]
     }
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+    const basket = new Basket(basketStorage, accountData);
     const handleClearStorage = useCallback(() => {
-        setBasketStorage([]);
+        setBasketStorage(basket.clear());
     },[])
 
 

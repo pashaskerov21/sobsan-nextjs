@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import { Container, Section } from '@/src/styles'
 import { AccountDataType, AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BasketDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
 import { ProductDetailWrapper } from './style'
-import { Attribute, AttributeGroup, Brand, Catalog, Category, Color, Product } from '@/src/class'
+import { Attribute, AttributeGroup, Basket, Brand, Catalog, Category, Color, Product } from '@/src/class'
 import { CatalogModal, Skeleton } from '@/src/components'
 import { FaCheck, FaMinus, FaPlus } from 'react-icons/fa'
 import { useLocalStorage } from 'usehooks-ts'
@@ -94,6 +94,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
         users: [],
     });
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
+    const basket = new Basket(basketStorage, accountData);
     const productBasketStatus: BasketDataType | undefined = basketStorage.find((data) =>
         data.product === activeProductData.id &&
         data.parameters.color?.id === selectedColor?.id &&
@@ -131,7 +132,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
 
     const handleBasketConfirm = () => {
         if (productBasketStatus) {
-            setBasketStorage([...basketStorage.filter((data) => data.id !== productBasketStatus.id)]);
+            setBasketStorage(basket.remove(productBasketStatus.id));
         } else {
             if ((productCatalogColors.length > 0 || productCustomColors.length > 0) && !selectedColor) {
                 Swal.fire({
@@ -140,7 +141,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                     text: generalDictionary["color_message"],
                 });
             } else {
-                let basketData: BasketDataType = {
+                let newData: BasketDataType = {
                     id: uuidv4(),
                     product: activeProductData.id,
                     user: accountData.activeUser ? accountData.activeUser : null,
@@ -151,7 +152,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                         price: activeProductData.discount === 0 ? activeProductData.price : activeProductData.discount,
                     }
                 }
-                setBasketStorage([...basketStorage, basketData]);
+                setBasketStorage(basket.add(newData));
                 Swal.fire({
                     icon: "success",
                     title: generalDictionary["congratulations"],

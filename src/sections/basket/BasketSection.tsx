@@ -7,7 +7,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { AlertComponent } from '@/src/styles/components/alert'
 import { ProductRow, Skeleton } from '@/src/components'
 import { useRouter } from 'next/navigation'
-import { Account } from '@/src/class'
+import { Account, Basket } from '@/src/class'
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -44,22 +44,24 @@ const BasketSection: React.FC<SectionProps> = ({
         users: [],
     });
     const account = new Account(accountData);
+    const basket = new Basket(basketStorage, accountData);
+    const basketData: BasketDataType[] = basket.data();
     const activeUser: UserDataType | undefined = account.getActiveUser();
 
     React.useEffect(() => {
-        if (basketStorage && basketStorage.length > 0) {
-            let total = basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
+        if (basketData && basketData.length > 0) {
+            let total = basketData.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
             setBasketTotal(total);
         }
-    }, [basketStorage]);
+    }, [basketData]);
 
     const handleBasketConfirm = useCallback(() => {
         if (activeUser) {
             const newOrder: OrderDataType = {
                 id: uuidv4(),
                 status: false,
-                product_payment: basketStorage.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0),
-                basketData: basketStorage,
+                product_payment: basketData.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0),
+                basketData: basketData,
             }
             setAccountData(account.addNewOrder(newOrder));
             router.push(`/${activeLocale}/basket/checkout`);
@@ -71,7 +73,7 @@ const BasketSection: React.FC<SectionProps> = ({
         <Section $py={20}>
             <Container>
                 {
-                    basketStorage && basketStorage.length > 0 ? (
+                    basketData && basketData.length > 0 ? (
                         <BasketContentWrapper>
                             <div className="basket__table__wrapper">
                                 {
@@ -79,7 +81,7 @@ const BasketSection: React.FC<SectionProps> = ({
                                         <Fragment>
                                             <Skeleton min_width='1200px' width='100%' height='45px' margin='0 0 5px 0' />
                                             {
-                                                basketStorage.map((data) => (
+                                                basketData.map((data) => (
                                                     <Fragment key={`skeleton-${data.id}`}>
                                                         <Skeleton min-width='1200px' width='100%' height='110px' margin='0 0 3px 0' />
                                                     </Fragment>
@@ -102,7 +104,7 @@ const BasketSection: React.FC<SectionProps> = ({
                                             </thead>
                                             <tbody>
                                                 {
-                                                    basketStorage.map((data) => (
+                                                    basketData.map((data) => (
                                                         <Fragment key={`product-row-${data.id}`}>
                                                             <ProductRow
                                                                 activeLocale={activeLocale}

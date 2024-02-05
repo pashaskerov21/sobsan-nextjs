@@ -10,6 +10,7 @@ import Brand from "./Brand";
 import Attribute from "./Attribute";
 import AttributeGroup from "./AttributeGroup";
 import Account from "./Account";
+import Basket from "./Basket";
 
 export {
     Setting,
@@ -24,4 +25,5 @@ export {
     Attribute,
     AttributeGroup,
     Account,
+    Basket
 }

@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment, useCallback, useEffect, useState } from 'react'
-import { Brand, Color, Product } from "@/src/class";
-import { BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "@/src/types";
+import { Basket, Brand, Color, Product } from "@/src/class";
+import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "@/src/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocalStorage } from 'usehooks-ts';
@@ -33,6 +33,12 @@ const ProductRow: React.FC<RowProps> = ({
     const color = new Color(colorData, colorTranslateData);
     const activeProductData: ProductDataType | undefined = product.getProductByID(basketData.product);
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[]>("basket", []);
+    const [accountData] = useLocalStorage<AccountDataType>('accounts', {
+        activeUser: undefined,
+        users: [],
+    });
+
+    const basket = new Basket(basketStorage, accountData);
 
 
     const [productAmount, setProductAmount] = useState<number>(basketData.parameters.amount);
@@ -60,22 +66,11 @@ const ProductRow: React.FC<RowProps> = ({
     }, [activeProductData?.stock]);
 
     const handleDeleteProduct = useCallback(() => {
-        console.log(basketData.id);
-        const updateData: BasketDataType[] = basketStorage.filter((data) => data.id !== basketData.id)
-        setBasketStorage([...updateData]);
-    }, [setBasketStorage, basketStorage])
+        setBasketStorage(basket.remove(basketData.id));
+    }, [setBasketStorage])
 
     useEffect(() => {
-        setBasketStorage((prev) => {
-            return prev.map((data) =>
-                data.id === basketData.id ? {
-                    ...data,
-                    parameters: {
-                        ...data.parameters,
-                        amount: productAmount,
-                    }
-                } : data)
-        });
+        setBasketStorage(basket.updateAmount(basketData.id, productAmount));
     }, [productAmount])
 
     useEffect(() => {

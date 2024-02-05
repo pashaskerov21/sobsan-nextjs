@@ -7,7 +7,7 @@ import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType,
 import { ProductCardWrapper } from './style';
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from 'next/navigation';
-import { Brand, Product } from '@/src/class';
+import { Basket, Brand, Product } from '@/src/class';
 import { useLocalStorage } from 'usehooks-ts';
 import { v4 as uuidv4 } from 'uuid';
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -47,6 +47,9 @@ const ProductCard: React.FC<CardProps> = ({
     const [basketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
     const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
+
+    const basket = new Basket(basketStorage, accountData);
+
     const wishlistData: WishlistDataType = {
         id: uuidv4(),
         user: accountData.activeUser ? accountData.activeUser : null,
@@ -57,7 +60,7 @@ const ProductCard: React.FC<CardProps> = ({
         user: accountData.activeUser ? accountData.activeUser : null,
         product: activeProductData.id,
     };
-    const isBasket = basketStorage.find((data) => data.product === activeProductData.id);
+    const isBasket = basket.getDataByProductId(activeProductData.id);
     const isWishlist = wishlistStorage.find((data) => data.product === activeProductData.id);
     const isComparison = comparisonStorage.find((data) => data.product === activeProductData.id);
     const [productState, setProductState] = React.useState<{

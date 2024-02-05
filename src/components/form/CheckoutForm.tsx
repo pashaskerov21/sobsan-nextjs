@@ -6,7 +6,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { Form, Formik, FormikHelpers } from 'formik'
 import { FormWrapper } from './style'
 import FormComponent from './FormComponent'
-import { Account } from '@/src/class'
+import { Account, Basket } from '@/src/class'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
 
@@ -47,6 +47,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const router = useRouter();
     const account = new Account(accountData);
+    const basket = new Basket(basketStorage,accountData);
     const activeUserData: UserDataType | undefined = account.getActiveUser();
     const activeOrderData: OrderDataType | undefined = account.getActiveOrder();
     const initialValues: CheckoutFormValuesType = {
@@ -120,7 +121,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 date: orderDate,
             }
             setAccountData(account.updateOrderData(newOrderData));
-            setBasketStorage([]);
+            setBasketStorage(basket.remove());
             Swal.fire({
                 icon: "success",
                 title: generalDictionary["congratulations"],
