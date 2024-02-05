@@ -154,6 +154,11 @@ const RegistrationForm: React.FC<FormProps> = ({
                                     <Fragment>
                                         <Skeleton width='100%' height='70px' />
                                         <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
+                                        <Skeleton width='100%' height='70px' />
                                     </Fragment>
                                 ) : (
                                     <Fragment>

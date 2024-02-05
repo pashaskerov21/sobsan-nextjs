@@ -79,7 +79,7 @@ const BasketPageLayout: React.FC<LayoutProps> = ({
     const basket = new Basket(basketStorage, accountData);
     const handleClearStorage = useCallback(() => {
         setBasketStorage(basket.clear());
-    },[])
+    }, [])
 
 
     React.useEffect(() => {
@@ -87,14 +87,25 @@ const BasketPageLayout: React.FC<LayoutProps> = ({
     }, [dispatch]);
     return (
         <Fragment>
-            <PageTitle
-                loading={loading}
-                activeLocale={activeLocale}
-                pageTitleData={pageTitleData}
-                titleDictionary={titleDictionary}
-                type="basket"
-                handleClearStorage={handleClearStorage}
-            />
+            {
+                basket.data().length > 0 ? (
+                    <PageTitle
+                        loading={loading}
+                        activeLocale={activeLocale}
+                        pageTitleData={pageTitleData}
+                        titleDictionary={titleDictionary}
+                        type="basket"
+                        handleClearStorage={handleClearStorage}
+                    />
+                ) : (
+                    <PageTitle
+                        loading={loading}
+                        activeLocale={activeLocale}
+                        pageTitleData={pageTitleData}
+                        titleDictionary={titleDictionary}
+                    />
+                )
+            }
             <BasketSection
                 activeLocale={activeLocale}
                 generalDictionary={generalDictionary}
@@ -106,7 +117,7 @@ const BasketPageLayout: React.FC<LayoutProps> = ({
                 colorTranslateData={colorTranslateData}
                 titleDictionary={titleDictionary}
                 handleClearStorage={handleClearStorage}
-                
+
             />
         </Fragment>
     )
