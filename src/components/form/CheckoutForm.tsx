@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { AccountDataType, BasketDataType, LoadingType, LocaleType, OrderDataType, UserDataType } from '@/src/types'
 import { useLocalStorage } from 'usehooks-ts'
@@ -9,6 +9,7 @@ import FormComponent from './FormComponent'
 import { Account, Basket } from '@/src/class'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
+import Skeleton from '../skeleton/Skeleton'
 
 type CheckoutFormProps = {
     activeLocale: LocaleType,
@@ -47,7 +48,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     const [basketStorage, setBasketStorage] = useLocalStorage<BasketDataType[] | []>("basket", []);
     const router = useRouter();
     const account = new Account(accountData);
-    const basket = new Basket(basketStorage,accountData);
+    const basket = new Basket(basketStorage, accountData);
     const activeUserData: UserDataType | undefined = account.getActiveUser();
     const activeOrderData: OrderDataType | undefined = account.getActiveOrder();
     const initialValues: CheckoutFormValuesType = {
@@ -145,133 +146,168 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                     formik => (
                         <Form autoComplete='off'>
                             <div className="checkout__form__left">
-                                <FormComponent
-                                    control='input'
-                                    name='firstName'
-                                    type='text'
-                                    label={formDictionary.label.firstName + ' *'}
-                                    formik={formik}
-                                    value={formik.values.firstName}
-                                />
-                                <FormComponent
-                                    control='input'
-                                    name='lastName'
-                                    type='text'
-                                    label={formDictionary.label.lastName + ' *'}
-                                    formik={formik}
-                                    value={formik.values.lastName}
-                                />
-                                <FormComponent
-                                    control='input'
-                                    name='address'
-                                    type='text'
-                                    label={formDictionary.label.delivery_address + ' *'}
-                                    formik={formik}
-                                    value={formik.values.address}
-                                />
-                                <FormComponent
-                                    control='input'
-                                    name='phone'
-                                    type='number'
-                                    label={formDictionary.label.phone + ' *'}
-                                    formik={formik}
-                                    value={`${formik.values.phone}`}
-                                />
-                                <FormComponent
-                                    control='input'
-                                    name='email'
-                                    type='email'
-                                    label={formDictionary.label.email + ' *'}
-                                    formik={formik}
-                                    value={formik.values.email}
-                                />
-                                <FormComponent
-                                    control='textarea'
-                                    name='note'
-                                    label={formDictionary.label.additional_notes}
-                                    formik={formik}
-                                />
+                                {
+                                    loading.lazy ? (
+                                        <Fragment>
+                                            <Skeleton width='100%' height='70px' />
+                                            <Skeleton width='100%' height='70px' />
+                                            <Skeleton width='100%' height='70px' />
+                                            <Skeleton width='100%' height='70px' />
+                                            <Skeleton width='100%' height='70px' />
+                                            <Skeleton width='100%' height='200px' />
+                                        </Fragment>
+                                    ) : (
+                                        <Fragment>
+                                            <FormComponent
+                                                control='input'
+                                                name='firstName'
+                                                type='text'
+                                                label={formDictionary.label.firstName + ' *'}
+                                                formik={formik}
+                                                value={formik.values.firstName}
+                                            />
+                                            <FormComponent
+                                                control='input'
+                                                name='lastName'
+                                                type='text'
+                                                label={formDictionary.label.lastName + ' *'}
+                                                formik={formik}
+                                                value={formik.values.lastName}
+                                            />
+                                            <FormComponent
+                                                control='input'
+                                                name='address'
+                                                type='text'
+                                                label={formDictionary.label.delivery_address + ' *'}
+                                                formik={formik}
+                                                value={formik.values.address}
+                                            />
+                                            <FormComponent
+                                                control='input'
+                                                name='phone'
+                                                type='number'
+                                                label={formDictionary.label.phone + ' *'}
+                                                formik={formik}
+                                                value={`${formik.values.phone}`}
+                                            />
+                                            <FormComponent
+                                                control='input'
+                                                name='email'
+                                                type='email'
+                                                label={formDictionary.label.email + ' *'}
+                                                formik={formik}
+                                                value={formik.values.email}
+                                            />
+                                            <FormComponent
+                                                control='textarea'
+                                                name='note'
+                                                label={formDictionary.label.additional_notes}
+                                                formik={formik}
+                                            />
+                                        </Fragment>
+                                    )
+                                }
+
                             </div>
                             <div className="checkout__form__right">
-                                <div className="order__info__wrapper">
-                                    <div className="title">{generalDictionary['order_informations']}</div>
-                                    <div className="info__row">
-                                        <div className="row__left">
-                                            {generalDictionary['total']}
-                                        </div>
-                                        <div className="row__right">
-                                            {paymentValues.product_total.toFixed(2)}AZN
-                                        </div>
-                                    </div>
-                                    <div className="info__row">
-                                        <div className="row__left">
-                                            {generalDictionary['delivery']}
-                                        </div>
-                                        <div className="row__right">
-                                            {paymentValues.delivery.toFixed(2)}AZN
-                                        </div>
-                                    </div>
-                                    <div className="info__row">
-                                        <div className="row__left">
-                                            {generalDictionary['discount']}
-                                        </div>
-                                        <div className="row__right">
-                                            {paymentValues.discount.toFixed(2)}AZN
-                                        </div>
-                                    </div>
-                                    <div className="info__row main">
-                                        <div className="row__left">
-                                            {generalDictionary['total_payment']}
-                                        </div>
-                                        <div className="row__right">
-                                            {paymentValues.payment_total.toFixed(2)}AZN
-                                        </div>
-                                    </div>
-                                    <div className="info__row">
-                                        <FormComponent
-                                            control='radio'
-                                            type='radio'
-                                            label={formDictionary.label['cash_payment']}
-                                            value="cash"
-                                            name='payment_type'
-                                            formik={formik}
-                                            checked={formik.values.payment_type === "cash"}
 
-                                        />
-                                        <FormComponent
-                                            control='radio'
-                                            type='radio'
-                                            label={formDictionary.label['card_payment']}
-                                            value="card"
-                                            name='payment_type'
-                                            formik={formik}
-                                            checked={formik.values.payment_type === "card"}
-                                        />
-                                    </div>
-                                    <div className="info__row">
-                                        <FormComponent
-                                            control='radio'
-                                            type='radio'
-                                            label={formDictionary.label['delivery_city']}
-                                            value="city"
-                                            name='delivery_type'
-                                            formik={formik}
-                                            handleInputChange={handleChangeDeliveryType}
-                                            checked={formik.values.delivery_type === "city"}
-                                        />
-                                        <FormComponent
-                                            control='radio'
-                                            type='radio'
-                                            label={formDictionary.label['delivery_region']}
-                                            value="region"
-                                            name='delivery_type'
-                                            formik={formik}
-                                            handleInputChange={handleChangeDeliveryType}
-                                            checked={formik.values.delivery_type === "region"}
-                                        />
-                                    </div>
+                                <div className="order__info__wrapper">
+                                    {
+                                        loading.lazy ? (
+                                            <Fragment>
+                                                <Skeleton width='200px' height='28px' />
+                                                <Skeleton width='100%' height='50px' />
+                                                <Skeleton width='100%' height='50px' />
+                                                <Skeleton width='100%' height='50px' />
+                                                <Skeleton width='100%' height='50px' />
+                                                <Skeleton width='100%' height='50px' />
+                                                <Skeleton width='100%' height='50px' />
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                                <div className="title">{generalDictionary['order_informations']}</div>
+                                                <div className="info__row">
+                                                    <div className="row__left">
+                                                        {generalDictionary['total']}
+                                                    </div>
+                                                    <div className="row__right">
+                                                        {paymentValues.product_total.toFixed(2)}AZN
+                                                    </div>
+                                                </div>
+                                                <div className="info__row">
+                                                    <div className="row__left">
+                                                        {generalDictionary['delivery']}
+                                                    </div>
+                                                    <div className="row__right">
+                                                        {paymentValues.delivery.toFixed(2)}AZN
+                                                    </div>
+                                                </div>
+                                                <div className="info__row">
+                                                    <div className="row__left">
+                                                        {generalDictionary['discount']}
+                                                    </div>
+                                                    <div className="row__right">
+                                                        {paymentValues.discount.toFixed(2)}AZN
+                                                    </div>
+                                                </div>
+                                                <div className="info__row main">
+                                                    <div className="row__left">
+                                                        {generalDictionary['total_payment']}
+                                                    </div>
+                                                    <div className="row__right">
+                                                        {paymentValues.payment_total.toFixed(2)}AZN
+                                                    </div>
+                                                </div>
+                                                <div className="info__row">
+                                                    <FormComponent
+                                                        control='radio'
+                                                        type='radio'
+                                                        label={formDictionary.label['cash_payment']}
+                                                        value="cash"
+                                                        name='payment_type'
+                                                        formik={formik}
+                                                        checked={formik.values.payment_type === "cash"}
+
+                                                    />
+                                                    <FormComponent
+                                                        control='radio'
+                                                        type='radio'
+                                                        label={formDictionary.label['card_payment']}
+                                                        value="card"
+                                                        name='payment_type'
+                                                        formik={formik}
+                                                        checked={formik.values.payment_type === "card"}
+                                                    />
+                                                </div>
+                                                <div className="info__row">
+                                                    <FormComponent
+                                                        control='radio'
+                                                        type='radio'
+                                                        label={formDictionary.label['delivery_city']}
+                                                        value="city"
+                                                        name='delivery_type'
+                                                        formik={formik}
+                                                        handleInputChange={handleChangeDeliveryType}
+                                                        checked={formik.values.delivery_type === "city"}
+                                                    />
+                                                    <FormComponent
+                                                        control='radio'
+                                                        type='radio'
+                                                        label={formDictionary.label['delivery_region']}
+                                                        value="region"
+                                                        name='delivery_type'
+                                                        formik={formik}
+                                                        handleInputChange={handleChangeDeliveryType}
+                                                        checked={formik.values.delivery_type === "region"}
+                                                    />
+                                                </div>
+                                            </Fragment>
+                                        )
+                                    }
                                 </div>
-                                <button type='submit'>{generalDictionary["confirm_order"]}</button>
+                                {
+                                    loading.lazy ? <Skeleton width='100%' height='55px' /> : <button type='submit'>{generalDictionary["confirm_order"]}</button>
+                                }
                             </div>
                         </Form>
                     )
