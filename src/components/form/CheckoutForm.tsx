@@ -121,7 +121,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                 date: orderDate,
             }
             setAccountData(account.updateOrderData(newOrderData));
-            setBasketStorage(basket.remove());
+            setBasketStorage(basket.clear());
             Swal.fire({
                 icon: "success",
                 title: generalDictionary["congratulations"],
