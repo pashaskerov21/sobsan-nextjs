@@ -293,5 +293,5 @@ export type UserDataType = {
 }
 export type AccountDataType = {
     activeUser: string | number | undefined,
-    users: UserDataType[],
+    users: string[],
 }

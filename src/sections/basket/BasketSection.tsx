@@ -45,7 +45,19 @@ const BasketSection: React.FC<SectionProps> = ({
     });
     const account = new Account(accountData);
     const activeUser:UserDataType | undefined = account.getActiveUser();
-    const activeUserBasketStorage: BasketDataType[] | [] = basketStorage.filter((data) => data.user === activeUser?.id)
+    const [activeUserBasketStorage, setActiveUserBasketStorage] = React.useState<BasketDataType[] | []>([]);
+
+
+    React.useEffect(() => {
+        if(activeUser){
+            let filteredBasketStorage = basketStorage.filter((data) => data.user === activeUser.id)
+            setActiveUserBasketStorage(filteredBasketStorage)
+        }        
+    },[activeUser, basketStorage])
+
+    React.useEffect(() => {
+        console.log('activeUserBasketStorage-1',activeUserBasketStorage)
+    },[activeUserBasketStorage])
 
     React.useEffect(() => {
         if (basketStorage && basketStorage.length > 0) {
@@ -56,7 +68,10 @@ const BasketSection: React.FC<SectionProps> = ({
 
     const handleBasketConfirm = useCallback(() => {
         if(activeUser){
+            console.log('111')
+            console.log('activeUserBasketStorage-2',activeUserBasketStorage)
             if(activeUserBasketStorage.length > 0){
+                console.log('activeUserBasketStorage-3',activeUserBasketStorage)
                 const newOrder: OrderDataType = {
                     id: uuidv4(),
                     status: false,

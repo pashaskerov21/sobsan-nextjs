@@ -8,8 +8,7 @@ class Account {
 
     constructor(accountData: AccountDataType) {
         this.accountData = accountData;
-        this.users = this.accountData.users;
-        // this.users = this.accountData.users.map((data) => this.decryptData(data));
+        this.users = this.accountData.users.map((data) => this.decryptData(data));
     }
     public encryptData(data: UserDataType) {
         const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), 'your-secret-key').toString();
@@ -36,13 +35,9 @@ class Account {
         return result;
     }
     public registration(data: UserDataType) {
-        // const updateAccountData: AccountDataType = {
-        //     ...this.accountData,
-        //     users: [...this.accountData.users, this.encryptData(data)],
-        // }
         const updateAccountData: AccountDataType = {
             ...this.accountData,
-            users: [...this.accountData.users, data],
+            users: [...this.accountData.users, this.encryptData(data)],
         }
         return updateAccountData;
     }
@@ -55,10 +50,10 @@ class Account {
     }
     public updateUserData(updateData: UserDataType) {
         const updateUsers: UserDataType[] = this.users.map((data) => data.id === updateData.id ? updateData : data);
-        // const encryptedData: string[] = updateUsers.map((data) => this.encryptData(data));
+        const encryptedData: string[] = updateUsers.map((data) => this.encryptData(data));
         const updateAccountData: AccountDataType = {
             ...this.accountData,
-            users: updateUsers,
+            users: encryptedData,
         }
         return updateAccountData;
     }

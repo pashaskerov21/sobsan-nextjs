@@ -159,6 +159,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                     type='text'
                                     label={formDictionary.label.firstName + ' *'}
                                     formik={formik}
+                                    value={formik.values.firstName}
                                 />
                                 <FormComponent
                                     control='input'
@@ -166,6 +167,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                     type='text'
                                     label={formDictionary.label.lastName + ' *'}
                                     formik={formik}
+                                    value={formik.values.lastName}
                                 />
                                 <FormComponent
                                     control='input'
@@ -173,6 +175,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                     type='text'
                                     label={formDictionary.label.delivery_address + ' *'}
                                     formik={formik}
+                                    value={formik.values.address}
                                 />
                                 <FormComponent
                                     control='input'
@@ -180,6 +183,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                     type='number'
                                     label={formDictionary.label.phone + ' *'}
                                     formik={formik}
+                                    value={`${formik.values.phone}`}
                                 />
                                 <FormComponent
                                     control='input'
@@ -187,6 +191,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
                                     type='email'
                                     label={formDictionary.label.email + ' *'}
                                     formik={formik}
+                                    value={formik.values.email}
                                 />
                                 <FormComponent
                                     control='textarea'
