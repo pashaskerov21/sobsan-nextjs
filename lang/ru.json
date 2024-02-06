@@ -98,7 +98,8 @@
         "order_complete_message": "Заказ выполнен успешно!",
         "yes": "Да",
         "no": "Да",
-        "cancel": "Отмена"
+        "cancel": "Отмена",
+        "delete_account_successfull": "Аккаунт успешно удален"
     },
     "form": {
         "label": {

@@ -98,7 +98,8 @@
         "order_complete_message": "Sifariş uğurla tamamlandı!",
         "yes": "Hə",
         "no": "Yox",
-        "cancel": "Ləğv et"
+        "cancel": "Ləğv et",
+        "delete_account_successfull": "Hesab uğurla silindi"
     },
     "form": {
         "label": {

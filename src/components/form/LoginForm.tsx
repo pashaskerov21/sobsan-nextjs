@@ -76,7 +76,7 @@ const LoginForm: React.FC<FormProps> = ({
             setWishlistStorage(wishlistStorage.map((data) => data.user === null ? { ...data, user: searchAccount.id } : data));
             setComparisonStorage(comparisonStorage.map((data) => data.user === null ? { ...data, user: searchAccount.id } : data));
             router.push(`/${activeLocale}/account`);
-            actions.resetForm();
+            // actions.resetForm();
         } else {
             Swal.fire({
                 icon: "error",

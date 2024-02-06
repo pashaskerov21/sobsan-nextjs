@@ -134,7 +134,7 @@ const RegistrationForm: React.FC<FormProps> = ({
             }).then((result) => {
                 if (result.isConfirmed) {
                     router.push(`/${activeLocale}/login`);
-                    actions.resetForm();
+                    // actions.resetForm();
                 }
             });
         }

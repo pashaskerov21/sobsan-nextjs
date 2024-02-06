@@ -98,7 +98,8 @@
         "order_complete_message": "Order completed successfully!",
         "yes": "Yes",
         "no": "No",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "delete_account_successfull": "Account deleted successfully"
     },
     "form": {
         "label": {

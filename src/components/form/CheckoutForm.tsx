@@ -130,7 +130,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
             }).then((result) => {
                 if (result.isConfirmed) {
                     router.push(`/${activeLocale}/account`);
-                    actions.resetForm();
+                    // actions.resetForm();
                 }
             });
         }

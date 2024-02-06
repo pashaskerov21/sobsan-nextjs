@@ -91,6 +91,11 @@ const AccounSection: React.FC<SectionProps> = ({
         }).then((result) => {
             if (result.isConfirmed) {
                 setAccountData(account.remove());
+                Swal.fire({
+                    icon: "success",
+                    title: generalDictionary["congratulations"],
+                    text: generalDictionary["delete_account_successfull"],
+                })
                 router.push(`/${activeLocale}/login`);
             } else if (result.isDenied) {
                 router.push(`/${activeLocale}/account`);

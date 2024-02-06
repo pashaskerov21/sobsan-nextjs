@@ -6,7 +6,7 @@ import { PageTitle } from '@/src/components';
 import { AccountDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, SettingDataType, UserDataType } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { AccounSection } from '@/src/sections';
 import { Account } from '@/src/class';
 
