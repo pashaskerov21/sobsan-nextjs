@@ -22,7 +22,9 @@ type SidebarProps = {
     account_info: boolean,
     delivery_info: boolean,
   },
+  layoutState: "account_settings" | "order_history",
   handleCollapseButton: (key: 'account' | 'order' | 'list' | 'profile_info' | 'account_info' | 'delivery_info') => void,
+  changeLayout: (value: "account_settings" | "order_history") => void,
   handleRemoveAccount: () => void,
   handleLogout: () => void,
 }
@@ -39,6 +41,8 @@ const AccountSidebar: React.FC<SidebarProps> = ({
   handleRemoveAccount,
   handleLogout,
   loading,
+  changeLayout,
+  layoutState,
 }) => {
 
   return (
@@ -81,7 +85,7 @@ const AccountSidebar: React.FC<SidebarProps> = ({
                   <Collapse in={collapseState.account}>
                     <div className="account__collapse__inner">
                       <div className="service__rows">
-                        <div className="service__row active">
+                        <div className={`service__row ${layoutState === "account_settings" ? 'active' : ''}`} onClick={() => changeLayout("account_settings")}>
                           <div className="title">{generalDictionary["account_settings"]}</div>
                         </div>
                         <div className="service__row" onClick={handleRemoveAccount}>
@@ -106,7 +110,7 @@ const AccountSidebar: React.FC<SidebarProps> = ({
                   <Collapse in={collapseState.order}>
                     <div className="account__collapse__inner">
                       <div className="service__rows">
-                        <div className="service__row">
+                        <div className={`service__row ${layoutState === "order_history" ? 'active' : ''}`} onClick={() => changeLayout("order_history")}>
                           <div className="title">{generalDictionary["order_history"]}</div>
                         </div>
                       </div>

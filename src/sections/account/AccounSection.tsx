@@ -5,7 +5,7 @@ import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/ty
 import { AccountGeneralContainer } from './style'
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { FaXmark } from 'react-icons/fa6'
-import { AccountSidebar } from '@/src/components'
+import { AccountSidebar, Skeleton } from '@/src/components'
 import { useLocalStorage } from 'usehooks-ts'
 import { Account } from '@/src/class'
 import Swal from 'sweetalert2'
@@ -55,6 +55,7 @@ const AccounSection: React.FC<SectionProps> = ({
         account_info: true,
         delivery_info: true,
     });
+    const [layoutState, setLayoutState] = React.useState<"account_settings" | "order_history">('account_settings');
     const openMenu = React.useCallback(() => {
         setMenu(true);
         if (body) {
@@ -75,6 +76,9 @@ const AccounSection: React.FC<SectionProps> = ({
             }
         })
     }, [setCollapseState]);
+    const changeLayout = React.useCallback((value: "account_settings" | "order_history") => {
+        setLayoutState(value);
+    }, [setLayoutState])
 
 
     const handleRemoveAccount = () => {
@@ -147,11 +151,17 @@ const AccounSection: React.FC<SectionProps> = ({
                             handleRemoveAccount={handleRemoveAccount}
                             handleLogout={handleLogout}
                             loading={loading}
+                            changeLayout={changeLayout}
+                            layoutState={layoutState}
                         />
                     </div>
                     <div className="container__right">
                         <div className="container__right__header">
-                            <div className="title">{generalDictionary["account_settings"]}</div>
+                            {
+                                loading.lazy ?
+                                    <Skeleton width='170px' height='33px' /> :
+                                    <div className="title">{generalDictionary[`${layoutState}`]}</div>
+                            }
                             <div className='account__menu__button' onClick={openMenu}>
                                 <HiOutlineBars3BottomRight />
                             </div>
