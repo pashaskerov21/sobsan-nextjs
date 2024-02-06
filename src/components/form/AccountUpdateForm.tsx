@@ -139,7 +139,7 @@ const AccountUpdateForm: React.FC<FormProps> = ({
         },
         account: {
           email: values.email,
-          password: values.password,
+          password: values.password ? values.password : activeUserData.account.password,
         },
         delivery: {
           city: values.city,
