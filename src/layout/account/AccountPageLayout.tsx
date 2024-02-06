@@ -104,7 +104,9 @@ const AccountPageLayout: React.FC<LayoutProps> = ({
             </Fragment>
         )
     }else{
-        redirect(`/${activeLocale}/login`)
+        return(
+            <Fragment></Fragment>
+        )
     }
 }
 
