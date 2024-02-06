@@ -55,7 +55,6 @@ class Account {
             ...this.accountData,
             users: encryptedData,
         }
-        console.log(updateUsers);
         return updateAccountData;
     }
     public getActiveUser() {
