@@ -3,10 +3,12 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { AccountDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, SettingDataType } from '@/src/types';
+import { AccountDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, SettingDataType, UserDataType } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { AccounSection } from '@/src/sections';
+import { Account } from '@/src/class';
 
 
 type LayoutProps = {
@@ -77,19 +79,33 @@ const AccountPageLayout: React.FC<LayoutProps> = ({
         activeUser: undefined,
         users: [],
     });
-    if(!accountData.activeUser){
+    const account = new Account(accountData);
+    const activeUserData: UserDataType | undefined = account.getActiveUser();
+    if (!accountData.activeUser) {
         router.push(`/${activeLocale}/login`)
     }
-    return (
-        <Fragment>
-            <PageTitle
-                loading={loading}
-                activeLocale={activeLocale}
-                pageTitleData={pageTitleData}
-                titleDictionary={titleDictionary}
-            />
-        </Fragment>
-    )
+    if(activeUserData){
+        return (
+            <Fragment>
+                <PageTitle
+                    loading={loading}
+                    activeLocale={activeLocale}
+                    pageTitleData={pageTitleData}
+                    titleDictionary={titleDictionary}
+                />
+                <AccounSection
+                    activeLocale={activeLocale}
+                    formDictionary={formDictionary}
+                    generalDictionary={generalDictionary}
+                    titleDictionary={titleDictionary}
+                    loading={loading}
+                    activeUserData={activeUserData}
+                />
+            </Fragment>
+        )
+    }else{
+        redirect(`/${activeLocale}/login`)
+    }
 }
 
 export default React.memo(AccountPageLayout)

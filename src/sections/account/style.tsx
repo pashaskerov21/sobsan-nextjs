@@ -1,4 +1,4 @@
-import { column_center, row_between, row_center } from "@/src/styles";
+import { column_center, row_between, row_center, row_justify_end, row_justify_start } from "@/src/styles";
 import { styled } from "styled-components";
 
 export const AccountFormWrapper = styled.div`
@@ -54,6 +54,138 @@ export const AccountFormWrapper = styled.div`
             ${row_center};
             &:hover{
                 animation: pulse-white 1s ease infinite;
+            }
+        }
+    }
+`;
+
+export const AccountGeneralContainer = styled.div`
+    width: 100%;
+    ${column_center};
+    gap: 30px;
+    @media (min-width: 992px){
+        ${row_between};
+        align-items: flex-start;
+    }
+    .account__sidebar{
+        position: fixed;
+        top: 0;
+        left: -100%;
+        opacity: 0;
+        transition: all 0.3s;
+        width: 100%;
+        max-width: 400px;
+        height: 100vh;
+        overflow: auto;
+        background-color: ${props => props.theme.bg_color_1};
+        z-index: 600;
+        padding: 12px;
+        &.active{
+            left: 0;
+            opacity: 1;
+        }
+        .account__sidebar__header{
+            width: 100%;
+            ${row_between};
+            gap: 20px;
+            padding: 15px 0;
+            .title{
+                font-size: 18px;
+                font-weight: 600;
+            }
+            .close__button{
+                font-size: 24px;
+                cursor: pointer;
+            }
+        }
+        .account__sidebar__body{
+            width: 100%;
+            ${column_center};
+            gap: 30px;
+        }
+        .account__collapse{
+            width: 100%;
+            ${column_center};
+            &__button{
+                width: 100%;
+                ${row_between};
+                padding: 15px 12px;
+                color: #fff;
+                background-size: cover;
+                background-image: url('/design/large-drop-bg.webp');
+                background-color: #ed3237;
+                cursor: pointer;
+                .title{
+                    font-weight: 600;
+                }
+            }
+            &__inner{
+                width: 100%;
+                border: 1px solid ${props => props.theme.border_color_1};
+            }
+            .service__rows{
+                width: 100%;
+                ${column_center};
+                .service__row{
+                    width: 100%;
+                    padding: 12px;
+                    border-bottom: 1px solid ${props => props.theme.border_color_1};
+                    font-weight: 600;
+                    cursor: pointer;
+                    .title{
+                        transition: all 0.1s;
+                    }
+                    &.active{
+                        color: ${props => props.theme.color_1};
+                    }
+                    &:hover{
+                        .title{
+                            color: ${props => props.theme.color_1};
+                            transform: translateX(15px)
+                        }
+                    }
+                }
+            }
+        }
+        @media (min-width: 992px){
+            position: relative;
+            top: 0;
+            left: 0;
+            opacity: 1;
+            padding: 0;
+            background-color: transparent;
+            min-width: 350px;
+            .account__sidebar__header{
+                display: none;
+            }
+        }
+    }
+    .container__left{
+        @media (min-width: 992px){
+            border: 1px solid ${props => props.theme.border_color_1};
+            padding: 20px
+        }
+    }
+    .container__right{
+        width: 100%;
+        ${column_center};
+        gap: 30px;
+        .container__right__header{
+            width: 100%;
+            ${row_between};
+            gap: 30px;
+            .title{
+                font-size: 18px;
+                font-weight: 600;
+                @media (min-width: 992px){
+                    font-size: 22px;
+                }
+            }
+            .account__menu__button{
+                font-size: 28px;
+                @media (min-width: 992px){
+                    display: none;
+                }
             }
         }
     }

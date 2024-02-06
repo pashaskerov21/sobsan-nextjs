@@ -57,26 +57,26 @@ class Account {
         }
         return updateAccountData;
     }
-    public getActiveUser(){
-        let activeUserData:UserDataType | undefined;
-        if(this.accountData.activeUser){
+    public getActiveUser() {
+        let activeUserData: UserDataType | undefined;
+        if (this.accountData.activeUser) {
             activeUserData = this.users.find((data) => data.id === this.accountData.activeUser);
         }
         return activeUserData
     }
-    public getActiveOrder(){
+    public getActiveOrder() {
         let activeOrder: OrderDataType | undefined;
-        if(this.accountData.activeUser){
-            const activeUserData:UserDataType | undefined = this.getActiveUser();
-            if(activeUserData && activeUserData.activeOrderID){
+        if (this.accountData.activeUser) {
+            const activeUserData: UserDataType | undefined = this.getActiveUser();
+            if (activeUserData && activeUserData.activeOrderID) {
                 activeOrder = activeUserData.orders.find((data) => data.id === activeUserData.activeOrderID);
             }
         }
         return activeOrder;
     }
-    public addNewOrder(newData: OrderDataType){
+    public addNewOrder(newData: OrderDataType) {
         let activeUserData: UserDataType | undefined = this.getActiveUser();
-        if(activeUserData){
+        if (activeUserData) {
             activeUserData = {
                 ...activeUserData,
                 orders: [...activeUserData.orders, newData],
@@ -86,9 +86,9 @@ class Account {
         }
         return this.accountData;
     }
-    public updateOrderData(newData: OrderDataType){
+    public updateOrderData(newData: OrderDataType) {
         let activeUserData: UserDataType | undefined = this.getActiveUser();
-        if(activeUserData){
+        if (activeUserData) {
             const updateOrders = activeUserData.orders.map((data) => data.id === activeUserData?.activeOrderID ? newData : data);
             activeUserData = {
                 ...activeUserData,
@@ -97,6 +97,27 @@ class Account {
             return this.updateUserData(activeUserData);
         }
         return this.accountData;
+    }
+    public logout() {
+        const result: AccountDataType = {
+            ...this.accountData,
+            activeUser: undefined,
+        }
+        return result;
+    }
+    public remove() {
+        const activeUser: UserDataType | undefined = this.getActiveUser();
+        let updateUsers: UserDataType[] = this.users;
+        if (activeUser) {
+            updateUsers = this.users.filter((data) => data.id !== activeUser?.id)
+        }
+        const encryptUsers: string[] = updateUsers.map((data) => this.encryptData(data));
+
+        const result: AccountDataType = {
+            users: encryptUsers,
+            activeUser: undefined
+        }
+        return result;
     }
 }
 

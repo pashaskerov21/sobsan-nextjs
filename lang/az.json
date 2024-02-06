@@ -86,12 +86,19 @@
         "account_settings": "Tənzimləmələr",
         "delete_account": "Hesabı sil",
         "logout": "Çıxış",
+        "delete_account_warning": "Hesabınızı silmək istəyirsiniz?",
+        "logout_warning": "Hesabdan çıxmaq istəyirsiniz?",
         "orders": "Sifarişlər",
+        "order_history": "Sifariş tarixçəsi",
+        "lists": "Siyahılar",
         "profil_informations": "Profil məlumatları",
         "account_informations": "Hesab məlumatları",
         "delivery_informations": "Çatdırılma məlumatları",
         "save": "Yadda saxla",
-        "order_complete_message": "Sifariş uğurla tamamlandı!"
+        "order_complete_message": "Sifariş uğurla tamamlandı!",
+        "yes": "Hə",
+        "no": "Yox",
+        "cancel": "Ləğv et"
     },
     "form": {
         "label": {

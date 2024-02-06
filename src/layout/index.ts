@@ -37,4 +37,5 @@ export {
     LoginPageLayout,
     RegisterPageLayout,
     AccountPageLayout,
+    CheckoutPageLayout,
 }

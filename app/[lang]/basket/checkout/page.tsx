@@ -3,8 +3,7 @@ import { getTranslate } from "@/get-translate";
 import { LocaleType } from "@/src/types";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { AccountPageLayout } from "@/src/layout";
-import CheckoutPageLayout from "@/src/layout/basket/CheckoutPageLayout";
+import { CheckoutPageLayout } from "@/src/layout";
 
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {

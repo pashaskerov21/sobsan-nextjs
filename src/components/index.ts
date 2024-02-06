@@ -18,6 +18,7 @@ import ProductRow from "./product/ProductRow";
 import LoginForm from "./form/LoginForm";
 import RegistrationForm from "./form/RegistrationForm";
 import CheckoutForm from "./form/CheckoutForm";
+import AccountSidebar from "./account/AccountSidebar";
 
 
 export {
@@ -41,4 +42,5 @@ export {
     LoginForm,
     RegistrationForm,
     CheckoutForm,
+    AccountSidebar,
 }

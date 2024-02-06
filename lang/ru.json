@@ -86,12 +86,19 @@
         "account_settings": "Корректировки",
         "delete_account": "Удалить аккаунт",
         "logout": "Выход",
+        "delete_account_warning": "Хотите удалить свой аккаунт?",
+        "logout_warning": "Хотите выйти из своего аккаунта?",
         "orders": "Заказы",
+        "order_history": "История заказов",
+        "lists": "Списки",
         "profil_informations": "Информация профиля",
         "account_informations": "Информация об аккаунте",
         "delivery_informations": "Информация о доставке",
         "save": "Сохранять",
-        "order_complete_message": "Заказ выполнен успешно!"
+        "order_complete_message": "Заказ выполнен успешно!",
+        "yes": "Да",
+        "no": "Да",
+        "cancel": "Отмена"
     },
     "form": {
         "label": {

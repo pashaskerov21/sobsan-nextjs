@@ -8,6 +8,7 @@ import BasketSection from "./basket/BasketSection";
 import LoginSection from "./account/LoginSection";
 import RegistrationSection from "./account/RegistrationSection";
 import CheckoutSection from "./basket/CheckoutSection";
+import AccounSection from "./account/AccounSection";
 
 export {
     CatalogSection,
@@ -20,4 +21,5 @@ export {
     LoginSection,
     RegistrationSection,
     CheckoutSection,
+    AccounSection,
 }
