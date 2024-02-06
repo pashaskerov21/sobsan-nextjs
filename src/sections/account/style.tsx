@@ -182,6 +182,7 @@ export const AccountGeneralContainer = styled.div`
                     border-bottom: 1px solid ${props => props.theme.border_color_1};
                     font-weight: 600;
                     cursor: pointer;
+                    ${row_justify_start};
                     .title{
                         transition: all 0.1s;
                     }
