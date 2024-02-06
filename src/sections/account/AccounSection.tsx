@@ -5,7 +5,7 @@ import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/ty
 import { AccountGeneralContainer } from './style'
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { FaXmark } from 'react-icons/fa6'
-import { AccountSidebar, Skeleton } from '@/src/components'
+import { AccountSidebar, AccountUpdateForm, Skeleton } from '@/src/components'
 import { useLocalStorage } from 'usehooks-ts'
 import { Account } from '@/src/class'
 import Swal from 'sweetalert2'
@@ -167,7 +167,18 @@ const AccounSection: React.FC<SectionProps> = ({
                             </div>
                         </div>
                         <div className="container__right__body">
-
+                            {layoutState === "account_settings" && (
+                                <AccountUpdateForm
+                                    activeLocale={activeLocale}
+                                    activeUserData={activeUserData}
+                                    collapseState={collapseState}
+                                    formDictionary={formDictionary}
+                                    generalDictionary={generalDictionary}
+                                    handleCollapseButton={handleCollapseButton}
+                                    loading={loading}
+                                    titleDictionary={titleDictionary}
+                                />
+                            )}
                         </div>
                     </div>
                 </AccountGeneralContainer>

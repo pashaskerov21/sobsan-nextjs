@@ -13,7 +13,7 @@ export type InputControlProps = {
     formik?: FormikProps<any>,
 }
 
-const Input: React.FC<InputControlProps> = ({...rest }) => {
+const Input: React.FC<InputControlProps> = ({ ...rest }) => {
     const [invalidStatus, setInvalidStatus] = React.useState(false);
     React.useEffect(() => {
         if (rest.formik?.errors[rest.name] && rest.formik.touched[rest.name]) {
@@ -24,7 +24,11 @@ const Input: React.FC<InputControlProps> = ({...rest }) => {
     }, [rest.formik])
     return (
         <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[rest.name] || rest.formik?.values[rest.name].length > 0 ? true : false}>
-            <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} value={rest.value} />
+            {
+                rest.type === "password" ?
+                    <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} /> :
+                    <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} value={rest.value} />
+            }
             <label htmlFor={`input-${rest.type}-${rest.name}`}>{rest.label}</label>
             <ErrorMessage name={rest.name}>
                 {(message: string) => (

@@ -103,50 +103,6 @@ export const AccountGeneralContainer = styled.div`
             ${column_center};
             gap: 30px;
         }
-        .account__collapse{
-            width: 100%;
-            ${column_center};
-            &__button{
-                width: 100%;
-                ${row_between};
-                padding: 15px 12px;
-                color: #fff;
-                background-size: cover;
-                background-image: url('/design/large-drop-bg.webp');
-                background-color: #ed3237;
-                cursor: pointer;
-                .title{
-                    font-weight: 600;
-                }
-            }
-            &__inner{
-                width: 100%;
-                border: 1px solid ${props => props.theme.border_color_1};
-            }
-            .service__rows{
-                width: 100%;
-                ${column_center};
-                .service__row{
-                    width: 100%;
-                    padding: 12px;
-                    border-bottom: 1px solid ${props => props.theme.border_color_1};
-                    font-weight: 600;
-                    cursor: pointer;
-                    .title{
-                        transition: all 0.1s;
-                    }
-                    &.active{
-                        color: ${props => props.theme.color_1};
-                    }
-                    &:hover{
-                        .title{
-                            color: ${props => props.theme.color_1};
-                            transform: translateX(15px)
-                        }
-                    }
-                }
-            }
-        }
         @media (min-width: 992px){
             position: relative;
             top: 0;
@@ -197,4 +153,48 @@ export const AccountGeneralContainer = styled.div`
             width: 100%;
         }
     }
+    .account__collapse{
+            width: 100%;
+            ${column_center};
+            &__button{
+                width: 100%;
+                ${row_between};
+                padding: 15px 12px;
+                color: #fff;
+                background-size: cover;
+                background-image: url('/design/large-drop-bg.webp');
+                background-color: #ed3237;
+                cursor: pointer;
+                .title{
+                    font-weight: 600;
+                }
+            }
+            &__inner{
+                width: 100%;
+                border: 1px solid ${props => props.theme.border_color_1};
+            }
+            .service__rows{
+                width: 100%;
+                ${column_center};
+                .service__row{
+                    width: 100%;
+                    padding: 12px;
+                    border-bottom: 1px solid ${props => props.theme.border_color_1};
+                    font-weight: 600;
+                    cursor: pointer;
+                    .title{
+                        transition: all 0.1s;
+                    }
+                    &.active{
+                        color: ${props => props.theme.color_1};
+                    }
+                    &:hover{
+                        .title{
+                            color: ${props => props.theme.color_1};
+                            transform: translateX(15px)
+                        }
+                    }
+                }
+            }
+        }
 `;

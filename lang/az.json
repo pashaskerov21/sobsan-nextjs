@@ -95,6 +95,7 @@
         "account_informations": "Hesab məlumatları",
         "delivery_informations": "Çatdırılma məlumatları",
         "save": "Yadda saxla",
+        "save_message": "Dəyişikliklər uğurla yadda saxlanıldı",
         "order_complete_message": "Sifariş uğurla tamamlandı!",
         "yes": "Hə",
         "no": "Yox",
@@ -120,6 +121,8 @@
             "delivery_region": "Regionlar",
             "phone_2": "Telefon (əlavə)",
             "gender": "Cinsi",
+            "male": "Kişi",
+            "female": "Qadın",
             "city": "Şəhər",
             "region": "Rayon, qəsəbə",
             "address_additional_info": "Əlavə təsvir (küçə, ev və s.)"

@@ -10,6 +10,7 @@ export type TextareaControlProps = {
     label?: string,
     placeholder?: string,
     formik?: FormikProps<any>,
+    value?: string,
 }
 
 const Textarea: React.FC<TextareaControlProps> = ({...rest}) => {
@@ -22,8 +23,8 @@ const Textarea: React.FC<TextareaControlProps> = ({...rest}) => {
         }
     }, [rest.formik])
     return (
-        <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[rest.name] || rest.formik?.values[rest.name].length > 0 ? true : false}>
-            <Field as="textarea" id={`text-area-${rest.name}`} name={rest.name} />
+        <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[rest.name] || rest.formik?.values[rest.name]?.length > 0 ? true : false}>
+            <Field as="textarea" id={`text-area-${rest.name}`} name={rest.name} value={rest.value}/>
             <label htmlFor={`text-area-${rest.name}`}>{rest.label}</label>
             <ErrorMessage name={rest.name}>
                 {(message: string) => (

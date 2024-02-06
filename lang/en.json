@@ -95,6 +95,7 @@
         "account_informations": "Account information",
         "delivery_informations": "Delivery information",
         "save": "Save",
+        "save_message": "Changes saved successfully",
         "order_complete_message": "Order completed successfully!",
         "yes": "Yes",
         "no": "No",
@@ -120,6 +121,8 @@
             "delivery_region": "Regions",
             "phone_2": "Phone (additional)",
             "gender": "Gender",
+            "male": "Male",
+            "female": "Female",
             "city": "City",
             "region": "District, settlement",
             "address_additional_info": "Additional description (street, house, etc.)"

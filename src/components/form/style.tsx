@@ -85,6 +85,48 @@ export const FormWrapper = styled.div`
             
         }
     }
+    &.accout__update__form{
+        form{
+            width: 100%;
+            ${column_center};
+            gap: 40px;
+            padding: 0;
+            border: none;
+            button{
+                max-width: 100%;
+            }
+            .form__components__grid{
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 25px 15px;
+                @media (min-width: 768px){
+                    grid-template-columns: 1fr 1fr;
+                    .grid__col{
+                        &.full{
+                            grid-column: span 2;
+                        }
+                    }
+                }
+                @media (min-width: 992px){
+                    grid-template-columns: 1fr;
+                    .grid__col{
+                        &.full{
+                            grid-column: span 1;
+                        }
+                    }
+                }
+                @media (min-width: 1200px){
+                    grid-template-columns: 1fr 1fr;
+                    .grid__col{
+                        &.full{
+                            grid-column: span 2;
+                        }
+                    }
+                }
+            }
+        }
+    }
 `
 type FormComponentProps = {
     $hasValue: boolean,
@@ -101,6 +143,7 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
         ${props => props.$hasValue && css`
             top: 8px;
             font-size: 13px;
+            opacity: 0.8;
         `}
     }
     input{
@@ -115,6 +158,7 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
             &~label{
                 top: 8px;
                 font-size: 13px;
+                opacity: 0.8;
             }
         }
         &:-webkit-autofill{
@@ -141,6 +185,7 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
             &~label{
                 top: 8px;
                 font-size: 13px;
+                opacity: 0.8;
             }
         }
     }
@@ -184,3 +229,12 @@ export const FormBoxComponentWrapper = styled.div`
         }
     }
 `;
+
+export const RadioInputRows = styled.div`
+    width: 100%;
+    border-bottom: 1px solid ${props => props.theme.border_color_1} !important;
+    padding: 30px 15px 15px;
+    ${row_justify_start};
+    gap: 15px;
+    flex-wrap: wrap;
+`

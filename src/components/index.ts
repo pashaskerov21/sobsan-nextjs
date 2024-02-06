@@ -19,6 +19,7 @@ import LoginForm from "./form/LoginForm";
 import RegistrationForm from "./form/RegistrationForm";
 import CheckoutForm from "./form/CheckoutForm";
 import AccountSidebar from "./account/AccountSidebar";
+import AccountUpdateForm from "./form/AccountUpdateForm";
 
 
 export {
@@ -43,4 +44,5 @@ export {
     RegistrationForm,
     CheckoutForm,
     AccountSidebar,
+    AccountUpdateForm,
 }

@@ -290,9 +290,6 @@ export type UserDataType = {
     },
     activeOrderID?: string | number,
     orders: OrderDataType[] | [],
-    // basket: BasketDataType[] | [],
-    // wishlist: WishlistDataType[] | [],
-    // comparison: ComparisonDataType[] | [],
 }
 export type AccountDataType = {
     activeUser: string | number | undefined,
