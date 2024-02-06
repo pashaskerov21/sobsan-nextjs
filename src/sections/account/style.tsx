@@ -155,6 +155,7 @@ export const AccountGeneralContainer = styled.div`
             padding: 0;
             background-color: transparent;
             min-width: 350px;
+            z-index: 1;
             .account__sidebar__header{
                 display: none;
             }
@@ -163,13 +164,17 @@ export const AccountGeneralContainer = styled.div`
     .container__left{
         @media (min-width: 992px){
             border: 1px solid ${props => props.theme.border_color_1};
-            padding: 20px
+            padding: 20px;
         }
     }
     .container__right{
         width: 100%;
         ${column_center};
         gap: 30px;
+        @media (min-width: 992px){
+            border: 1px solid ${props => props.theme.border_color_1};
+            padding: 20px;
+        }
         .container__right__header{
             width: 100%;
             ${row_between};
@@ -187,6 +192,9 @@ export const AccountGeneralContainer = styled.div`
                     display: none;
                 }
             }
+        }
+        .container__right__body{
+            width: 100%;
         }
     }
 `;

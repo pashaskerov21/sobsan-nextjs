@@ -146,6 +146,7 @@ const AccounSection: React.FC<SectionProps> = ({
                             titleDictionary={titleDictionary}
                             handleRemoveAccount={handleRemoveAccount}
                             handleLogout={handleLogout}
+                            loading={loading}
                         />
                     </div>
                     <div className="container__right">
@@ -154,6 +155,9 @@ const AccounSection: React.FC<SectionProps> = ({
                             <div className='account__menu__button' onClick={openMenu}>
                                 <HiOutlineBars3BottomRight />
                             </div>
+                        </div>
+                        <div className="container__right__body">
+
                         </div>
                     </div>
                 </AccountGeneralContainer>
