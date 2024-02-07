@@ -4,7 +4,7 @@ import { BrandDataType, BrandTranslateDataType, LocaleType, ProductDataType, Pro
 import { fetchBrandData, fetchBrandTranslateData, fetchProductData, fetchProductTranslateData } from "@/src/utils";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { WishlistPageLayout } from "@/src/layout";
+import { ComparisonPageLayout } from "@/src/layout";
 
 const fetchData = async (): Promise<{
     productData: ProductDataType[] | undefined,
@@ -69,7 +69,7 @@ const ComparisonPage = async ({ params: { lang } }: { params: { lang: LocaleType
             && brandTranslateData
         ) {
             return (
-                <WishlistPageLayout
+                <ComparisonPageLayout
                     activeLocale={lang}
                     brandData={brandData}
                     brandTranslateData={brandTranslateData}

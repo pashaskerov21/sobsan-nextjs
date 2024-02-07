@@ -571,4 +571,6 @@ export const ProductSortFilterWrapper = styled.div`
             }
         }
     }
-`
+`;
+
+export const ProductComparisonTableWrapper = styled.div``

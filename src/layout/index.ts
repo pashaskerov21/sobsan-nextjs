@@ -18,6 +18,7 @@ import RegisterPageLayout from "./account/RegisterPageLayout";
 import AccountPageLayout from "./account/AccountPageLayout";
 import CheckoutPageLayout from "./basket/CheckoutPageLayout";
 import WishlistPageLayout from "./wishlist/WishlistPageLayout";
+import ComparisonPageLayout from "./comparisons/ComparisonPageLayout";
 
 export {
     RootLayout,
@@ -40,4 +41,5 @@ export {
     AccountPageLayout,
     CheckoutPageLayout,
     WishlistPageLayout,
+    ComparisonPageLayout,
 }
