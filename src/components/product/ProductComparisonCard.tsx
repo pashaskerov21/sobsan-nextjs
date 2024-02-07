@@ -5,6 +5,7 @@ import Link from 'next/link'
 import React, { Fragment } from 'react'
 import { FaXmark } from 'react-icons/fa6'
 import { useLocalStorage } from 'usehooks-ts'
+import Skeleton from '../skeleton/Skeleton'
 
 type CardProps = {
     loading: LoadingType,
@@ -59,40 +60,55 @@ const ProductComparisonCard: React.FC<CardProps> = ({
         return (
             <div className='comparison__col'>
                 <div className="comparison__col__list product">
-                    <div className="list__item">
-                        <div className="remove__button" onClick={handleRemoveButton}>
-                            <FaXmark />
-                        </div>
-                        <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__image'>
-                            <Image src={activeProductData.image} width={200} height={200} alt='product' />
-                        </Link>
-                    </div>
-                    <div className="list__item">
-                        <div className="product__brand">{brandTitle}</div>
-                    </div>
-                    <div className="list__item">
-                        <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__title'>
-                            {product.getTranslate(activeProductData.id, activeLocale, "title")}
-                        </Link>
-                    </div>
-                    <div className="list__item">
-                        <div className="product__code">{activeProductData.code}</div>
-                    </div>
-                    <div className="list__item">
-                        <div className="product__price">
-                            {activeProductData.discount === 0 ? activeProductData.discount.toFixed(2) : activeProductData.price.toFixed(2)} AZN
-                        </div>
-                    </div>
-                    <div className="list__item">
-                        <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='basket__button'>
-                            {generalDictionary["add_basket"]}
-                        </Link>
-                    </div>
+                    {
+                        loading.lazy ? (
+                            <Fragment>
+                                <Skeleton width='100%' height='200px' margin='0 0 2px 0' />
+                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                <div className="list__item">
+                                    <div className="remove__button" onClick={handleRemoveButton}>
+                                        <FaXmark />
+                                    </div>
+                                    <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__image'>
+                                        <Image src={activeProductData.image} width={200} height={200} alt='product' />
+                                    </Link>
+                                </div>
+                                <div className="list__item">
+                                    <div className="product__brand">{brandTitle}</div>
+                                </div>
+                                <div className="list__item">
+                                    <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__title'>
+                                        {product.getTranslate(activeProductData.id, activeLocale, "title")}
+                                    </Link>
+                                </div>
+                                <div className="list__item">
+                                    <div className="product__code">{activeProductData.code}</div>
+                                </div>
+                                <div className="list__item">
+                                    <div className="product__price">
+                                        {activeProductData.discount === 0 ? activeProductData.discount.toFixed(2) : activeProductData.price.toFixed(2)} AZN
+                                    </div>
+                                </div>
+                                <div className="list__item">
+                                    <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='basket__button'>
+                                        {generalDictionary["add_basket"]}
+                                    </Link>
+                                </div>
+                            </Fragment>
+                        )
+                    }
                 </div>
             </div>
         )
     } else {
-        return(
+        return (
             <></>
         )
     }
