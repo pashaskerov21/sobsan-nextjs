@@ -1,4 +1,4 @@
-import { AccountDataType, ComparisonDataType } from "../types";
+import { AccountDataType, ComparisonDataType, ProductDataType } from "../types";
 
 
 class Comparison {
@@ -42,6 +42,12 @@ class Comparison {
             user: this.activeUserID ? this.activeUserID : null
         }
         return [...this.comparisonStorage, result];
+    }
+    public products(productData: ProductDataType[]) {
+        const wishlistProducts: ProductDataType[] = this.comparisonStorage.map((c_data) =>
+            productData.find((p_data) => p_data.id === c_data.product)).
+            filter((p) => p !== undefined) as ProductDataType[];
+        return wishlistProducts;
     }
 }
 

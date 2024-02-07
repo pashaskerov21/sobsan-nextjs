@@ -180,6 +180,7 @@ export const TopNavbarWrapper = styled.nav<TopNavProps>`
 `;
 export const BottomNavbarWrapper = styled.nav<BottomProps>`
     width: 100%;
+    z-index: 900;
     @media (width >= 1200px){
         z-index: 200;
     }

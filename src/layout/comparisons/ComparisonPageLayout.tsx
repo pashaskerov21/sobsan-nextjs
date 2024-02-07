@@ -7,17 +7,17 @@ import {
     AccountDataType,
     BrandDataType,
     BrandTranslateDataType,
+    ComparisonDataType,
     LoadingType,
     LocaleStateType,
     LocaleType,
     PageTitleDataType,
     ProductDataType,
     ProductTranslateDataType,
-    WishlistDataType
 } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
-import { Wishlist } from '@/src/class';
+import { Comparison, Wishlist } from '@/src/class';
 import { Container, Section } from '@/src/styles';
 
 type LayoutProps = {
@@ -30,7 +30,7 @@ type LayoutProps = {
     generalDictionary: { [key: string]: string },
 }
 
-const WishlistPageLayout: React.FC<LayoutProps> = ({
+const ComparisonPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     brandData,
     brandTranslateData,
@@ -62,7 +62,7 @@ const WishlistPageLayout: React.FC<LayoutProps> = ({
         }, 1000);
     }, []);
 
-    const path = 'wishlist';
+    const path = 'comparisons';
     const dispatch = useDispatch();
     const localeSlugs: LocaleStateType[] = i18n.locales.map((locale) => {
         return {
@@ -71,24 +71,24 @@ const WishlistPageLayout: React.FC<LayoutProps> = ({
         }
     });
     const pageTitleData: PageTitleDataType = {
-        title: titleDictionary["wishlist"],
+        title: titleDictionary["comparisons"],
         breadcrumbs: [
             {
                 id: 1,
                 path: `/${activeLocale}/${path}`,
-                name: titleDictionary["wishlist"],
+                name: titleDictionary["comparisons"],
             }
         ]
     }
-    const [wishlistStorage, setWishlistStorage] = useLocalStorage<WishlistDataType[] | []>("wishlist", []);
+    const [comparisonStorage, setComparisonStorage] = useLocalStorage<ComparisonDataType[] | []>("comparison", []);
     const [accountData] = useLocalStorage<AccountDataType>('accounts', {
         activeUser: undefined,
         users: [],
     });
-    const wishlist = new Wishlist(wishlistStorage, accountData);
-    const wishlistProducts: ProductDataType[] = wishlist.products(productData);
+    const comparison = new Comparison(comparisonStorage, accountData);
+    const comparisonProducts: ProductDataType[] = comparison.products(productData);
     const handleClearStorage = useCallback(() => {
-        setWishlistStorage(wishlist.clear());
+        setComparisonStorage(comparison.clear());
     }, [])
 
 
@@ -98,7 +98,7 @@ const WishlistPageLayout: React.FC<LayoutProps> = ({
     return (
         <Fragment>
             {
-                wishlist.data().length > 0 ? (
+                comparison.data().length > 0 ? (
                     <PageTitle
                         loading={loading}
                         activeLocale={activeLocale}
@@ -120,11 +120,11 @@ const WishlistPageLayout: React.FC<LayoutProps> = ({
                 <Container>
 
                     {
-                        wishlistProducts.length > 0 ? (
+                        comparisonProducts.length > 0 ? (
                             <ProductGrid
                                 loading={loading}
                                 activeLocale={activeLocale}
-                                productData={wishlistProducts}
+                                productData={comparisonProducts}
                                 productTranslateData={productTranslateData}
                                 brandData={brandData}
                                 brandTranslateData={brandTranslateData}
@@ -134,8 +134,8 @@ const WishlistPageLayout: React.FC<LayoutProps> = ({
                         ) : (
                             <Fragment>
                                 {
-                                    loading.standart ? <Skeleton width='100%' height='45px' /> : (
-                                        <h3 className='text-center text-lg-start'>{generalDictionary["no_product_in_wishlist"]}</h3>
+                                    loading.standart ? <Skeleton width='100%' height='45px'/> : (
+                                        <h3 className='text-center text-lg-start'>{generalDictionary["no_product_in_comparison"]}</h3>
                                     )
                                 }
                             </Fragment>
@@ -147,4 +147,4 @@ const WishlistPageLayout: React.FC<LayoutProps> = ({
     )
 }
 
-export default React.memo(WishlistPageLayout)
+export default React.memo(ComparisonPageLayout)
