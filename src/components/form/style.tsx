@@ -141,9 +141,8 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
         top: 25px;
         left: 15px;
         ${props => props.$hasValue && css`
-            top: 8px;
+            top: 4px;
             font-size: 13px;
-            opacity: 0.8;
         `}
     }
     input{
@@ -156,9 +155,8 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
         padding: 30px 15px 15px;
         &:focus{
             &~label{
-                top: 8px;
+                top: 4px;
                 font-size: 13px;
-                opacity: 0.8;
             }
         }
         &:-webkit-autofill{
@@ -183,9 +181,8 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
         resize: none;
         &:focus{
             &~label{
-                top: 8px;
+                top: 4px;
                 font-size: 13px;
-                opacity: 0.8;
             }
         }
     }

@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment } from 'react'
 import { AlertComponent, Container, Section } from '@/src/styles'
-import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/types'
+import { AccountDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, UserDataType } from '@/src/types'
 import { AccountGeneralContainer } from './style'
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
 import { AccountSidebar, AccountUpdateForm, OrderHistory, Skeleton } from '@/src/components'
@@ -14,6 +14,8 @@ type SectionProps = {
     activeLocale: LocaleType,
     activeUserData: UserDataType,
     loading: LoadingType,
+    productData: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
     formDictionary: {
@@ -30,6 +32,8 @@ const AccounSection: React.FC<SectionProps> = ({
     generalDictionary,
     loading,
     titleDictionary,
+    productData,
+    productTranslateData,
 }) => {
     const body = document.querySelector('body');
     const router = useRouter();
@@ -199,6 +203,8 @@ const AccounSection: React.FC<SectionProps> = ({
                                                 loading={loading}
                                                 titleDictionary={titleDictionary}
                                                 orders={activeUserData.orders}
+                                                productData={productData}
+                                                productTranslateData={productTranslateData}
                                             />
                                         ) : (
                                             <Fragment>

@@ -1,7 +1,7 @@
 import React from "react";
 import { getTranslate } from "@/get-translate";
-import { BrandDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "@/src/types";
-import { fetchBrandData, fetchBrandTranslateData, fetchColorData, fetchColorTranslateData, fetchProductData, fetchProductTranslateData } from "@/src/utils";
+import { BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from "@/src/types";
+import { fetchBrandTranslateData, fetchColorData, fetchColorTranslateData, fetchProductData, fetchProductTranslateData } from "@/src/utils";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { BasketPageLayout } from "@/src/layout";

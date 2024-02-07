@@ -63,10 +63,6 @@ export const AccountGeneralContainer = styled.div`
     width: 100%;
     ${column_center};
     gap: 30px;
-    @media (min-width: 992px){
-        ${row_between};
-        align-items: flex-start;
-    }
     .account__sidebar{
         position: fixed;
         top: 0;
@@ -110,7 +106,7 @@ export const AccountGeneralContainer = styled.div`
             opacity: 1;
             padding: 0;
             background-color: transparent;
-            min-width: 350px;
+            height: auto;
             z-index: 1;
             .account__sidebar__header{
                 display: none;
@@ -118,6 +114,7 @@ export const AccountGeneralContainer = styled.div`
         }
     }
     .container__left{
+        width: 100%;
         @media (min-width: 992px){
             border: 1px solid ${props => props.theme.border_color_1};
             padding: 20px;
@@ -196,6 +193,24 @@ export const AccountGeneralContainer = styled.div`
                         }
                     }
                 }
+            }
+        }
+        @media (min-width: 992px){
+            ${row_between};
+            align-items: flex-start;
+            .container__left{
+                width: 35%;
+            }
+            .container__right{
+                width: 65%;
+            }
+        }
+        @media (min-width: 1400px){
+            .container__left{
+                width: 30%;
+            }
+            .container__right{
+                width: 70%;
             }
         }
 `;

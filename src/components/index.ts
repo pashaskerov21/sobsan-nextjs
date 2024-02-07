@@ -21,6 +21,7 @@ import CheckoutForm from "./form/CheckoutForm";
 import AccountSidebar from "./account/AccountSidebar";
 import AccountUpdateForm from "./form/AccountUpdateForm";
 import OrderHistory from "./account/OrderHistory";
+import ProductOrderRow from "./product/ProductOrderRow";
 
 
 export {
@@ -47,4 +48,5 @@ export {
     AccountSidebar,
     AccountUpdateForm,
     OrderHistory,
+    ProductOrderRow,
 }

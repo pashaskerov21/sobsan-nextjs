@@ -3,7 +3,16 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
-import { AccountDataType, LoadingType, LocaleStateType, LocaleType, PageTitleDataType, SettingDataType, UserDataType } from '@/src/types';
+import {
+    AccountDataType,
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    PageTitleDataType,
+    ProductDataType,
+    ProductTranslateDataType, 
+    UserDataType
+} from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
 import { useRouter } from 'next/navigation';
@@ -13,6 +22,8 @@ import { Account } from '@/src/class';
 
 type LayoutProps = {
     activeLocale: LocaleType,
+    productData: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
     formDictionary: {
@@ -27,6 +38,8 @@ const AccountPageLayout: React.FC<LayoutProps> = ({
     titleDictionary,
     generalDictionary,
     formDictionary,
+    productData,
+    productTranslateData,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
         standart: true,
@@ -84,7 +97,7 @@ const AccountPageLayout: React.FC<LayoutProps> = ({
     if (!accountData.activeUser) {
         router.push(`/${activeLocale}/login`)
     }
-    if(activeUserData){
+    if (activeUserData) {
         return (
             <Fragment>
                 <PageTitle
@@ -100,11 +113,13 @@ const AccountPageLayout: React.FC<LayoutProps> = ({
                     titleDictionary={titleDictionary}
                     loading={loading}
                     activeUserData={activeUserData}
+                    productData={productData}
+                    productTranslateData={productTranslateData}
                 />
             </Fragment>
         )
-    }else{
-        return(
+    } else {
+        return (
             <Fragment></Fragment>
         )
     }
