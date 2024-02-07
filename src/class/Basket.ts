@@ -43,6 +43,7 @@ class Basket {
             parameters: {
                 ...data.parameters,
                 amount: amount,
+                total: amount * data.parameters.price,
             }
         } : data);
         return result;

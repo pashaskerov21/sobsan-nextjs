@@ -79,7 +79,7 @@ class Account {
         if (activeUserData) {
             activeUserData = {
                 ...activeUserData,
-                orders: [...activeUserData.orders, newData],
+                orders: [...activeUserData.orders.filter((data) => data.status), newData],
                 activeOrderID: newData.id,
             }
             return this.updateUserData(activeUserData);

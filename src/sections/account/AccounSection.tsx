@@ -1,11 +1,10 @@
 'use client'
-import React from 'react'
-import { Container, Section } from '@/src/styles'
+import React, { Fragment } from 'react'
+import { AlertComponent, Container, Section } from '@/src/styles'
 import { AccountDataType, LoadingType, LocaleType, UserDataType } from '@/src/types'
 import { AccountGeneralContainer } from './style'
 import { HiOutlineBars3BottomRight } from "react-icons/hi2";
-import { FaXmark } from 'react-icons/fa6'
-import { AccountSidebar, AccountUpdateForm, Skeleton } from '@/src/components'
+import { AccountSidebar, AccountUpdateForm, OrderHistory, Skeleton } from '@/src/components'
 import { useLocalStorage } from 'usehooks-ts'
 import { Account } from '@/src/class'
 import Swal from 'sweetalert2'
@@ -78,6 +77,7 @@ const AccounSection: React.FC<SectionProps> = ({
     }, [setCollapseState]);
     const changeLayout = React.useCallback((value: "account_settings" | "order_history") => {
         setLayoutState(value);
+        closeMenu();
     }, [setLayoutState])
 
 
@@ -159,12 +159,21 @@ const AccounSection: React.FC<SectionProps> = ({
                         <div className="container__right__header">
                             {
                                 loading.lazy ?
-                                    <Skeleton width='170px' height='33px' /> :
-                                    <div className="title">{generalDictionary[`${layoutState}`]}</div>
+                                    (
+                                        <Fragment>
+                                            <Skeleton width='170px' height='33px' />
+                                            <Skeleton width='30px' height='30px' className='d-lg-none' />
+                                        </Fragment>
+                                    ) :
+                                    (
+                                        <Fragment>
+                                            <div className="title">{generalDictionary[`${layoutState}`]}</div>
+                                            <div className='account__menu__button' onClick={openMenu}>
+                                                <HiOutlineBars3BottomRight />
+                                            </div>
+                                        </Fragment>
+                                    )
                             }
-                            <div className='account__menu__button' onClick={openMenu}>
-                                <HiOutlineBars3BottomRight />
-                            </div>
                         </div>
                         <div className="container__right__body">
                             {layoutState === "account_settings" && (
@@ -178,6 +187,32 @@ const AccounSection: React.FC<SectionProps> = ({
                                     loading={loading}
                                     titleDictionary={titleDictionary}
                                 />
+                            )}
+                            {layoutState === 'order_history' && (
+                                <Fragment>
+                                    {
+                                        activeUserData.orders.length > 0 ? (
+                                            <OrderHistory
+                                                activeLocale={activeLocale}
+                                                activeUserData={activeUserData}
+                                                generalDictionary={generalDictionary}
+                                                loading={loading}
+                                                titleDictionary={titleDictionary}
+                                                orders={activeUserData.orders}
+                                            />
+                                        ) : (
+                                            <Fragment>
+                                                {
+                                                    loading.standart ? <Skeleton width='100%' height='45px' radius='10px' /> : (
+                                                        <AlertComponent>
+                                                            {generalDictionary["no_order"]}
+                                                        </AlertComponent>
+                                                    )
+                                                }
+                                            </Fragment>
+                                        )
+                                    }
+                                </Fragment>
                             )}
                         </div>
                     </div>

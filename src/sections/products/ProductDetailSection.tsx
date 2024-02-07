@@ -141,6 +141,8 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                     text: generalDictionary["color_message"],
                 });
             } else {
+                const productPrice: number = activeProductData.discount === 0 ? activeProductData.price : activeProductData.discount;
+                const productTotalPrice: number = productPrice * productAmount;
                 let newData: BasketDataType = {
                     id: uuidv4(),
                     product: activeProductData.id,
@@ -149,7 +151,8 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                         color: selectedColor,
                         weight: selectedWeight,
                         amount: productAmount,
-                        price: activeProductData.discount === 0 ? activeProductData.price : activeProductData.discount,
+                        price: productPrice,
+                        total: productTotalPrice,
                     }
                 }
                 setBasketStorage(basket.add(newData));

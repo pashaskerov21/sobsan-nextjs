@@ -1,10 +1,9 @@
 'use client'
 import React, { Fragment, useCallback } from 'react'
-import { Container, Section } from '@/src/styles'
+import { AlertComponent, Container, Section } from '@/src/styles'
 import { AccountDataType, BasketDataType, BrandTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, OrderDataType, ProductDataType, ProductTranslateDataType, UserDataType } from '@/src/types'
 import { BasketContentWrapper } from './style'
 import { useLocalStorage } from 'usehooks-ts'
-import { AlertComponent } from '@/src/styles/components/alert'
 import { ProductRow, Skeleton } from '@/src/components'
 import { useRouter } from 'next/navigation'
 import { Account, Basket } from '@/src/class'
@@ -50,17 +49,18 @@ const BasketSection: React.FC<SectionProps> = ({
 
     React.useEffect(() => {
         if (basketData && basketData.length > 0) {
-            let total = basketData.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0);
+            let total = basketData.reduce((acc: number, data: BasketDataType) => acc + data.parameters.total, 0);
             setBasketTotal(total);
         }
     }, [basketData]);
 
+    
     const handleBasketConfirm = useCallback(() => {
         if (activeUser) {
             const newOrder: OrderDataType = {
                 id: uuidv4(),
                 status: false,
-                product_payment: basketData.reduce((acc: number, data: BasketDataType) => acc + data.parameters.amount * data.parameters.price, 0),
+                product_payment: basketTotal,
                 basketData: basketData,
             }
             setAccountData(account.addNewOrder(newOrder));
@@ -68,7 +68,7 @@ const BasketSection: React.FC<SectionProps> = ({
         } else {
             router.push(`/${activeLocale}/login`);
         }
-    }, [router, accountData.activeUser]);
+    }, [router, accountData.activeUser, basketTotal, basketData, setAccountData]);
     return (
         <Section $py={20}>
             <Container>

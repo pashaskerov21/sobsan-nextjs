@@ -67,6 +67,7 @@
         "add_basket_message": "Продукт был добавлен в корзину.",
         "no_product": "Нет продукта",
         "no_product_in_basket": "В корзине нет продуктов",
+        "no_order": "Нет заказа",
         "photo": "Фото",
         "product_name_brand": "Название продукта и бренд",
         "color": "Цвет",
@@ -100,7 +101,9 @@
         "yes": "Да",
         "no": "Да",
         "cancel": "Отмена",
-        "delete_account_successfull": "Аккаунт успешно удален"
+        "delete_account_successfull": "Аккаунт успешно удален",
+        "title": "Заголовок",
+        "number": "Число"
     },
     "form": {
         "label": {

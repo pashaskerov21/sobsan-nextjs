@@ -65,4 +65,5 @@ export {
     GridContainer,
     CategoryButtonWrapper,
     AccordionContainer,
+    AlertComponent
 }

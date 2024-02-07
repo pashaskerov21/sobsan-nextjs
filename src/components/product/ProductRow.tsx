@@ -122,7 +122,7 @@ const ProductRow: React.FC<RowProps> = ({
                         <td>
                             <div className="product__col">
                                 <div className="product__price">
-                                    {activeProductData.discount === 0 ? activeProductData.price.toFixed(2) : activeProductData.discount.toFixed(2)} AZN
+                                    {basketData.parameters.price.toFixed(2)} AZN
                                 </div>
                             </div>
                         </td>

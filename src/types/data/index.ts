@@ -229,6 +229,7 @@ export type BasketDataType = {
         weight: WeightDataType,
         amount: number,
         price: number,
+        total: number,
     }
 }
 export type WishlistDataType = {

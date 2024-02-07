@@ -2,7 +2,7 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ProductGrid, ProductLeftFilters, ProductPagination, ProductSortFilters, Skeleton } from '@/src/components'
-import { Container, Section } from '@/src/styles'
+import { AlertComponent, Container, Section } from '@/src/styles'
 import {
     AttributeDataType,
     AttributeGroupDataType,
@@ -26,7 +26,6 @@ import { useLocalStorage } from 'usehooks-ts'
 import { Product } from '@/src/class'
 import { ProductData } from '@/src/data'
 import { usePathname } from 'next/navigation'
-import { AlertComponent } from '@/src/styles/components/alert'
 
 type SectionProps = {
     loading: LoadingType,
@@ -339,9 +338,13 @@ const ProductsSection: React.FC<SectionProps> = ({
                                 </Fragment>
                             ) : (
                                 <Fragment>
-                                    <AlertComponent>
-                                        {generalDictionary["no_product"]}
-                                    </AlertComponent>
+                                    {
+                                        loading.standart ? <Skeleton width='100%' height='45px' radius='10px' /> : (
+                                            <AlertComponent>
+                                                {generalDictionary["no_product"]}
+                                            </AlertComponent>
+                                        )
+                                    }
                                 </Fragment>
                             )
                         }

@@ -67,6 +67,7 @@
         "add_basket_message": "Product added to cart.",
         "no_product": "No products",
         "no_product_in_basket": "There are no products in the cart",
+        "no_order": "No order",
         "photo": "Photo",
         "product_name_brand": "Product Name & Brand",
         "color": "Color",
@@ -100,7 +101,9 @@
         "yes": "Yes",
         "no": "No",
         "cancel": "Cancel",
-        "delete_account_successfull": "Account deleted successfully"
+        "delete_account_successfull": "Account deleted successfully",
+        "title": "Title",
+        "number": "Number"
     },
     "form": {
         "label": {

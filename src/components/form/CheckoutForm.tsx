@@ -71,7 +71,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         delivery_type: Yup.string().required(`${formDictionary.error.delivery_type_required}`),
     });
 
-    console.log(activeOrderData)
     const [paymentValues, setPaymentValues] = useState<{
         product_total: number,
         delivery: number,
@@ -93,7 +92,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         })
     };
 
-
+    console.log(activeOrderData)
     useEffect(() => {
         setPaymentValues((prev) => {
             return {
