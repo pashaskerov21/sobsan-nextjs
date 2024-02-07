@@ -15,4 +15,4 @@ const VanillaComponent:React.FC<{children: React.ReactNode, className: string,}>
   )
 }
 
-export default VanillaComponent
+export default React.memo(VanillaComponent)

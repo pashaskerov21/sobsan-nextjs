@@ -198,4 +198,4 @@ const ProductLeftFilters: React.FC<LeftFilterProps> = ({
   )
 }
 
-export default ProductLeftFilters
+export default React.memo(ProductLeftFilters)

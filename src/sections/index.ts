@@ -9,6 +9,7 @@ import LoginSection from "./account/LoginSection";
 import RegistrationSection from "./account/RegistrationSection";
 import CheckoutSection from "./basket/CheckoutSection";
 import AccounSection from "./account/AccounSection";
+import ComparisonSection from "./comparison/ComparisonSection";
 
 export {
     CatalogSection,
@@ -22,4 +23,5 @@ export {
     RegistrationSection,
     CheckoutSection,
     AccounSection,
+    ComparisonSection,
 }

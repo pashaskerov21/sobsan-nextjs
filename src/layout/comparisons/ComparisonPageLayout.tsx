@@ -19,6 +19,7 @@ import { i18n } from '@/i18n-config';
 import { useLocalStorage } from 'usehooks-ts';
 import { Comparison, Wishlist } from '@/src/class';
 import { Container, Section } from '@/src/styles';
+import { ComparisonSection } from '@/src/sections';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -116,33 +117,16 @@ const ComparisonPageLayout: React.FC<LayoutProps> = ({
                     />
                 )
             }
-            <Section $py={20}>
-                <Container>
-
-                    {
-                        comparisonProducts.length > 0 ? (
-                            <ProductGrid
-                                loading={loading}
-                                activeLocale={activeLocale}
-                                productData={comparisonProducts}
-                                productTranslateData={productTranslateData}
-                                brandData={brandData}
-                                brandTranslateData={brandTranslateData}
-                                generalDictionary={generalDictionary}
-                                className="full__container"
-                            />
-                        ) : (
-                            <Fragment>
-                                {
-                                    loading.standart ? <Skeleton width='100%' height='45px'/> : (
-                                        <h3 className='text-center text-lg-start'>{generalDictionary["no_product_in_comparison"]}</h3>
-                                    )
-                                }
-                            </Fragment>
-                        )
-                    }
-                </Container>
-            </Section>
+            <ComparisonSection
+                activeLocale={activeLocale}
+                brandData={brandData}
+                brandTranslateData={brandTranslateData}
+                generalDictionary={generalDictionary}
+                loading={loading}
+                productData={comparisonProducts}
+                productTranslateData={productTranslateData}
+                titleDictionary={titleDictionary}
+            />
         </Fragment >
     )
 }

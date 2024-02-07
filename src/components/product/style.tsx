@@ -1,4 +1,4 @@
-import { column_align_start, column_center, column_justify_start, row_between, row_center, row_justify_start } from "@/src/styles";
+import { column_align_start, column_center, column_justify_start, row_between, row_center, row_justify_start, row_start } from "@/src/styles";
 import styled, { css } from "styled-components";
 
 export const ProductCardWrapper = styled.div<{ $productsView?: "grid" | "list" }>`
@@ -572,5 +572,3 @@ export const ProductSortFilterWrapper = styled.div`
         }
     }
 `;
-
-export const ProductComparisonTableWrapper = styled.div``

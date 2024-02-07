@@ -36,7 +36,7 @@ class Comparison {
         const result: ComparisonDataType[] = this.comparisonStorage.filter((data) => data.id !== id);
         return result;
     }
-    public add(data: ComparisonDataType){
+    public add(data: ComparisonDataType) {
         const result: ComparisonDataType = {
             ...data,
             user: this.activeUserID ? this.activeUserID : null

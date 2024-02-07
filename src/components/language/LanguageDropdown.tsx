@@ -27,4 +27,4 @@ const LanguageDropdown: React.FC<{ activeLocale: string }> = ({ activeLocale }) 
   )
 }
 
-export default LanguageDropdown
+export default React.memo(LanguageDropdown)

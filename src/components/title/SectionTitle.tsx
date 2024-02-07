@@ -9,4 +9,4 @@ const SectionTitle: React.FC<{ title: string }> = ({ title }) => {
     )
 }
 
-export default SectionTitle
+export default React.memo(SectionTitle)
