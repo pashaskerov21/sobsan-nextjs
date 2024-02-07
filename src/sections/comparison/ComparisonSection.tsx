@@ -43,30 +43,45 @@ const ComparisonSection: React.FC<SectionProps> = ({
                         <ComparisonContainer>
                             <div className="comparison__col">
                                 <div className="comparison__col__list">
-                                    <div className="list__item"></div>
-                                    <div className="list__item">{generalDictionary["brand"]}:</div>
-                                    <div className="list__item">{generalDictionary["product_name"]}:</div>
-                                    <div className="list__item">{generalDictionary["product_code"]}:</div>
-                                    <div className="list__item">{generalDictionary["price"]}:</div>
-                                    <div className="list__item"></div>
+                                    {
+                                        loading.lazy ? (
+                                            <Fragment>
+                                                <Skeleton width='100%' height='200px' margin='0 0 2px 0'/>
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                                <div className="list__item"></div>
+                                                <div className="list__item">{generalDictionary["brand"]}:</div>
+                                                <div className="list__item">{generalDictionary["product_name"]}:</div>
+                                                <div className="list__item">{generalDictionary["product_code"]}:</div>
+                                                <div className="list__item">{generalDictionary["price"]}:</div>
+                                                <div className="list__item"></div>
+                                            </Fragment>
+                                        )
+                                    }
                                 </div>
                             </div>
                             {
-                                    comparisonData.map((data) => (
-                                        <Fragment key={`product-comparison-item-${data.id}`}>
-                                            <ProductComparisonCard
-                                                activeLocale={activeLocale}
-                                                activeComparisonData={data}
-                                                brandData={brandData}
-                                                brandTranslateData={brandTranslateData}
-                                                generalDictionary={generalDictionary}
-                                                loading={loading}
-                                                productData={productData}
-                                                productTranslateData={productTranslateData}
-                                            />
-                                        </Fragment>
-                                    ))
-                                }
+                                comparisonData.map((data) => (
+                                    <Fragment key={`product-comparison-item-${data.id}`}>
+                                        <ProductComparisonCard
+                                            activeLocale={activeLocale}
+                                            activeComparisonData={data}
+                                            brandData={brandData}
+                                            brandTranslateData={brandTranslateData}
+                                            generalDictionary={generalDictionary}
+                                            loading={loading}
+                                            productData={productData}
+                                            productTranslateData={productTranslateData}
+                                        />
+                                    </Fragment>
+                                ))
+                            }
                         </ComparisonContainer>
                     ) : (
                         <Fragment>
