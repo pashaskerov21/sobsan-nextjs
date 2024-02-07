@@ -46,12 +46,12 @@ const ComparisonSection: React.FC<SectionProps> = ({
                                     {
                                         loading.lazy ? (
                                             <Fragment>
-                                                <Skeleton width='100%' height='200px' margin='0 0 2px 0'/>
-                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
-                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
-                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
-                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
-                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0'/>
+                                                <Skeleton width='100%' height='200px' margin='0 0 2px 0' />
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
                                             </Fragment>
                                         ) : (
                                             <Fragment>
@@ -69,16 +69,29 @@ const ComparisonSection: React.FC<SectionProps> = ({
                             {
                                 comparisonData.map((data) => (
                                     <Fragment key={`product-comparison-item-${data.id}`}>
-                                        <ProductComparisonCard
-                                            activeLocale={activeLocale}
-                                            activeComparisonData={data}
-                                            brandData={brandData}
-                                            brandTranslateData={brandTranslateData}
-                                            generalDictionary={generalDictionary}
-                                            loading={loading}
-                                            productData={productData}
-                                            productTranslateData={productTranslateData}
-                                        />
+                                        {
+                                            loading.lazy ? (
+                                                <Fragment>
+                                                    <Skeleton width='100%' height='200px' margin='0 0 2px 0' />
+                                                    <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                    <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                    <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                    <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                    <Skeleton width='100%' height='70px' margin='0 0 2px 0' />
+                                                </Fragment>
+                                            ) : (
+                                                <ProductComparisonCard
+                                                    activeLocale={activeLocale}
+                                                    activeComparisonData={data}
+                                                    brandData={brandData}
+                                                    brandTranslateData={brandTranslateData}
+                                                    generalDictionary={generalDictionary}
+                                                    loading={loading}
+                                                    productData={productData}
+                                                    productTranslateData={productTranslateData}
+                                                />
+                                            )
+                                        }
                                     </Fragment>
                                 ))
                             }
