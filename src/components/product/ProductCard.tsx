@@ -3,7 +3,18 @@ import React, { Fragment } from 'react'
 import Image from 'next/image';
 import Skeleton from '../skeleton/Skeleton';
 import Link from 'next/link';
-import { AccountDataType, BasketDataType, BrandDataType, BrandTranslateDataType, ComparisonDataType, LoadingType, LocaleType, ProductDataType, ProductTranslateDataType, WishlistDataType } from '@/src/types'
+import {
+    AccountDataType,
+    BasketDataType,
+    BrandDataType,
+    BrandTranslateDataType, 
+    ComparisonDataType, 
+    LoadingType, 
+    LocaleType, 
+    ProductDataType, 
+    ProductTranslateDataType, 
+    WishlistDataType
+} from '@/src/types'
 import { ProductCardWrapper } from './style';
 import { FaCheck } from "react-icons/fa";
 import { useRouter } from 'next/navigation';

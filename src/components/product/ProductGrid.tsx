@@ -13,6 +13,7 @@ type ProductGridProps = {
   brandData: BrandDataType[],
   brandTranslateData: BrandTranslateDataType[],
   productsView?: "list" | "grid",
+  className?: string,
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({
@@ -24,9 +25,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   brandTranslateData,
   generalDictionary,
   productsView,
+  className
 }) => {
   return (
-    <ProductGridWrapper $productsView={productsView}>
+    <ProductGridWrapper $productsView={productsView} className={`${className}`}>
       {
         productData.map((data) => (
           <Fragment key={`product-${data.id}`}>

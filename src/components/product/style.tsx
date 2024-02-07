@@ -468,16 +468,27 @@ export const ProductGridWrapper = styled.div<{ $productsView?: "grid" | "list" }
     place-items: center;
     ${props => props.$productsView === "grid" && css`
         @media (width >= 768px){
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
         }
-        @media (width >= 1200px){
-            grid-template-columns: 1fr 1fr 1fr;
+        @media (width >= 1400px){
+            grid-template-columns: repeat(3, 1fr);
         }
     `}
     ${
         props => props.$productsView === "list" && css`
             overflow-x: auto;
         `
+    }
+    &.full__container{
+        @media (width >= 768px){
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (width >= 992px){
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (width >= 1200px){
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 `;
 

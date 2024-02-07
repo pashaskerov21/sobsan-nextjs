@@ -17,6 +17,7 @@ import LoginPageLayout from "./account/LoginPageLayout";
 import RegisterPageLayout from "./account/RegisterPageLayout";
 import AccountPageLayout from "./account/AccountPageLayout";
 import CheckoutPageLayout from "./basket/CheckoutPageLayout";
+import WishlistPageLayout from "./wishlist/WishlistPageLayout";
 
 export {
     RootLayout,
@@ -38,4 +39,5 @@ export {
     RegisterPageLayout,
     AccountPageLayout,
     CheckoutPageLayout,
+    WishlistPageLayout,
 }

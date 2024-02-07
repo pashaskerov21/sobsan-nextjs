@@ -28,7 +28,8 @@
         "clear": "Clean",
         "all": "All",
         "private_cabinet": "Личный Кабинет",
-        "order": "Order"
+        "order": "Order",
+        "my_account": "My account"
     },
     "text": {
         "catalog_note": "Note: The catalog colors on the screen may appear different from the original colors that will be applied due to the screen calibration differences of monitors, tablets, laptops and smartphones and the drop of light. For the exact result, you can see our color catalog at the nearest sales address. Also, when applying your chosen color, the color of the paint may look different depending on the natural sunlight falling into the room, the color of the light bulbs you use (eg yellow, led, etc.)."
@@ -67,6 +68,8 @@
         "add_basket_message": "Product added to cart.",
         "no_product": "No products",
         "no_product_in_basket": "There are no products in the cart",
+        "no_product_in_wishlist": "Seçilmiş məhsul yoxdur",
+        "no_product_in_comparison": "There are no products to compare",
         "no_order": "No order",
         "photo": "Photo",
         "product_name_brand": "Product Name & Brand",

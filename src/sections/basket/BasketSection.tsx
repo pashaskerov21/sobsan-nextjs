@@ -54,7 +54,7 @@ const BasketSection: React.FC<SectionProps> = ({
         }
     }, [basketData]);
 
-    
+
     const handleBasketConfirm = useCallback(() => {
         if (activeUser) {
             const newOrder: OrderDataType = {
@@ -159,10 +159,8 @@ const BasketSection: React.FC<SectionProps> = ({
                     ) : (
                         <Fragment>
                             {
-                                loading.standart ? <Skeleton width='100%' height='45px' radius='10px' /> : (
-                                    <AlertComponent>
-                                        {generalDictionary["no_product_in_basket"]}
-                                    </AlertComponent>
+                                loading.standart ? <Skeleton width='100%' height='45px' /> : (
+                                    <h3 className='text-center text-lg-start'>{generalDictionary["no_product_in_basket"]}</h3>
                                 )
                             }
                         </Fragment>

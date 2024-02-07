@@ -74,7 +74,7 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
                 toggleSearch={toggleSearch} />
               {
                 accountData.activeUser ? (
-                  <Link className='icon d-none d-md-flex' href={`/${activeLocale}/account`}><HiMiniUser /></Link>
+                  <Link className='icon d-none d-md-flex' href={`/${activeLocale}/account`}><HiMiniUser /> <span>{titleDictionary.my_account}</span></Link>
                 ) : (
                   <Link className='icon d-none d-md-flex' href={`/${activeLocale}/login`}><span>{titleDictionary.login}</span><BiLogInCircle /></Link>
                 )
