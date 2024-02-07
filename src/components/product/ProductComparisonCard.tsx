@@ -42,7 +42,7 @@ const ProductComparisonCard: React.FC<CardProps> = ({
 
     const handleRemoveButton = React.useCallback(() => {
         setComparisonStorage(comparison.remove(activeComparisonData.id));
-    }, [setComparisonStorage])
+    }, [setComparisonStorage, comparison, activeComparisonData.id])
 
 
     React.useEffect(() => {
