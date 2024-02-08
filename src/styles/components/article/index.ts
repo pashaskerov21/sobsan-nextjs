@@ -24,20 +24,20 @@ export const ArticleContainer = styled.div`
                 object-fit: contain;
             }
             .article__title{
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: 600px;
                 @media (min-width: 768px){
-                    font-size: 20px;
+                    font-size: 18px;
                 }
             }
             .article__text{
                 width: 100%:
-                font-size: 14px;
+                font-size: 12px;
                 ul{
                     list-style: disc;
                 }
                 @media (min-width: 768px){
-                    font-size: 16px;
+                    font-size: 14px;
                 }
             }
         }
