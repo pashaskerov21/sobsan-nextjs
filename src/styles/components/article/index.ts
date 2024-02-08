@@ -31,7 +31,7 @@ export const ArticleContainer = styled.div`
                 }
             }
             .article__text{
-                width: 100%:
+                width: 100%;
                 font-size: 12px;
                 ul{
                     list-style: disc;
