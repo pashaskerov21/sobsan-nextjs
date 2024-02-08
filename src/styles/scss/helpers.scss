@@ -96,6 +96,7 @@
     background-color: rgba(0,0,0, 0.8);
     opacity: 0;
     animation: backdropAnimation 0.3s ease forwards;
+    backdrop-filter: blur(10px);
 }
 @keyframes backdropAnimation{
     0%{

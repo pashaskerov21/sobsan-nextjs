@@ -95,4 +95,7 @@ export const SectionTitleWrapper = styled.h2`
         text-align: start;
         justify-content:flex-start;
     }
+    &.color__white{
+        color: #fff;
+    }
 `

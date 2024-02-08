@@ -1,9 +1,9 @@
 import React from 'react'
 import { SectionTitleWrapper } from './style'
 
-const SectionTitle: React.FC<{ title: string }> = ({ title }) => {
+const SectionTitle: React.FC<{ title: string, className?: 'color__white' }> = ({ title, className }) => {
     return (
-        <SectionTitleWrapper>
+        <SectionTitleWrapper className={className}>
             {title}
         </SectionTitleWrapper>
     )

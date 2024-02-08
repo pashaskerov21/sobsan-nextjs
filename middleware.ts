@@ -312,6 +312,7 @@ export function middleware(request: NextRequest) {
       '/room/img-3.webp',
       '/room/img-4.webp',
       '/room/img-5.webp',
+      '/room/img-6.webp',
 
       '/text/about-1.webp',
       '/text/about-2.webp',

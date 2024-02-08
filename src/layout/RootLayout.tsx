@@ -145,4 +145,4 @@ const RootLayout: React.FC<LayoutProps> = ({
     )
 }
 
-export default RootLayout
+export default React.memo(RootLayout)

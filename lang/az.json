@@ -29,7 +29,8 @@
         "all": "Hamısı",
         "private_cabinet": "Şəxsi kabinet",
         "order": "Sifariş",
-        "my_account": "Hesabım"
+        "my_account": "Hesabım",
+        "coloring_suggestion": "Daxili rəngləndirmə təklifləri"
     },
     "text": {
         "catalog_note": "Qeyd: Ekrandakı kataloq rəngləri monitor, planşet, noutbuk və smartfonların ekran kalibrasiya fərqlərinə və işığın düşməsinə görə tətbiq olunacaq orijinal rənglərindən fərqli görünə bilər. Dəqiq nəticə üçün rəng kataloqumuza ən yaxın satış ünvanlarında baxa bilərsiniz. Həmçinin seçdiyiniz rəngi tətbiq edərkən, boyanın rəngi otağa təbii günəş işığının düşməsinə, istifadə etdiyiniz aydınlatma cihazlarının lampa rənginə (məs: sarı, led və s.) görə də fərqli görünə bilər."
@@ -107,7 +108,8 @@
         "cancel": "Ləğv et",
         "delete_account_successfull": "Hesab uğurla silindi",
         "title": "Başlıq",
-        "number": "Say"
+        "number": "Say",
+        "coloring_suggestion": "Daxili rəngləndirmə təklifləri"
     },
     "form": {
         "label": {

@@ -13,6 +13,7 @@ import Account from "./Account";
 import Basket from "./Basket";
 import Wishlist from "./Wishlist";
 import Comparison from "./Comparison";
+import Suggestion from "./Suggestion";
 
 export {
     Setting,
@@ -29,5 +30,6 @@ export {
     Account,
     Basket,
     Wishlist,
-    Comparison
+    Comparison,
+    Suggestion,
 }

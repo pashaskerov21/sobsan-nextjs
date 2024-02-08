@@ -31,6 +31,7 @@ import { Container, GridContainer} from "./components/container";
 import { CategoryButtonWrapper } from "./components/category";
 import { AccordionContainer } from "./components/accordion";
 import { AlertComponent } from "./components/alert";
+import { ArticleContainer } from "./components/article";
 
 export {
     GlobalStyles,
@@ -65,5 +66,6 @@ export {
     GridContainer,
     CategoryButtonWrapper,
     AccordionContainer,
-    AlertComponent
+    AlertComponent,
+    ArticleContainer,
 }

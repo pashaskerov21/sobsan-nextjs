@@ -19,6 +19,8 @@ import AccountPageLayout from "./account/AccountPageLayout";
 import CheckoutPageLayout from "./basket/CheckoutPageLayout";
 import WishlistPageLayout from "./wishlist/WishlistPageLayout";
 import ComparisonPageLayout from "./comparisons/ComparisonPageLayout";
+import SuggestionPageLayout from "./suggestions/SuggestionPageLayout";
+import SuggestionInnerPageLayout from "./suggestions/SuggestionInnerPageLayout";
 
 export {
     RootLayout,
@@ -42,4 +44,6 @@ export {
     CheckoutPageLayout,
     WishlistPageLayout,
     ComparisonPageLayout,
+    SuggestionPageLayout,
+    SuggestionInnerPageLayout,
 }
