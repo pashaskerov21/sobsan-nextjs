@@ -43,7 +43,7 @@ const ProductBannerSection: React.FC<SectionProps> = ({
               loading.lazy ? (
                 <div className="banner-slide">
                   <div className="content">
-                    <Skeleton width='30px' height='30px' />
+                    <Skeleton width='150px' height='30px' />
                     <Skeleton width='90%' height='200px' />
                     <Skeleton width='150px' height='50px' radius='10px' />
                   </div>
@@ -92,22 +92,15 @@ const ProductBannerSection: React.FC<SectionProps> = ({
             }
 
           </div>
-          <div className={`bottom ${loading.lazy ? '' : 'bg__active'}`}>
-            <div className="bottom_left">
-              {
-                loading.lazy ?
-                  <Skeleton width='100%' max_width='450px' height='45px' height_lg='26px' /> :
+          {
+            loading.lazy ? (
+              <Skeleton width='100%' height='100px' radius='0 0 10px 10px' />
+            ) : (
+              <div className={`bottom ${loading.lazy ? '' : 'bg__active'}`}>
+                <div className="bottom_left">
                   <Link href={`/${activeLocale}`}>{generalDictionary.banner_question}</Link>
-              }
-            </div>
-            <div className="bottom_right">
-              {
-                loading.lazy ? (
-                  <Fragment>
-                    <Skeleton width='140px' height='35px' />
-                    <Skeleton width='140px' height='35px' />
-                  </Fragment>
-                ) : (
+                </div>
+                <div className="bottom_right">
                   <Fragment>
                     <Link href={`/${activeLocale}`}>
                       <div className="icon"><FaPhoneAlt /></div>
@@ -118,10 +111,11 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                       <div className="label">{generalDictionary.write_us}</div>
                     </Link>
                   </Fragment>
-                )
-              }
-            </div>
-          </div>
+                </div>
+              </div>
+            )
+          }
+
         </ProductBannerWrapper>
       </Container>
     </Section>
