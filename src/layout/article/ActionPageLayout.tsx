@@ -3,10 +3,28 @@ import React, { Fragment } from 'react'
 import { Menu } from '@/src/class';
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { ActionPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
+import {
+    ArticleDataType,
+    ArticleTranslateDataType,
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType, 
+    PageTitleDataType
+} from '@/src/types'
 import { PageTitle } from '@/src/components';
 
-const ActionPageLayout: React.FC<ActionPageLayoutProps> = ({
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    articleData: ArticleDataType[],
+    articleTranslateData: ArticleTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+}
+
+const ActionPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     articleData,
     articleTranslateData,

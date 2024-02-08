@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Container, Section } from '@/src/styles'
 import { LoadingType, LocaleType, ProductBannerDataType, ProductBannerTranslateDataType } from '@/src/types'
 import { ProductBannerWrapper } from './style'
@@ -37,19 +37,21 @@ const ProductBannerSection: React.FC<SectionProps> = ({
   return (
     <Section $py={20}>
       <Container>
-        {
-          loading.lazy ? (
-            <Skeleton
-              width='100%'
-              height='125px'
-              height_sm='270px'
-              height_md='365px'
-              height_lg='500px'
-              radius='10px'
-            />
-          ) : (
-            <ProductBannerWrapper>
-              <div className="top">
+        <ProductBannerWrapper>
+          <div className={`top ${loading.lazy ? '' : 'bg__active'}`}>
+            {
+              loading.lazy ? (
+                <div className="banner-slide">
+                  <div className="content">
+                    <Skeleton width='30px' height='30px' />
+                    <Skeleton width='90%' height='200px' />
+                    <Skeleton width='150px' height='50px' radius='10px' />
+                  </div>
+                  <div className="banner-image">
+                    <Skeleton width='100%' height='100%' />
+                  </div>
+                </div>
+              ) : (
                 <Swiper
                   className='pagination-true'
                   loop={true}
@@ -86,25 +88,41 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                     ))
                   }
                 </Swiper>
-              </div>
-              <div className="bottom">
-                <div className="bottom_left">
+              )
+            }
+
+          </div>
+          <div className={`bottom ${loading.lazy ? '' : 'bg__active'}`}>
+            <div className="bottom_left">
+              {
+                loading.lazy ?
+                  <Skeleton width='100%' max_width='450px' height='45px' height_lg='26px' /> :
                   <Link href={`/${activeLocale}`}>{generalDictionary.banner_question}</Link>
-                </div>
-                <div className="bottom_right">
-                  <Link href={`/${activeLocale}`}>
-                    <div className="icon"><FaPhoneAlt /></div>
-                    <div className="label">(+994 12) 404 45 45</div>
-                  </Link>
-                  <Link href={`/${activeLocale}`}>
-                    <div className="icon"><FaQuestion /></div>
-                    <div className="label">{generalDictionary.write_us}</div>
-                  </Link>
-                </div>
-              </div>
-            </ProductBannerWrapper>
-          )
-        }
+              }
+            </div>
+            <div className="bottom_right">
+              {
+                loading.lazy ? (
+                  <Fragment>
+                    <Skeleton width='140px' height='35px' />
+                    <Skeleton width='140px' height='35px' />
+                  </Fragment>
+                ) : (
+                  <Fragment>
+                    <Link href={`/${activeLocale}`}>
+                      <div className="icon"><FaPhoneAlt /></div>
+                      <div className="label">(+994 12) 404 45 45</div>
+                    </Link>
+                    <Link href={`/${activeLocale}`}>
+                      <div className="icon"><FaQuestion /></div>
+                      <div className="label">{generalDictionary.write_us}</div>
+                    </Link>
+                  </Fragment>
+                )
+              }
+            </div>
+          </div>
+        </ProductBannerWrapper>
       </Container>
     </Section>
   )

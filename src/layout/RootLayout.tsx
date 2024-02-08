@@ -6,12 +6,22 @@ import GlobalStyles from '../styles/global';
 import { Fancybox } from '@fancyapps/ui';
 import { ThemeProvider } from 'styled-components';
 import { SiteToolbar } from '../components';
-import { LoadingType, RootLayoutProps } from '../types';
 import { Footer, Header } from '../partials';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
-import Cookies from 'js-cookie';
 import { useDarkMode } from 'usehooks-ts';
+import {
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    FilialDataType,
+    FilialTranslateDataType,
+    LoadingType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
+    SettingDataType,
+    SettingTranslateDataType
+} from '../types';
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
@@ -21,9 +31,21 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import '../styles/scss/index.scss';
 
+type LayoutProps = {
+    children: React.ReactNode,
+    activeLocale: LocaleType,
+    settingData: SettingDataType,
+    settingTranslateData: SettingTranslateDataType[],
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
+    filialData: FilialDataType[],
+    filialTranslateData: FilialTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+}
 
-
-const RootLayout: React.FC<RootLayoutProps> = ({
+const RootLayout: React.FC<LayoutProps> = ({
     activeLocale,
     categoryData,
     categoryTranslateData,

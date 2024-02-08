@@ -30,7 +30,7 @@ const PopularProductSection: React.FC<SectionProps> = ({
   const product = new Product(productData, productTranslateData);
   const popularProducts: ProductDataType[] | [] = product.getPopularProducts(productData);
   return (
-    <Section $py={20}>
+    <Section $py={40} $py_lg={60}>
       <Container>
         <SectionTitle title={titleDictionary.popular_products} />
         <Swiper

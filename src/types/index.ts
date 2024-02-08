@@ -47,20 +47,6 @@ import {
 } from './data';
 
 import {
-    RootLayoutProps,
-    CatalogPageLayoutProps,
-    AboutPageLayoutProps,
-    ColorSystemPageLayoutProps,
-    ActionPageLayoutProps,
-    GalleryPageLayoutProps,
-    NewsPageLayoutProps,
-    ContactPageLayoutProps,
-    PaymentDeliveryPageLayoutProps,
-    WarrantyConditionPageLayoutProps,
-    HomePageLayoutProps,
-} from './layout';
-
-import {
     BreadcrumbType,
     PageTitleDataType,
     LoadingType,
@@ -127,18 +113,6 @@ export type {
     AccountDataType,
     UserDataType,
     OrderDataType,
-
-    RootLayoutProps,
-    CatalogPageLayoutProps,
-    AboutPageLayoutProps,
-    ColorSystemPageLayoutProps,
-    ActionPageLayoutProps,
-    GalleryPageLayoutProps,
-    NewsPageLayoutProps,
-    ContactPageLayoutProps,
-    PaymentDeliveryPageLayoutProps,
-    WarrantyConditionPageLayoutProps,
-    HomePageLayoutProps,
 
     BreadcrumbType,
     PageTitleDataType,

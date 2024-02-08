@@ -4,10 +4,27 @@ import { useDispatch } from 'react-redux';
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components'
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { LoadingType, LocaleStateType, NewsPageLayoutProps, PageTitleDataType } from '@/src/types'
+import {
+    ArticleDataType,
+    ArticleTranslateDataType,
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
+    PageTitleDataType
+} from '@/src/types'
 
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    articleData: ArticleDataType[],
+    articleTranslateData: ArticleTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+}
 
-const NewsPageLayout: React.FC<NewsPageLayoutProps> = ({
+const NewsPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     articleData,
     articleTranslateData,

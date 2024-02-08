@@ -3,10 +3,28 @@ import React, { Fragment } from 'react'
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { LoadingType, LocaleStateType, PageTitleDataType, PaymentDeliveryPageLayoutProps } from '@/src/types'
+import {
+    ArticleDataType,
+    ArticleTranslateDataType,
+    LoadingType, 
+    LocaleStateType, 
+    LocaleType, 
+    MenuDataType, 
+    MenuTranslateDataType, 
+    PageTitleDataType
+} from '@/src/types'
 import { useDispatch } from 'react-redux';
 
-const PaymentDeliveryPageLayout: React.FC<PaymentDeliveryPageLayoutProps> = ({
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    articleData: ArticleDataType[],
+    articleTranslateData: ArticleTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+}
+
+const PaymentDeliveryPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     articleData,
     articleTranslateData,

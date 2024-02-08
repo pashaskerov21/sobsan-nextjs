@@ -1,12 +1,44 @@
 'use client'
 import { Menu } from '@/src/class';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { BannerSection, PopularProductSection, ProductBannerSection } from '@/src/sections';
-import { HomePageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
+import { BannerSection, PopularProductSection, ProductBannerSection, RoomSuggestionSection } from '@/src/sections';
+import {
+    BannerDataType,
+    BrandDataType,
+    BrandTranslateDataType,
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
+    ProductBannerDataType,
+    ProductBannerTranslateDataType,
+    ProductDataType,
+    ProductTranslateDataType,
+    RoomDataType,
+    RoomTranslateDataType
+} from '@/src/types'
 import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 
-const HomePageLayout: React.FC<HomePageLayoutProps> = ({
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    bannerData: BannerDataType[],
+    productBannerData: ProductBannerDataType[];
+    productBannerTranslateData: ProductBannerTranslateDataType[],
+    productData: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
+    generalDictionary: { [key: string]: string },
+    brandData: BrandDataType[],
+    brandTranslateData: BrandTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+    roomData: RoomDataType[],
+    roomTranslateData: RoomTranslateDataType[],
+}
+
+const HomePageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     bannerData,
     menuData,
@@ -19,6 +51,8 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
     brandData,
     brandTranslateData,
     titleDictionary,
+    roomData,
+    roomTranslateData,
 }) => {
 
     const [loading, setLoading] = React.useState<LoadingType>({
@@ -72,6 +106,14 @@ const HomePageLayout: React.FC<HomePageLayoutProps> = ({
                 productTranslateData={productTranslateData}
                 brandData={brandData}
                 brandTranslateData={brandTranslateData}
+                titleDictionary={titleDictionary}
+            />
+            <RoomSuggestionSection
+                activeLocale={activeLocale}
+                generalDictionary={generalDictionary}
+                loading={loading}
+                roomData={roomData}
+                roomTranslateData={roomTranslateData}
                 titleDictionary={titleDictionary}
             />
         </Fragment>

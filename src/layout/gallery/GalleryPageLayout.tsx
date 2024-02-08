@@ -4,9 +4,17 @@ import { useDispatch } from 'react-redux';
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { GalleryPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
+import { GalleryDataType, LoadingType, LocaleStateType, LocaleType, MenuDataType, MenuTranslateDataType, PageTitleDataType } from '@/src/types'
 
-const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
+type LayoutProps = {
+  activeLocale: LocaleType,
+  menuData: MenuDataType[],
+  menuTranslateData: MenuTranslateDataType[],
+  galleryData: GalleryDataType[],
+  titleDictionary: { [key: string]: string },
+}
+
+const GalleryPageLayout: React.FC<LayoutProps> = ({
   activeLocale,
   galleryData,
   menuData,
@@ -21,22 +29,22 @@ const GalleryPageLayout: React.FC<GalleryPageLayoutProps> = ({
   });
   React.useEffect(() => {
     setTimeout(() => {
-        setLoading((prev) => {
-            return {
-                ...prev,
-                standart: false,
-            }
-        });
+      setLoading((prev) => {
+        return {
+          ...prev,
+          standart: false,
+        }
+      });
     }, 500);
     setTimeout(() => {
-        setLoading((prev) => {
-            return {
-                ...prev,
-                lazy: false,
-            }
-        });
+      setLoading((prev) => {
+        return {
+          ...prev,
+          lazy: false,
+        }
+      });
     }, 1000);
-}, []);
+  }, []);
 
   const menu = new Menu(menuData, menuTranslateData);
   const localeSlugs: LocaleStateType[] = menu.getLocaleSlugs(path);

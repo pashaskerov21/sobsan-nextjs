@@ -1,13 +1,41 @@
 'use client'
 import React, { Fragment } from 'react'
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { CatalogPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { PageTitle } from '@/src/components';
 import { Menu } from '@/src/class';
 import { CatalogSection } from '@/src/sections';
+import {
+    CatalogDataType,
+    CatalogTranslateDataType,
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    ColorDataType, 
+    ColorTranslateDataType, 
+    LoadingType, 
+    LocaleStateType, 
+    LocaleType, 
+    MenuDataType, 
+    MenuTranslateDataType, 
+    PageTitleDataType
+} from '@/src/types'
 
-const CatalogPageLayout: React.FC<CatalogPageLayoutProps> = ({
+
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
+    catalogData: CatalogDataType[],
+    catalogTranslateData: CatalogTranslateDataType[],
+    colorData: ColorDataType[],
+    colorTranslateData: ColorTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+    textDictionary: { [key: string]: string },
+}
+
+const CatalogPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     menuData,
     menuTranslateData,

@@ -31,12 +31,14 @@ export const ProductBannerWrapper = styled.div`
     .top{
         width: 100%;
         min-height: 300px;
-        padding: 30px 0;
-        background: url('/design/large-drop-bg.webp'), linear-gradient(to bottom, #ffc073 -24%, #ed3237 95%);
+        padding: 30px 0;  
         background-position: top center;
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 10px 10px 0 0;
+        &.bg__active{
+            background: url('/design/large-drop-bg.webp'), linear-gradient(to bottom, #ffc073 -24%, #ed3237 95%);
+        }
         @media (width >= 992px){
             padding: 50px 0;
         }
@@ -88,31 +90,24 @@ export const ProductBannerWrapper = styled.div`
                 }
             }
             .banner-image{
-                width: 100%;
-                max-width: 200px;
+                width: 200px;
+                height: 200px;
                 img{
                     width: 100%;
-                    height: auto;
-                    max-height: 200px;
+                    height: 100%;
                     object-fit: contain;
                 }
                 @media (min-width: 576px){
-                    max-width: 250px;
-                    img{
-                        max-height: 250px;
-                    }
+                    width: 250px;
+                    height: 250px;
                 }
                 @media (min-width: 992px){
-                    max-width: 300px;
-                    img{
-                        max-height: 300px;
-                    }
+                    width: 300px;
+                    height: 300px;
                 }
                 @media (min-width: 1200px){
-                    max-width: 400px;
-                    img{
-                        max-height: 400px;
-                    }
+                    width: 400px;
+                    height: 400px;
                 }
             }
         }
@@ -121,10 +116,12 @@ export const ProductBannerWrapper = styled.div`
         width: 100%;
         min-height: 100px;
         padding: 25px 10px;
-        background: linear-gradient(to bottom,rgb(186, 34, 34),#ed3237);
         border-radius: 0 0 10px 10px;
         ${column_center};
         gap: 40px;
+        &.bg__active{
+            background: linear-gradient(to bottom,rgb(186, 34, 34),#ed3237);
+        }
         @media (width >= 992px){
             ${row_around};
         }

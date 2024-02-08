@@ -3,10 +3,28 @@ import React, { Fragment } from 'react'
 import { Menu } from '@/src/class';
 import { PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { ContactPageLayoutProps, LoadingType, LocaleStateType, PageTitleDataType } from '@/src/types'
+import {
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
+    PageTitleDataType, 
+    SettingDataType, 
+    SettingTranslateDataType
+} from '@/src/types'
 import { useDispatch } from 'react-redux';
 
-const ContactPageLayout: React.FC<ContactPageLayoutProps> = ({
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    settingData: SettingDataType,
+    settingTranslateData: SettingTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+}
+
+const ContactPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     menuData,
     menuTranslateData,

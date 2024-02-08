@@ -1,12 +1,30 @@
 'use client'
 import React, { Fragment } from 'react'
 import { Menu } from '@/src/class';
-import { LoadingType, LocaleStateType, PageTitleDataType, WarrantyConditionPageLayoutProps } from '@/src/types'
+import {
+    ArticleDataType,
+    ArticleTranslateDataType,
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    MenuDataType, 
+    MenuTranslateDataType, 
+    PageTitleDataType
+} from '@/src/types'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { PageTitle } from '@/src/components';
 
-const WarrantyConditionsPageLayout: React.FC<WarrantyConditionPageLayoutProps> = ({
+type LayoutProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    articleData: ArticleDataType[],
+    articleTranslateData: ArticleTranslateDataType[],
+    titleDictionary: { [key: string]: string },
+}
+
+const WarrantyConditionsPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     articleData,
     articleTranslateData,

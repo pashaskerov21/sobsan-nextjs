@@ -1,4 +1,15 @@
-import { CategoriesDataType, CategoriesTranslateDataType, FilialDataType, FilialTranslateDataType, LoadingType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from ".."
+import {
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    FilialDataType,
+    FilialTranslateDataType,
+    LoadingType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
+    SettingDataType,
+    SettingTranslateDataType
+} from ".."
 
 export type HeaderStateType = {
     fixed: boolean,

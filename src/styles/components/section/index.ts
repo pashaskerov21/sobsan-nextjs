@@ -162,6 +162,9 @@ const Section = styled.section<SectionProps>`
             }
         `
     }
+    &.room__section{
+        animation: room-background 10s linear infinite;
+    }
 `;
 
 export default Section;
