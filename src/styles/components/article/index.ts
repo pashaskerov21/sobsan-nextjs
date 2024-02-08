@@ -12,11 +12,9 @@ export const ArticleContainer = styled.div`
         .article__row__column{
             width: 100%;
             ${column_center};
-            text-align: center;
             gap: 20px;
             max-width: 650px;
             @media (min-width: 992px){
-                text-align: start;
                 align-items: flex-start;
                 max-width: 100%;
             }
@@ -33,7 +31,11 @@ export const ArticleContainer = styled.div`
                 }
             }
             .article__text{
+                width: 100%:
                 font-size: 14px;
+                ul{
+                    list-style: disc;
+                }
                 @media (min-width: 768px){
                     font-size: 16px;
                 }
@@ -54,11 +56,9 @@ export const ArticleContainer = styled.div`
                     width: 47%;
                     &:first-child{
                         align-items: flex-start;
-                        text-align: start;
                     }
                     &:last-child{
                         align-items: flex-start;
-                        text-align: end;
                     }
                 }
             }

@@ -1,19 +1,21 @@
 'use client'
 import React, { Fragment } from 'react'
-import { Menu } from '@/src/class';
-import { PageTitle } from '@/src/components';
+import { Article, Menu } from '@/src/class';
+import { PageTitle, Skeleton } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import {
     ArticleDataType,
     ArticleTranslateDataType,
-    LoadingType, 
-    LocaleStateType, 
-    LocaleType, 
-    MenuDataType, 
-    MenuTranslateDataType, 
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
     PageTitleDataType
 } from '@/src/types'
 import { useDispatch } from 'react-redux';
+import { ArticleContainer, Container, Section } from '@/src/styles';
+import Image from 'next/image';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -64,6 +66,9 @@ const PaymentDeliveryPageLayout: React.FC<LayoutProps> = ({
     React.useEffect(() => {
         dispatch(updateLocaleSlug(localeSlugs))
     }, [dispatch]);
+    
+    const article = new Article(articleData, articleTranslateData);
+    const activeArticleData: ArticleDataType[] = article.getArticle(3);
     return (
         <Fragment>
             <PageTitle
@@ -72,6 +77,34 @@ const PaymentDeliveryPageLayout: React.FC<LayoutProps> = ({
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
             />
+            <Section $py={20}>
+                <Container>
+                    <ArticleContainer>
+                        {
+                            activeArticleData.map((data) => (
+                                <div className={`article__row ${data.image !== null ? 'two__column' : ''}`} key={`article-1-${data.id}`}>
+                                    <div className="article__row__column">
+                                        {
+                                            loading.standart ? <Skeleton width='100%' height='250px' /> : (
+                                                <div className="article__text" dangerouslySetInnerHTML={{ __html: article.getTranslate(data.id, activeLocale, "text") }} />
+                                            )
+                                        }
+                                    </div>
+                                    {
+                                        data.image !== null && (
+                                            <div className="article__row__column">
+                                                {
+                                                    loading.lazy ? <Skeleton width='100%' height='400px' /> : <Image src={data.image} width={1000} height={1000} alt='' priority={true} />
+                                                }
+                                            </div>
+                                        )
+                                    }
+                                </div>
+                            ))
+                        }
+                    </ArticleContainer>
+                </Container>
+            </Section>
         </Fragment>
     )
 }

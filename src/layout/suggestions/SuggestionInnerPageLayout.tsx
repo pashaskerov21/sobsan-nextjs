@@ -2,11 +2,12 @@
 import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { PageTitle } from '@/src/components';
+import { PageTitle, Skeleton } from '@/src/components';
 import { LoadingType, LocaleStateType, LocaleType, PageTitleDataType, RoomDataType, RoomTranslateDataType } from '@/src/types';
-import { i18n } from '@/i18n-config';
-import { RoomSuggesstionInnerSection, RoomSuggestionSection } from '@/src/sections';
 import { Suggestion } from '@/src/class';
+import { ArticleContainer, Section } from '@/src/styles';
+import { Container } from 'react-bootstrap';
+import Image from 'next/image';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -65,15 +66,26 @@ const SuggestionInnerPageLayout: React.FC<LayoutProps> = ({
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
             />
-            <RoomSuggesstionInnerSection
-                activeData={activeData}
-                activeLocale={activeLocale}
-                generalDictionary={generalDictionary}
-                loading={loading}
-                roomData={roomData}
-                roomTranslateData={roomTranslateData}
-                titleDictionary={titleDictionary}
-            />
+            <Section $py={20}>
+                <Container>
+                    <ArticleContainer>
+                        <div className="article__row two__column">
+                            <div className="article__row__column">
+                                {
+                                    loading.standart ? <Skeleton width='100%' height='250px' /> : (
+                                        <div className="article__text" dangerouslySetInnerHTML={{ __html: suggestion.getTranslate(activeData.id, activeLocale, "text") }} />
+                                    )
+                                }
+                            </div>
+                            <div className="article__row__column">
+                                {
+                                    loading.lazy ? <Skeleton width='100%' height='400px' /> : <Image src={activeData.image} width={1000} height={1000} alt='' priority={true} />
+                                }
+                            </div>
+                        </div>
+                    </ArticleContainer>
+                </Container>
+            </Section>
         </Fragment>
     )
 }

@@ -14,6 +14,7 @@ import Basket from "./Basket";
 import Wishlist from "./Wishlist";
 import Comparison from "./Comparison";
 import Suggestion from "./Suggestion";
+import Article from "./Article";
 
 export {
     Setting,
@@ -32,4 +33,5 @@ export {
     Wishlist,
     Comparison,
     Suggestion,
+    Article,
 }

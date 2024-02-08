@@ -79,7 +79,7 @@ export const SuggestionWrapper = styled.div`
         }
         &:hover{
             .suggestion__item__image{
-                transform: scale(0.9);
+                /* transform: scale(0.9); */
                 .image__hover{
                     opacity: 1;
                     .title{

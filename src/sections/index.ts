@@ -11,7 +11,6 @@ import CheckoutSection from "./basket/CheckoutSection";
 import AccounSection from "./account/AccounSection";
 import ComparisonSection from "./comparison/ComparisonSection";
 import RoomSuggestionSection from "./room/RoomSuggestionSection";
-import RoomSuggesstionInnerSection from "./room/RoomSuggesstionInnerSection";
 
 export {
     CatalogSection,
@@ -27,5 +26,4 @@ export {
     AccounSection,
     ComparisonSection,
     RoomSuggestionSection,
-    RoomSuggesstionInnerSection,
 }

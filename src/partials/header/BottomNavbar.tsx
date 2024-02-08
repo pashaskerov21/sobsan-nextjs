@@ -53,17 +53,20 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                 <div className="menu-header-icons">
                   <Link href='/'><FaPhoneAlt /></Link>
                   <Link href='/'><FaQuestion /></Link>
-                  <Link className='user-icon' href={`/${activeLocale}/account`}><HiMiniUser /></Link>
                 </div>
                 {
-                  !accountData.activeUser && (
+                  accountData.activeUser ? (
+                    <Link href={`/${activeLocale}/login`} className='login-link'>
+                      <div className="icon"><HiMiniUser /></div>
+                      <span>{titleDictionary.my_account}</span>
+                    </Link>
+                  ) : (
                     <Link href={`/${activeLocale}/login`} className='login-link'>
                       <div className="icon"><BiLogInCircle /></div>
                       <span>{titleDictionary.login}</span>
                     </Link>
                   )
                 }
-
                 <button className='close-button' onClick={toggleMenu}><FaXmark /></button>
               </div>
             </div>
