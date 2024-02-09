@@ -23,6 +23,7 @@ import AccountUpdateForm from "./form/AccountUpdateForm";
 import OrderHistory from "./account/OrderHistory";
 import ProductOrderRow from "./product/ProductOrderRow";
 import ProductComparisonCard from "./product/ProductComparisonCard";
+import Gallery from "./gallery/Gallery";
 
 
 export {
@@ -51,4 +52,5 @@ export {
     OrderHistory,
     ProductOrderRow,
     ProductComparisonCard,
+    Gallery,
 }

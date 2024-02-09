@@ -2,9 +2,10 @@
 import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux';
 import { Menu } from '@/src/class';
-import { PageTitle } from '@/src/components';
+import { Gallery, PageTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { GalleryDataType, LoadingType, LocaleStateType, LocaleType, MenuDataType, MenuTranslateDataType, PageTitleDataType } from '@/src/types'
+import { Container, Section } from '@/src/styles';
 
 type LayoutProps = {
   activeLocale: LocaleType,
@@ -61,6 +62,15 @@ const GalleryPageLayout: React.FC<LayoutProps> = ({
         pageTitleData={pageTitleData}
         titleDictionary={titleDictionary}
       />
+      <Section $py={20}>
+        <Container>
+          <Gallery
+            galleryData={galleryData}
+            loading={loading}
+            titleDictionary={titleDictionary}
+          />
+        </Container>
+      </Section>
     </Fragment>
   )
 }

@@ -1,11 +1,14 @@
 'use client'
 import { Menu } from '@/src/class';
+import { Gallery, SectionTitle } from '@/src/components';
 import { updateLocaleSlug } from '@/src/redux/actions';
 import { BannerSection, PopularProductSection, ProductBannerSection, RoomSuggestionSection } from '@/src/sections';
+import { Section } from '@/src/styles';
 import {
     BannerDataType,
     BrandDataType,
     BrandTranslateDataType,
+    GalleryDataType,
     LoadingType,
     LocaleStateType,
     LocaleType,
@@ -19,6 +22,7 @@ import {
     RoomTranslateDataType
 } from '@/src/types'
 import React, { Fragment } from 'react'
+import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 type LayoutProps = {
@@ -36,6 +40,7 @@ type LayoutProps = {
     titleDictionary: { [key: string]: string },
     roomData: RoomDataType[],
     roomTranslateData: RoomTranslateDataType[],
+    galleryData: GalleryDataType[],
 }
 
 const HomePageLayout: React.FC<LayoutProps> = ({
@@ -53,6 +58,7 @@ const HomePageLayout: React.FC<LayoutProps> = ({
     titleDictionary,
     roomData,
     roomTranslateData,
+    galleryData,
 }) => {
 
     const [loading, setLoading] = React.useState<LoadingType>({
@@ -116,6 +122,16 @@ const HomePageLayout: React.FC<LayoutProps> = ({
                 roomTranslateData={roomTranslateData}
                 titleDictionary={titleDictionary}
             />
+            <Section $py={60}>
+                <Container>
+                    <SectionTitle title={titleDictionary['gallery']}/>
+                    <Gallery
+                        galleryData={galleryData}
+                        loading={loading}
+                        titleDictionary={titleDictionary}
+                    />
+                </Container>
+            </Section>
         </Fragment>
     )
 }

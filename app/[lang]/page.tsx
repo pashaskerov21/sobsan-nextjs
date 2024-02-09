@@ -1,8 +1,8 @@
 import React, { Fragment } from "react"
 import { getTranslate } from "@/get-translate";
 import { HomePageLayout } from "@/src/layout";
-import { BannerDataType, BrandDataType, BrandTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, ProductBannerDataType, ProductBannerTranslateDataType, ProductDataType, ProductTranslateDataType, RoomDataType, RoomTranslateDataType } from "@/src/types";
-import { fetchBannerData, fetchBrandData, fetchBrandTranslateData, fetchMenuData, fetchMenuTranslateData, fetchProductBannerData, fetchProductBannerTranslateData, fetchProductData, fetchProductTranslateData, fetchRoomData, fetchRoomTranslateData } from "@/src/utils";
+import { BannerDataType, BrandDataType, BrandTranslateDataType, GalleryDataType, LocaleType, MenuDataType, MenuTranslateDataType, ProductBannerDataType, ProductBannerTranslateDataType, ProductDataType, ProductTranslateDataType, RoomDataType, RoomTranslateDataType } from "@/src/types";
+import { fetchBannerData, fetchBrandData, fetchBrandTranslateData, fetchGalleryData, fetchMenuData, fetchMenuTranslateData, fetchProductBannerData, fetchProductBannerTranslateData, fetchProductData, fetchProductTranslateData, fetchRoomData, fetchRoomTranslateData } from "@/src/utils";
 
 const fetchData = async (): Promise<{
   menuData: MenuDataType[] | undefined;
@@ -15,7 +15,8 @@ const fetchData = async (): Promise<{
   brandData: BrandDataType[] | undefined,
   brandTranslateData: BrandTranslateDataType[] | undefined,
   roomData: RoomDataType[] | undefined,
-  roomTranslateData: RoomTranslateDataType[] | []
+  roomTranslateData: RoomTranslateDataType[] | [],
+  galleryData: GalleryDataType[] | undefined,
 }> => {
   try {
     const [
@@ -30,6 +31,7 @@ const fetchData = async (): Promise<{
       brandTranslateData,
       roomData,
       roomTranslateData,
+      galleryData,
     ] = await Promise.all([
       fetchMenuData(),
       fetchMenuTranslateData(),
@@ -42,6 +44,7 @@ const fetchData = async (): Promise<{
       fetchBrandTranslateData(),
       fetchRoomData(),
       fetchRoomTranslateData(),
+      fetchGalleryData(),
     ]);
 
     return {
@@ -56,6 +59,7 @@ const fetchData = async (): Promise<{
       brandTranslateData,
       roomData,
       roomTranslateData,
+      galleryData,
     };
   } catch (error) {
     throw new Error('Failed to fetch data');
@@ -78,6 +82,7 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
       brandTranslateData,
       roomData,
       roomTranslateData,
+      galleryData,
     } = await fetchData();
 
     const t = await getTranslate(lang);
@@ -96,6 +101,7 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
       && brandTranslateData
       && roomData
       && roomTranslateData
+      && galleryData
     ) {
       return (
         <HomePageLayout
@@ -113,6 +119,7 @@ const HomePage = async ({ params: { lang } }: { params: { lang: LocaleType }; })
           titleDictionary={titleDictionary}
           roomData={roomData}
           roomTranslateData={roomTranslateData}
+          galleryData={galleryData}
         />
       )
     } else {
