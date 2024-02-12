@@ -112,6 +112,7 @@ export const MasterWrapper = styled.div<{$activeTab: number}>`
         }
         .content__text{
             font-size: 14px;
+            text-align: center;
         }
     }
 `;

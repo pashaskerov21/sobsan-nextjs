@@ -59,32 +59,47 @@ const MasterSection: React.FC<SectionProps> = ({
                         </div>
                     </div>
                     <div className="wrapper__right">
-                        <Swiper
-                            loop={true}
-                            spaceBetween={20}
-                            autoplay={{
-                                delay: 2500,
-                                disableOnInteraction: false,
-                            }}
-                            modules={[Autoplay]}
-                        >
-                            {
-                                masterArticles.map((data) => (
-                                    <SwiperSlide key={`master-article-image-${data.id}`}>
-                                        {data.image && (
-                                            <div className="master__image">
-                                                <Image src={data.image} width={1000} height={500} priority={true} alt='' />
-                                            </div>
-                                        )}
-                                    </SwiperSlide>
-                                ))
-                            }
-                        </Swiper>
+                        {
+                            loading.lazy ? <Skeleton width='100%' height='300px' /> : (
+                                <Swiper
+                                    loop={true}
+                                    spaceBetween={20}
+                                    autoplay={{
+                                        delay: 2500,
+                                        disableOnInteraction: false,
+                                    }}
+                                    modules={[Autoplay]}
+                                >
+                                    {
+                                        masterArticles.map((data) => (
+                                            <SwiperSlide key={`master-article-image-${data.id}`}>
+                                                {data.image && (
+                                                    <div className="master__image">
+                                                        <Image src={data.image} width={1000} height={500} priority={true} alt='' />
+                                                    </div>
+                                                )}
+                                            </SwiperSlide>
+                                        ))
+                                    }
+                                </Swiper>
+                            )
+                        }
                         {
                             masterArticles.map((data) => (
                                 <div className="master__content" key={`master-article-content-${data.id}`}>
-                                    <div className="content__title">{article.getTranslate(data.id, activeLocale, "title")}</div>
-                                    <div className="content__text" dangerouslySetInnerHTML={{ __html: article.getTranslate(data.id, activeLocale, "text") }} />
+                                    {
+                                        loading.lazy ? (
+                                            <Fragment>
+                                                <Skeleton width='80%' height='30px'/>
+                                                <Skeleton width='100%' height='250px'/>
+                                            </Fragment>
+                                        ) : (
+                                            <Fragment>
+                                                <div className="content__title">{article.getTranslate(data.id, activeLocale, "title")}</div>
+                                                <div className="content__text" dangerouslySetInnerHTML={{ __html: article.getTranslate(data.id, activeLocale, "text") }} />
+                                            </Fragment>
+                                        )
+                                    }
                                 </div>
                             ))
                         }
