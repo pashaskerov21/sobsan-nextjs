@@ -136,6 +136,14 @@ export const FormWrapper = styled.div`
             max-width: 100%;
         }
     }
+    &.master__form{
+        form{
+            padding: 20px;
+        }
+        button[type="submit"]{
+            max-width: 100%;
+        }
+    }
 `
 type FormComponentProps = {
     $hasValue: boolean,

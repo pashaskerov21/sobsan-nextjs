@@ -25,6 +25,8 @@ import ProductOrderRow from "./product/ProductOrderRow";
 import ProductComparisonCard from "./product/ProductComparisonCard";
 import Gallery from "./gallery/Gallery";
 import ContactForm from "./form/ContactForm";
+import MasterLoginForm from "./form/MasterLoginForm";
+import MasterRegisterForm from "./form/MasterRegisterForm";
 
 
 export {
@@ -55,4 +57,6 @@ export {
     ProductComparisonCard,
     Gallery,
     ContactForm,
+    MasterLoginForm,
+    MasterRegisterForm,
 }

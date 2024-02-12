@@ -7,7 +7,7 @@ import { Article } from '@/src/class'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Image from 'next/image'
 import { Autoplay } from 'swiper/modules'
-import { Skeleton } from '@/src/components'
+import { MasterLoginForm, MasterRegisterForm, Skeleton } from '@/src/components'
 
 type SectionProps = {
     loading: LoadingType,
@@ -57,6 +57,21 @@ const MasterSection: React.FC<SectionProps> = ({
                             }
 
                         </div>
+                        {
+                            activeFormTab === 1 ? (
+                                <MasterLoginForm
+                                    formDictionary={formDictionary}
+                                    loading={loading}
+                                    titleDictionary={titleDictionary}
+                                />
+                            ) : (
+                                <MasterRegisterForm
+                                    formDictionary={formDictionary}
+                                    loading={loading}
+                                    titleDictionary={titleDictionary}
+                                />
+                            )
+                        }
                     </div>
                     <div className="wrapper__right">
                         {
@@ -90,8 +105,8 @@ const MasterSection: React.FC<SectionProps> = ({
                                     {
                                         loading.lazy ? (
                                             <Fragment>
-                                                <Skeleton width='80%' height='30px'/>
-                                                <Skeleton width='100%' height='250px'/>
+                                                <Skeleton width='80%' height='30px' />
+                                                <Skeleton width='100%' height='250px' />
                                             </Fragment>
                                         ) : (
                                             <Fragment>

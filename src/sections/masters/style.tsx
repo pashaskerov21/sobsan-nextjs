@@ -7,7 +7,7 @@ export const MasterWrapper = styled.div<{$activeTab: number}>`
     gap: 40px;
     @media (min-width: 992px){
         ${row_between};
-        align-items: stretch;
+        align-items: flex-start;
     }
     .wrapper__left{
         width: 100%;

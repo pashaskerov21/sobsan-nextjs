@@ -13,10 +13,8 @@ import { Account } from '@/src/class'
 import Skeleton from '../skeleton/Skeleton'
 
 type FormProps = {
-    activeLocale: LocaleType,
     loading: LoadingType,
     titleDictionary: { [key: string]: string },
-    generalDictionary: { [key: string]: string },
     formDictionary: {
         [key: string]: {
             [key: string]: string
@@ -28,31 +26,21 @@ type RegistrationFormValueType = {
     firstName: string,
     lastName: string,
     phone: string | number,
-    address: string,
     email: string,
     password: string,
     password_confirm: string,
 }
 
-const RegistrationForm: React.FC<FormProps> = ({
-    activeLocale,
+const MasterRegisterForm: React.FC<FormProps> = ({
     formDictionary,
     loading,
     titleDictionary,
-    generalDictionary,
 }) => {
-    const [accountData, setAccountData] = useLocalStorage<AccountDataType>('accounts', {
-        activeUser: undefined,
-        users: [],
-    });
-    const router = useRouter();
-    const account = new Account(accountData);
 
     const initialValues: RegistrationFormValueType = {
         firstName: "",
         lastName: "",
         phone: "",
-        address: "",
         email: "",
         password: "",
         password_confirm: "",
@@ -104,43 +92,10 @@ const RegistrationForm: React.FC<FormProps> = ({
     });
 
     const onSubmit = (values: RegistrationFormValueType, actions: FormikHelpers<RegistrationFormValueType>) => {
-        const searchAccount: UserDataType | undefined = account.searchUserByEmail(values.email);
-        if (searchAccount) {
-            Swal.fire({
-                icon: "error",
-                title: formDictionary.error["error"],
-                text: formDictionary.error["account_exist"],
-            });
-        } else {
-            const newUser: UserDataType = {
-                id: uuidv4(),
-                account: {
-                    email: values.email,
-                    password: values.password,
-                },
-                profile: {
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                    phone: values.phone,
-                    address: values.address,
-                },
-                orders: [],
-            }
-            setAccountData(account.registration(newUser));
-            Swal.fire({
-                icon: "success",
-                title: generalDictionary["congratulations"],
-                text: generalDictionary["resgistration_messsage"],
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    router.push(`/${activeLocale}/login`);
-                    // actions.resetForm();
-                }
-            });
-        }
+        actions.resetForm();
     }
     return (
-        <FormWrapper className='registration__form'>
+        <FormWrapper className='master__form'>
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
@@ -152,7 +107,6 @@ const RegistrationForm: React.FC<FormProps> = ({
                             {
                                 loading.lazy ? (
                                     <Fragment>
-                                        <Skeleton width='100%' height='70px' />
                                         <Skeleton width='100%' height='70px' />
                                         <Skeleton width='100%' height='70px' />
                                         <Skeleton width='100%' height='70px' />
@@ -185,13 +139,6 @@ const RegistrationForm: React.FC<FormProps> = ({
                                         />
                                         <FormComponent
                                             control='input'
-                                            name='address'
-                                            type='text'
-                                            label={formDictionary.label.address}
-                                            formik={formik}
-                                        />
-                                        <FormComponent
-                                            control='input'
                                             name='email'
                                             type='email'
                                             label={formDictionary.label.email + ' *'}
@@ -216,7 +163,7 @@ const RegistrationForm: React.FC<FormProps> = ({
                             }
                             {
                                 loading.lazy ?
-                                    <Skeleton width='100%' max_width='200px' height='55px' className='button__skeleton' />
+                                    <Skeleton width='100%' height='55px' className='button__skeleton' />
                                     : <button type='submit'>{titleDictionary["registration"]}</button>
                             }
                         </Form>
@@ -227,4 +174,4 @@ const RegistrationForm: React.FC<FormProps> = ({
     )
 }
 
-export default React.memo(RegistrationForm)
+export default React.memo(MasterRegisterForm)
