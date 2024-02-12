@@ -1,13 +1,14 @@
 import { column_center, row_between, row_center } from "@/src/styles";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
-export const GalleryWrapper = styled.div`
+export const GalleryWrapper = styled.div<{ $type: number }>`
     width: 100%;
     ${column_center};
     gap: 30px;
     .gallery__buttons{
         width: 100%;
         ${column_center};
+        position: relative;
         @media (min-width: 768px){
             ${row_between};
         }
@@ -19,12 +20,46 @@ export const GalleryWrapper = styled.div`
             border: 1px solid ${props => props.theme.border_color_1};
             transition: all 0.3s;
             cursor: pointer;
+            background: url('/design/large-drop-bg.webp');
+            background-size: cover;
+            transition: all 0.5s;
+            &:nth-child(1){
+                border-bottom: 0;
+                @media (min-width: 768px){
+                    border-bottom: 1px solid ${props => props.theme.border_color_1};
+                    border-right: 0;
+                }
+            }
+            &:nth-child(2){
+                @media (min-width: 768px){
+                    border-left: 0;
+                }
+            }
             &.active{
-                background: url('/design/large-drop-bg.webp');
-                background-size: contain;
-                background-color: #ed3237 !important;
                 color: #fff;
             }
+        }
+        .active__button__layer{
+            z-index: -1;
+            width: 100%;
+            height: 70px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+            background-color: #ed3237 !important;
+            color: #fff;
+            transition: all 0.3s;
+            @media (min-width: 768px){
+                width: 50%;
+            }
+            ${props => props.$type === 2 && css`
+                top: 50%;
+                @media (min-width: 768px){
+                    top: 0;
+                    left: 50%;
+                }
+            `}
         }
         .button__skeleton{
             &:first-child{

@@ -21,6 +21,7 @@ import WishlistPageLayout from "./wishlist/WishlistPageLayout";
 import ComparisonPageLayout from "./comparisons/ComparisonPageLayout";
 import SuggestionPageLayout from "./suggestions/SuggestionPageLayout";
 import SuggestionInnerPageLayout from "./suggestions/SuggestionInnerPageLayout";
+import MasterPageLayout from "./article/MasterPageLayout";
 
 export {
     RootLayout,
@@ -46,4 +47,5 @@ export {
     ComparisonPageLayout,
     SuggestionPageLayout,
     SuggestionInnerPageLayout,
+    MasterPageLayout,
 }

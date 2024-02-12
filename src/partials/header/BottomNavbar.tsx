@@ -97,7 +97,7 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                     toggleSearch={toggleSearch} />
                 </div>
               </div>
-              <Link href='/' className='master-logo'>
+              <Link href={`/${activeLocale}/masters_union`} className='master-logo'>
                 <Image src={settingData.master_logo} width={100} height={30} alt='m-logo' />
               </Link>
             </div>

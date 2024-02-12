@@ -12,6 +12,7 @@ import AccounSection from "./account/AccounSection";
 import ComparisonSection from "./comparison/ComparisonSection";
 import RoomSuggestionSection from "./room/RoomSuggestionSection";
 import ContactSection from "./contact/ContactSection";
+import MasterSection from "./masters/MasterSection";
 
 export {
     CatalogSection,
@@ -28,4 +29,5 @@ export {
     ComparisonSection,
     RoomSuggestionSection,
     ContactSection,
+    MasterSection,
 }

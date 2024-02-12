@@ -45,7 +45,12 @@ const ArticleData: ArticleDataType[] = [
     {
         id: 7,
         type: 7,
-        image: '',
+        image: '/masters/banner-1.webp',
+    },
+    {
+        id: 8,
+        type: 7,
+        image: '/masters/banner-2.webp',
     },
 ]
 export default ArticleData;

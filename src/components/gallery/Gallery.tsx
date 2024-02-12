@@ -1,5 +1,5 @@
 'use client'
-import React, { Fragment } from 'react'
+import React, { Fragment, useRef } from 'react'
 import { GalleryDataType, LoadingType } from '@/src/types'
 import Skeleton from '../skeleton/Skeleton'
 import { GalleryWrapper } from './style'
@@ -20,18 +20,13 @@ const Gallery: React.FC<GalleryProps> = ({
 }) => {
     const [activeType, setActiveType] = React.useState<number>(1);
     const [galleryItems, setGalleryItems] = React.useState<GalleryDataType[]>(galleryData);
-    const [imageLoading, setImageLoading] = React.useState<boolean>(true);
+
 
     React.useEffect(() => {
         setGalleryItems([...galleryData.filter((data) => data.type === activeType)]);
     }, [activeType]);
-
-    const handleImageLoad = () => {
-        setImageLoading(false); 
-        console.log('load func test')
-    };
     return (
-        <GalleryWrapper>
+        <GalleryWrapper $type={activeType}>
             <div className="gallery__buttons">
                 {
                     loading.lazy ? (
@@ -41,8 +36,9 @@ const Gallery: React.FC<GalleryProps> = ({
                         </Fragment>
                     ) : (
                         <Fragment>
-                            <div className={`gallery__button ${activeType === 1 && 'active'}`} onClick={() => setActiveType(1)}>{titleDictionary["photos"]}</div>
-                            <div className={`gallery__button ${activeType === 2 && 'active'}`} onClick={() => setActiveType(2)}>{titleDictionary["videos"]}</div>
+                            <div className={`gallery__button ${activeType === 1 ? 'active' : ''}`} onClick={() => setActiveType(1)}>{titleDictionary["photos"]}</div>
+                            <div className={`gallery__button ${activeType === 2 ? 'active' : ''}`} onClick={() => setActiveType(2)}>{titleDictionary["videos"]}</div>
+                            <div className="active__button__layer"></div>
                         </Fragment>
                     )
                 }
@@ -53,7 +49,7 @@ const Gallery: React.FC<GalleryProps> = ({
                         <div key={`gallery-item-${data.id}`} className='gallery__item'>
                             {loading.lazy ? <Skeleton width='100%' height='300px' /> : (
                                 <Fragment>
-                                    <Image src={data.image} className='gallery__image' width={500} height={500} alt='' onLoad={handleImageLoad} />
+                                    <Image src={data.image} className='gallery__image' width={500} height={500} alt='' />
                                     <div className="item__hover">
                                         <Link href={data.image} data-fancybox={`gallery-${activeType}`} className='item__button'>
                                             {activeType === 1 ? <FaSearch /> : <FaPlay />}
