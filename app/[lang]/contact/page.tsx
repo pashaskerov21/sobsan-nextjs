@@ -49,6 +49,8 @@ const ContactPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
   try {
     const t = await getTranslate(lang);
     const titleDictionary = t.title;
+    const generalDictionary = t.general;
+    const formDictionary = t.form;
     const { settingData, settingTranslateData, menuData, menuTranslateData } = await fetchData();
     if (
       settingData
@@ -64,6 +66,8 @@ const ContactPage = async ({ params: { lang } }: { params: { lang: LocaleType } 
           menuData={menuData}
           menuTranslateData={menuTranslateData}
           titleDictionary={titleDictionary}
+          formDictionary={formDictionary}
+          generalDictionary={generalDictionary}
         />
       )
     } else {

@@ -127,6 +127,15 @@ export const FormWrapper = styled.div`
             }
         }
     }
+    &.contact__form{
+        .contact__text{
+            width: 100%;
+            font-size: 14px;
+        }
+        button[type="submit"]{
+            max-width: 100%;
+        }
+    }
 `
 type FormComponentProps = {
     $hasValue: boolean,
@@ -195,6 +204,9 @@ export const FormComponentWrapper = styled.div<FormComponentProps>`
     &.invalid{
         input{
             border-bottom: 1px solid ${props => props.theme.color_1} !important;
+        }
+        textarea{
+            border: 1px solid ${props => props.theme.color_1} !important;
         }
     }
 `

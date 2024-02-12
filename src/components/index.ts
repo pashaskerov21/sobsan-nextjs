@@ -24,6 +24,7 @@ import OrderHistory from "./account/OrderHistory";
 import ProductOrderRow from "./product/ProductOrderRow";
 import ProductComparisonCard from "./product/ProductComparisonCard";
 import Gallery from "./gallery/Gallery";
+import ContactForm from "./form/ContactForm";
 
 
 export {
@@ -53,4 +54,5 @@ export {
     ProductOrderRow,
     ProductComparisonCard,
     Gallery,
+    ContactForm,
 }

@@ -13,7 +13,7 @@ export type TextareaControlProps = {
     value?: string,
 }
 
-const Textarea: React.FC<TextareaControlProps> = ({...rest}) => {
+const Textarea: React.FC<TextareaControlProps> = ({ ...rest }) => {
     const [invalidStatus, setInvalidStatus] = React.useState(false);
     React.useEffect(() => {
         if (rest.formik?.errors[rest.name] && rest.formik.touched[rest.name]) {
@@ -24,11 +24,14 @@ const Textarea: React.FC<TextareaControlProps> = ({...rest}) => {
     }, [rest.formik])
     return (
         <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[rest.name] || rest.formik?.values[rest.name]?.length > 0 ? true : false}>
-            <Field as="textarea" id={`text-area-${rest.name}`} name={rest.name} value={rest.value}/>
+
+            {rest.value ?
+                <Field as="textarea" id={`text-area-${rest.name}`} name={rest.name} value={rest.value} /> :
+                <Field as="textarea" id={`text-area-${rest.name}`} name={rest.name} />}
             <label htmlFor={`text-area-${rest.name}`}>{rest.label}</label>
             <ErrorMessage name={rest.name}>
                 {(message: string) => (
-                    <div className='error'>{message}</div>
+                    <div className='invalid__message'>{message}</div>
                 )}
             </ErrorMessage>
         </FormComponentWrapper>

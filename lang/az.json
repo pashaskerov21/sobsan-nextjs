@@ -111,7 +111,10 @@
         "delete_account_successfull": "Hesab uğurla silindi",
         "title": "Başlıq",
         "number": "Say",
-        "coloring_suggestion": "Daxili rəngləndirmə təklifləri"
+        "coloring_suggestion": "Daxili rəngləndirmə təklifləri",
+        "message_send_successfull": "Mesajınız uğurla göndərildi",
+        "contact_info_text": "Bütün sual və müraciətlərinizi rahatlıqla bizə ünvanlaya bilərsiniz. Ən qısa zamanda və böyük məmnuniyyətlə cavablandıracağıq.",
+        "send": "Göndər"
     },
     "form": {
         "label": {
@@ -136,7 +139,9 @@
             "female": "Qadın",
             "city": "Şəhər",
             "region": "Rayon, qəsəbə",
-            "address_additional_info": "Əlavə təsvir (küçə, ev və s.)"
+            "address_additional_info": "Əlavə təsvir (küçə, ev və s.)",
+            "fullName": "Ad, Soyad",
+            "message": "Mesajınız"
         },
         "error": {
             "error": "Xəta",
@@ -159,7 +164,9 @@
             "phone_required": "Telefon tələb olunur",
             "delivery_address_required": "Çatdırılma ünvanı tələb olunur",
             "payment_type_required": "Ödəniş növünü seçin",
-            "delivery_type_required": "Çatdırılma növünü seçin"
+            "delivery_type_required": "Çatdırılma növünü seçin",
+            "fullName_required": "Ad, Soyad tələb olunur",
+            "message_required": "Mesaj tələb olunur"
         }
     }
 }

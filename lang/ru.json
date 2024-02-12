@@ -111,7 +111,10 @@
         "delete_account_successfull": "Аккаунт успешно удален",
         "title": "Заголовок",
         "number": "Число",
-        "coloring_suggestion": "Рекомендации по окраске интерьера"
+        "coloring_suggestion": "Рекомендации по окраске интерьера",
+        "message_send_successfull": "Ваше сообщение было отправлено успешно",
+        "contact_info_text": "Все свои вопросы и пожелания вы легко можете адресовать нам. Мы ответим как можно скорее и с большим удовольствием.",
+        "send": "Отправлять"
     },
     "form": {
         "label": {
@@ -136,7 +139,9 @@
             "female": "Женский",
             "city": "Город",
             "region": "Район, поселок",
-            "address_additional_info": "Дополнительное описание (улица, дом и т.п.)"
+            "address_additional_info": "Дополнительное описание (улица, дом и т.п.)",
+            "fullName": "Имя и фамилия",
+            "message": "Ваше сообщение"
         },
         "error": {
             "error": "Ошибка",
@@ -159,7 +164,9 @@
             "phone_required": "Требуется телефон",
             "delivery_address_required": "Требуется адрес доставки",
             "payment_type_required": "Выберите тип оплаты",
-            "delivery_type_required": "Выберите тип доставки"
+            "delivery_type_required": "Выберите тип доставки",
+            "fullName_required": "Требуется Имя, Фамилия",
+            "message_required": "Требуется сообщение"
         }
     }
 }

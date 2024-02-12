@@ -7,7 +7,7 @@ const SettingTranslateData:SettingTranslateDataType[] = [
         setting_id: 1,
         title: "Sobsan Boya",
         description: "Sobsan Boya - Azərbaycanın ilk lak-boya istehsalı müəssisəsi",
-        address: "",
+        address: "Bakı,",
         copyright: 'Bütün hüquqlar qorunur',
     },
     {

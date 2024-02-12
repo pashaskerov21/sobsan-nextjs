@@ -25,9 +25,9 @@ const Input: React.FC<InputControlProps> = ({ ...rest }) => {
     return (
         <FormComponentWrapper className={invalidStatus ? 'invalid' : ''} $hasValue={rest.formik?.values[rest.name] || rest.formik?.values[rest.name].length > 0 ? true : false}>
             {
-                rest.type === "password" ?
-                    <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} /> :
-                    <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} value={rest.value} />
+                rest.value ?
+                    <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder} value={rest.value}/> :
+                    <Field id={`input-${rest.type}-${rest.name}`} name={rest.name} type={rest.type} placeholder={rest.placeholder}  />
             }
             <label htmlFor={`input-${rest.type}-${rest.name}`}>{rest.label}</label>
             <ErrorMessage name={rest.name}>

@@ -9,11 +9,12 @@ import {
     LocaleType,
     MenuDataType,
     MenuTranslateDataType,
-    PageTitleDataType, 
-    SettingDataType, 
+    PageTitleDataType,
+    SettingDataType,
     SettingTranslateDataType
 } from '@/src/types'
 import { useDispatch } from 'react-redux';
+import { ContactSection } from '@/src/sections';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -22,6 +23,12 @@ type LayoutProps = {
     settingData: SettingDataType,
     settingTranslateData: SettingTranslateDataType[],
     titleDictionary: { [key: string]: string },
+    generalDictionary: { [key: string]: string },
+    formDictionary: {
+        [key: string]: {
+            [key: string]: string
+        }
+    },
 }
 
 const ContactPageLayout: React.FC<LayoutProps> = ({
@@ -31,6 +38,8 @@ const ContactPageLayout: React.FC<LayoutProps> = ({
     settingData,
     settingTranslateData,
     titleDictionary,
+    formDictionary,
+    generalDictionary,
 }) => {
     const path = 'contact';
     const dispatch = useDispatch();
@@ -70,6 +79,15 @@ const ContactPageLayout: React.FC<LayoutProps> = ({
                 loading={loading}
                 activeLocale={activeLocale}
                 pageTitleData={pageTitleData}
+                titleDictionary={titleDictionary}
+            />
+            <ContactSection
+                activeLocale={activeLocale}
+                formDictionary={formDictionary}
+                generalDictionary={generalDictionary}
+                loading={loading}
+                settingData={settingData}
+                settingTranslateData={settingTranslateData}
                 titleDictionary={titleDictionary}
             />
         </Fragment>

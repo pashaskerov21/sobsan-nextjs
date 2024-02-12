@@ -111,7 +111,10 @@
         "delete_account_successfull": "Account deleted successfully",
         "title": "Title",
         "number": "Number",
-        "coloring_suggestion": "Interior coloring suggestions"
+        "coloring_suggestion": "Interior coloring suggestions",
+        "message_send_successfull": "Your message has been sent successfully",
+        "contact_info_text": "You can easily address all your questions and requests to us. We will respond as soon as possible and with great pleasure.",
+        "send": "Send"
     },
     "form": {
         "label": {
@@ -136,7 +139,9 @@
             "female": "Female",
             "city": "City",
             "region": "District, settlement",
-            "address_additional_info": "Additional description (street, house, etc.)"
+            "address_additional_info": "Additional description (street, house, etc.)",
+            "fullName": "Name, Surname",
+            "message": "Your message"
         },
         "error": {
             "error": "Error",
@@ -159,7 +164,9 @@
             "phone_required": "Phone is required",
             "delivery_address_required": "Delivery address is required",
             "payment_type_required": "Select the payment type",
-            "delivery_type_required": "Select the delivery type"
+            "delivery_type_required": "Select the delivery type",
+            "fullName_required": "Name, Surname required",
+            "message_required": "Message required"
         }
     }
 }
