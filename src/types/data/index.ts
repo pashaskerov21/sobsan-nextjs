@@ -212,7 +212,8 @@ export type SettingTranslateDataType = {
     setting_id: number,
     title: string,
     description: string,
-    address: string,
+    address_office: string,
+    address_factory: string,
     copyright: string,
 };
 export type WeightDataType = {

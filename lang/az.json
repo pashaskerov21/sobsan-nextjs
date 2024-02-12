@@ -114,7 +114,9 @@
         "coloring_suggestion": "Daxili rəngləndirmə təklifləri",
         "message_send_successfull": "Mesajınız uğurla göndərildi",
         "contact_info_text": "Bütün sual və müraciətlərinizi rahatlıqla bizə ünvanlaya bilərsiniz. Ən qısa zamanda və böyük məmnuniyyətlə cavablandıracağıq.",
-        "send": "Göndər"
+        "send": "Göndər",
+        "address_office": "Baş ofis",
+        "address_factory": "Fabrik ünvanı"
     },
     "form": {
         "label": {

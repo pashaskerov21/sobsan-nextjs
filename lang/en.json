@@ -114,7 +114,9 @@
         "coloring_suggestion": "Interior coloring suggestions",
         "message_send_successfull": "Your message has been sent successfully",
         "contact_info_text": "You can easily address all your questions and requests to us. We will respond as soon as possible and with great pleasure.",
-        "send": "Send"
+        "send": "Send",
+        "address_office": "Head office",
+        "address_factory": "Factory address"
     },
     "form": {
         "label": {

@@ -25,14 +25,12 @@ export const ContactWrapper = styled.div`
         ${column_center};
         gap: 20px;
         text-align: center;
+        padding: 10px 30px;
         .item__icon{
-            font-size: 40px;
+            font-size: 30px;
         }
         .item__value{
             font-weight: 500;
-            @media (min-width: 768px){
-                font-size: 18px;
-            }
         }
     }
     .social-icons{

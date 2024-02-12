@@ -70,7 +70,10 @@ const ContactSection: React.FC<SectionProps> = ({
                                 <FaLocationDot />
                             </div>
                             <div className="item__value">
-                                {setting.getTranslate(1, activeLocale, "address")}
+                                {generalDictionary['address_office']}: {setting.getTranslate(1, activeLocale, "address_office")}
+                            </div>
+                            <div className="item__value">
+                                {generalDictionary['address_factory']}: {setting.getTranslate(1, activeLocale, "address_factory")}
                             </div>
                         </div>
                         <SocialMedia className='form-page' settingData={settingData} />
