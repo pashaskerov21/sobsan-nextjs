@@ -98,7 +98,7 @@ class Product {
         }
     };
     public getProductBySlug(slug: string, activeLocale: LocaleType) {
-        const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.lang === activeLocale && data.title.toLocaleLowerCase() === decodeURIComponent(slug.toLocaleLowerCase()));
+        const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.lang === activeLocale && data.title.toLocaleLowerCase().trim() === decodeURIComponent(slug.toLocaleLowerCase().trim()));
         let activeData: ProductDataType | undefined;
         if (activeTranslateData) {
             activeData = this.productData.find((data) => data.id === activeTranslateData.product_id);

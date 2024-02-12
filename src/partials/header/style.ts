@@ -408,13 +408,16 @@ export const SearchFormWrapper = styled.form`
     .input-row{
         position: absolute;
         top: calc(100% + 15px);
-        right: 0;
+        right: 30px;
         width: 0;
         opacity: 0;
         height: 35px;
         overflow: hidden;
         visibility: hidden;
         transition: all 0.2s;
+        @media (min-width: 576px){
+            right: 0;
+        }
         input{
             position: absolute;
             width: 100%;

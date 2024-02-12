@@ -19,6 +19,7 @@ export const CategoryWrapper = styled.div<CategoryWrapperProps>`
             position: relative;
             a{
                 display: block;
+                width: 100%;
                 text-transform: capitalize;
                 font-size: 12px;
                 &:hover{
