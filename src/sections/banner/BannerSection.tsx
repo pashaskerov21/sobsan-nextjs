@@ -20,6 +20,7 @@ const BannerSection: React.FC<{ loading: LoadingType, bannerData: BannerDataType
                             height_md='365px'
                             height_lg='500px'
                             radius='10px'
+                            className='d-none'
                         />
                     ) : (
                         <Swiper

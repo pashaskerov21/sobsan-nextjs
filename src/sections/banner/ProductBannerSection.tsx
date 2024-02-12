@@ -41,7 +41,7 @@ const ProductBannerSection: React.FC<SectionProps> = ({
           <div className={`top ${loading.lazy ? '' : 'bg__active'}`}>
             {
               loading.lazy ? (
-                <div className="banner-slide">
+                <div className="banner-slide d-none">
                   <div className="content">
                     <Skeleton width='150px' height='30px' />
                     <Skeleton width='90%' height='200px' />
@@ -94,7 +94,7 @@ const ProductBannerSection: React.FC<SectionProps> = ({
           </div>
           {
             loading.lazy ? (
-              <Skeleton width='100%' height='100px' radius='0 0 10px 10px' />
+              <Skeleton width='100%' height='100px' radius='0 0 10px 10px' className='d-none' />
             ) : (
               <div className={`bottom ${loading.lazy ? '' : 'bg__active'}`}>
                 <div className="bottom_left">
