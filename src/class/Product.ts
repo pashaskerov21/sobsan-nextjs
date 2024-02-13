@@ -20,7 +20,7 @@ class Product {
                 case "description":
                     return translate = activeTranslateData.description;
                 case "url":
-                    return translate = `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+                    return translate = `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.trim().toLocaleLowerCase())}`
                 default:
                     return translate = "";
             }
@@ -43,7 +43,7 @@ class Product {
         const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.product_id === id && data.lang === activeLocale);
         let url = `/${activeLocale}/product/`
         if (activeTranslateData) {
-            url = `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`
+            url = `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.trim().toLocaleLowerCase())}`
         }
         return url;
     };
@@ -98,8 +98,9 @@ class Product {
         }
     };
     public getProductBySlug(slug: string, activeLocale: LocaleType) {
-        const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.lang === activeLocale && data.title.toLocaleLowerCase().trim() === decodeURIComponent(slug.toLocaleLowerCase().trim()));
         let activeData: ProductDataType | undefined;
+        const repairSlug = decodeURIComponent(slug);
+        const activeTranslateData: ProductTranslateDataType | undefined = this.productTranslateData.find((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase() === repairSlug);
         if (activeTranslateData) {
             activeData = this.productData.find((data) => data.id === activeTranslateData.product_id);
         }
@@ -118,7 +119,7 @@ class Product {
             localeSlugs = activeTranslateData.map((data) => {
                 return {
                     locale: data.lang,
-                    slug: `product/${encodeURIComponent(data.title.toLocaleLowerCase())}`,
+                    slug: `product/${encodeURIComponent(data.title.trim().toLocaleLowerCase())}`,
                 }
             });
         };
@@ -143,7 +144,7 @@ class Product {
                 breadcrumbs: [
                     {
                         id: 1,
-                        path: `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.toLocaleLowerCase())}`,
+                        path: `/${activeLocale}/product/${encodeURIComponent(activeTranslateData.title.trim().toLocaleLowerCase())}`,
                         name: activeTranslateData.title,
                     }
                 ]
