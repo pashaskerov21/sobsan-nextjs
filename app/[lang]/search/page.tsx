@@ -2,15 +2,19 @@ import React from 'react'
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslate } from '@/get-translate';
-import { BrandDataType, BrandTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types';
+import { BrandDataType, BrandTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, LocaleType, MenuDataType, MenuTranslateDataType, ProductDataType, ProductTranslateDataType } from '@/src/types';
 import { SearchPageLayout } from '@/src/layout';
-import { fetchBrandData, fetchBrandTranslateData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
+import { fetchBrandData, fetchBrandTranslateData, fetchCategoryData, fetchCategoryTranslateData, fetchMenuData, fetchMenuTranslateData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
 
 const fetchData = async (): Promise<{
     productData: ProductDataType[] | undefined,
     productTranslateData: ProductTranslateDataType[] | undefined,
     brandData: BrandDataType[] | undefined,
     brandTranslateData: BrandTranslateDataType[] | undefined,
+    menuData: MenuDataType[] | undefined,
+    menuTranslateData: MenuTranslateDataType[] | undefined,
+    categoryData: CategoriesDataType[] | undefined;
+    categoryTranslateData: CategoriesTranslateDataType[] | undefined;
 }> => {
     try {
         const [
@@ -18,11 +22,19 @@ const fetchData = async (): Promise<{
             productTranslateData,
             brandData,
             brandTranslateData,
+            menuData,
+            menuTranslateData,
+            categoryData,
+            categoryTranslateData,
         ] = await Promise.all([
             fetchProductData(),
             fetchProductTranslateData(),
             fetchBrandData(),
             fetchBrandTranslateData(),
+            fetchMenuData(),
+            fetchMenuTranslateData(),
+            fetchCategoryData(),
+            fetchCategoryTranslateData(),
         ]);
 
         return {
@@ -30,6 +42,10 @@ const fetchData = async (): Promise<{
             productTranslateData,
             brandData,
             brandTranslateData,
+            menuData,
+            menuTranslateData,
+            categoryData,
+            categoryTranslateData,
         };
     } catch (error) {
         throw new Error('Failed to fetch data');
@@ -60,12 +76,20 @@ const SearchPage = async ({ params: { lang } }: { params: { lang: LocaleType } }
             productData,
             productTranslateData,
             brandData,
-            brandTranslateData } = await fetchData();
+            brandTranslateData,
+            menuData,
+            menuTranslateData,
+            categoryData,
+            categoryTranslateData, } = await fetchData();
         if (
             productData
             && productTranslateData
             && brandData
             && brandTranslateData
+            && menuData
+            && menuTranslateData
+            && categoryData
+            && categoryTranslateData
         ) {
             return (
                 <SearchPageLayout
@@ -76,6 +100,10 @@ const SearchPage = async ({ params: { lang } }: { params: { lang: LocaleType } }
                     productData={productData}
                     productTranslateData={productTranslateData}
                     titleDictionary={titleDictionary}
+                    menuData={menuData}
+                    menuTranslateData={menuTranslateData}
+                    categoryData={categoryData}
+                    categoryTranslateData={categoryTranslateData}
                 />
             )
         } else {

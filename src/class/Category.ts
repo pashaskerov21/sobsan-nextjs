@@ -94,6 +94,16 @@ class Category {
             filter((product) => product !== undefined) as ProductDataType[];
         return products;
     }
+    public search(value: string, activeLocale: LocaleType) {
+        let result: CategoriesDataType | undefined;
+        const searchResult = decodeURIComponent(value.trim().toLocaleLowerCase());
+        const translateData: CategoriesTranslateDataType | undefined = this.categoryTranslateData.find((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase().includes(searchResult));
+
+        if (translateData) {
+            result = this.categoryData.find((data) => data.id === translateData.category_id);
+        }
+        return result;
+    }
 }
 
 export default Category;

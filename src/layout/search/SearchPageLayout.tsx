@@ -6,16 +6,21 @@ import { PageTitle, ProductGrid, Skeleton } from '@/src/components';
 import {
     BrandDataType,
     BrandTranslateDataType,
+    CategoriesDataType,
+    CategoriesTranslateDataType,
     LoadingType,
     LocaleStateType,
     LocaleType,
+    MenuDataType,
+    MenuTranslateDataType,
     PageTitleDataType,
     ProductDataType,
     ProductTranslateDataType,
 } from '@/src/types';
 import { i18n } from '@/i18n-config';
 import { Container, Section } from '@/src/styles';
-import { Product } from '@/src/class';
+import { Category, Menu, Product } from '@/src/class';
+import { useRouter } from 'next/navigation';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -25,6 +30,10 @@ type LayoutProps = {
     productTranslateData: ProductTranslateDataType[],
     brandData: BrandDataType[],
     brandTranslateData: BrandTranslateDataType[],
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    categoryData: CategoriesDataType[],
+    categoryTranslateData: CategoriesTranslateDataType[],
 }
 
 const SearchPageLayout: React.FC<LayoutProps> = ({
@@ -35,6 +44,10 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
     brandTranslateData,
     productData,
     productTranslateData,
+    menuData,
+    menuTranslateData,
+    categoryData,
+    categoryTranslateData,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
         standart: true,
@@ -79,8 +92,10 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
     }
 
 
-
+    const router = useRouter();
     const product = new Product(productData, productTranslateData);
+    const menu = new Menu(menuData, menuTranslateData);
+    const category = new Category(categoryData, categoryTranslateData);
     const [queryStatus, setQueryStatus] = useState<boolean>(false);
     const [query, setQuery] = useState<string>('');
     const [searchProducts, setSearchProducts] = useState<ProductDataType[]>([]);
@@ -99,11 +114,30 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
             });
             dispatch(updateLocaleSlug(localeSlugs));
 
-            const resultProducts: ProductDataType[] = product.search(queryParam, activeLocale);
-            if(resultProducts.length > 0){
+            const searchProductsByTitle: ProductDataType[] = product.searchByTitle(queryParam, activeLocale);
+            const searchProductsByDesc: ProductDataType[] = product.searchByDesc(queryParam, activeLocale);
+            const mergedProducts = [...searchProductsByTitle, ...searchProductsByDesc];
+
+            const uniqueProducts = mergedProducts.filter((product, index, self) =>
+                index === self.findIndex((p) => (
+                    p.id === product.id
+                ))
+            );
+
+            const activeCategoryData: CategoriesDataType | undefined = category.search(queryParam, activeLocale);
+            const activeMenuData: MenuDataType | undefined = menu.search(queryParam, activeLocale);
+            if (uniqueProducts.length > 0) {
                 setQueryStatus(true);
-                setSearchProducts(resultProducts);
-            }else{
+                setSearchProducts(uniqueProducts);
+            } else if (activeCategoryData) {
+                setQueryStatus(true);
+                const url = category.getTranslate(activeCategoryData.id, activeLocale, "url");
+                router.push(url);
+            } else if (activeMenuData) {
+                setQueryStatus(true);
+                const url = menu.getTranslate(activeMenuData, activeLocale, "url");
+                router.push(url);
+            } else {
                 setQueryStatus(false);
                 setSearchProducts([]);
             }

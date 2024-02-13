@@ -18,13 +18,13 @@ class Menu {
                 case "title":
                     return translate = activeTranslateData.title;
                 case "url":
-                    if(activeData.parent_id === 0){
+                    if (activeData.parent_id === 0) {
                         return translate = `/${activeLocale}/${activeData.path}`;
-                    }else{
+                    } else {
                         const parentData: MenuDataType | undefined = this.menuData.find((data) => data.id === activeData.parent_id);
-                        if(parentData){
+                        if (parentData) {
                             return translate = `/${activeLocale}/${parentData.path}/${activeData.path}`;
-                        }else{
+                        } else {
                             return translate = `/${activeLocale}/${activeData.path}`;
                         }
                     }
@@ -126,6 +126,16 @@ class Menu {
         }
 
         return localeSlugs;
+    }
+    public search(value: string, activeLocale: LocaleType) {
+        let result: MenuDataType | undefined;
+        const searchResult = decodeURIComponent(value.trim().toLocaleLowerCase());
+        const translateData: MenuTranslateDataType | undefined = this.menuTranslateData.find((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase().includes(searchResult));
+
+        if (translateData) {
+            result = this.menuData.find((data) => data.id === translateData.menu_id);
+        }
+        return result;
     }
 }
 

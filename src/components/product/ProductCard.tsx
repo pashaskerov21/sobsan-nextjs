@@ -60,6 +60,29 @@ const ProductTitle: React.FC<{ title: string, searchKeyword?: string }> = ({ sea
         )
     }
 }
+const ProductDescription: React.FC<{ description: string, searchKeyword?: string }> = ({ searchKeyword, description }) => {
+    if (searchKeyword) {
+        const regex = new RegExp(`(${searchKeyword})`, 'gi');
+        const parts = description.split(regex);
+        return (
+            <Fragment>
+                {parts.map((part, index) =>
+                    regex.test(part) ? (
+                        <span key={index} style={{ backgroundColor: '#ed3237', color: '#fff' }}>
+                            {part}
+                        </span>
+                    ) : (
+                        <Fragment key={index}>{part}</Fragment>
+                    )
+                )}
+            </Fragment>
+        )
+    } else {
+        return (
+            <Fragment>{description}</Fragment>
+        )
+    }
+}
 
 const ProductCard: React.FC<CardProps> = ({
     activeLocale,
@@ -197,10 +220,14 @@ const ProductCard: React.FC<CardProps> = ({
                             <div className="product__brand">{brandTitle}</div>
                             <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__title'>
                                 <ProductTitle title={product.getTranslate(activeProductData.id, activeLocale, "title")} searchKeyword={searchKeyword} />
-                                {/* {product.getTranslate(activeProductData.id, activeLocale, "title")} */}
                             </Link>
                             <div className="product__description">
-                                {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0, 100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}
+                                <ProductDescription
+                                    description={product.getTranslate(activeProductData.id, activeLocale, "description").length > 100
+                                        ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0, 100) + '...'
+                                        : product.getTranslate(activeProductData.id, activeLocale, "description")}
+                                    searchKeyword={searchKeyword}
+                                />
                             </div>
                         </Fragment>
                     )

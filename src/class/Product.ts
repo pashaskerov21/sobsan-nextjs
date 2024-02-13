@@ -191,7 +191,7 @@ class Product {
         const product: ProductDataType | undefined = this.productData.find((data) => data.id === id);
         return product;
     }
-    public search(value: string, activeLocale: LocaleType) {
+    public searchByTitle(value: string, activeLocale: LocaleType) {
         const searchResult = decodeURIComponent(value.trim().toLocaleLowerCase());
         const translates: ProductTranslateDataType[] = this.productTranslateData.filter((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase().includes(searchResult));
         const result: ProductDataType[] = translates.map((t_data) =>
@@ -199,5 +199,14 @@ class Product {
             filter((p) => p !== undefined) as ProductDataType[];
         return result;
     }
+    public searchByDesc(value: string, activeLocale: LocaleType) {
+        const searchResult = decodeURIComponent(value.trim().toLocaleLowerCase());
+        const translates: ProductTranslateDataType[] = this.productTranslateData.filter((data) => data.lang === activeLocale && data.description.trim().toLocaleLowerCase().includes(searchResult));
+        const result: ProductDataType[] = translates.map((t_data) =>
+            this.productData.find((p_data) => p_data.id === t_data.product_id)).
+            filter((p) => p !== undefined) as ProductDataType[];
+        return result;
+    }
+    
 }
 export default Product;
