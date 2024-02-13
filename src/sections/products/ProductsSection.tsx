@@ -180,6 +180,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         });
         const url = window.location.origin + window.location.pathname;
         router.push(url);
+        closeFilters();
     }, [router]);
 
 
@@ -212,6 +213,7 @@ const ProductsSection: React.FC<SectionProps> = ({
 
     const handleSubmitFilterForm = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        closeFilters();
 
         const queryParams = new URLSearchParams(window.location.search); 
 

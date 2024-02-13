@@ -37,21 +37,12 @@ const ProductBannerSection: React.FC<SectionProps> = ({
   return (
     <Section $py={20}>
       <Container>
-        <ProductBannerWrapper>
-          <div className={`top ${loading.lazy ? '' : 'bg__active'}`}>
-            {
-              loading.lazy ? (
-                <div className="banner-slide d-none">
-                  <div className="content">
-                    <Skeleton width='150px' height='30px' />
-                    <Skeleton width='90%' height='200px' />
-                    <Skeleton width='150px' height='50px' radius='10px' />
-                  </div>
-                  <div className="banner-image">
-                    <Skeleton width='100%' height='100%' />
-                  </div>
-                </div>
-              ) : (
+        {
+          loading.lazy ? (
+            <Fragment></Fragment>
+          ) : (
+            <ProductBannerWrapper>
+              <div className={`top ${loading.lazy ? '' : 'bg__active'}`}>
                 <Swiper
                   className='pagination-true'
                   loop={true}
@@ -88,14 +79,7 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                     ))
                   }
                 </Swiper>
-              )
-            }
-
-          </div>
-          {
-            loading.lazy ? (
-              <Skeleton width='100%' height='100px' radius='0 0 10px 10px' className='d-none' />
-            ) : (
+              </div>
               <div className={`bottom ${loading.lazy ? '' : 'bg__active'}`}>
                 <div className="bottom_left">
                   <Link href={`/${activeLocale}`}>{generalDictionary.banner_question}</Link>
@@ -113,10 +97,9 @@ const ProductBannerSection: React.FC<SectionProps> = ({
                   </Fragment>
                 </div>
               </div>
-            )
-          }
-
-        </ProductBannerWrapper>
+            </ProductBannerWrapper>
+          )
+        }
       </Container>
     </Section>
   )
