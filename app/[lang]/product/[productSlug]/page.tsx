@@ -245,11 +245,7 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
                     />
                 )
             } else {
-                return(
-                    <div>
-                        {productSlug} - {decodeURIComponent(productSlug)} 
-                    </div>
-                )
+                redirect(`/${lang}/404`);
             }
         } else {
             redirect(`/${lang}/404`);
