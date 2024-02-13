@@ -218,8 +218,8 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
             if (activeProductData) {
                 return (
                     <>
-                    {decodeURIComponent(productSlug)}
-                    {product.getTranslate(activeProductData.id, lang, "title").toLocaleLowerCase()}
+                    <div>slug: {decodeURIComponent(productSlug)}</div>
+                    <div>title: {product.getTranslate(activeProductData.id, lang, "title").toLocaleLowerCase()}</div>
                     </>
                     // <ProductDetailPageLayout
                     //     activeLocale={lang}
