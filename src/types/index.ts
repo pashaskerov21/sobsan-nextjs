@@ -52,16 +52,6 @@ import {
     LoadingType,
 } from './components';
 
-import {
-    HeaderStateType,
-    HeaderProps,
-    TopNavbarProps,
-    BottomNavbarProps,
-    PageLinksProps,
-    CategoryProps,
-    SearchProps,
-    FooterProps,
-} from './partials'
 
 import {
     LocaleStateType,
@@ -117,15 +107,6 @@ export type {
     BreadcrumbType,
     PageTitleDataType,
     LoadingType,
-
-    HeaderStateType,
-    HeaderProps,
-    TopNavbarProps,
-    BottomNavbarProps,
-    PageLinksProps,
-    CategoryProps,
-    SearchProps,
-    FooterProps,
 
     LocaleStateType,
     RootStateType,

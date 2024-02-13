@@ -3,10 +3,35 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FooterWrapper } from './style'
-import { FooterProps } from '@/src/types'
 import { Container } from '@/src/styles'
 import { Skeleton, SocialMedia } from '@/src/components'
 import { Category, Filial, Menu, Setting } from '@/src/class'
+import {
+  CategoriesDataType,
+  CategoriesTranslateDataType,
+  FilialDataType,
+  FilialTranslateDataType,
+  LoadingType,
+  LocaleType,
+  MenuDataType,
+  MenuTranslateDataType,
+  SettingDataType,
+  SettingTranslateDataType
+} from '@/src/types'
+
+export type FooterProps = {
+  loading: LoadingType,
+  activeLocale: LocaleType,
+  settingData: SettingDataType,
+  settingTranslateData: SettingTranslateDataType[],
+  menuData: MenuDataType[],
+  menuTranslateData: MenuTranslateDataType[],
+  categoryData: CategoriesDataType[],
+  categoryTranslateData: CategoriesTranslateDataType[],
+  filialData: FilialDataType[],
+  filialTranslateData: FilialTranslateDataType[],
+  titleDictionary: { [key: string]: string },
+}
 
 const Footer: React.FC<FooterProps> = ({
   loading,

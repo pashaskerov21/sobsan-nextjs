@@ -2,17 +2,47 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { AccountDataType, BottomNavbarProps } from '@/src/types';
+import {
+  AccountDataType,
+  CategoriesDataType,
+  CategoriesTranslateDataType,
+  LoadingType,
+  LocaleType,
+  MenuDataType,
+  MenuTranslateDataType,
+  SettingDataType,
+  SettingTranslateDataType
+} from '@/src/types';
 import { BottomNavbarWrapper } from './style';
 import { Container } from '@/src/styles';
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaQuestion, FaXmark } from "react-icons/fa6";
 import { BiLogInCircle } from 'react-icons/bi';
 import PageLinks from './PageLinks';
-import { Categories, LanguageDropdown, Skeleton, SocialMedia, ThemeButton } from '@/src/components';
+import { Categories, LanguageDropdown, SocialMedia, ThemeButton } from '@/src/components';
 import Search from './Search';
 import { useLocalStorage } from 'usehooks-ts';
 import { HiMiniUser } from 'react-icons/hi2';
+import { HeaderStateType } from './Header';
+
+
+export type BottomNavbarProps = {
+  loading: LoadingType,
+  headerState: HeaderStateType,
+  theme: string,
+  toggleTheme: () => void,
+  toggleMenu: () => void,
+  toggleSearch: () => void,
+  activeLocale: LocaleType,
+  settingData: SettingDataType,
+  settingTranslateData: SettingTranslateDataType[],
+  menuData: MenuDataType[],
+  menuTranslateData: MenuTranslateDataType[],
+  categoryData: CategoriesDataType[],
+  categoryTranslateData: CategoriesTranslateDataType[],
+  titleDictionary: { [key: string]: string },
+  generalDictionary: { [key: string]: string },
+};
 
 const BottomNavbar: React.FC<BottomNavbarProps> = ({
   loading,
@@ -28,6 +58,9 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
   toggleTheme,
   toggleMenu,
   toggleSearch,
+  settingTranslateData,
+  generalDictionary,
+
 }) => {
   const [accountData] = useLocalStorage<AccountDataType>('accounts', {
     activeUser: undefined,
@@ -92,6 +125,8 @@ const BottomNavbar: React.FC<BottomNavbarProps> = ({
                   <LanguageDropdown activeLocale={activeLocale} />
                   <ThemeButton theme={theme} toggleTheme={toggleTheme} />
                   <Search
+                    activeLocale={activeLocale}
+                    generalDictionary={generalDictionary}
                     headerState={headerState}
                     titleDictionary={titleDictionary}
                     toggleSearch={toggleSearch} />

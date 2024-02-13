@@ -25,7 +25,7 @@ import { FaList, FaTableCellsLarge } from "react-icons/fa6";
 import { useLocalStorage } from 'usehooks-ts'
 import { Product } from '@/src/class'
 import { ProductData } from '@/src/data'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 type SectionProps = {
     loading: LoadingType,
@@ -67,6 +67,7 @@ const ProductsSection: React.FC<SectionProps> = ({
     // variables
     const body = document.querySelector('body');
     const pathName = usePathname();
+    const router = useRouter();
     const generalWrapperRef = useRef<HTMLDivElement>(null);
     const product = new Product(ProductData, productTranslateData);
     const [filterShow, setFilterShow] = useState<boolean>(false);
@@ -78,7 +79,7 @@ const ProductsSection: React.FC<SectionProps> = ({
         filtered: categoryProducts,
         finalResult: [],
     });
-    const [productFilterData, setProductFilterData] = useLocalStorage<ProductFilterDataType>('filter-data', {
+    const [productFilterData, setProductFilterData] = useState<ProductFilterDataType>({
         price: {
             min: 0,
             max: product.getMaxPrice(productState.filtered),
@@ -86,14 +87,17 @@ const ProductsSection: React.FC<SectionProps> = ({
         brand: 0,
         attributeIDs: [],
     });
-    const [paginationState, setPaginationState] = useLocalStorage("pagination", {
+    const [paginationState, setPaginationState] = useState<{
+        currentPage: number,
+        productCount: number,
+        pageNumbers: number[],
+    }>({
         currentPage: 1,
         productCount: 12,
+        pageNumbers: [],
     });
-    const indexOfLastProduct = paginationState.currentPage * paginationState.productCount;
-    const indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
-
-
+    let indexOfLastProduct = paginationState.currentPage * paginationState.productCount;
+    let indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
 
     // functions
     const openFilters = useCallback(() => {
@@ -166,82 +170,156 @@ const ProductsSection: React.FC<SectionProps> = ({
     }, [setProductFilterData]);
 
     const resetLeftFilterForm = useCallback(() => {
-        scrollContainerTop();
-
-        setProductFilterData((prev) => ({
+        setProductFilterData({
             price: {
                 min: 0,
                 max: product.getMaxPrice(categoryProducts),
             },
             brand: 0,
             attributeIDs: [],
-        }));
+        });
+        const url = window.location.origin + window.location.pathname;
+        router.push(url);
+    }, [router]);
 
-        setPaginationState((prev) => ({
-            ...prev,
-            currentPage: 1,
-        }));
 
-        scrollContainerTop();
-        closeFilters();
+    const handlePageChange = (number: number) => {
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('page', number.toString());
+        const queryString = queryParams.toString();
+        const url = `${window.location.pathname}?${queryString}`;
 
-        setProductState((prev) => ({
-            ...prev,
-            filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
-        }));
-    }, [scrollContainerTop, setProductFilterData, product.getMaxPrice, categoryProducts, setPaginationState, closeFilters, setProductState, product.techFilterization]);
+        router.push(url);
+    }
+    const handlePrevPage = () => {
+        const page = paginationState.currentPage - 1;
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('page', page.toString());
+        const queryString = queryParams.toString();
+        const url = `${window.location.pathname}?${queryString}`;
 
+        router.push(url);
+    }
+    const handleNextPage = () => {
+        const page = paginationState.currentPage + 1;
+        const queryParams = new URLSearchParams(window.location.search);
+        queryParams.set('page', page.toString());
+        const queryString = queryParams.toString();
+        const url = `${window.location.pathname}?${queryString}`;
+
+        router.push(url);
+    }
 
     const handleSubmitFilterForm = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        scrollContainerTop();
-        closeFilters();
 
-        setPaginationState((prev) => ({
-            ...prev,
-            currentPage: 1,
-        }));
+        const queryParams = new URLSearchParams(window.location.search); 
 
-        setProductState((prev) => ({
-            ...prev,
-            filtered: product.techFilterization(productFilterData, categoryProducts, productAttributeRelationData),
-        }));
-    }, [scrollContainerTop, closeFilters, setPaginationState, setProductState, product.techFilterization, productFilterData, categoryProducts, productAttributeRelationData]);
+        queryParams.set('min', productFilterData.price.min.toString());
+        queryParams.set('max', productFilterData.price.max.toString());
+        if (productFilterData.brand !== 0) {
+            queryParams.set('brand', productFilterData.brand.toString());
+        } else {
+            queryParams.delete('brand');
+        }
 
+        if (productFilterData.attributeIDs.length > 0) {
+            queryParams.delete('attr');
+            productFilterData.attributeIDs.forEach(attrId => {
+                queryParams.append('attr', attrId.toString());
+            });
+        } else {
+            queryParams.delete('attr');
+        }
+        queryParams.delete('page');
 
-    const handleSortFilters = useCallback((type: "cheaptoexp" | "exptocheap" | 'a-z' | 'z-a') => {
-        const productDataWithActiveTitle = productState.filtered.map((data) => ({
-            ...data,
-            activeTitle: product.getTranslate(data.id, activeLocale, "title"),
-        }));
+        const queryString = queryParams.toString();
+        const url = `${window.location.pathname}?${queryString}`;
 
-        setProductState((prev) => ({
-            ...prev,
-            filtered: product.sortFilterization(type, productDataWithActiveTitle),
-            finalResult: product.sortFilterization(type, productDataWithActiveTitle).slice(indexOfFirstProduct, indexOfLastProduct),
-        }));
-    }, [productState, setProductState, product, activeLocale, indexOfFirstProduct, indexOfLastProduct]);
+        router.push(url);
+    }, [router, productFilterData]);
 
-    // useeffect
+    const handleSortFilters = useCallback((value: "cheaptoexp" | "exptocheap" | 'a-z' | 'z-a') => {
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('sort', value);
+        const url = `${window.location.pathname}?${urlParams.toString()}`;
+        router.push(url);
+
+    }, [router]);
+
     useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const minPrice = urlParams.get('min');
+        const maxPrice = urlParams.get('max');
+        const attributes = urlParams.getAll('attr');
+        const branID = urlParams.get('brand');
+        const sort = urlParams.get('sort');
+        const activePage = urlParams.get('page');
+        let filterDataResult: ProductFilterDataType = productFilterData;
+        if (minPrice && maxPrice) {
+            filterDataResult = {
+                ...filterDataResult,
+                price: {
+                    min: parseInt(minPrice),
+                    max: parseInt(maxPrice),
+                },
+            }
+        }
+        if (attributes.length > 0) {
+            filterDataResult = {
+                ...filterDataResult,
+                attributeIDs: attributes.map(attr => parseInt(attr)),
+            }
+        }
+        if (branID) {
+            filterDataResult = {
+                ...filterDataResult,
+                brand: parseInt(branID),
+            }
+        }
+
+        setProductFilterData(filterDataResult);
+
+        let filteredProducts: ProductDataType[] = product.techFilterization(filterDataResult, categoryProducts, productAttributeRelationData);
+        setProductState((prev) => ({
+            ...prev,
+            filtered: filteredProducts,
+        }));
+
+        if (sort && (sort === 'cheaptoexp' || sort === 'exptocheap' || sort === 'a-z' || sort === 'z-a')) {
+
+            filteredProducts = filteredProducts.map((data) => ({
+                ...data,
+                activeTitle: product.getTranslate(data.id, activeLocale, "title"),
+            }));
+            filteredProducts = product.sortFilterization(sort, filteredProducts)
+            setProductState((prev) => ({
+                ...prev,
+                filtered: filteredProducts,
+            }));
+        }
+        const pageNumbers: number[] = [];
+        for (let i = 1; i <= Math.ceil(filteredProducts.length / paginationState.productCount); i++) {
+            pageNumbers.push(i);
+        }
+        setPaginationState((prev) => {
+            return {
+                ...prev,
+                currentPage: activePage ? parseInt(activePage) : 1,
+                pageNumbers: pageNumbers,
+            }
+        });
+        if (activePage) {
+            indexOfLastProduct = parseInt(activePage) * paginationState.productCount;
+            indexOfFirstProduct = indexOfLastProduct - paginationState.productCount;
+        }
         setProductState((prev) => {
             return {
                 ...prev,
-                finalResult: productState.filtered.slice(indexOfFirstProduct, indexOfLastProduct),
+                finalResult: filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct),
             }
         });
-    }, [indexOfFirstProduct, indexOfLastProduct, productState.filtered]);
-
-    useEffect(() => {
-        setProductFilterData({
-            price: {
-                min: 0,
-                max: product.getMaxPrice(productState.filtered),
-            },
-            brand: 0,
-            attributeIDs: [],
-        })
-    }, [pathName])
+    }, []);
 
     return (
         <Section $py={20}>
@@ -330,8 +408,10 @@ const ProductsSection: React.FC<SectionProps> = ({
                                         productState.filtered.length > paginationState.productCount && (
                                             <ProductPagination
                                                 loading={loading}
-                                                totalProducts={productState.filtered.length}
-                                                scrollContainerTop={scrollContainerTop}
+                                                paginationState={paginationState}
+                                                handlePageChange={handlePageChange}
+                                                handlePrevPage={handlePrevPage}
+                                                handleNextPage={handleNextPage}
                                             />
                                         )
                                     }

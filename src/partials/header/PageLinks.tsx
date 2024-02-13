@@ -1,10 +1,16 @@
 'use client'
 import React, { Fragment } from 'react'
-import { PageLinksProps } from '@/src/types';
 import { BiChevronDown } from "react-icons/bi";
 import { Menu } from '@/src/class';
 import Link from 'next/link';
+import { LocaleType, MenuDataType, MenuTranslateDataType } from '@/src/types';
 
+export type PageLinksProps = {
+    activeLocale: LocaleType,
+    menuData: MenuDataType[],
+    menuTranslateData: MenuTranslateDataType[],
+    className: string,
+}
 
 const PageLinks: React.FC<PageLinksProps> = ({ className, menuData, menuTranslateData, activeLocale }) => {
     const menu = new Menu(menuData, menuTranslateData);

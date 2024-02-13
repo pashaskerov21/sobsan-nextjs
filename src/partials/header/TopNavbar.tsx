@@ -1,7 +1,7 @@
 'use client'
 import React, { Fragment } from 'react'
 import Link from 'next/link'
-import { AccountDataType, TopNavbarProps } from '@/src/types'
+import { AccountDataType, LoadingType, LocaleType, MenuDataType, MenuTranslateDataType, SettingDataType, SettingTranslateDataType } from '@/src/types'
 import { TopNavbarWrapper } from './style'
 import { Container } from '@/src/styles'
 import { PiShoppingCartSimpleLight, PiHeartStraight, PiScalesLight } from "react-icons/pi";
@@ -10,9 +10,24 @@ import { BiLogInCircle } from "react-icons/bi";
 import PageLinks from './PageLinks'
 import Search from './Search'
 import { useLocalStorage } from 'usehooks-ts'
-import { FaUser } from "react-icons/fa";
 import { HiMiniUser } from "react-icons/hi2";
+import { HeaderStateType } from './Header'
 
+export type TopNavbarProps = {
+  loading: LoadingType,
+  headerState: HeaderStateType,
+  theme: string,
+  toggleTheme: () => void,
+  toggleMenu: () => void,
+  toggleSearch: () => void,
+  activeLocale: LocaleType,
+  settingData: SettingDataType,
+  settingTranslateData: SettingTranslateDataType[],
+  menuData: MenuDataType[],
+  menuTranslateData: MenuTranslateDataType[],
+  titleDictionary: { [key: string]: string },
+  generalDictionary: { [key: string]: string },
+};
 
 const TopNavbar: React.FC<TopNavbarProps> = ({
   loading,
@@ -26,6 +41,7 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
   toggleTheme,
   toggleMenu,
   toggleSearch,
+  generalDictionary,
 }) => {
   const [accountData] = useLocalStorage<AccountDataType>('accounts', {
     activeUser: undefined,
@@ -69,9 +85,11 @@ const TopNavbar: React.FC<TopNavbarProps> = ({
               <Link className='icon d-none d-md-flex' href={`/${activeLocale}/wishlist`}><PiHeartStraight /></Link>
               <Link className='icon d-none d-md-flex' href={`/${activeLocale}/comparisons`}><PiScalesLight /></Link>
               <Search
+                activeLocale={activeLocale}
                 headerState={headerState}
                 titleDictionary={titleDictionary}
-                toggleSearch={toggleSearch} />
+                toggleSearch={toggleSearch}
+                generalDictionary={generalDictionary} />
               {
                 accountData.activeUser ? (
                   <Link className='icon d-none d-md-flex' href={`/${activeLocale}/account`}><HiMiniUser /> <span>{titleDictionary.my_account}</span></Link>

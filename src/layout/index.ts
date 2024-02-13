@@ -22,6 +22,7 @@ import ComparisonPageLayout from "./comparisons/ComparisonPageLayout";
 import SuggestionPageLayout from "./suggestions/SuggestionPageLayout";
 import SuggestionInnerPageLayout from "./suggestions/SuggestionInnerPageLayout";
 import MasterPageLayout from "./article/MasterPageLayout";
+import SearchPageLayout from "./search/SearchPageLayout";
 
 export {
     RootLayout,
@@ -48,4 +49,5 @@ export {
     SuggestionPageLayout,
     SuggestionInnerPageLayout,
     MasterPageLayout,
+    SearchPageLayout,
 }

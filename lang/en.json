@@ -117,7 +117,8 @@
         "contact_info_text": "You can easily address all your questions and requests to us. We will respond as soon as possible and with great pleasure.",
         "send": "Send",
         "address_office": "Head office",
-        "address_factory": "Factory address"
+        "address_factory": "Factory address",
+        "search_error_message": "No search results found"
     },
     "form": {
         "label": {

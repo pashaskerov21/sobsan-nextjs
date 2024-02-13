@@ -2,9 +2,39 @@
 import React from 'react'
 import TopNavbar from './TopNavbar';
 import BottomNavbar from './BottomNavbar';
-import { HeaderProps, HeaderStateType } from '@/src/types';
 import { HeaderWrapper } from './style';
 import { usePathname } from 'next/navigation';
+import {
+  CategoriesDataType,
+  CategoriesTranslateDataType,
+  LoadingType,
+  LocaleType,
+  MenuDataType,
+  MenuTranslateDataType,
+  SettingDataType,
+  SettingTranslateDataType
+} from '@/src/types';
+
+export type HeaderProps = {
+  loading: LoadingType,
+  activeLocale: LocaleType,
+  theme: string,
+  toggleTheme: () => void,
+  settingData: SettingDataType,
+  settingTranslateData: SettingTranslateDataType[],
+  menuData: MenuDataType[],
+  menuTranslateData: MenuTranslateDataType[],
+  categoryData: CategoriesDataType[],
+  categoryTranslateData: CategoriesTranslateDataType[],
+  titleDictionary: { [key: string]: string },
+  generalDictionary: { [key: string]: string },
+};
+
+export type HeaderStateType = {
+  fixed: boolean,
+  menuShow: boolean,
+  searchShow: boolean,
+};
 
 const Header: React.FC<HeaderProps> = ({
   loading,
@@ -18,6 +48,7 @@ const Header: React.FC<HeaderProps> = ({
   titleDictionary,
   theme,
   toggleTheme,
+  generalDictionary,
 }) => {
   const pathName = usePathname();
   const body = document.querySelector('body');
@@ -76,6 +107,7 @@ const Header: React.FC<HeaderProps> = ({
         toggleTheme={toggleTheme}
         toggleMenu={openMenu}
         toggleSearch={toggleSearch}
+        generalDictionary={generalDictionary}
       />
       <BottomNavbar
         loading={loading}
@@ -92,6 +124,7 @@ const Header: React.FC<HeaderProps> = ({
         toggleTheme={toggleTheme}
         toggleMenu={closeMenu}
         toggleSearch={toggleSearch}
+        generalDictionary={generalDictionary}
       />
     </HeaderWrapper>
   )

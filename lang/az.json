@@ -6,7 +6,7 @@
         "comparisons": "Müqayisələr",
         "login": "Daxil ol",
         "registration": "Qeydiyyat",
-        "search": "Axtar",
+        "search": "Axtarış",
         "menues": "Menyular",
         "categories": "Kateqoriyalar",
         "addresses": "Ünvanlarımız",
@@ -117,7 +117,8 @@
         "contact_info_text": "Bütün sual və müraciətlərinizi rahatlıqla bizə ünvanlaya bilərsiniz. Ən qısa zamanda və böyük məmnuniyyətlə cavablandıracağıq.",
         "send": "Göndər",
         "address_office": "Baş ofis",
-        "address_factory": "Fabrik ünvanı"
+        "address_factory": "Fabrik ünvanı",
+        "search_error_message": "Axtarışa uyğun nəticə tapılmadı"
     },
     "form": {
         "label": {

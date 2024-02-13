@@ -122,6 +122,7 @@ export default async function Root({
 
     const t = await getTranslate(lang);
     const titleDictionary = t.title;
+    const generalDictionary = t.general;
 
     if (
       settingData &&
@@ -155,7 +156,8 @@ export default async function Root({
                 settingTranslateData={settingTranslateData}
                 filialData={filialData}
                 filialTranslateData={filialTranslateData}
-                titleDictionary={titleDictionary}>
+                titleDictionary={titleDictionary}
+                generalDictionary={generalDictionary}>
                 {children}
                 <SpeedInsights />
               </RootLayout>

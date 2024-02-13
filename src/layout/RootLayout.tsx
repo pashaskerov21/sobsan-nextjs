@@ -43,6 +43,7 @@ type LayoutProps = {
     filialData: FilialDataType[],
     filialTranslateData: FilialTranslateDataType[],
     titleDictionary: { [key: string]: string },
+    generalDictionary: { [key: string]: string },
 }
 
 const RootLayout: React.FC<LayoutProps> = ({
@@ -57,6 +58,7 @@ const RootLayout: React.FC<LayoutProps> = ({
     settingData,
     settingTranslateData,
     titleDictionary,
+    generalDictionary,
 }) => {
     React.useEffect(() => { Fancybox.bind("[data-fancybox]", {}) }, []);
     const themes = ['dark', 'light']
@@ -122,6 +124,7 @@ const RootLayout: React.FC<LayoutProps> = ({
                         theme={activeThemeValue}
                         titleDictionary={titleDictionary}
                         toggleTheme={toggle}
+                        generalDictionary={generalDictionary}
                     />
                     <main>
                         {children}

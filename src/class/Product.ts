@@ -62,6 +62,7 @@ class Product {
         return price;
     };
     public techFilterization(filterData: ProductFilterDataType, productData: ProductDataType[], productAttributeRelationData: ProductAttributeRelationDataType[]) {
+        console.log('filterdata', filterData)
         let filteredProducts: ProductDataType[] | [] = productData;
         if (filterData.brand !== 0) {
             filteredProducts = filteredProducts.filter((data) => data.brand_id === filterData.brand);
@@ -182,13 +183,21 @@ class Product {
             filter((weight) => weight !== undefined) as ColorDataType[]
         return activeColorData;
     }
-    public getCatalog(id: number, catalogData: CatalogDataType[]){
+    public getCatalog(id: number, catalogData: CatalogDataType[]) {
         const activeCatalog: CatalogDataType | undefined = catalogData.find((data) => data.id === id);
         return activeCatalog;
     }
-    public getProductByID(id: number){
+    public getProductByID(id: number) {
         const product: ProductDataType | undefined = this.productData.find((data) => data.id === id);
         return product;
+    }
+    public search(value: string, activeLocale: LocaleType) {
+        const searchResult = value.trim().toLocaleLowerCase();
+        const translates: ProductTranslateDataType[] = this.productTranslateData.filter((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase().includes(searchResult));
+        const result: ProductDataType[] = translates.map((t_data) =>
+            this.productData.find((p_data) => p_data.id === t_data.product_id)).
+            filter((p) => p !== undefined) as ProductDataType[];
+        return result;
     }
 }
 export default Product;
