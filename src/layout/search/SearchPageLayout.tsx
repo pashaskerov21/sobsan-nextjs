@@ -2,23 +2,39 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateLocaleSlug } from '@/src/redux/actions';
-import { PageTitle, Skeleton } from '@/src/components';
-import { LoadingType, LocaleStateType, LocaleType, PageTitleDataType, RoomDataType, RoomTranslateDataType } from '@/src/types';
+import { PageTitle, ProductGrid, Skeleton } from '@/src/components';
+import {
+    BrandDataType,
+    BrandTranslateDataType,
+    LoadingType,
+    LocaleStateType,
+    LocaleType,
+    PageTitleDataType,
+    ProductDataType,
+    ProductTranslateDataType,
+} from '@/src/types';
 import { i18n } from '@/i18n-config';
-import { RoomSuggestionSection } from '@/src/sections';
-import { useRouter } from 'next/navigation';
 import { Container, Section } from '@/src/styles';
+import { Product } from '@/src/class';
 
 type LayoutProps = {
     activeLocale: LocaleType,
     titleDictionary: { [key: string]: string },
     generalDictionary: { [key: string]: string },
+    productData: ProductDataType[],
+    productTranslateData: ProductTranslateDataType[],
+    brandData: BrandDataType[],
+    brandTranslateData: BrandTranslateDataType[],
 }
 
 const SearchPageLayout: React.FC<LayoutProps> = ({
     activeLocale,
     titleDictionary,
     generalDictionary,
+    brandData,
+    brandTranslateData,
+    productData,
+    productTranslateData,
 }) => {
     const [loading, setLoading] = React.useState<LoadingType>({
         standart: true,
@@ -64,7 +80,9 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
 
 
 
+    const product = new Product(productData, productTranslateData);
     const [queryStatus, setQueryStatus] = useState<boolean>(false);
+    const [searchProducts, setSearchProducts] = useState<ProductDataType[]>([]);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -77,7 +95,16 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                     slug: `${path}?query=${queryParam}`,
                 }
             });
-            dispatch(updateLocaleSlug(localeSlugs))
+            dispatch(updateLocaleSlug(localeSlugs));
+
+            const resultProducts: ProductDataType[] = product.search(queryParam, activeLocale);
+            if(resultProducts.length > 0){
+                setQueryStatus(true);
+                setSearchProducts(resultProducts);
+            }else{
+                setQueryStatus(false);
+                setSearchProducts([]);
+            }
         } else {
             setQueryStatus(false);
         }
@@ -92,20 +119,39 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                 pageTitleData={pageTitleData}
                 titleDictionary={titleDictionary}
             />
-            {
-                !queryStatus && (
-                    <Section $py={20}>
-                        <Container>
-                            {
-                                loading.standart ? <Skeleton width='100%' height='45px' /> : (
-                                    <h3 className='text-center text-lg-start'>{generalDictionary["search_error_message"]}</h3>
-                                )
-                            }
+            <Section $py={20}>
+                <Container>
+                    {
+                        queryStatus ? (
+                            <Fragment>
+                                {
+                                    searchProducts.length > 0 && (
+                                        <ProductGrid
+                                            loading={loading}
+                                            activeLocale={activeLocale}
+                                            productData={searchProducts}
+                                            productTranslateData={productTranslateData}
+                                            brandData={brandData}
+                                            brandTranslateData={brandTranslateData}
+                                            generalDictionary={generalDictionary}
+                                            className="full__container"
+                                        />
+                                    )
+                                }
+                            </Fragment>
+                        ) : (
+                            <Fragment>
+                                {
+                                    loading.standart ? <Skeleton width='100%' height='45px' /> : (
+                                        <h3 className='text-center text-lg-start'>{generalDictionary["search_error_message"]}</h3>
+                                    )
+                                }
+                            </Fragment>
+                        )
+                    }
 
-                        </Container>
-                    </Section>
-                )
-            }
+                </Container>
+            </Section>
         </Fragment>
     )
 }

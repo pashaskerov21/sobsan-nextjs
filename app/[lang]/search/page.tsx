@@ -2,9 +2,39 @@ import React from 'react'
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getTranslate } from '@/get-translate';
-import { LocaleType } from '@/src/types';
+import { BrandDataType, BrandTranslateDataType, LocaleType, ProductDataType, ProductTranslateDataType } from '@/src/types';
 import { SearchPageLayout } from '@/src/layout';
+import { fetchBrandData, fetchBrandTranslateData, fetchProductData, fetchProductTranslateData } from '@/src/utils';
 
+const fetchData = async (): Promise<{
+    productData: ProductDataType[] | undefined,
+    productTranslateData: ProductTranslateDataType[] | undefined,
+    brandData: BrandDataType[] | undefined,
+    brandTranslateData: BrandTranslateDataType[] | undefined,
+}> => {
+    try {
+        const [
+            productData,
+            productTranslateData,
+            brandData,
+            brandTranslateData,
+        ] = await Promise.all([
+            fetchProductData(),
+            fetchProductTranslateData(),
+            fetchBrandData(),
+            fetchBrandTranslateData(),
+        ]);
+
+        return {
+            productData,
+            productTranslateData,
+            brandData,
+            brandTranslateData,
+        };
+    } catch (error) {
+        throw new Error('Failed to fetch data');
+    }
+}
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: LocaleType } }): Promise<Metadata> {
     try {
@@ -26,13 +56,31 @@ const SearchPage = async ({ params: { lang } }: { params: { lang: LocaleType } }
         const t = await getTranslate(lang);
         const titleDictionary = t.title;
         const generalDictionary = t.general;
-        return (
-            <SearchPageLayout
-                activeLocale={lang}
-                generalDictionary={generalDictionary}
-                titleDictionary={titleDictionary}
-            />
-        )
+        const {
+            productData,
+            productTranslateData,
+            brandData,
+            brandTranslateData } = await fetchData();
+        if (
+            productData
+            && productTranslateData
+            && brandData
+            && brandTranslateData
+        ) {
+            return (
+                <SearchPageLayout
+                    activeLocale={lang}
+                    brandData={brandData}
+                    brandTranslateData={brandTranslateData}
+                    generalDictionary={generalDictionary}
+                    productData={productData}
+                    productTranslateData={productTranslateData}
+                    titleDictionary={titleDictionary}
+                />
+            )
+        } else {
+            redirect(`/${lang}/404`);
+        }
     } catch (error) {
         console.error('Error:', error);
         redirect(`/${lang}/404`);

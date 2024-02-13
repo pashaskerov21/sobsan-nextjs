@@ -513,6 +513,10 @@ export const ProductPaginationWrapper = styled.div`
             background-color: ${props => props.theme.color_1};
             color: #fff;
         }
+        &:disabled{
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 `;
 

@@ -27,6 +27,7 @@ const Search: React.FC<SearchProps> = ({
         e.preventDefault();
         router.push(`/${activeLocale}/search?query=${encodeURIComponent(searchValue)}`);
         setSearchValue('');
+        toggleSearch();
     }
     return (
         <SearchFormWrapper method='get' onSubmit={onSubmit} autoComplete="off">

@@ -192,7 +192,7 @@ class Product {
         return product;
     }
     public search(value: string, activeLocale: LocaleType) {
-        const searchResult = value.trim().toLocaleLowerCase();
+        const searchResult = decodeURIComponent(value.trim().toLocaleLowerCase());
         const translates: ProductTranslateDataType[] = this.productTranslateData.filter((data) => data.lang === activeLocale && data.title.trim().toLocaleLowerCase().includes(searchResult));
         const result: ProductDataType[] = translates.map((t_data) =>
             this.productData.find((p_data) => p_data.id === t_data.product_id)).
