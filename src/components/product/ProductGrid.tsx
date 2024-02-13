@@ -14,6 +14,7 @@ type ProductGridProps = {
   brandTranslateData: BrandTranslateDataType[],
   productsView?: "list" | "grid",
   className?: string,
+  searchKeyword?: string,
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({
@@ -25,7 +26,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   brandTranslateData,
   generalDictionary,
   productsView,
-  className
+  className,
+  searchKeyword,
 }) => {
   return (
     <ProductGridWrapper $productsView={productsView} className={`${className}`}>
@@ -42,6 +44,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               brandTranslateData={brandTranslateData}
               generalDictionary={generalDictionary}
               productsView={productsView}
+              searchKeyword={searchKeyword}
             />
           </Fragment>
         ))

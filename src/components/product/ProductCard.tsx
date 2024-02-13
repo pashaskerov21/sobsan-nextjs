@@ -7,12 +7,12 @@ import {
     AccountDataType,
     BasketDataType,
     BrandDataType,
-    BrandTranslateDataType, 
-    ComparisonDataType, 
-    LoadingType, 
-    LocaleType, 
-    ProductDataType, 
-    ProductTranslateDataType, 
+    BrandTranslateDataType,
+    ComparisonDataType,
+    LoadingType,
+    LocaleType,
+    ProductDataType,
+    ProductTranslateDataType,
     WishlistDataType
 } from '@/src/types'
 import { ProductCardWrapper } from './style';
@@ -34,6 +34,31 @@ type CardProps = {
     brandTranslateData: BrandTranslateDataType[]
     generalDictionary: { [key: string]: string },
     productsView?: "list" | "grid",
+    searchKeyword?: string,
+}
+
+const ProductTitle: React.FC<{ title: string, searchKeyword?: string }> = ({ searchKeyword, title }) => {
+    if (searchKeyword) {
+        const regex = new RegExp(`(${searchKeyword})`, 'gi');
+        const parts = title.split(regex);
+        return (
+            <Fragment>
+                {parts.map((part, index) =>
+                    regex.test(part) ? (
+                        <span key={index} style={{ backgroundColor: '#ed3237', color: '#fff' }}>
+                            {part}
+                        </span>
+                    ) : (
+                        <Fragment key={index}>{part}</Fragment>
+                    )
+                )}
+            </Fragment>
+        )
+    } else {
+        return (
+            <Fragment>{title}</Fragment>
+        )
+    }
 }
 
 const ProductCard: React.FC<CardProps> = ({
@@ -46,6 +71,7 @@ const ProductCard: React.FC<CardProps> = ({
     productData,
     productTranslateData,
     productsView,
+    searchKeyword,
 }) => {
 
     const product = new Product(productData, productTranslateData);
@@ -170,7 +196,8 @@ const ProductCard: React.FC<CardProps> = ({
                         <Fragment>
                             <div className="product__brand">{brandTitle}</div>
                             <Link href={product.getTranslate(activeProductData.id, activeLocale, "url")} className='product__title'>
-                                {product.getTranslate(activeProductData.id, activeLocale, "title")}
+                                <ProductTitle title={product.getTranslate(activeProductData.id, activeLocale, "title")} searchKeyword={searchKeyword} />
+                                {/* {product.getTranslate(activeProductData.id, activeLocale, "title")} */}
                             </Link>
                             <div className="product__description">
                                 {product.getTranslate(activeProductData.id, activeLocale, "description").length > 100 ? product.getTranslate(activeProductData.id, activeLocale, "description").slice(0, 100) + '...' : product.getTranslate(activeProductData.id, activeLocale, "description")}

@@ -82,6 +82,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
 
     const product = new Product(productData, productTranslateData);
     const [queryStatus, setQueryStatus] = useState<boolean>(false);
+    const [query, setQuery] = useState<string>('');
     const [searchProducts, setSearchProducts] = useState<ProductDataType[]>([]);
 
     useEffect(() => {
@@ -89,6 +90,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
         const queryParam = urlParams.get('query');
         if (queryParam) {
             setQueryStatus(true);
+            setQuery(queryParam);
             localeSlugs = i18n.locales.map((locale) => {
                 return {
                     locale: locale,
@@ -135,6 +137,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                                             brandTranslateData={brandTranslateData}
                                             generalDictionary={generalDictionary}
                                             className="full__container"
+                                            searchKeyword={query}
                                         />
                                     )
                                 }
