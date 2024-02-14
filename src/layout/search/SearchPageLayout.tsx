@@ -214,7 +214,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                             {
                                 loading.standart ? <Skeleton width='100%' height='45px' /> : (
                                     <SearchMessage>
-                                        <div className='title'>{generalDictionary["search_redirect_message"]}</div>
+                                        <div className='title'>{generalDictionary["search_error_message"]}</div>
                                     </SearchMessage>
                                 )
                             }
