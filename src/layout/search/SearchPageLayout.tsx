@@ -151,7 +151,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
         } else if (activeCategoryData) {
             setTimeout(() => {
                 router.push(category.getTranslate(activeCategoryData.id, activeLocale, "url"))
-            }, 2000)
+            }, 1000)
             return (
                 <Fragment>
                     <PageTitle
@@ -177,7 +177,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
         } else if (activeMenuData) {
             setTimeout(() => {
                 router.push(menu.getTranslate(activeMenuData, activeLocale, "url"))
-            }, 2000)
+            }, 1000)
             return (
                 <Fragment>
                     <PageTitle
@@ -224,9 +224,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
             )
         }
     } else {
-        setTimeout(() => {
-            router.push(`/${activeLocale}/404`)
-        }, 2000)
+        router.push(`/${activeLocale}/404`)
         return (
             <Fragment>
                 <PageTitle
