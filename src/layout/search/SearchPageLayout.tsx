@@ -21,6 +21,8 @@ import { i18n } from '@/i18n-config';
 import { Container, Section } from '@/src/styles';
 import { Category, Menu, Product } from '@/src/class';
 import { redirect, useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { SearchMessage } from './style';
 
 type LayoutProps = {
     activeLocale: LocaleType,
@@ -91,7 +93,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
         ]
     }
 
-
+    const router = useRouter();
     const product = new Product(productData, productTranslateData);
     const menu = new Menu(menuData, menuTranslateData);
     const category = new Category(categoryData, categoryTranslateData);
@@ -147,9 +149,57 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                 </Fragment>
             )
         } else if (activeCategoryData) {
-            redirect(`${category.getTranslate(activeCategoryData.id, activeLocale, "url")}`)
+            setTimeout(() => {
+                router.push(category.getTranslate(activeCategoryData.id, activeLocale, "url"))
+            }, 2000)
+            return (
+                <Fragment>
+                    <PageTitle
+                        loading={loading}
+                        activeLocale={activeLocale}
+                        pageTitleData={pageTitleData}
+                        titleDictionary={titleDictionary}
+                    />
+                    <Section $py={20}>
+                        <Container>
+                            {
+                                loading.standart ? <Skeleton width='100%' height='45px' /> : (
+                                    <SearchMessage>
+                                        <div className='title'>{generalDictionary["search_redirect_message"]}</div>
+                                        <div className="loader__spin"></div>
+                                    </SearchMessage>
+                                )
+                            }
+                        </Container>
+                    </Section>
+                </Fragment>
+            )
         } else if (activeMenuData) {
-            redirect(`${menu.getTranslate(activeMenuData, activeLocale, "url")}`)
+            setTimeout(() => {
+                router.push(menu.getTranslate(activeMenuData, activeLocale, "url"))
+            }, 2000)
+            return (
+                <Fragment>
+                    <PageTitle
+                        loading={loading}
+                        activeLocale={activeLocale}
+                        pageTitleData={pageTitleData}
+                        titleDictionary={titleDictionary}
+                    />
+                    <Section $py={20}>
+                        <Container>
+                            {
+                                loading.standart ? <Skeleton width='100%' height='45px' /> : (
+                                    <SearchMessage>
+                                        <div className='title'>{generalDictionary["search_redirect_message"]}</div>
+                                        <div className="loader__spin"></div>
+                                    </SearchMessage>
+                                )
+                            }
+                        </Container>
+                    </Section>
+                </Fragment>
+            )
         } else {
             return (
                 <Fragment>
@@ -163,7 +213,9 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                         <Container>
                             {
                                 loading.standart ? <Skeleton width='100%' height='45px' /> : (
-                                    <h3 className='text-center text-lg-start'>{generalDictionary["search_error_message"]}</h3>
+                                    <SearchMessage>
+                                        <div className='title'>{generalDictionary["search_redirect_message"]}</div>
+                                    </SearchMessage>
                                 )
                             }
                         </Container>
@@ -172,7 +224,31 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
             )
         }
     } else {
-        redirect(`/${activeLocale}/404`);
+        setTimeout(() => {
+            router.push(`/${activeLocale}/404`)
+        }, 2000)
+        return (
+            <Fragment>
+                <PageTitle
+                    loading={loading}
+                    activeLocale={activeLocale}
+                    pageTitleData={pageTitleData}
+                    titleDictionary={titleDictionary}
+                />
+                <Section $py={20}>
+                    <Container>
+                        {
+                            loading.standart ? <Skeleton width='100%' height='45px' /> : (
+                                <SearchMessage>
+                                    <div className='title'>{generalDictionary["search_redirect_message"]}</div>
+                                    <div className="loader__spin"></div>
+                                </SearchMessage>
+                            )
+                        }
+                    </Container>
+                </Section>
+            </Fragment>
+        )
     }
 }
 

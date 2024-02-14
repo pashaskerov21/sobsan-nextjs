@@ -118,7 +118,8 @@
         "send": "Отправлять",
         "address_office": "Головной офис",
         "address_factory": "Адрес завода",
-        "search_error_message": "Результаты поиска не найдены"
+        "search_error_message": "Результаты поиска не найдены",
+        "search_redirect_message": "Поиск перенаправляется"
     },
     "form": {
         "label": {

@@ -118,7 +118,8 @@
         "send": "Send",
         "address_office": "Head office",
         "address_factory": "Factory address",
-        "search_error_message": "No search results found"
+        "search_error_message": "No search results found",
+        "search_redirect_message": "Search is redirected"
     },
     "form": {
         "label": {

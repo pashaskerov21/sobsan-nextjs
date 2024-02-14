@@ -118,7 +118,8 @@
         "send": "Göndər",
         "address_office": "Baş ofis",
         "address_factory": "Fabrik ünvanı",
-        "search_error_message": "Axtarışa uyğun nəticə tapılmadı"
+        "search_error_message": "Axtarışa uyğun nəticə tapılmadı",
+        "search_redirect_message": "Axtarış yönləndirilir"
     },
     "form": {
         "label": {
