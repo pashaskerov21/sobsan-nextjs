@@ -89,6 +89,15 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
         description: setting.getTranslate(1, lang, "description"),
         icons: {
           icon: settingData[0].logo
+        },
+        openGraph: {
+          type: "website",
+          title: setting.getTranslate(1, lang, "title"),
+          description: setting.getTranslate(1, lang, "description"),
+          siteName: setting.getTranslate(1, lang, "title"),
+          images: {
+            url: settingData[0].logo,
+          }
         }
       };
     }

@@ -46,7 +46,10 @@ export async function generateMetadata({ params: { lang, slug } }: { params: { l
       }
     }
     return {
-      title: pageTitle
+      title: pageTitle,
+      openGraph: {
+        title: pageTitle,
+      }
     }
   } catch (error) {
     return {

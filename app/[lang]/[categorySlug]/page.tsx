@@ -85,7 +85,10 @@ export async function generateMetadata({ params: { lang, categorySlug } }: { par
             }
         }
         return {
-            title: pageTitle
+            title: pageTitle,
+            openGraph: {
+                title: pageTitle,
+            }
         }
     } catch (error) {
         return {

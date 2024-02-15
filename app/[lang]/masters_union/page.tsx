@@ -31,7 +31,10 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
     const titleDictionary = t.title;
     const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.masters_union}`;
     return {
-      title: pageTitle
+      title: pageTitle,
+      openGraph: {
+        title: pageTitle,
+      }
     };
   } catch (error) {
     return {

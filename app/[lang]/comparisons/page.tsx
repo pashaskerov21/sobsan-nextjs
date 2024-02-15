@@ -42,7 +42,10 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
         const titleDictionary = t.title;
         const pageTitle = `${titleDictionary.sobsan} | ${titleDictionary.comparisons}`;
         return {
-            title: pageTitle
+            title: pageTitle,
+            openGraph: {
+                title: pageTitle,
+            }
         };
     } catch (error) {
         return {
