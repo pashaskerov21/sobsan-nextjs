@@ -95,6 +95,8 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
           title: setting.getTranslate(1, lang, "title"),
           description: setting.getTranslate(1, lang, "description"),
           siteName: setting.getTranslate(1, lang, "title"),
+          locale: lang === 'az' ? 'az_AZ' : lang === 'en' ? 'en_GB' : 'ru_RU',
+          alternateLocale: lang === 'az' ? ['en_GB', 'ru_RU'] : lang === 'en' ? ['az_AZ', 'ru_RU'] : ['az_AZ', 'en_GB'],
           images: {
             url: settingData[0].logo,
           }
