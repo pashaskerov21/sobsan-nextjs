@@ -374,7 +374,7 @@ const ProductDetailSection: React.FC<SectionProps> = ({
                     </div>
                     <div className="wrapper__right">
                         <div className="product__image">
-                            {loading.lazy ? <Skeleton width='100%' height='200px' height_md='300px' height_lg='400px' width_lg='400px' /> : <Image src={activeProductData.image} width={400} height={400} alt='product' />}
+                            {loading.lazy ? <Skeleton width='100%' height='200px' height_md='300px' height_lg='400px' /> : <Image src={activeProductData.image} width={400} height={400} alt='product' />}
                         </div>
                     </div>
                 </ProductDetailWrapper>

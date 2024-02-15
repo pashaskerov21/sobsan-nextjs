@@ -71,7 +71,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
                     lazy: false,
                 }
             });
-        }, 1000);
+        }, 500);
     }, []);
 
     const path = 'search';
@@ -151,7 +151,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
         } else if (activeCategoryData) {
             setTimeout(() => {
                 router.push(category.getTranslate(activeCategoryData.id, activeLocale, "url"))
-            }, 1000)
+            }, 500)
             return (
                 <Fragment>
                     <PageTitle
@@ -177,7 +177,7 @@ const SearchPageLayout: React.FC<LayoutProps> = ({
         } else if (activeMenuData) {
             setTimeout(() => {
                 router.push(menu.getTranslate(activeMenuData, activeLocale, "url"))
-            }, 1000)
+            }, 500)
             return (
                 <Fragment>
                     <PageTitle
