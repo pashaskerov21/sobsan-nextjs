@@ -144,6 +144,7 @@ export async function generateMetadata({ params: { lang, productSlug } }: { para
         const titleDictionary = t.title;
         const { productData, productTranslateData } = await fetchData();
         let pageTitle = `${titleDictionary.sobsan}`;
+        let pageDescription = '';
         if (productData && productTranslateData) {
             const product = new Product(productData, productTranslateData);
             const activeProductData: ProductDataType | undefined = product.getProductBySlug(productSlug, lang);
@@ -151,10 +152,12 @@ export async function generateMetadata({ params: { lang, productSlug } }: { para
                 const productTitle = product.getTranslate(activeProductData.id, lang, "title");
                 const result = productTitle.charAt(0).toLocaleUpperCase() + productTitle.slice(1).toLocaleLowerCase();
                 pageTitle = `${titleDictionary.sobsan} | ${result}`;
+                pageDescription = `${result} - ${product.getTranslate(activeProductData.id,lang, "description")}`
             }
         }
         return {
-            title: pageTitle
+            title: pageTitle,
+            description: pageDescription,
         }
     } catch (error) {
         return {
