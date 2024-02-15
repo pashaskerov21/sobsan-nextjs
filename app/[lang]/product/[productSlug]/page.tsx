@@ -146,6 +146,7 @@ export async function generateMetadata({ params: { lang, productSlug } }: { para
         let pageTitle = `${titleDictionary.sobsan}`;
         let pageDescription = '';
         let pageImage = '';
+        let pageKeyword = '';
         if (productData && productTranslateData) {
             const product = new Product(productData, productTranslateData);
             const activeProductData: ProductDataType | undefined = product.getProductBySlug(productSlug, lang);
@@ -154,12 +155,17 @@ export async function generateMetadata({ params: { lang, productSlug } }: { para
                 const result = productTitle.charAt(0).toLocaleUpperCase() + productTitle.slice(1).toLocaleLowerCase();
                 pageTitle = `${titleDictionary.sobsan} | ${result}`;
                 pageDescription = `${result} - ${product.getTranslate(activeProductData.id, lang, "description")}`;
-                pageImage = activeProductData.image
+                pageImage = activeProductData.image;
+                pageKeyword = `
+                ${product.getTranslate(activeProductData.id, 'az', "title")}, 
+                ${product.getTranslate(activeProductData.id, 'en', "title")}, 
+                ${product.getTranslate(activeProductData.id, 'ru', "title")}`
             }
         }
         return {
             title: pageTitle,
             description: pageDescription,
+            keywords: pageKeyword,
             openGraph: {
                 title: pageTitle,
                 description: pageDescription,

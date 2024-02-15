@@ -87,6 +87,11 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
       return {
         title: setting.getTranslate(1, lang, "title"),
         description: setting.getTranslate(1, lang, "description"),
+        keywords: 'Sobsan, Собсан, Sobsan Boya, Sobsan Paint, Собсан Бойя',
+        authors: {
+          name: 'Alipasha Askerov',
+          url: 'https://alipashaskerov.vercel.app/'
+        },
         icons: {
           icon: settingData[0].logo
         },

@@ -75,6 +75,7 @@ export async function generateMetadata({ params: { lang, categorySlug } }: { par
         const { categoryData, categoryTranslateData } = await fetchData();
         const titleDictionary = t.title;
         let pageTitle = `${titleDictionary.sobsan}`;
+        let pageKeywords = '';
         if (categoryData && categoryTranslateData) {
             const category = new Category(categoryData, categoryTranslateData);
             const activeCategoryData = category.getCategoryBySlug(categorySlug, lang);
@@ -82,10 +83,15 @@ export async function generateMetadata({ params: { lang, categorySlug } }: { par
                 const categoryTitle = category.getTranslate(activeCategoryData.id, lang, "title");
                 const result = categoryTitle.charAt(0).toLocaleUpperCase() + categoryTitle.slice(1);
                 pageTitle = `${titleDictionary.sobsan} | ${result}`;
+                pageKeywords = `
+                ${category.getTranslate(activeCategoryData.id, 'az', "title")}, 
+                ${category.getTranslate(activeCategoryData.id, 'en', "title")}, 
+                ${category.getTranslate(activeCategoryData.id, 'ru', "title")}`
             }
         }
         return {
             title: pageTitle,
+            keywords: pageKeywords,
             openGraph: {
                 title: pageTitle,
             }
