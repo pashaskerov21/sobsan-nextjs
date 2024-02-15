@@ -156,10 +156,7 @@ export async function generateMetadata({ params: { lang, productSlug } }: { para
                 pageTitle = `${titleDictionary.sobsan} | ${result}`;
                 pageDescription = `${result} - ${product.getTranslate(activeProductData.id, lang, "description")}`;
                 pageImage = activeProductData.image;
-                pageKeyword = `
-                ${product.getTranslate(activeProductData.id, 'az', "title")}, 
-                ${product.getTranslate(activeProductData.id, 'en', "title")}, 
-                ${product.getTranslate(activeProductData.id, 'ru', "title")}`
+                pageKeyword = `${product.getTranslate(activeProductData.id, 'az', "title")}, ${product.getTranslate(activeProductData.id, 'en', "title")}, ${product.getTranslate(activeProductData.id, 'ru', "title")}, Sobsan ${product.getTranslate(activeProductData.id, 'az', "title")}, Sobsan ${product.getTranslate(activeProductData.id, 'en', "title")}, Собсан ${product.getTranslate(activeProductData.id, 'ru', "title")}`
             }
         }
         return {
