@@ -19,7 +19,6 @@ const ProductOrderRow: React.FC<ProductOrderRowProps> = ({
 }) => {
     const product = new Product(productData, productTranslateData);
     const activeProductData: ProductDataType | undefined = product.getProductByID(basketData.product);
-    console.log(basketData)
     if (activeProductData) {
         return (
             <tr>

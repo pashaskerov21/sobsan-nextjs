@@ -3,7 +3,31 @@ import React, { Fragment, useCallback, useState } from 'react'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import { Container, Section } from '@/src/styles'
-import { AccountDataType, AttributeDataType, AttributeGroupDataType, AttributeGroupTranslateDataType, AttributeTranslateDataType, BasketDataType, BrandDataType, BrandTranslateDataType, CatalogDataType, CatalogTranslateDataType, CategoriesDataType, CategoriesTranslateDataType, ColorDataType, ColorTranslateDataType, LoadingType, LocaleType, ProductAttributeRelationDataType, ProductCategoryRelationDataType, ProductColorRelationDataType, ProductDataType, ProductTranslateDataType, ProductWeightRelationDataType, WeightDataType } from '@/src/types'
+import {
+    AccountDataType,
+    AttributeDataType,
+    AttributeGroupDataType,
+    AttributeGroupTranslateDataType,
+    AttributeTranslateDataType,
+    BasketDataType,
+    BrandDataType,
+    BrandTranslateDataType,
+    CatalogDataType,
+    CatalogTranslateDataType,
+    CategoriesDataType,
+    CategoriesTranslateDataType,
+    ColorDataType,
+    ColorTranslateDataType,
+    LoadingType,
+    LocaleType,
+    ProductAttributeRelationDataType,
+    ProductCategoryRelationDataType,
+    ProductColorRelationDataType,
+    ProductDataType,
+    ProductTranslateDataType,
+    ProductWeightRelationDataType,
+    WeightDataType
+} from '@/src/types'
 import { ProductDetailWrapper } from './style'
 import { Attribute, AttributeGroup, Basket, Brand, Catalog, Category, Color, Product } from '@/src/class'
 import { CatalogModal, Skeleton } from '@/src/components'

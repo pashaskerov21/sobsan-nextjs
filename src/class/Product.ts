@@ -62,7 +62,6 @@ class Product {
         return price;
     };
     public techFilterization(filterData: ProductFilterDataType, productData: ProductDataType[], productAttributeRelationData: ProductAttributeRelationDataType[]) {
-        console.log('filterdata', filterData)
         let filteredProducts: ProductDataType[] | [] = productData;
         if (filterData.brand !== 0) {
             filteredProducts = filteredProducts.filter((data) => data.brand_id === filterData.brand);

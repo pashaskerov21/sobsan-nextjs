@@ -92,7 +92,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         })
     };
 
-    console.log(activeOrderData)
     useEffect(() => {
         setPaymentValues((prev) => {
             return {
