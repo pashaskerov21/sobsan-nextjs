@@ -85,6 +85,7 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: L
     if (settingData && settingTranslateData) {
       const setting = new Setting(settingTranslateData);
       return {
+        metadataBase: new URL('https://sobsan-nextjs.vercel.app'),
         title: setting.getTranslate(1, lang, "title"),
         description: setting.getTranslate(1, lang, "description"),
         keywords: 'Sobsan, Собсан, Sobsan Boya, Sobsan Paint, Собсан Бойя',

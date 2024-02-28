@@ -98,4 +98,19 @@ const SuggestionInnerPage = async ({ params: { lang, slug } }: { params: { lang:
     <Fragment></Fragment>
   )
 }
+
+export async function generateStaticParams() {
+  try {
+      const roomTranslateData:RoomTranslateDataType[] = await fetchRoomTranslateData();
+
+      return roomTranslateData.map((data) => ({
+          lang: data.lang,
+          slug: data.title.toLocaleLowerCase()
+      }))
+  } catch (error) {
+      console.error(error);
+      return [];
+  }
+}
+
 export default SuggestionInnerPage
