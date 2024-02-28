@@ -167,18 +167,4 @@ const CategoryPage = async ({ params: { lang, categorySlug } }: { params: { lang
     redirect(`/${lang}/404`);
 }
 
-export async function generateStaticParams() {
-    try {
-        const categoryTranslateData:CategoriesTranslateDataType[] = await fetchCategoryTranslateData();
-
-        return categoryTranslateData.map((data) => ({
-            lang: data.lang,
-            categorySlug: data.title.toLocaleLowerCase()
-        }))
-    } catch (error) {
-        console.error(error);
-        return [];
-    }
-}
-
 export default CategoryPage

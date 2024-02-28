@@ -271,18 +271,4 @@ const ProductPage = async ({ params: { lang, productSlug } }: { params: { lang: 
     redirect(`/${lang}/404`);
 }
 
-// export async function generateStaticParams() {
-//     try {
-//         const productTranslateData:ProductTranslateDataType[] = await fetchProductTranslateData();
-
-//         return productTranslateData.map((data) => ({
-//             lang: data.lang,
-//             productSlug: data.title.toLocaleLowerCase()
-//         }))
-//     } catch (error) {
-//         console.error(error);
-//         return [];
-//     }
-// }
-
 export default ProductPage;
